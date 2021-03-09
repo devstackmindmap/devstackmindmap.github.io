@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.80.0" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="dykim" />
+  <meta property="og:url" content="http://example.org/posts/20210502-redis-cluster-shard/" />
+  <link rel="canonical" href="http://example.org/posts/20210502-redis-cluster-shard/" /><link rel="alternate" type="application/atom+xml" href="http://example.org/index.xml" title="DEV STACK MINDMAP">
+
+  <script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "http:\/\/example.org\/"
+      },
+      "articleSection" : "posts",
+      "name" : "Redis Cluster 샤드 추가\/삭제에 따른 데이터 재 조정 확인",
+      "headline" : "Redis Cluster 샤드 추가\/삭제에 따른 데이터 재 조정 확인",
+      "description" : "Overview 목표 Step 1. 네트워크 구성  Step 1.1. VPC 생성 Step 1.2. 서브넷 생성 Step 1.3. 보안 그룹 생성 Step 1.4. 인터넷 게이트웨이 생성 Step 1.5. 인터넷 게이트웨이 VPC에 연결 Step 1.6. 라우팅 테이블 생성 Step 1.7. 라우팅 편집 Step 1.8. 서브넷 연결   Step 2. Redis Cluster 생성  Step 2.1. 서브넷 그룹 생성 Step 2.2. Redis Cluster 생성   Step 3. AWS Cloud9 생성 Step 4.",
+      "inLanguage" : "en-US",
+      "author" : "dykim",
+      "creator" : "dykim",
+      "publisher": "dykim",
+      "accountablePerson" : "dykim",
+      "copyrightHolder" : "dykim",
+      "copyrightYear" : "2021",
+      "datePublished": "2021-05-02 02:09:00 \u002b0900 KST",
+      "dateModified" : "2021-05-02 02:09:00 \u002b0900 KST",
+      "url" : "http:\/\/example.org\/posts\/20210502-redis-cluster-shard\/",
+      "keywords" : [  ]
+  }
+</script>
+<title>Redis Cluster 샤드 추가/삭제에 따른 데이터 재 조정 확인</title>
+  <meta property="og:title" content="Redis Cluster 샤드 추가/삭제에 따른 데이터 재 조정 확인" />
+  <meta property="og:type" content="article" />
+  <meta property="og:description" content="Overview 목표 Step 1. 네트워크 구성  Step 1.1. VPC 생성 Step 1.2. 서브넷 생성 Step 1.3. 보안 그룹 생성 Step 1.4. 인터넷 게이트웨이 생성 Step 1.5. 인터넷 게이트웨이 VPC에 연결 Step 1.6. 라우팅 테이블 생성 Step 1.7. 라우팅 편집 Step 1.8. 서브넷 연결   Step 2. Redis Cluster 생성  Step 2.1. 서브넷 그룹 생성 Step 2.2. Redis Cluster 생성   Step 3. AWS Cloud9 생성 Step 4." />
+  <meta name="description" content="Overview 목표 Step 1. 네트워크 구성  Step 1.1. VPC 생성 Step 1.2. 서브넷 생성 Step 1.3. 보안 그룹 생성 Step 1.4. 인터넷 게이트웨이 생성 Step 1.5. 인터넷 게이트웨이 VPC에 연결 Step 1.6. 라우팅 테이블 생성 Step 1.7. 라우팅 편집 Step 1.8. 서브넷 연결   Step 2. Redis Cluster 생성  Step 2.1. 서브넷 그룹 생성 Step 2.2. Redis Cluster 생성   Step 3. AWS Cloud9 생성 Step 4." />
+  <meta property="og:locale" content="en-us" />
+
+  
+    <style>body{font-family:bree serif,sans-serif;-webkit-font-smoothing:antialiased;margin:0 20px}article{max-width:800px;margin-left:auto;margin-right:auto}a{color:#000;text-decoration:none}a:hover{font-weight:600;text-decoration:underline}.post-ads{margin:50px 0}.markdown-body{font-size:18px;max-width:100%}.markdown-body a{text-decoration:underline;text-decoration-color:#000}.markdown-body pre{padding:16px;overflow:auto;border-radius:10px}.markdown-body code{padding:.2em .4em;font-size:85%;background-color:#f6f8fa;border-radius:6px}.markdown-body pre>code{padding:0;font-size:100%;background-color:inherit;border:0}.Chinese .markdown-body{line-height:200%}.site-date-catalog{font-size:2rem}.header-title{font-size:2rem;font-weight:700;margin-top:32px;font-family:bungee shade,sans-serif}.header-title a{text-decoration:none}.header-subtitle{color:#666}.header-items{margin:10px 0}.header-item{margin:0 5px}.header-line{width:100%;border-width:2px;border-color:#482936;border-style:solid none none none}.lang-switch{font-weight:600}#posts-list{min-height:600px}.posts-line{font-size:1.2rem;margin:12px 0}.posts-categories{font-size:.8rem;margin:auto;text-align:center}.posts-category{padding:3px 0;border:#000 2px solid;border-radius:5px}.site-footer{margin-top:50px}.site-footer-item{margin-right:12px}.post-content img{max-width:100%;display:block;margin-left:auto;margin-right:auto;margin-top:12px}.post-header{margin-bottom:50px}.post-title{font-size:2rem;font-weight:600}.post-category{display:inline;font-weight:600;padding:2px 5px;border:#000 2px solid;border-radius:5px}.post-date{font-weight:800;font-style:italic}.post-author{float:right;font-weight:600}.page-content{min-height:60%}.post-content{margin-bottom:50px}.post-content p{hyphens:auto;line-height:1.8;text-justify:ideographic;margin-bottom:1em}.related-content{border-width:3px;border-style:solid;border-color:#000;padding:0 10px;margin-bottom:50px;margin-top:100px}.related-content li{margin:5px 0}.taxonomy-term{font-size:3rem}.gallery-img{text-align:center}.gallery-img span{text-align:center}.gallery-img-desc{font-size:.8em;font-weight:800}#disqus_thread{position:relative}#disqus_thread:after{content:"";display:block;height:55px;width:100%;position:absolute;bottom:0;background:#fff}@media screen and (max-width:600px){.header-title,.header-subtitle,.header-items{text-align:center}.posts-line{font-size:16px}.markdown-body{font-size:16px}.post-title{font-size:2rem}.post-content p{letter-spacing:.05em}}@media screen and (max-width:48em){.posts-category{display:none}}</style>
+  
+  
+    <style>.container,.container-fluid{margin-right:auto;margin-left:auto}.container-fluid{padding-right:2rem;padding-left:2rem}.row{box-sizing:border-box;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:0;-ms-flex:0 1 auto;flex:0 1 auto;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:-.5rem;margin-left:-.5rem}.row.reverse{-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse}.col.reverse{-webkit-box-orient:vertical;-webkit-box-direction:reverse;-ms-flex-direction:column-reverse;flex-direction:column-reverse}.col-xs,.col-xs-1,.col-xs-10,.col-xs-11,.col-xs-12,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9,.col-xs-offset-0,.col-xs-offset-1,.col-xs-offset-10,.col-xs-offset-11,.col-xs-offset-12,.col-xs-offset-2,.col-xs-offset-3,.col-xs-offset-4,.col-xs-offset-5,.col-xs-offset-6,.col-xs-offset-7,.col-xs-offset-8,.col-xs-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:0 0 auto;padding-right:.5rem;padding-left:.5rem}.col-xs{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-xs-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-xs-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-xs-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-xs-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-xs-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-xs-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-xs-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-xs-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-xs-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-xs-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-xs-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-xs-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-xs-offset-0{margin-left:0}.col-xs-offset-1{margin-left:8.33333333%}.col-xs-offset-2{margin-left:16.66666667%}.col-xs-offset-3{margin-left:25%}.col-xs-offset-4{margin-left:33.33333333%}.col-xs-offset-5{margin-left:41.66666667%}.col-xs-offset-6{margin-left:50%}.col-xs-offset-7{margin-left:58.33333333%}.col-xs-offset-8{margin-left:66.66666667%}.col-xs-offset-9{margin-left:75%}.col-xs-offset-10{margin-left:83.33333333%}.col-xs-offset-11{margin-left:91.66666667%}.start-xs{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-xs{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-xs{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-xs{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-xs{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-xs{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-xs{-ms-flex-pack:distribute;justify-content:space-around}.between-xs{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-xs{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-xs{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}@media only screen and (min-width:48em){.container{width:49rem}.col-sm,.col-sm-1,.col-sm-10,.col-sm-11,.col-sm-12,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-offset-0,.col-sm-offset-1,.col-sm-offset-10,.col-sm-offset-11,.col-sm-offset-12,.col-sm-offset-2,.col-sm-offset-3,.col-sm-offset-4,.col-sm-offset-5,.col-sm-offset-6,.col-sm-offset-7,.col-sm-offset-8,.col-sm-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:0 0 auto;padding-right:.5rem;padding-left:.5rem}.col-sm{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-sm-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-sm-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-sm-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-sm-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-sm-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-sm-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-sm-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-sm-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-sm-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-sm-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-sm-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-sm-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-sm-offset-0{margin-left:0}.col-sm-offset-1{margin-left:8.33333333%}.col-sm-offset-2{margin-left:16.66666667%}.col-sm-offset-3{margin-left:25%}.col-sm-offset-4{margin-left:33.33333333%}.col-sm-offset-5{margin-left:41.66666667%}.col-sm-offset-6{margin-left:50%}.col-sm-offset-7{margin-left:58.33333333%}.col-sm-offset-8{margin-left:66.66666667%}.col-sm-offset-9{margin-left:75%}.col-sm-offset-10{margin-left:83.33333333%}.col-sm-offset-11{margin-left:91.66666667%}.start-sm{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-sm{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-sm{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-sm{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-sm{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-sm{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-sm{-ms-flex-pack:distribute;justify-content:space-around}.between-sm{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-sm{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-sm{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:64em){.container{width:65rem}.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-md-offset-0,.col-md-offset-1,.col-md-offset-10,.col-md-offset-11,.col-md-offset-12,.col-md-offset-2,.col-md-offset-3,.col-md-offset-4,.col-md-offset-5,.col-md-offset-6,.col-md-offset-7,.col-md-offset-8,.col-md-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:0 0 auto;padding-right:.5rem;padding-left:.5rem}.col-md{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-md-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-md-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-md-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-md-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-md-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-md-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-md-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-md-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-md-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-md-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-md-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-md-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-md-offset-0{margin-left:0}.col-md-offset-1{margin-left:8.33333333%}.col-md-offset-2{margin-left:16.66666667%}.col-md-offset-3{margin-left:25%}.col-md-offset-4{margin-left:33.33333333%}.col-md-offset-5{margin-left:41.66666667%}.col-md-offset-6{margin-left:50%}.col-md-offset-7{margin-left:58.33333333%}.col-md-offset-8{margin-left:66.66666667%}.col-md-offset-9{margin-left:75%}.col-md-offset-10{margin-left:83.33333333%}.col-md-offset-11{margin-left:91.66666667%}.start-md{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-md{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-md{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-md{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-md{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-md{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-md{-ms-flex-pack:distribute;justify-content:space-around}.between-md{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-md{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-md{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:75em){.container{width:76rem}.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-lg-offset-0,.col-lg-offset-1,.col-lg-offset-10,.col-lg-offset-11,.col-lg-offset-12,.col-lg-offset-2,.col-lg-offset-3,.col-lg-offset-4,.col-lg-offset-5,.col-lg-offset-6,.col-lg-offset-7,.col-lg-offset-8,.col-lg-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:0 0 auto;padding-right:.5rem;padding-left:.5rem}.col-lg{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-lg-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-lg-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-lg-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-lg-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-lg-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-lg-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-lg-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-lg-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-lg-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-lg-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-lg-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-lg-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-lg-offset-0{margin-left:0}.col-lg-offset-1{margin-left:8.33333333%}.col-lg-offset-2{margin-left:16.66666667%}.col-lg-offset-3{margin-left:25%}.col-lg-offset-4{margin-left:33.33333333%}.col-lg-offset-5{margin-left:41.66666667%}.col-lg-offset-6{margin-left:50%}.col-lg-offset-7{margin-left:58.33333333%}.col-lg-offset-8{margin-left:66.66666667%}.col-lg-offset-9{margin-left:75%}.col-lg-offset-10{margin-left:83.33333333%}.col-lg-offset-11{margin-left:91.66666667%}.start-lg{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-lg{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-lg{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-lg{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-lg{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-lg{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-lg{-ms-flex-pack:distribute;justify-content:space-around}.between-lg{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-lg{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-lg{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}</style>
+  
+
+  
+
+  <link href="/index.xml" rel="alternate" type="application/rss+xml"
+    title="DEV STACK MINDMAP">
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Bungee+Shade" rel="stylesheet">
+  
+  
+
+  
+  
+</head>
+
+
+<body>
+  <article class="post " id="article">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="site-header">
+          
+<header>
+  <div class="header-title">
+    <a href="/"
+      >dev stack mindmap</a
+    >
+  </div>
+  <div class="header-subtitle"></div>
+</header>
+<div class="row end-md center-xs header-items">
+  
+</div>
+<div class="row end-xs">
+   
+</div>
+<div class="header-line"></div>
+
+        </div>
+        <header class="post-header">
+          <h1 class="post-title">Redis Cluster 샤드 추가/삭제에 따른 데이터 재 조정 확인</h1>
+          
+          <div class="row post-desc">
+            <div class="col-xs-6">
+              
+              <time class="post-date" datetime="2021-05-02 02:09:00 KST">
+                02 May 2021
+              </time>
+              
+            </div>
+            <div class="col-xs-6">
+              
+              <div class="post-author">
+                <a target="_blank" href="">@dykim</a>
+              </div>
+              
+            </div>
+          </div>
+          
+        </header>
+
+        <div class="post-content markdown-body">
+          
+          <ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#%EB%AA%A9%ED%91%9C">목표</a></li>
+<li><a href="#step-1-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EA%B5%AC%EC%84%B1">Step 1. 네트워크 구성</a>
+<ul>
+<li><a href="#step-11-vpc-%EC%83%9D%EC%84%B1">Step 1.1. VPC 생성</a></li>
+<li><a href="#step-12-%EC%84%9C%EB%B8%8C%EB%84%B7-%EC%83%9D%EC%84%B1">Step 1.2. 서브넷 생성</a></li>
+<li><a href="#step-13-%EB%B3%B4%EC%95%88-%EA%B7%B8%EB%A3%B9-%EC%83%9D%EC%84%B1">Step 1.3. 보안 그룹 생성</a></li>
+<li><a href="#step-14-%EC%9D%B8%ED%84%B0%EB%84%B7-%EA%B2%8C%EC%9D%B4%ED%8A%B8%EC%9B%A8%EC%9D%B4-%EC%83%9D%EC%84%B1">Step 1.4. 인터넷 게이트웨이 생성</a></li>
+<li><a href="#step-15-%EC%9D%B8%ED%84%B0%EB%84%B7-%EA%B2%8C%EC%9D%B4%ED%8A%B8%EC%9B%A8%EC%9D%B4-vpc%EC%97%90-%EC%97%B0%EA%B2%B0">Step 1.5. 인터넷 게이트웨이 VPC에 연결</a></li>
+<li><a href="#step-16-%EB%9D%BC%EC%9A%B0%ED%8C%85-%ED%85%8C%EC%9D%B4%EB%B8%94-%EC%83%9D%EC%84%B1">Step 1.6. 라우팅 테이블 생성</a></li>
+<li><a href="#step-17-%EB%9D%BC%EC%9A%B0%ED%8C%85-%ED%8E%B8%EC%A7%91">Step 1.7. 라우팅 편집</a></li>
+<li><a href="#step-18-%EC%84%9C%EB%B8%8C%EB%84%B7-%EC%97%B0%EA%B2%B0">Step 1.8. 서브넷 연결</a></li>
+</ul>
+</li>
+<li><a href="#step-2-redis-cluster-%EC%83%9D%EC%84%B1">Step 2. Redis Cluster 생성</a>
+<ul>
+<li><a href="#step-21-%EC%84%9C%EB%B8%8C%EB%84%B7-%EA%B7%B8%EB%A3%B9-%EC%83%9D%EC%84%B1">Step 2.1. 서브넷 그룹 생성</a></li>
+<li><a href="#step-22-redis-cluster-%EC%83%9D%EC%84%B1">Step 2.2. Redis Cluster 생성</a></li>
+</ul>
+</li>
+<li><a href="#step-3-aws-cloud9-%EC%83%9D%EC%84%B1">Step 3. AWS Cloud9 생성</a></li>
+<li><a href="#step-4-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%A7%84%ED%96%89">Step 4. 테스트 진행</a>
+<ul>
+<li><a href="#step-41-redis-py-cluster-%EC%84%A4%EC%B9%98">Step 4.1. redis-py-cluster 설치</a></li>
+<li><a href="#step-42-%ED%85%8C%EC%8A%A4%ED%8A%B8-script-%EC%9E%91%EC%84%B1">Step 4.2. 테스트 Script 작성</a></li>
+<li><a href="#step-43-script-%EC%8B%A4%ED%96%89">Step 4.3. Script 실행</a></li>
+<li><a href="#step-44-%EC%83%A4%EB%93%9C-%EC%B6%94%EA%B0%80">Step 4.4. 샤드 추가</a></li>
+<li><a href="#step-45-script-%EC%8B%A4%ED%96%89-%EC%8A%AC%EB%A1%AF%ED%82%A4%EC%8A%A4%ED%8E%98%EC%9D%B4%EC%8A%A4-%ED%99%95%EC%9D%B8">Step 4.5. Script 실행, 슬롯/키스페이스 확인</a></li>
+<li><a href="#step-46-%EC%83%A4%EB%93%9C-%EC%82%AD%EC%A0%9C">Step 4.6. 샤드 삭제</a></li>
+</ul>
+</li>
+<li><a href="#%EB%A6%AC%EC%86%8C%EC%8A%A4-%EC%A0%95%EB%A6%AC">리소스 정리</a></li>
+<li><a href="#%EC%B0%B8%EA%B3%A0-%EB%AC%B8%ED%97%8C">참고 문헌</a></li>
+</ul>
+<h2 id="overview">Overview</h2>
+<p>Redis는 캐싱, 랭킹, 세션 정보 저장, PubSub 등에 쓰이는 고성능 key-value 저장소로서 리스트, 해시, 셋, 정렬된 셋 등 여러 형식의 자료구조를 지원하는 인 메모리 데이터 스토어 NoSQL입니다.</p>
+<p>다양한 규모에서 쓰이는 Redis를 운용하다 보면 한번 쯤 클러스터 모드 적용에 대해 고민하게 됩니다.  간단한 테스트를 통해 클러스터의 샤드, 노드가 확장, 축소 될 때 자동으로 노드간에 키 공간의 재 할당,  균형 조정 되는 것을 눈으로 확인해 보고자 합니다.</p>
+<hr>
+<h2 id="목표">목표</h2>
+<p>Redis 클러스터의 샤드 확장, 축소 시 데이터의 재 조정을 눈으로 확인하고 특정 워크로드에서 Redis 클러스터의 활용에 대해 고민할 수 있도록 합니다.</p>
+<p>테스트 내용을 먼저 확인하고자 한다면 Step 4. 테스트 진행으로 이동하여 내용을 확인합니다.</p>
+<hr>
+<h2 id="step-1-네트워크-구성">Step 1. 네트워크 구성</h2>
+<p>테스트를 할 네트워크를 구성합니다.</p>
+<p>기본 VPC 위에서 테스트를 진행하신다면 <strong>Step 1. 네트워크 구성은 생략</strong> 하셔도 좋습니다.</p>
+<h3 id="step-11-vpc-생성">Step 1.1. VPC 생성</h3>
+<p>VPC 대시보드로 이동하여 VPC 생성을 아래와 같이 진행합니다.</p>
+<p><img src="/images/redis-cluster/0001-vpc.png" alt="0001-vpc.png"></p>
+<h3 id="step-12-서브넷-생성">Step 1.2. 서브넷 생성</h3>
+<p>서브넷 생성을 아래와 같이 진행합니다.</p>
+<p><img src="/images/redis-cluster/0002-subnet.png" alt="images/0002-subnet.png"></p>
+<h3 id="step-13-보안-그룹-생성">Step 1.3. 보안 그룹 생성</h3>
+<p>보안 그룹을 아래와 같이 생성합니다.</p>
+<p><img src="/images/redis-cluster/0003-sg.png" alt="c90e1bc2-4985-4e5a-86af-ca81d0a5c836/0003-sg.png"></p>
+<h3 id="step-14-인터넷-게이트웨이-생성">Step 1.4. 인터넷 게이트웨이 생성</h3>
+<p><img src="/images/redis-cluster/0004-rt3.png" alt="6ee7736f-f6f0-440a-9014-27b42f16da3a/0004-rt3.png"></p>
+<h3 id="step-15-인터넷-게이트웨이-vpc에-연결">Step 1.5. 인터넷 게이트웨이 VPC에 연결</h3>
+<p><img src="/images/redis-cluster/0004-rt4.png" alt="cc51be58-f57d-4186-827c-2ae2540631cd/0004-rt4.png"></p>
+<p><img src="/images/redis-cluster/0004-rt5.png" alt="76210655-0fe0-4ab3-856f-c019a5d641df/0004-rt5.png"></p>
+<h3 id="step-16-라우팅-테이블-생성">Step 1.6. 라우팅 테이블 생성</h3>
+<p><img src="/images/redis-cluster/0004-rt.png" alt="df8a39af-7a44-4aef-b626-7fbe204c71d9/0004-rt.png"></p>
+<h3 id="step-17-라우팅-편집">Step 1.7. 라우팅 편집</h3>
+<p><img src="/images/redis-cluster/0004-rt2.png" alt="556464dd-d142-46d1-92e4-010ff39ec0a1/0004-rt2.png"></p>
+<p><img src="/images/redis-cluster/0004-rt6.png" alt="19edb113-d98f-434a-88f4-26907cb2fda9/0004-rt6.png"></p>
+<h3 id="step-18-서브넷-연결">Step 1.8. 서브넷 연결</h3>
+<p><img src="/images/redis-cluster/0004-rt7.png" alt="1786ec05-4df5-44be-97ba-deb4ad71cb70/0004-rt7.png"></p>
+<p><img src="/images/redis-cluster/0004-rt8.png" alt="71acab08-3518-453f-9e8c-9675af5d3ff4/0004-rt8.png"></p>
+<hr>
+<h2 id="step-2-redis-cluster-생성">Step 2. Redis Cluster 생성</h2>
+<p>테스트를 진행 할 Redis Cluster를 생성합니다.</p>
+<h3 id="step-21-서브넷-그룹-생성">Step 2.1. 서브넷 그룹 생성</h3>
+<p>ElastiCache 대시보드로 이동하고 서브넷 그룹을 아래와 같이 생성합니다.</p>
+<p><img src="/images/redis-cluster/0004-subnet-group2.png" alt="ef4cd422-dad4-4b94-a604-15aa5c805d95/0004-subnet-group2.png"></p>
+<h3 id="step-22-redis-cluster-생성">Step 2.2. Redis Cluster 생성</h3>
+<p>Redis 생성을 아래와 같이 진행합니다.</p>
+<p><img src="/images/redis-cluster/0005-redis-cluster1.png" alt="287b5471-f1c8-4d95-9661-dbdbddc7fbc9/0005-redis-cluster1.png"></p>
+<p><img src="/images/redis-cluster/0006-redis-cluster2.png" alt="54986da8-9837-45fd-82f6-9038bb3583ea/0006-redis-cluster2.png"></p>
+<p><img src="/images/redis-cluster/0007-redis-cluster3.png" alt="6faa2b3d-60a6-46b9-96e3-f25fe71d8238/0007-redis-cluster3.png"></p>
+<p><img src="/images/redis-cluster/0008-redis-cluster4.png" alt="2b464dcf-6309-4876-b5ea-7e07f2f8e9ba/0008-redis-cluster4.png"></p>
+<p><img src="/images/redis-cluster/0009-redis-cluster4.png" alt="9c41fd63-8170-4546-a23a-1d3e339589fc/0009-redis-cluster4.png"></p>
+<p><img src="/images/redis-cluster/0010-redis-cluster5.png" alt="489ac97d-2d1b-4c9e-afeb-cd06d1fb74d2/0010-redis-cluster5.png"></p>
+<hr>
+<h2 id="step-3-aws-cloud9-생성">Step 3. AWS Cloud9 생성</h2>
+<p>Cloud9 대시 보드로 이동하여 아래와 같이 진행합니다.</p>
+<p><img src="/images/redis-cluster/0011-cloud9-2.png" alt="0f538580-a0f5-41a2-888a-62f6c0290e1c/0011-cloud9-2.png"></p>
+<p><img src="/images/redis-cluster/0012-cloud9-3.png" alt="8f2d3c72-2b52-4e67-884c-c5752394ed7e/0012-cloud9-3.png"></p>
+<p><img src="/images/redis-cluster/0013-cloud9-4.png" alt="750c55b8-25d7-45f2-b65f-05bf50190600/0013-cloud9-4.png"></p>
+<hr>
+<h2 id="step-4-테스트-진행">Step 4. 테스트 진행</h2>
+<p>Redis Cluster 생성과 Cloud9 환경 생성이 완료되면 테스트를 진행합니다.</p>
+<h3 id="step-41-redis-py-cluster-설치">Step 4.1. redis-py-cluster 설치</h3>
+<p>Cloud9 터미널에서 아래 명령어를 실행하여 Python의 Redis Cluster 라이브러리를 설치합니다.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">sudo pip3 install redis-py-cluster
+</code></pre></div><p><img src="/images/redis-cluster/Untitled0.png" alt="caf7a70f-61c4-4700-9225-521238c5cb70/Untitled.png"></p>
+<h3 id="step-42-테스트-script-작성">Step 4.2. 테스트 Script 작성</h3>
+<p>아래와 같이 진행하여 새로운 파일을 생성합니다.</p>
+<p><img src="/images/redis-cluster/0015-cloud9-6.png" alt="fadc4845-d2e4-4af7-82fe-a92c5390962c/0015-cloud9-6.png"></p>
+<p>아래 코드를 복사합니다.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-python" data-lang="python"><span style="font-weight:bold">import</span> <span style="font-weight:bold">rediscluster</span>
+<span style="font-weight:bold">import</span> <span style="font-weight:bold">sys</span>
+
+<span style="font-weight:bold">if</span> __name__ == <span style="font-style:italic">&#34;__main__&#34;</span>:
+    
+    <span style="font-style:italic"># Connect Cluster</span>
+    startup_nodes = [{ <span style="font-style:italic">&#34;host&#34;</span>: <span style="font-style:italic">&#34;rc-test-redis-cluster-0001-001.xcugux.0001.apn2.cache.amazonaws.com&#34;</span>, <span style="font-style:italic">&#34;port&#34;</span>: <span style="font-style:italic">&#34;6379&#34;</span>}, {<span style="font-style:italic">&#34;host&#34;</span>: <span style="font-style:italic">&#34;rc-test-redis-cluster-0002-001.xcugux.0001.apn2.cache.amazonaws.com&#34;</span>, <span style="font-style:italic">&#34;port&#34;</span>:<span style="font-style:italic">&#34;6379&#34;</span>}]
+    client = rediscluster.RedisCluster(startup_nodes=startup_nodes, decode_responses=True, skip_full_coverage_check=True)
+    
+    <span style="font-style:italic"># Get Slot Info</span>
+    slots = client.cluster(<span style="font-style:italic">&#39;slots&#39;</span>)
+    
+    slotsDic = {}
+    
+    <span style="font-weight:bold">for</span> slot <span style="font-weight:bold">in</span> slots:
+        slotsDic[slot] = { <span style="font-style:italic">&#39;IP&#39;</span> : slots[slot][<span style="font-style:italic">&#39;master&#39;</span>][0], <span style="font-style:italic">&#39;from&#39;</span> : slot[0], <span style="font-style:italic">&#39;to&#39;</span> : slot[1], <span style="font-style:italic">&#39;keyCount&#39;</span> : 0 }  
+    
+    
+    <span style="font-weight:bold">for</span> i <span style="font-weight:bold">in</span> range(1, 1001):
+        client.set(<span style="font-style:italic">&#34;foo&#34;</span> + str(i), <span style="font-style:italic">&#34;bar&#34;</span> + str(i))
+        
+        keySlot = client.cluster(<span style="font-style:italic">&#34;keyslot&#34;</span>, <span style="font-style:italic">&#34;foo&#34;</span> + str(i))
+        <span style="font-weight:bold">for</span> slot <span style="font-weight:bold">in</span> slotsDic:
+            <span style="font-weight:bold">if</span> keySlot &gt;= slotsDic[slot][<span style="font-style:italic">&#39;from&#39;</span>] <span style="font-weight:bold">and</span> slotsDic[slot][<span style="font-style:italic">&#39;to&#39;</span>] &gt;= keySlot:
+                slotsDic[slot][<span style="font-style:italic">&#39;keyCount&#39;</span>] = slotsDic[slot][<span style="font-style:italic">&#39;keyCount&#39;</span>] + 1
+                
+    <span style="font-weight:bold">for</span> slot <span style="font-weight:bold">in</span> slotsDic:
+        <span style="font-weight:bold">print</span> (slotsDic[slot])
+</code></pre></div><p>새로운 파일에 붙여넣고 아래 부분을 Redis Cluster 샤드1과 샤드2의 Endpoint로 수정합니다.</p>
+<p>EndPoint는 ElastiCache 대시보드에서 아래와 같이 확인할 수 있습니다.</p>
+<p><img src="/images/redis-cluster/0018-endpoint1.png" alt="57a6d685-fc9b-47ec-ac1e-aa0c961d7700/0018-endpoint1.png"></p>
+<p><img src="/images/redis-cluster/0019-endpoint2.png" alt="a3f19cc1-6e70-4785-8912-d246c90c1ace/0019-endpoint2.png"></p>
+<p><img src="/images/redis-cluster/0020-endpoint3.png" alt="c2afb248-a4ca-44d6-a729-fe67a525250f/0020-endpoint3.png"></p>
+<p>아래 빨간 부분을  rc-test-redis-cluster-0001, rc-test-redis-cluster-0002의 Endpoint로 수정합니다.</p>
+<p><img src="/images/redis-cluster/0016-cloud9-7.png" alt="ac506ff8-6bbe-46e9-9a69-de60a225de03/0016-cloud9-7.png"></p>
+<p>Ctrl + S를 누르고 저장합니다.</p>
+<p><img src="/images/redis-cluster/0017-cloud9-8.png" alt="18f86341-d990-43c5-884e-14a6a71421d6/0017-cloud9-8.png"></p>
+<h3 id="step-43-script-실행">Step 4.3. Script 실행</h3>
+<p>스크립트를 실행하면 클러스터에 접속해 반복문을 통해 1000개의 데이터를 쓰고 데이터가 어떤 해시 슬롯에 저장되었는지 확인할 수 있습니다.</p>
+<p>클러스터에 데이터를 쓰거나 읽을 때 클라이언트는 CRC16(key) mode 16384와 같은 간단한 알고리즘을 통해 사용할 해시 슬롯을 계산합니다. Redis 용 ElastiCache의 경우 클라이언트 자체가 키를 기반으로 사용할 샤드를 결정합니다.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">python test.py
+</code></pre></div><p><img src="/images/redis-cluster/Untitled1.png" alt="d53ad378-69c7-4d93-a9d0-fedc46d202de/Untitled.png"></p>
+<p><img src="/images/redis-cluster/Untitled2.png" alt="edd69b99-461a-4266-90c2-fef21fea564f/Untitled.png"></p>
+<p>실행 결과를 확인하면 0-8191 슬롯이 있는 샤드에 501개 데이터가 저장되었으며 8192-16383 슬롯이 있는 샤드에 499개 데이터가 저장되었습니다.</p>
+<p>여기서 샤드를 추가하여 데이터가 어떻게 되는지 확인해 보겠습니다.</p>
+<h3 id="step-44-샤드-추가">Step 4.4. 샤드 추가</h3>
+<p>ElastiCache 대시보드에서 클러스터 이름을 누르고 들어가서 샤드 추가를 진행 합니다.</p>
+<p><img src="/images/redis-cluster/0021-shard.png" alt="2d15f45a-e29d-4772-ae22-f013e7ae77e9/0021-shard.png"></p>
+<p><img src="/images/redis-cluster/0021-shard2.png" alt="5f93d18f-e068-4e97-8050-3b773cf4565c/0021-shard2.png"></p>
+<p>추가를 하면 샤드 생성 작업과 기존 샤드 수정 작업이 진행됩니다. 진행이 되면서 슬롯/키스페이스가 재조정됩니다.</p>
+<p><img src="/images/redis-cluster/0021-shard3.png" alt="a8477a88-f930-4e50-afb9-10320c423f41/0021-shard3.png"></p>
+<p>샤드가 추가되면서 전체 샤드의 슬롯/키스페이스가 계속 조정되는 것을 확인할 수 있습니다.</p>
+<p><img src="/images/redis-cluster/0021-shard4.png" alt="685e0d41-cf61-4215-a39c-8c182744719c/0021-shard4.png"></p>
+<p><img src="/images/redis-cluster/0021-shard7.png" alt="73925dae-7d45-4b13-9636-37dbb7c2b21b/0021-shard7.png"></p>
+<p><img src="/images/redis-cluster/0021-shard8.png" alt="ba7fff38-13c7-471e-b36e-0f1ee6335445/0021-shard8.png"></p>
+<h3 id="step-45-script-실행-슬롯키스페이스-확인">Step 4.5. Script 실행, 슬롯/키스페이스 확인</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">python test.py
+</code></pre></div><p><img src="/images/redis-cluster/Untitled3.png" alt="f5766383-e58d-4a1b-a411-17447c69a8bf/Untitled.png"></p>
+<p>샤드가 추가되면서 키가 자동으로 조정이 되었습니다.</p>
+<p>3개의 샤드에 각각 320, 355, 325개의 데이터가 분산되어 저장되었습니다.</p>
+<p>샤드가 추가되었어도 startup_nodes에 하나의 샤드 정보만 있어도 괜찮습니다.</p>
+<p>그래고 1001 값을 3001 로 수정하여 데이터를 추가 입력 해봅니다.</p>
+<p><img src="/images/redis-cluster/Untitled4.png" alt="3bde8442-f383-4659-919e-979f42f644f4/Untitled.png"></p>
+<p>스크립트를 실행해서 확인하면 3개의 샤드에 균등하게 데이터가 저장되는 것을 확인할 수 있습니다.</p>
+<p><img src="/images/redis-cluster/Untitled5.png" alt="2ae73ee6-5c48-4520-932a-38f6bc86ef7e/Untitled.png"></p>
+<h3 id="step-46-샤드-삭제">Step 4.6. 샤드 삭제</h3>
+<p>샤드를 삭제 후 데이터를 확인해 보겠습니다.</p>
+<p><img src="/images/redis-cluster/0022-delete-shard.png" alt="86790235-968b-4da2-81ef-9ae8da430cef/0022-delete-shard.png"></p>
+<p><img src="/images/redis-cluster/0022-delete-shard2.png" alt="ed44fa0e-b89a-426e-a07c-5917a919f14f/0022-delete-shard2.png"></p>
+<p>샤드 삭제가 완료 되었습니다.</p>
+<p><img src="/images/redis-cluster/0022-delete-shard3.png" alt="629ed65a-510e-4b17-92df-f388a920694f/0022-delete-shard3.png"></p>
+<p>1번 샤드가 삭제되었기 때문에 2번 , 3번 샤드 Endpoint 중 하나를 입력해야 합니다.</p>
+<p><img src="/images/redis-cluster/0022-delete-shard4.png" alt="d5702a5a-67de-4204-abaf-842a84e4c70e/0022-delete-shard4.png"></p>
+<p>샤드가 삭제되면서 키가 자동으로 조정이 되었습니다.</p>
+<p>2개의 샤드에 각각 1,504개, 1,496개의 데이터가 분산되어 저장되었습니다.</p>
+<p><img src="/images/redis-cluster/Untitledx.png" alt="9c1430d6-499b-44a1-ae16-e1f986bb413a/Untitled.png"></p>
+<p>클러스터에 Redis 데이터를 쓰고 샤드를 추가, 삭제해 보면서 데이터의 재 조정이 자동으로 이루어지는 것을 확인 할 수 있었습니다.</p>
+<p>테스트는 여기까지 입니다.</p>
+<p>감사합니다.</p>
+<h2 id="리소스-정리">리소스 정리</h2>
+<ol>
+<li>Redis Cluster 삭제</li>
+<li>Cloud9 삭제</li>
+<li>라우팅 테이블 삭제
+<ol>
+<li>서브넷 연결 해제</li>
+<li>라우팅 테이블 삭제</li>
+</ol>
+</li>
+<li>인터넷 게이트웨이 삭제
+<ol>
+<li>VPC에서 분리</li>
+<li>인터넷 게이트웨이 삭제</li>
+</ol>
+</li>
+<li>보안 그룹 삭제</li>
+<li>서브넷 삭제</li>
+<li>VPC 삭제</li>
+</ol>
+<h2 id="참고-문헌">참고 문헌</h2>
+<ul>
+<li><a href="https://aws.amazon.com/ko/blogs/database/work-with-cluster-mode-on-amazon-elasticache-for-redis/">How to work with Cluster Mode on Amazon ElastiCache for Redis</a></li>
+</ul>
+<h2 id="heading">…</h2>
+<hr>
+<h3 id="links">Links</h3>
+<p><a href="https://planbs.tistory.com/entry/Python-pip">▶ pip</a></p>
+<p><a href="https://docs.aws.amazon.com/ko_kr/AmazonElastiCache/latest/red-ug/CacheNodes.NodeGroups.html">https://docs.aws.amazon.com/ko_kr/AmazonElastiCache/latest/red-ug/CacheNodes.NodeGroups.html</a><br>
+<a href="https://docs.aws.amazon.com/ko_kr/AmazonElastiCache/latest/red-ug/Shards.html">https://docs.aws.amazon.com/ko_kr/AmazonElastiCache/latest/red-ug/Shards.html</a><br>
+<a href="https://docs.aws.amazon.com/ko_kr/AmazonElastiCache/latest/red-ug/Clusters.html">https://docs.aws.amazon.com/ko_kr/AmazonElastiCache/latest/red-ug/Clusters.html</a><br>
+<a href="https://aws.amazon.com/ko/blogs/database/work-with-cluster-mode-on-amazon-elasticache-for-redis">Redis 용 Amazon ElastiCache에서 클러스터 모드로 작업하는 방법</a></p>
+
+        </div>
+
+        <div class="row middle-xs">
+          <div class="col-xs-12">
+            
+          </div>
+        </div>
+        
+          <div class="row">
+            <div class="col-xs-12">
+              
+            </div>
+          </div>
+
+          
+
+
+
+          
+          
+          <div style="height: 50px;"></div>
+          
+        
+
+        <div class="site-footer">
+  
+  
+</div>
+
+      </div>
+    </div>
+  </article>
+
+  
+
+<script>
+  
+  
+    
+    
+  
+</script>
+
+  
+
+</body>
+
+</html>

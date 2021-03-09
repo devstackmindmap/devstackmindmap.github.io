@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang='en' dir='auto'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Credit 및 Burster 내용 이해 및 숙지 T Type Instance에 대해 알아보자.
+문서에서 확인해보면 성능 순간 확장 가능 인스턴스 라고 한다.
+기본 수준의 CPU 성능과 함께 워크로드에서 필요한 만큼 성능을 높이는 버스트 기능을 제공하도록 설계되어 있다. 여기서 기본 수준이 어느 정도이고 필요한 만큼 성능을 높이는 버스트 기능이 어떻게 작동하는지 이해해야 하겠다.
+시간 당 요금이 비슷한 인스턴스들을 가지고 조금 비교해 보자. (서울 기준)
+    인스턴스 이름 온디맨드 시간당 요금 vCPU 메모리 스토리지 네트워크 성능     t3.'>
+<meta name='theme-color' content='#ffcd00'>
+
+<meta property='og:title' content='AWS EC2 문제들 • DEV STACK MINDMAP'>
+<meta property='og:description' content='Credit 및 Burster 내용 이해 및 숙지 T Type Instance에 대해 알아보자.
+문서에서 확인해보면 성능 순간 확장 가능 인스턴스 라고 한다.
+기본 수준의 CPU 성능과 함께 워크로드에서 필요한 만큼 성능을 높이는 버스트 기능을 제공하도록 설계되어 있다. 여기서 기본 수준이 어느 정도이고 필요한 만큼 성능을 높이는 버스트 기능이 어떻게 작동하는지 이해해야 하겠다.
+시간 당 요금이 비슷한 인스턴스들을 가지고 조금 비교해 보자. (서울 기준)
+    인스턴스 이름 온디맨드 시간당 요금 vCPU 메모리 스토리지 네트워크 성능     t3.'>
+<meta property='og:url' content='http://example.org/docs/20210423-ec2-issues/'>
+<meta property='og:site_name' content='DEV STACK MINDMAP'>
+<meta property='og:type' content='article'><meta property='article:section' content='docs'><meta property='article:published_time' content='2021-04-23T14:08:00&#43;09:00'/><meta property='article:modified_time' content='2021-04-23T14:08:00&#43;09:00'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.81.0" />
+
+  <title>AWS EC2 문제들 • DEV STACK MINDMAP</title>
+  <link rel='canonical' href='http://example.org/docs/20210423-ec2-issues/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.ab98e12b.css'><link rel='stylesheet' href='/css/custom.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
+  
+
+</head>
+<body class='page type-docs has-sidebar'>
+
+  <div class='site'><div id='sidebar' class='sidebar'>
+  <a class='screen-reader-text' href='#main-menu'>Skip to Main Menu</a>
+
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+      <a href='/'>
+      DEV STACK MINDMAP
+      </a>
+    </h2>
+    <div class='desc'>
+    devstack&#39;s library
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-search sep-after'>
+  <header>
+    <h4 class='title widget-title'>Search</h4>
+  </header>
+
+  <form action='/search' id='search-form' class='search-form'>
+    <label>
+      <span class='screen-reader-text'>Search</span>
+      <input id='search-term' class='search-term' type='search' name='q' placeholder='Search&hellip;'>
+    </label></form>
+
+</section>
+<section class='widget widget-sidebar_menu sep-after'><nav id='sidebar-menu' class='menu sidebar-menu' aria-label='Sidebar Menu'>
+    <div class='container'>
+      <ul><li class='item'>
+  <a href='/docs/'>Docs</a></li></ul>
+    </div>
+  </nav>
+
+</section><section class='widget widget-taxonomy_cloud sep-after'>
+  <header>
+    <h4 class='title widget-title'>Tags</h4>
+  </header>
+
+  <div class='container list-container'>
+  <ul class='list taxonomy-cloud'><span>Not a single Tag!</span></ul>
+</div>
+
+
+</section>
+</div>
+
+  <div class='sidebar-overlay'></div>
+</div><div class='main'><nav id='main-menu' class='menu main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    <a class='screen-reader-text' href='#content'>Skip to Content</a>
+
+<button id='sidebar-toggler' class='sidebar-toggler' aria-controls='sidebar'>
+  <span class='screen-reader-text'>Toggle Sidebar</span>
+  <span class='open'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="3" y1="12" x2="21" y2="12" />
+<line x1="3" y1="6" x2="21" y2="6" />
+<line x1="3" y1="18" x2="21" y2="18" />
+</svg>
+</span>
+  <span class='close'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="18" y1="6" x2="6" y2="18" />
+<line x1="6" y1="6" x2="18" y2="18" />
+</svg>
+</span>
+</button>
+    <ul><li class='item'>
+        <a href='/docs/'>Docs</a>
+      </li></ul>
+  </div>
+</nav><div class='header-widgets'>
+        <div class='container'>
+    
+    <style>.widget-breadcrumbs li:after{content:'\2f '}</style>
+  <section class='widget widget-breadcrumbs sep-after'>
+    <nav id='breadcrumbs'>
+      <ol><li><a href='/'>DEV STACK MINDMAP</a></li><li><a href='/docs/'>Docs</a></li><li><span>AWS EC2 문제들</span></li></ol>
+    </nav>
+  </section></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>DEV STACK MINDMAP</p><p class='desc site-desc'>devstack&#39;s library</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>AWS EC2 문제들</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+<line x1="16" y1="2" x2="16" y2="6" />
+<line x1="8" y1="2" x2="8" y2="6" />
+<line x1="3" y1="10" x2="21" y2="10" />
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2021-04-23T14:08:00&#43;09:00'>2021, Apr 23</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><circle cx="12" cy="12" r="10" />
+<polyline points="12 6 12 12 15 15" />
+</svg>
+One min read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  <hr>
+<h3 id="credit-및-burster-내용-이해-및-숙지">Credit 및 Burster 내용 이해 및 숙지</h3>
+<p>T Type Instance에 대해 알아보자.<br>
+<br>
+문서에서 확인해보면  <a href="https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/burstable-performance-instances.html">성능 순간 확장 가능 인스턴스</a> 라고 한다.<br>
+기본 수준의 CPU 성능과 함께 워크로드에서 필요한 만큼 성능을 높이는 버스트 기능을 제공하도록 설계되어 있다. 여기서 <strong>기본 수준</strong>이 어느 정도이고 필요한 만큼 성능을 높이는 <strong>버스트 기능</strong>이 어떻게 작동하는지 이해해야 하겠다.</p>
+<p>시간 당 <a href="https://aws.amazon.com/ko/ec2/pricing/on-demand/">요금</a>이 비슷한 인스턴스들을 가지고 조금 비교해 보자. (서울 기준)</p>
+<hr>
+<table>
+<thead>
+<tr>
+<th>인스턴스 이름</th>
+<th>온디맨드 시간당 요금</th>
+<th>vCPU</th>
+<th>메모리</th>
+<th>스토리지</th>
+<th>네트워크 성능</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>t3.xlarge</td>
+<td>0.208 USD</td>
+<td>4</td>
+<td>16GiB</td>
+<td>EBS 전용</td>
+<td>최대 5기가비트</td>
+</tr>
+<tr>
+<td>m5.xlarge</td>
+<td>0.236 USD</td>
+<td>4</td>
+<td>16Gib</td>
+<td>EBS 전용</td>
+<td>최대 10기가비트</td>
+</tr>
+<tr>
+<td>c5.xlarge</td>
+<td>0.192 USD</td>
+<td>4</td>
+<td>8 Gib</td>
+<td>EBS 전용</td>
+<td>최대 10기가비트</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>이것만 봐서 성능을 잘 모르겠다.<br>
+다행히 자세한 문서가 있다.</p>
+<p><a href="https://aws.amazon.com/ko/ec2/instance-types/m5/">https://aws.amazon.com/ko/ec2/instance-types/m5/</a><br>
+<a href="https://aws.amazon.com/ko/ec2/instance-types/t3/">https://aws.amazon.com/ko/ec2/instance-types/t3/</a><br>
+<a href="https://aws.amazon.com/ko/ec2/instance-types/c5/">https://aws.amazon.com/ko/ec2/instance-types/c5/</a></p>
+<hr>
+<h3 id="links">Links</h3>
+<p><a href="https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/enhanced-networking-ena.html">Linux 인스턴스에서 ENA(Elastic Network Adapter)를 사용하여 향상된 네트워킹 활성화</a></p>
+<p><a href="https://github.com/amzn/amzn-drivers/blob/master/kernel/linux/ena/RELEASENOTES.md">ENA Linux Kernel Driver Release notes</a></p>
+<p><a href="https://forums.aws.amazon.com/thread.jspa?threadID=268592">https://forums.aws.amazon.com/thread.jspa?threadID=268592</a></p>
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'>
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/docs/20210423-gamelift-peering/'>
+        <span aria-hidden='true'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="20" y1="12" x2="4" y2="12" />
+<polyline points="10 18 4 12 10 6" />
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>GameLift Peering</a>
+    </div><div class='next-entry sep-before'>
+      <a href='/docs/20210428-rds-performance/'>
+        <span class='screen-reader-text'>Next post: </span>About RDS<span aria-hidden='true'>Next <svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="4" y1="12" x2="20" y2="12" />
+<polyline points="14 6 20 12 14 18" />
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='mailto:devstackmindmap@gmail.com' target='_blank' rel='noopener me'>
+          <span class='screen-reader-text'>Contact via Email</span><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+<polyline points="22,6 12,13 2,6" />
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section><div class='copyright'>
+  <p> &copy; 2021 Dev stack Kim </p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="/assets/js/"</script>
+
+<script src='/assets/js/main.c3bcf2df.js'></script><script src='/js/custom.js'></script>
+
+</body>
+
+</html>
+

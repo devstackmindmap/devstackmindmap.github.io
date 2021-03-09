@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang='en' dir='auto'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='VPC 생성 : VPC 자체를 생성 및 사용하는 데에는 별도의 비용이 없습니다.
+VPN과 연결 : VPN 연결 시간(VPN 연결이 &ldquo;사용 가능&rdquo; 상태인 시간)당 요금
+VPN 연결을 통해 전송된 데이터는 표준 AWS 데이터 전송 요금이 청구됩니다.
+ Amazon API Gateway Amazon API Gateway를 사용하면 API를 사용할 때만 비용을 지불하면 됩니다. 최소 요금이나 사전 약정은 없습니다. HTTP API와 REST API의 경우 수신한 API 호출과 전송한 데이터 양에 대해서만 요금을 지불하면 됩니다. 프라이빗 API에 대한 데이터 전송 요금은 없습니다.'>
+<meta name='theme-color' content='#ffcd00'>
+
+<meta property='og:title' content='AWS Price • DEV STACK MINDMAP'>
+<meta property='og:description' content='VPC 생성 : VPC 자체를 생성 및 사용하는 데에는 별도의 비용이 없습니다.
+VPN과 연결 : VPN 연결 시간(VPN 연결이 &ldquo;사용 가능&rdquo; 상태인 시간)당 요금
+VPN 연결을 통해 전송된 데이터는 표준 AWS 데이터 전송 요금이 청구됩니다.
+ Amazon API Gateway Amazon API Gateway를 사용하면 API를 사용할 때만 비용을 지불하면 됩니다. 최소 요금이나 사전 약정은 없습니다. HTTP API와 REST API의 경우 수신한 API 호출과 전송한 데이터 양에 대해서만 요금을 지불하면 됩니다. 프라이빗 API에 대한 데이터 전송 요금은 없습니다.'>
+<meta property='og:url' content='http://example.org/docs/20210409-aws-price/'>
+<meta property='og:site_name' content='DEV STACK MINDMAP'>
+<meta property='og:type' content='article'><meta property='article:section' content='docs'><meta property='article:published_time' content='2021-04-09T10:09:00&#43;09:00'/><meta property='article:modified_time' content='2021-04-09T10:09:00&#43;09:00'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.81.0" />
+
+  <title>AWS Price • DEV STACK MINDMAP</title>
+  <link rel='canonical' href='http://example.org/docs/20210409-aws-price/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.ab98e12b.css'><link rel='stylesheet' href='/css/custom.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
+  
+
+</head>
+<body class='page type-docs has-sidebar'>
+
+  <div class='site'><div id='sidebar' class='sidebar'>
+  <a class='screen-reader-text' href='#main-menu'>Skip to Main Menu</a>
+
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+      <a href='/'>
+      DEV STACK MINDMAP
+      </a>
+    </h2>
+    <div class='desc'>
+    devstack&#39;s library
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-search sep-after'>
+  <header>
+    <h4 class='title widget-title'>Search</h4>
+  </header>
+
+  <form action='/search' id='search-form' class='search-form'>
+    <label>
+      <span class='screen-reader-text'>Search</span>
+      <input id='search-term' class='search-term' type='search' name='q' placeholder='Search&hellip;'>
+    </label></form>
+
+</section>
+<section class='widget widget-sidebar_menu sep-after'><nav id='sidebar-menu' class='menu sidebar-menu' aria-label='Sidebar Menu'>
+    <div class='container'>
+      <ul><li class='item'>
+  <a href='/docs/'>Docs</a></li></ul>
+    </div>
+  </nav>
+
+</section><section class='widget widget-taxonomy_cloud sep-after'>
+  <header>
+    <h4 class='title widget-title'>Tags</h4>
+  </header>
+
+  <div class='container list-container'>
+  <ul class='list taxonomy-cloud'><span>Not a single Tag!</span></ul>
+</div>
+
+
+</section>
+</div>
+
+  <div class='sidebar-overlay'></div>
+</div><div class='main'><nav id='main-menu' class='menu main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    <a class='screen-reader-text' href='#content'>Skip to Content</a>
+
+<button id='sidebar-toggler' class='sidebar-toggler' aria-controls='sidebar'>
+  <span class='screen-reader-text'>Toggle Sidebar</span>
+  <span class='open'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="3" y1="12" x2="21" y2="12" />
+<line x1="3" y1="6" x2="21" y2="6" />
+<line x1="3" y1="18" x2="21" y2="18" />
+</svg>
+</span>
+  <span class='close'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="18" y1="6" x2="6" y2="18" />
+<line x1="6" y1="6" x2="18" y2="18" />
+</svg>
+</span>
+</button>
+    <ul><li class='item'>
+        <a href='/docs/'>Docs</a>
+      </li></ul>
+  </div>
+</nav><div class='header-widgets'>
+        <div class='container'>
+    
+    <style>.widget-breadcrumbs li:after{content:'\2f '}</style>
+  <section class='widget widget-breadcrumbs sep-after'>
+    <nav id='breadcrumbs'>
+      <ol><li><a href='/'>DEV STACK MINDMAP</a></li><li><a href='/docs/'>Docs</a></li><li><span>AWS Price</span></li></ol>
+    </nav>
+  </section></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>DEV STACK MINDMAP</p><p class='desc site-desc'>devstack&#39;s library</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>AWS Price</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+<line x1="16" y1="2" x2="16" y2="6" />
+<line x1="8" y1="2" x2="8" y2="6" />
+<line x1="3" y1="10" x2="21" y2="10" />
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2021-04-09T10:09:00&#43;09:00'>2021, Apr 09</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><circle cx="12" cy="12" r="10" />
+<polyline points="12 6 12 12 15 15" />
+</svg>
+2 mins read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  <h3 id="vpc">VPC</h3>
+<p>생성 : VPC 자체를 생성 및 사용하는 데에는 별도의 비용이 없습니다.<br>
+VPN과 연결 :  VPN 연결 시간(VPN 연결이 &ldquo;사용 가능&rdquo; 상태인 시간)당 요금<br>
+VPN 연결을 통해 전송된 데이터는 표준 AWS 데이터 전송 요금이 청구됩니다.</p>
+<hr>
+<h3 id="amazon-api-gateway">Amazon API Gateway</h3>
+<p>Amazon API Gateway를 사용하면 API를 사용할 때만 비용을 지불하면 됩니다. 최소 요금이나 사전 약정은 없습니다. HTTP API와 REST API의 경우 수신한 API 호출과 전송한 데이터 양에 대해서만 요금을 지불하면 됩니다. 프라이빗 API에 대한 데이터 전송 요금은 없습니다. 하지만 Amazon API Gateway에서 프라이빗 API를 사용하는 경우에는 AWS PrivateLink 요금이 적용됩니다. 또한, API Gateway는 선택한 캐시 크기를 기반으로 시간당 요금이 부과되는 데이터 캐싱을 옵션으로 제공합니다. WebSocket API의 경우, 보내고 받은 메시지 수와 연결 시간(분)에 따라 API를 사용할 때만 요금이 청구됩니다.</p>
+<hr>
+<h3 id="cloudwatch-event">CloudWatch Event</h3>
+<p>Custom/Cross-account events cost<br>
+1 events = 0.000001 USD = 0.000001 USD</p>
+<hr>
+<h3 id="lambda-비용">Lambda 비용</h3>
+<table>
+<thead>
+<tr>
+<th>메모리(MB)(대형 메모리 포함)</th>
+<th>1밀리초당 요금</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>128</td>
+<td>0.0000000021 USD</td>
+</tr>
+<tr>
+<td>512</td>
+<td>0.0000000083 USD</td>
+</tr>
+<tr>
+<td>1,024</td>
+<td>0.0000000167 USD</td>
+</tr>
+<tr>
+<td>1,536</td>
+<td>0.0000000250 USD</td>
+</tr>
+<tr>
+<td>2,048</td>
+<td>0.0000000333 USD</td>
+</tr>
+<tr>
+<td>3,072</td>
+<td>0.0000000500 USD</td>
+</tr>
+<tr>
+<td>4,096</td>
+<td>0.0000000667 USD</td>
+</tr>
+<tr>
+<td>5,120</td>
+<td>0.0000000833 USD</td>
+</tr>
+<tr>
+<td>6,144</td>
+<td>0.0000001000 USD</td>
+</tr>
+<tr>
+<td>7,168</td>
+<td>0.0000001167 USD</td>
+</tr>
+<tr>
+<td>8,192</td>
+<td>0.0000001333 USD</td>
+</tr>
+<tr>
+<td>9,216</td>
+<td>0.0000001500 USD</td>
+</tr>
+<tr>
+<td>10,240</td>
+<td>0.0000001667 USD</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>1,024 MB Lambda 가 3초 실행, 10,000 번 실행 된다면<br>
+0.0000000167 * 3000 * 10000 = 0.501 USD</li>
+</ul>
+<hr>
+<h3 id="nat-게이트웨이-요금">NAT 게이트웨이 요금</h3>
+<p>서울 기준  </p>
+<table>
+<thead>
+<tr>
+<th>NAT 게이트웨이당 요금(USD/시간)</th>
+<th>처리된 데이터 GB당 요금(USD)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.059 USD</td>
+<td>0.059 USD</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="elasticache-for-redis">ElastiCache For Redis</h3>
+<p>동일한 가용 영역 내의 Amazon EC2와 Amazon ElastiCache 간의 데이터 전송 요금은 없습니다.<br>
+동일한 지역의 서로 다른 가용 영역에서 Amazon EC2 인스턴스와 Amazon ElastiCache 노드 간에 데이터를 전송할 경우, 수신/송신 GB당 0.01 USD의 표준 Amazon EC2 지역 데이터 전송 요금이 적용되고, Amazon EC2 인스턴스에서 수신 또는 송신되는 데이터 전송 요금만 청구됩니다.<br>
+Amazon ElastiCache 노드 자체에서 송수신하는 트래픽에 대해서는 Amazon ElastiCache 데이터 전송 요금이 부과되지 않습니다.</p>
+<hr>
+<h3 id="links">Links</h3>
+<p><a href="https://aws.amazon.com/ko/vpc/faqs/">▶ Amazon VPC FAQ</a><br>
+<a href="https://aws.amazon.com/ko/vpc/pricing/">▶ Amazon VPC 요금</a><br>
+<a href="https://aws.amazon.com/ko/api-gateway/pricing/">▶ Amazon API Gateway 요금</a><br>
+<a href="https://aws.amazon.com/ko/cloudwatch/pricing/">▶ Amazon CloudWatch 요금</a><br>
+<a href="https://aws.amazon.com/ko/lambda/pricing/">▶ AWS Lambda 요금</a><br>
+<a href="https://aws.amazon.com/ko/elasticache/pricing/">▶ Amazon ElastiCache 요금</a></p>
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'>
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/docs/20210402-cdk/'>
+        <span aria-hidden='true'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="20" y1="12" x2="4" y2="12" />
+<polyline points="10 18 4 12 10 6" />
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>CDK in C# </a>
+    </div><div class='next-entry sep-before'>
+      <a href='/docs/20210409-lambda-in-csharp/'>
+        <span class='screen-reader-text'>Next post: </span>AWS Lambda with Visual Studio and C#<span aria-hidden='true'>Next <svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="4" y1="12" x2="20" y2="12" />
+<polyline points="14 6 20 12 14 18" />
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='mailto:devstackmindmap@gmail.com' target='_blank' rel='noopener me'>
+          <span class='screen-reader-text'>Contact via Email</span><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+<polyline points="22,6 12,13 2,6" />
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section><div class='copyright'>
+  <p> &copy; 2021 Dev stack Kim </p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="/assets/js/"</script>
+
+<script src='/assets/js/main.c3bcf2df.js'></script><script src='/js/custom.js'></script>
+
+</body>
+
+</html>
+

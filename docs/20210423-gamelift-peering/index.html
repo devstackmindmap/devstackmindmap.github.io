@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang='en' dir='auto'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='EC2에서 원격 GameLift로 CreateGameSession
+Local에서 원격 GameLift로 CreateGameSession
+둘다 되는데
+Lambda에서 원격 GameLift로 CreateGameSession 이 안됨.
+ CloudTrail에서 로그를 보면 CreateGameSession 호출 자체를 못함 CloudWatch에서 로그를 확인하면 호출 직전 로그 찍힘 해당 람다는 VPC 내에 있음 람다가 가지고 있는 Role   CustomLambdaRole : GameLiftFullAccess, AmazonRDSDataFullAccess, AWSLambdaBasicExecutionRole, AWSLambdaVPCAccessExecutionRole   권한 문제는 없고 네트워크 문제였음. 람다는 GameLift로 바로 통신되지 않음
+  람다가 VPC 외부에 있다면 바로 됨.
+VPC 내부에 있다면 Internet Gateway를 탈 수 없기 때문에 NAT를 통해 통신 해야함'>
+<meta name='theme-color' content='#ffcd00'>
+
+<meta property='og:title' content='GameLift Peering • DEV STACK MINDMAP'>
+<meta property='og:description' content='EC2에서 원격 GameLift로 CreateGameSession
+Local에서 원격 GameLift로 CreateGameSession
+둘다 되는데
+Lambda에서 원격 GameLift로 CreateGameSession 이 안됨.
+ CloudTrail에서 로그를 보면 CreateGameSession 호출 자체를 못함 CloudWatch에서 로그를 확인하면 호출 직전 로그 찍힘 해당 람다는 VPC 내에 있음 람다가 가지고 있는 Role   CustomLambdaRole : GameLiftFullAccess, AmazonRDSDataFullAccess, AWSLambdaBasicExecutionRole, AWSLambdaVPCAccessExecutionRole   권한 문제는 없고 네트워크 문제였음. 람다는 GameLift로 바로 통신되지 않음
+  람다가 VPC 외부에 있다면 바로 됨.
+VPC 내부에 있다면 Internet Gateway를 탈 수 없기 때문에 NAT를 통해 통신 해야함'>
+<meta property='og:url' content='http://example.org/docs/20210423-gamelift-peering/'>
+<meta property='og:site_name' content='DEV STACK MINDMAP'>
+<meta property='og:type' content='article'><meta property='article:section' content='docs'><meta property='article:published_time' content='2021-04-23T14:08:00&#43;09:00'/><meta property='article:modified_time' content='2021-04-23T14:08:00&#43;09:00'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.81.0" />
+
+  <title>GameLift Peering • DEV STACK MINDMAP</title>
+  <link rel='canonical' href='http://example.org/docs/20210423-gamelift-peering/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.ab98e12b.css'><link rel='stylesheet' href='/css/custom.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
+  
+
+</head>
+<body class='page type-docs has-sidebar'>
+
+  <div class='site'><div id='sidebar' class='sidebar'>
+  <a class='screen-reader-text' href='#main-menu'>Skip to Main Menu</a>
+
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+      <a href='/'>
+      DEV STACK MINDMAP
+      </a>
+    </h2>
+    <div class='desc'>
+    devstack&#39;s library
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-search sep-after'>
+  <header>
+    <h4 class='title widget-title'>Search</h4>
+  </header>
+
+  <form action='/search' id='search-form' class='search-form'>
+    <label>
+      <span class='screen-reader-text'>Search</span>
+      <input id='search-term' class='search-term' type='search' name='q' placeholder='Search&hellip;'>
+    </label></form>
+
+</section>
+<section class='widget widget-sidebar_menu sep-after'><nav id='sidebar-menu' class='menu sidebar-menu' aria-label='Sidebar Menu'>
+    <div class='container'>
+      <ul><li class='item'>
+  <a href='/docs/'>Docs</a></li></ul>
+    </div>
+  </nav>
+
+</section><section class='widget widget-taxonomy_cloud sep-after'>
+  <header>
+    <h4 class='title widget-title'>Tags</h4>
+  </header>
+
+  <div class='container list-container'>
+  <ul class='list taxonomy-cloud'><span>Not a single Tag!</span></ul>
+</div>
+
+
+</section>
+</div>
+
+  <div class='sidebar-overlay'></div>
+</div><div class='main'><nav id='main-menu' class='menu main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    <a class='screen-reader-text' href='#content'>Skip to Content</a>
+
+<button id='sidebar-toggler' class='sidebar-toggler' aria-controls='sidebar'>
+  <span class='screen-reader-text'>Toggle Sidebar</span>
+  <span class='open'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="3" y1="12" x2="21" y2="12" />
+<line x1="3" y1="6" x2="21" y2="6" />
+<line x1="3" y1="18" x2="21" y2="18" />
+</svg>
+</span>
+  <span class='close'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="18" y1="6" x2="6" y2="18" />
+<line x1="6" y1="6" x2="18" y2="18" />
+</svg>
+</span>
+</button>
+    <ul><li class='item'>
+        <a href='/docs/'>Docs</a>
+      </li></ul>
+  </div>
+</nav><div class='header-widgets'>
+        <div class='container'>
+    
+    <style>.widget-breadcrumbs li:after{content:'\2f '}</style>
+  <section class='widget widget-breadcrumbs sep-after'>
+    <nav id='breadcrumbs'>
+      <ol><li><a href='/'>DEV STACK MINDMAP</a></li><li><a href='/docs/'>Docs</a></li><li><span>GameLift Peering</span></li></ol>
+    </nav>
+  </section></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>DEV STACK MINDMAP</p><p class='desc site-desc'>devstack&#39;s library</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>GameLift Peering</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+<line x1="16" y1="2" x2="16" y2="6" />
+<line x1="8" y1="2" x2="8" y2="6" />
+<line x1="3" y1="10" x2="21" y2="10" />
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2021-04-23T14:08:00&#43;09:00'>2021, Apr 23</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><circle cx="12" cy="12" r="10" />
+<polyline points="12 6 12 12 15 15" />
+</svg>
+2 mins read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  <p>EC2에서 원격 GameLift로 CreateGameSession<br>
+Local에서 원격 GameLift로 CreateGameSession<br>
+둘다 되는데<br>
+Lambda에서 원격 GameLift로 CreateGameSession 이 안됨.</p>
+<ol>
+<li>CloudTrail에서 로그를 보면 CreateGameSession 호출 자체를 못함</li>
+<li>CloudWatch에서 로그를 확인하면 호출 직전 로그 찍힘</li>
+<li>해당 람다는 VPC 내에 있음</li>
+<li>람다가 가지고 있는 Role</li>
+</ol>
+<ul>
+<li>CustomLambdaRole : GameLiftFullAccess, AmazonRDSDataFullAccess, AWSLambdaBasicExecutionRole, AWSLambdaVPCAccessExecutionRole</li>
+</ul>
+<blockquote>
+<p>권한 문제는 없고 네트워크 문제였음.
+람다는 GameLift로 바로 통신되지 않음</p>
+</blockquote>
+<blockquote>
+<p>람다가 VPC 외부에 있다면 바로 됨.<br>
+VPC 내부에 있다면 Internet Gateway를 탈 수 없기 때문에
+NAT를 통해 통신 해야함</p>
+</blockquote>
+<p>EIP 생성
+NAT gateway 생성 (위 EIP Assign)
+private subnet 2개 생성</p>
+<p>위 2개 subnet에 대한 route table 생성
+위 route table 에서 0.0.0.0/</p>
+<p>삭제할때</p>
+<ol>
+<li>Route table에서 NAT gateway 연결 해제</li>
+<li>NAT Gateway 삭제</li>
+<li>EIP Release</li>
+<li>Route table Subnet 해제</li>
+<li>Route table 삭제</li>
+<li>Subnet 삭제</li>
+</ol>
+<hr>
+<p><a href="https://docs.aws.amazon.com/ko_kr/gamelift/latest/developerguide/vpc-peering.html">GameLift에 대한 VPC 피어링</a></p>
+<ol>
+<li>GameLift가 있는 그리고 비 GameLift 리소스의 AWS Account ID를 준비한다.</li>
+<li>GameLift의 VPC ID (Fleet ID), 비 GameLift 리소스의 VPC ID를 준비한다.</li>
+<li>VPC peering을 승인한다.</li>
+</ol>
+<p>aws gamelift create-vpc-peering-authorization
+&ndash;game-lift-aws-account-id <value>
+&ndash;peer-vpc-id <value></p>
+<p><a href="https://docs.aws.amazon.com/cli/latest/reference/gamelift/create-vpc-peering-authorization.html">Link</a></p>
+<ol start="4">
+<li>Peering connection을 요청 한다.</li>
+</ol>
+<p>aws gamelift create-vpc-peering-connection &ndash;fleet-id fleet-xxxxxxxxx-yyyy-zzzzzzzzzzzzzz &ndash;peer-vpc-id vpc-11112222 &ndash;peer-vpc-aws-account-id 111122223333</p>
+<p><a href="https://docs.aws.amazon.com/cli/latest/reference/ec2/create-vpc-peering-connection.html">Link</a></p>
+<p>aws gamelift create-vpc-peering-authorization &ndash;game-lift-aws-account-id 831150897155 &ndash;peer-vpc-id vpc-87be03ec
+{
+&ldquo;VpcPeeringAuthorization&rdquo;: {
+&ldquo;GameLiftAwsAccountId&rdquo;: &ldquo;831150897155&rdquo;,
+&ldquo;PeerVpcAwsAccountId&rdquo;: &ldquo;831150897155&rdquo;,
+&ldquo;PeerVpcId&rdquo;: &ldquo;vpc-87be03ec&rdquo;,
+&ldquo;CreationTime&rdquo;: &ldquo;2021-04-22T14:05:10.867000+09:00&rdquo;,
+&ldquo;ExpirationTime&rdquo;: &ldquo;2021-04-23T14:05:10+09:00&rdquo;
+}
+}</p>
+<hr>
+<p>20210423<br>
+$ aws gamelift create-vpc-peering-authorization &ndash;game-lift-aws-account-id 831150897155 &ndash;peer-vpc-id 831150897155
+{
+&ldquo;VpcPeeringAuthorization&rdquo;: {
+&ldquo;GameLiftAwsAccountId&rdquo;: &ldquo;831150897155&rdquo;,
+&ldquo;PeerVpcAwsAccountId&rdquo;: &ldquo;831150897155&rdquo;,
+&ldquo;PeerVpcId&rdquo;: &ldquo;831150897155&rdquo;,
+&ldquo;CreationTime&rdquo;: &ldquo;2021-04-22T15:17:37.754000+09:00&rdquo;,
+&ldquo;ExpirationTime&rdquo;: &ldquo;2021-04-24T15:21:22+09:00&rdquo;
+}
+}</p>
+<p>aws gamelift describe-vpc-peering-connections &ndash;fleet-id fleet-d53207f4-6a43-467c-8c96-50edf1852a31</p>
+<hr>
+<h3 id="links">Links</h3>
+<p><a href="">▶</a></p>
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'>
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/docs/20210420-beanstalk/'>
+        <span aria-hidden='true'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="20" y1="12" x2="4" y2="12" />
+<polyline points="10 18 4 12 10 6" />
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>AWS Elastic Beanstalk</a>
+    </div><div class='next-entry sep-before'>
+      <a href='/docs/20210423-ec2-issues/'>
+        <span class='screen-reader-text'>Next post: </span>AWS EC2 문제들<span aria-hidden='true'>Next <svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="4" y1="12" x2="20" y2="12" />
+<polyline points="14 6 20 12 14 18" />
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='mailto:devstackmindmap@gmail.com' target='_blank' rel='noopener me'>
+          <span class='screen-reader-text'>Contact via Email</span><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+<polyline points="22,6 12,13 2,6" />
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section><div class='copyright'>
+  <p> &copy; 2021 Dev stack Kim </p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="/assets/js/"</script>
+
+<script src='/assets/js/main.c3bcf2df.js'></script><script src='/js/custom.js'></script>
+
+</body>
+
+</html>
+

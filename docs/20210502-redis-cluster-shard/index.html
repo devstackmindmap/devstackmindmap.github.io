@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang='en' dir='auto'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Overview 목표 Step 1. 네트워크 구성  Step 1.1. VPC 생성 Step 1.2. 서브넷 생성 Step 1.3. 보안 그룹 생성 Step 1.4. 인터넷 게이트웨이 생성 Step 1.5. 인터넷 게이트웨이 VPC에 연결 Step 1.6. 라우팅 테이블 생성 Step 1.7. 라우팅 편집 Step 1.8. 서브넷 연결   Step 2. Redis Cluster 생성  Step 2.1. 서브넷 그룹 생성 Step 2.2. Redis Cluster 생성   Step 3. AWS Cloud9 생성 Step 4.'>
+<meta name='theme-color' content='#ffcd00'>
+
+<meta property='og:title' content='Redis Cluster 샤드 추가/삭제에 따른 데이터 재 조정 확인 • DEV STACK MINDMAP'>
+<meta property='og:description' content='Overview 목표 Step 1. 네트워크 구성  Step 1.1. VPC 생성 Step 1.2. 서브넷 생성 Step 1.3. 보안 그룹 생성 Step 1.4. 인터넷 게이트웨이 생성 Step 1.5. 인터넷 게이트웨이 VPC에 연결 Step 1.6. 라우팅 테이블 생성 Step 1.7. 라우팅 편집 Step 1.8. 서브넷 연결   Step 2. Redis Cluster 생성  Step 2.1. 서브넷 그룹 생성 Step 2.2. Redis Cluster 생성   Step 3. AWS Cloud9 생성 Step 4.'>
+<meta property='og:url' content='http://example.org/docs/20210502-redis-cluster-shard/'>
+<meta property='og:site_name' content='DEV STACK MINDMAP'>
+<meta property='og:type' content='article'><meta property='article:section' content='docs'><meta property='article:published_time' content='2021-05-02T02:09:00&#43;09:00'/><meta property='article:modified_time' content='2021-05-02T02:09:00&#43;09:00'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.81.0" />
+
+  <title>Redis Cluster 샤드 추가/삭제에 따른 데이터 재 조정 확인 • DEV STACK MINDMAP</title>
+  <link rel='canonical' href='http://example.org/docs/20210502-redis-cluster-shard/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.ab98e12b.css'><link rel='stylesheet' href='/css/custom.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
+  
+
+</head>
+<body class='page type-docs has-sidebar'>
+
+  <div class='site'><div id='sidebar' class='sidebar'>
+  <a class='screen-reader-text' href='#main-menu'>Skip to Main Menu</a>
+
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+      <a href='/'>
+      DEV STACK MINDMAP
+      </a>
+    </h2>
+    <div class='desc'>
+    devstack&#39;s library
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-search sep-after'>
+  <header>
+    <h4 class='title widget-title'>Search</h4>
+  </header>
+
+  <form action='/search' id='search-form' class='search-form'>
+    <label>
+      <span class='screen-reader-text'>Search</span>
+      <input id='search-term' class='search-term' type='search' name='q' placeholder='Search&hellip;'>
+    </label></form>
+
+</section>
+<section class='widget widget-sidebar_menu sep-after'><nav id='sidebar-menu' class='menu sidebar-menu' aria-label='Sidebar Menu'>
+    <div class='container'>
+      <ul><li class='item'>
+  <a href='/docs/'>Docs</a></li></ul>
+    </div>
+  </nav>
+
+</section><section class='widget widget-taxonomy_cloud sep-after'>
+  <header>
+    <h4 class='title widget-title'>Tags</h4>
+  </header>
+
+  <div class='container list-container'>
+  <ul class='list taxonomy-cloud'><span>Not a single Tag!</span></ul>
+</div>
+
+
+</section>
+</div>
+
+  <div class='sidebar-overlay'></div>
+</div><div class='main'><nav id='main-menu' class='menu main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    <a class='screen-reader-text' href='#content'>Skip to Content</a>
+
+<button id='sidebar-toggler' class='sidebar-toggler' aria-controls='sidebar'>
+  <span class='screen-reader-text'>Toggle Sidebar</span>
+  <span class='open'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="3" y1="12" x2="21" y2="12" />
+<line x1="3" y1="6" x2="21" y2="6" />
+<line x1="3" y1="18" x2="21" y2="18" />
+</svg>
+</span>
+  <span class='close'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="18" y1="6" x2="6" y2="18" />
+<line x1="6" y1="6" x2="18" y2="18" />
+</svg>
+</span>
+</button>
+    <ul><li class='item'>
+        <a href='/docs/'>Docs</a>
+      </li></ul>
+  </div>
+</nav><div class='header-widgets'>
+        <div class='container'>
+    
+    <style>.widget-breadcrumbs li:after{content:'\2f '}</style>
+  <section class='widget widget-breadcrumbs sep-after'>
+    <nav id='breadcrumbs'>
+      <ol><li><a href='/'>DEV STACK MINDMAP</a></li><li><a href='/docs/'>Docs</a></li><li><span>Redis Cluster 샤드 추가/삭제에 따른 데이터 재 조정 확인</span></li></ol>
+    </nav>
+  </section></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>DEV STACK MINDMAP</p><p class='desc site-desc'>devstack&#39;s library</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>Redis Cluster 샤드 추가/삭제에 따른 데이터 재 조정 확인</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+<line x1="16" y1="2" x2="16" y2="6" />
+<line x1="8" y1="2" x2="8" y2="6" />
+<line x1="3" y1="10" x2="21" y2="10" />
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2021-05-02T02:09:00&#43;09:00'>2021, May 02</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><circle cx="12" cy="12" r="10" />
+<polyline points="12 6 12 12 15 15" />
+</svg>
+4 mins read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  <ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#%EB%AA%A9%ED%91%9C">목표</a></li>
+<li><a href="#step-1-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EA%B5%AC%EC%84%B1">Step 1. 네트워크 구성</a>
+<ul>
+<li><a href="#step-11-vpc-%EC%83%9D%EC%84%B1">Step 1.1. VPC 생성</a></li>
+<li><a href="#step-12-%EC%84%9C%EB%B8%8C%EB%84%B7-%EC%83%9D%EC%84%B1">Step 1.2. 서브넷 생성</a></li>
+<li><a href="#step-13-%EB%B3%B4%EC%95%88-%EA%B7%B8%EB%A3%B9-%EC%83%9D%EC%84%B1">Step 1.3. 보안 그룹 생성</a></li>
+<li><a href="#step-14-%EC%9D%B8%ED%84%B0%EB%84%B7-%EA%B2%8C%EC%9D%B4%ED%8A%B8%EC%9B%A8%EC%9D%B4-%EC%83%9D%EC%84%B1">Step 1.4. 인터넷 게이트웨이 생성</a></li>
+<li><a href="#step-15-%EC%9D%B8%ED%84%B0%EB%84%B7-%EA%B2%8C%EC%9D%B4%ED%8A%B8%EC%9B%A8%EC%9D%B4-vpc%EC%97%90-%EC%97%B0%EA%B2%B0">Step 1.5. 인터넷 게이트웨이 VPC에 연결</a></li>
+<li><a href="#step-16-%EB%9D%BC%EC%9A%B0%ED%8C%85-%ED%85%8C%EC%9D%B4%EB%B8%94-%EC%83%9D%EC%84%B1">Step 1.6. 라우팅 테이블 생성</a></li>
+<li><a href="#step-17-%EB%9D%BC%EC%9A%B0%ED%8C%85-%ED%8E%B8%EC%A7%91">Step 1.7. 라우팅 편집</a></li>
+<li><a href="#step-18-%EC%84%9C%EB%B8%8C%EB%84%B7-%EC%97%B0%EA%B2%B0">Step 1.8. 서브넷 연결</a></li>
+</ul>
+</li>
+<li><a href="#step-2-redis-cluster-%EC%83%9D%EC%84%B1">Step 2. Redis Cluster 생성</a>
+<ul>
+<li><a href="#step-21-%EC%84%9C%EB%B8%8C%EB%84%B7-%EA%B7%B8%EB%A3%B9-%EC%83%9D%EC%84%B1">Step 2.1. 서브넷 그룹 생성</a></li>
+<li><a href="#step-22-redis-cluster-%EC%83%9D%EC%84%B1">Step 2.2. Redis Cluster 생성</a></li>
+</ul>
+</li>
+<li><a href="#step-3-aws-cloud9-%EC%83%9D%EC%84%B1">Step 3. AWS Cloud9 생성</a></li>
+<li><a href="#step-4-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%A7%84%ED%96%89">Step 4. 테스트 진행</a>
+<ul>
+<li><a href="#step-41-redis-py-cluster-%EC%84%A4%EC%B9%98">Step 4.1. redis-py-cluster 설치</a></li>
+<li><a href="#step-42-%ED%85%8C%EC%8A%A4%ED%8A%B8-script-%EC%9E%91%EC%84%B1">Step 4.2. 테스트 Script 작성</a></li>
+<li><a href="#step-43-script-%EC%8B%A4%ED%96%89">Step 4.3. Script 실행</a></li>
+<li><a href="#step-44-%EC%83%A4%EB%93%9C-%EC%B6%94%EA%B0%80">Step 4.4. 샤드 추가</a></li>
+<li><a href="#step-45-script-%EC%8B%A4%ED%96%89-%EC%8A%AC%EB%A1%AF%ED%82%A4%EC%8A%A4%ED%8E%98%EC%9D%B4%EC%8A%A4-%ED%99%95%EC%9D%B8">Step 4.5. Script 실행, 슬롯/키스페이스 확인</a></li>
+<li><a href="#step-46-%EC%83%A4%EB%93%9C-%EC%82%AD%EC%A0%9C">Step 4.6. 샤드 삭제</a></li>
+</ul>
+</li>
+<li><a href="#%EB%A6%AC%EC%86%8C%EC%8A%A4-%EC%A0%95%EB%A6%AC">리소스 정리</a></li>
+<li><a href="#%EC%B0%B8%EA%B3%A0-%EB%AC%B8%ED%97%8C">참고 문헌</a></li>
+</ul>
+<h2 id="overview">Overview</h2>
+<p>Redis는 캐싱, 랭킹, 세션 정보 저장, PubSub 등에 쓰이는 고성능 key-value 저장소로서 리스트, 해시, 셋, 정렬된 셋 등 여러 형식의 자료구조를 지원하는 인 메모리 데이터 스토어 NoSQL입니다.</p>
+<p>다양한 규모에서 쓰이는 Redis를 운용하다 보면 한번 쯤 클러스터 모드 적용에 대해 고민하게 됩니다.  간단한 테스트를 통해 클러스터의 샤드, 노드가 확장, 축소 될 때 자동으로 노드간에 키 공간의 재 할당,  균형 조정 되는 것을 눈으로 확인해 보고자 합니다.</p>
+<hr>
+<h2 id="목표">목표</h2>
+<p>Redis 클러스터의 샤드 확장, 축소 시 데이터의 재 조정을 눈으로 확인하고 특정 워크로드에서 Redis 클러스터의 활용에 대해 고민할 수 있도록 합니다.</p>
+<p>테스트 내용을 먼저 확인하고자 한다면 Step 4. 테스트 진행으로 이동하여 내용을 확인합니다.</p>
+<hr>
+<h2 id="step-1-네트워크-구성">Step 1. 네트워크 구성</h2>
+<p>테스트를 할 네트워크를 구성합니다.</p>
+<p>기본 VPC 위에서 테스트를 진행하신다면 <strong>Step 1. 네트워크 구성은 생략</strong> 하셔도 좋습니다.</p>
+<h3 id="step-11-vpc-생성">Step 1.1. VPC 생성</h3>
+<p>VPC 대시보드로 이동하여 VPC 생성을 아래와 같이 진행합니다.</p>
+<p><img src="/images/redis-cluster/0001-vpc.png" alt="0001-vpc.png"></p>
+<h3 id="step-12-서브넷-생성">Step 1.2. 서브넷 생성</h3>
+<p>서브넷 생성을 아래와 같이 진행합니다.</p>
+<p><img src="/images/redis-cluster/0002-subnet.png" alt="images/0002-subnet.png"></p>
+<h3 id="step-13-보안-그룹-생성">Step 1.3. 보안 그룹 생성</h3>
+<p>보안 그룹을 아래와 같이 생성합니다.</p>
+<p><img src="/images/redis-cluster/0003-sg.png" alt="c90e1bc2-4985-4e5a-86af-ca81d0a5c836/0003-sg.png"></p>
+<h3 id="step-14-인터넷-게이트웨이-생성">Step 1.4. 인터넷 게이트웨이 생성</h3>
+<p><img src="/images/redis-cluster/0004-rt3.png" alt="6ee7736f-f6f0-440a-9014-27b42f16da3a/0004-rt3.png"></p>
+<h3 id="step-15-인터넷-게이트웨이-vpc에-연결">Step 1.5. 인터넷 게이트웨이 VPC에 연결</h3>
+<p><img src="/images/redis-cluster/0004-rt4.png" alt="cc51be58-f57d-4186-827c-2ae2540631cd/0004-rt4.png"></p>
+<p><img src="/images/redis-cluster/0004-rt5.png" alt="76210655-0fe0-4ab3-856f-c019a5d641df/0004-rt5.png"></p>
+<h3 id="step-16-라우팅-테이블-생성">Step 1.6. 라우팅 테이블 생성</h3>
+<p><img src="/images/redis-cluster/0004-rt.png" alt="df8a39af-7a44-4aef-b626-7fbe204c71d9/0004-rt.png"></p>
+<h3 id="step-17-라우팅-편집">Step 1.7. 라우팅 편집</h3>
+<p><img src="/images/redis-cluster/0004-rt2.png" alt="556464dd-d142-46d1-92e4-010ff39ec0a1/0004-rt2.png"></p>
+<p><img src="/images/redis-cluster/0004-rt6.png" alt="19edb113-d98f-434a-88f4-26907cb2fda9/0004-rt6.png"></p>
+<h3 id="step-18-서브넷-연결">Step 1.8. 서브넷 연결</h3>
+<p><img src="/images/redis-cluster/0004-rt7.png" alt="1786ec05-4df5-44be-97ba-deb4ad71cb70/0004-rt7.png"></p>
+<p><img src="/images/redis-cluster/0004-rt8.png" alt="71acab08-3518-453f-9e8c-9675af5d3ff4/0004-rt8.png"></p>
+<hr>
+<h2 id="step-2-redis-cluster-생성">Step 2. Redis Cluster 생성</h2>
+<p>테스트를 진행 할 Redis Cluster를 생성합니다.</p>
+<h3 id="step-21-서브넷-그룹-생성">Step 2.1. 서브넷 그룹 생성</h3>
+<p>ElastiCache 대시보드로 이동하고 서브넷 그룹을 아래와 같이 생성합니다.</p>
+<p><img src="/images/redis-cluster/0004-subnet-group2.png" alt="ef4cd422-dad4-4b94-a604-15aa5c805d95/0004-subnet-group2.png"></p>
+<h3 id="step-22-redis-cluster-생성">Step 2.2. Redis Cluster 생성</h3>
+<p>Redis 생성을 아래와 같이 진행합니다.</p>
+<p><img src="/images/redis-cluster/0005-redis-cluster1.png" alt="287b5471-f1c8-4d95-9661-dbdbddc7fbc9/0005-redis-cluster1.png"></p>
+<p><img src="/images/redis-cluster/0006-redis-cluster2.png" alt="54986da8-9837-45fd-82f6-9038bb3583ea/0006-redis-cluster2.png"></p>
+<p><img src="/images/redis-cluster/0007-redis-cluster3.png" alt="6faa2b3d-60a6-46b9-96e3-f25fe71d8238/0007-redis-cluster3.png"></p>
+<p><img src="/images/redis-cluster/0008-redis-cluster4.png" alt="2b464dcf-6309-4876-b5ea-7e07f2f8e9ba/0008-redis-cluster4.png"></p>
+<p><img src="/images/redis-cluster/0009-redis-cluster4.png" alt="9c41fd63-8170-4546-a23a-1d3e339589fc/0009-redis-cluster4.png"></p>
+<p><img src="/images/redis-cluster/0010-redis-cluster5.png" alt="489ac97d-2d1b-4c9e-afeb-cd06d1fb74d2/0010-redis-cluster5.png"></p>
+<hr>
+<h2 id="step-3-aws-cloud9-생성">Step 3. AWS Cloud9 생성</h2>
+<p>Cloud9 대시 보드로 이동하여 아래와 같이 진행합니다.</p>
+<p><img src="/images/redis-cluster/0011-cloud9-2.png" alt="0f538580-a0f5-41a2-888a-62f6c0290e1c/0011-cloud9-2.png"></p>
+<p><img src="/images/redis-cluster/0012-cloud9-3.png" alt="8f2d3c72-2b52-4e67-884c-c5752394ed7e/0012-cloud9-3.png"></p>
+<p><img src="/images/redis-cluster/0013-cloud9-4.png" alt="750c55b8-25d7-45f2-b65f-05bf50190600/0013-cloud9-4.png"></p>
+<hr>
+<h2 id="step-4-테스트-진행">Step 4. 테스트 진행</h2>
+<p>Redis Cluster 생성과 Cloud9 환경 생성이 완료되면 테스트를 진행합니다.</p>
+<h3 id="step-41-redis-py-cluster-설치">Step 4.1. redis-py-cluster 설치</h3>
+<p>Cloud9 터미널에서 아래 명령어를 실행하여 Python의 Redis Cluster 라이브러리를 설치합니다.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">sudo pip3 install redis-py-cluster
+</code></pre></div><p><img src="/images/redis-cluster/Untitled0.png" alt="caf7a70f-61c4-4700-9225-521238c5cb70/Untitled.png"></p>
+<h3 id="step-42-테스트-script-작성">Step 4.2. 테스트 Script 작성</h3>
+<p>아래와 같이 진행하여 새로운 파일을 생성합니다.</p>
+<p><img src="/images/redis-cluster/0015-cloud9-6.png" alt="fadc4845-d2e4-4af7-82fe-a92c5390962c/0015-cloud9-6.png"></p>
+<p>아래 코드를 복사합니다.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-python" data-lang="python"><span style="font-weight:bold">import</span> <span style="font-weight:bold">rediscluster</span>
+<span style="font-weight:bold">import</span> <span style="font-weight:bold">sys</span>
+
+<span style="font-weight:bold">if</span> __name__ == <span style="font-style:italic">&#34;__main__&#34;</span>:
+    
+    <span style="font-style:italic"># Connect Cluster</span>
+    startup_nodes = [{ <span style="font-style:italic">&#34;host&#34;</span>: <span style="font-style:italic">&#34;rc-test-redis-cluster-0001-001.xcugux.0001.apn2.cache.amazonaws.com&#34;</span>, <span style="font-style:italic">&#34;port&#34;</span>: <span style="font-style:italic">&#34;6379&#34;</span>}, {<span style="font-style:italic">&#34;host&#34;</span>: <span style="font-style:italic">&#34;rc-test-redis-cluster-0002-001.xcugux.0001.apn2.cache.amazonaws.com&#34;</span>, <span style="font-style:italic">&#34;port&#34;</span>:<span style="font-style:italic">&#34;6379&#34;</span>}]
+    client = rediscluster.RedisCluster(startup_nodes=startup_nodes, decode_responses=True, skip_full_coverage_check=True)
+    
+    <span style="font-style:italic"># Get Slot Info</span>
+    slots = client.cluster(<span style="font-style:italic">&#39;slots&#39;</span>)
+    
+    slotsDic = {}
+    
+    <span style="font-weight:bold">for</span> slot <span style="font-weight:bold">in</span> slots:
+        slotsDic[slot] = { <span style="font-style:italic">&#39;IP&#39;</span> : slots[slot][<span style="font-style:italic">&#39;master&#39;</span>][0], <span style="font-style:italic">&#39;from&#39;</span> : slot[0], <span style="font-style:italic">&#39;to&#39;</span> : slot[1], <span style="font-style:italic">&#39;keyCount&#39;</span> : 0 }  
+    
+    
+    <span style="font-weight:bold">for</span> i <span style="font-weight:bold">in</span> range(1, 1001):
+        client.set(<span style="font-style:italic">&#34;foo&#34;</span> + str(i), <span style="font-style:italic">&#34;bar&#34;</span> + str(i))
+        
+        keySlot = client.cluster(<span style="font-style:italic">&#34;keyslot&#34;</span>, <span style="font-style:italic">&#34;foo&#34;</span> + str(i))
+        <span style="font-weight:bold">for</span> slot <span style="font-weight:bold">in</span> slotsDic:
+            <span style="font-weight:bold">if</span> keySlot &gt;= slotsDic[slot][<span style="font-style:italic">&#39;from&#39;</span>] <span style="font-weight:bold">and</span> slotsDic[slot][<span style="font-style:italic">&#39;to&#39;</span>] &gt;= keySlot:
+                slotsDic[slot][<span style="font-style:italic">&#39;keyCount&#39;</span>] = slotsDic[slot][<span style="font-style:italic">&#39;keyCount&#39;</span>] + 1
+                
+    <span style="font-weight:bold">for</span> slot <span style="font-weight:bold">in</span> slotsDic:
+        <span style="font-weight:bold">print</span> (slotsDic[slot])
+</code></pre></div><p>새로운 파일에 붙여넣고 아래 부분을 Redis Cluster 샤드1과 샤드2의 Endpoint로 수정합니다.</p>
+<p>EndPoint는 ElastiCache 대시보드에서 아래와 같이 확인할 수 있습니다.</p>
+<p><img src="/images/redis-cluster/0018-endpoint1.png" alt="57a6d685-fc9b-47ec-ac1e-aa0c961d7700/0018-endpoint1.png"></p>
+<p><img src="/images/redis-cluster/0019-endpoint2.png" alt="a3f19cc1-6e70-4785-8912-d246c90c1ace/0019-endpoint2.png"></p>
+<p><img src="/images/redis-cluster/0020-endpoint3.png" alt="c2afb248-a4ca-44d6-a729-fe67a525250f/0020-endpoint3.png"></p>
+<p>아래 빨간 부분을  rc-test-redis-cluster-0001, rc-test-redis-cluster-0002의 Endpoint로 수정합니다.</p>
+<p><img src="/images/redis-cluster/0016-cloud9-7.png" alt="ac506ff8-6bbe-46e9-9a69-de60a225de03/0016-cloud9-7.png"></p>
+<p>Ctrl + S를 누르고 저장합니다.</p>
+<p><img src="/images/redis-cluster/0017-cloud9-8.png" alt="18f86341-d990-43c5-884e-14a6a71421d6/0017-cloud9-8.png"></p>
+<h3 id="step-43-script-실행">Step 4.3. Script 실행</h3>
+<p>스크립트를 실행하면 클러스터에 접속해 반복문을 통해 1000개의 데이터를 쓰고 데이터가 어떤 해시 슬롯에 저장되었는지 확인할 수 있습니다.</p>
+<p>클러스터에 데이터를 쓰거나 읽을 때 클라이언트는 CRC16(key) mode 16384와 같은 간단한 알고리즘을 통해 사용할 해시 슬롯을 계산합니다. Redis 용 ElastiCache의 경우 클라이언트 자체가 키를 기반으로 사용할 샤드를 결정합니다.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">python test.py
+</code></pre></div><p><img src="/images/redis-cluster/Untitled1.png" alt="d53ad378-69c7-4d93-a9d0-fedc46d202de/Untitled.png"></p>
+<p><img src="/images/redis-cluster/Untitled2.png" alt="edd69b99-461a-4266-90c2-fef21fea564f/Untitled.png"></p>
+<p>실행 결과를 확인하면 0-8191 슬롯이 있는 샤드에 501개 데이터가 저장되었으며 8192-16383 슬롯이 있는 샤드에 499개 데이터가 저장되었습니다.</p>
+<p>여기서 샤드를 추가하여 데이터가 어떻게 되는지 확인해 보겠습니다.</p>
+<h3 id="step-44-샤드-추가">Step 4.4. 샤드 추가</h3>
+<p>ElastiCache 대시보드에서 클러스터 이름을 누르고 들어가서 샤드 추가를 진행 합니다.</p>
+<p><img src="/images/redis-cluster/0021-shard.png" alt="2d15f45a-e29d-4772-ae22-f013e7ae77e9/0021-shard.png"></p>
+<p><img src="/images/redis-cluster/0021-shard2.png" alt="5f93d18f-e068-4e97-8050-3b773cf4565c/0021-shard2.png"></p>
+<p>추가를 하면 샤드 생성 작업과 기존 샤드 수정 작업이 진행됩니다. 진행이 되면서 슬롯/키스페이스가 재조정됩니다.</p>
+<p><img src="/images/redis-cluster/0021-shard3.png" alt="a8477a88-f930-4e50-afb9-10320c423f41/0021-shard3.png"></p>
+<p>샤드가 추가되면서 전체 샤드의 슬롯/키스페이스가 계속 조정되는 것을 확인할 수 있습니다.</p>
+<p><img src="/images/redis-cluster/0021-shard4.png" alt="685e0d41-cf61-4215-a39c-8c182744719c/0021-shard4.png"></p>
+<p><img src="/images/redis-cluster/0021-shard7.png" alt="73925dae-7d45-4b13-9636-37dbb7c2b21b/0021-shard7.png"></p>
+<p><img src="/images/redis-cluster/0021-shard8.png" alt="ba7fff38-13c7-471e-b36e-0f1ee6335445/0021-shard8.png"></p>
+<h3 id="step-45-script-실행-슬롯키스페이스-확인">Step 4.5. Script 실행, 슬롯/키스페이스 확인</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">python test.py
+</code></pre></div><p><img src="/images/redis-cluster/Untitled3.png" alt="f5766383-e58d-4a1b-a411-17447c69a8bf/Untitled.png"></p>
+<p>샤드가 추가되면서 키가 자동으로 조정이 되었습니다.</p>
+<p>3개의 샤드에 각각 320, 355, 325개의 데이터가 분산되어 저장되었습니다.</p>
+<p>샤드가 추가되었어도 startup_nodes에 하나의 샤드 정보만 있어도 괜찮습니다.</p>
+<p>그래고 1001 값을 3001 로 수정하여 데이터를 추가 입력 해봅니다.</p>
+<p><img src="/images/redis-cluster/Untitled4.png" alt="3bde8442-f383-4659-919e-979f42f644f4/Untitled.png"></p>
+<p>스크립트를 실행해서 확인하면 3개의 샤드에 균등하게 데이터가 저장되는 것을 확인할 수 있습니다.</p>
+<p><img src="/images/redis-cluster/Untitled5.png" alt="2ae73ee6-5c48-4520-932a-38f6bc86ef7e/Untitled.png"></p>
+<h3 id="step-46-샤드-삭제">Step 4.6. 샤드 삭제</h3>
+<p>샤드를 삭제 후 데이터를 확인해 보겠습니다.</p>
+<p><img src="/images/redis-cluster/0022-delete-shard.png" alt="86790235-968b-4da2-81ef-9ae8da430cef/0022-delete-shard.png"></p>
+<p><img src="/images/redis-cluster/0022-delete-shard2.png" alt="ed44fa0e-b89a-426e-a07c-5917a919f14f/0022-delete-shard2.png"></p>
+<p>샤드 삭제가 완료 되었습니다.</p>
+<p><img src="/images/redis-cluster/0022-delete-shard3.png" alt="629ed65a-510e-4b17-92df-f388a920694f/0022-delete-shard3.png"></p>
+<p>1번 샤드가 삭제되었기 때문에 2번 , 3번 샤드 Endpoint 중 하나를 입력해야 합니다.</p>
+<p><img src="/images/redis-cluster/0022-delete-shard4.png" alt="d5702a5a-67de-4204-abaf-842a84e4c70e/0022-delete-shard4.png"></p>
+<p>샤드가 삭제되면서 키가 자동으로 조정이 되었습니다.</p>
+<p>2개의 샤드에 각각 1,504개, 1,496개의 데이터가 분산되어 저장되었습니다.</p>
+<p><img src="/images/redis-cluster/Untitledx.png" alt="9c1430d6-499b-44a1-ae16-e1f986bb413a/Untitled.png"></p>
+<p>클러스터에 Redis 데이터를 쓰고 샤드를 추가, 삭제해 보면서 데이터의 재 조정이 자동으로 이루어지는 것을 확인 할 수 있었습니다.</p>
+<p>테스트는 여기까지 입니다.</p>
+<p>감사합니다.</p>
+<h2 id="리소스-정리">리소스 정리</h2>
+<ol>
+<li>Redis Cluster 삭제</li>
+<li>Cloud9 삭제</li>
+<li>라우팅 테이블 삭제
+<ol>
+<li>서브넷 연결 해제</li>
+<li>라우팅 테이블 삭제</li>
+</ol>
+</li>
+<li>인터넷 게이트웨이 삭제
+<ol>
+<li>VPC에서 분리</li>
+<li>인터넷 게이트웨이 삭제</li>
+</ol>
+</li>
+<li>보안 그룹 삭제</li>
+<li>서브넷 삭제</li>
+<li>VPC 삭제</li>
+</ol>
+<h2 id="참고-문헌">참고 문헌</h2>
+<ul>
+<li><a href="https://aws.amazon.com/ko/blogs/database/work-with-cluster-mode-on-amazon-elasticache-for-redis/">How to work with Cluster Mode on Amazon ElastiCache for Redis</a></li>
+</ul>
+<h2 id="heading">…</h2>
+<hr>
+<h3 id="links">Links</h3>
+<p><a href="https://planbs.tistory.com/entry/Python-pip">▶ pip</a></p>
+<p><a href="https://docs.aws.amazon.com/ko_kr/AmazonElastiCache/latest/red-ug/CacheNodes.NodeGroups.html">https://docs.aws.amazon.com/ko_kr/AmazonElastiCache/latest/red-ug/CacheNodes.NodeGroups.html</a><br>
+<a href="https://docs.aws.amazon.com/ko_kr/AmazonElastiCache/latest/red-ug/Shards.html">https://docs.aws.amazon.com/ko_kr/AmazonElastiCache/latest/red-ug/Shards.html</a><br>
+<a href="https://docs.aws.amazon.com/ko_kr/AmazonElastiCache/latest/red-ug/Clusters.html">https://docs.aws.amazon.com/ko_kr/AmazonElastiCache/latest/red-ug/Clusters.html</a><br>
+<a href="https://aws.amazon.com/ko/blogs/database/work-with-cluster-mode-on-amazon-elasticache-for-redis">Redis 용 Amazon ElastiCache에서 클러스터 모드로 작업하는 방법</a></p>
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'>
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/docs/20210429-data-lake/'>
+        <span aria-hidden='true'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="20" y1="12" x2="4" y2="12" />
+<polyline points="10 18 4 12 10 6" />
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>Data Lake</a>
+    </div><div class='next-entry sep-before'>
+      <a href='/docs/20210504-aws-containers/'>
+        <span class='screen-reader-text'>Next post: </span>AWS Container Service<span aria-hidden='true'>Next <svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="4" y1="12" x2="20" y2="12" />
+<polyline points="14 6 20 12 14 18" />
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='mailto:devstackmindmap@gmail.com' target='_blank' rel='noopener me'>
+          <span class='screen-reader-text'>Contact via Email</span><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+<polyline points="22,6 12,13 2,6" />
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section><div class='copyright'>
+  <p> &copy; 2021 Dev stack Kim </p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="/assets/js/"</script>
+
+<script src='/assets/js/main.c3bcf2df.js'></script><script src='/js/custom.js'></script>
+
+</body>
+
+</html>
+

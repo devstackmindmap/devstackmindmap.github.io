@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang='en' dir='auto'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Unity 해상도에 대해 아래 영상을 통해 배운 것을 정리 해보자
+[고라니TV-게임개발 채널] 이거 하나면 모바일 해상도 걱정 끝! 16:9 고정해상도 만들기
+현재 가장 많이 쓰는 해상도는 9:16!
+나는 눕혀서 할꺼니까 1980:1080으로 !
+기본 제공 되는 것으로 만드니 뭔가 해상도 숫자가 이상해서 Custom으로 만드니 오케이.
+ Constant Pixel Size 대신 Scale With Screen Size로 해주면 이미지 크기들이 일정하게 유지 된다고 한다.
+그리고 Reference Resolution로 수정.
+Match Width Or Height 가 Width에 가까우면 Shrink,'>
+<meta name='theme-color' content='#ffcd00'>
+
+<meta property='og:title' content='Unity 해상도 • DEV STACK MINDMAP'>
+<meta property='og:description' content='Unity 해상도에 대해 아래 영상을 통해 배운 것을 정리 해보자
+[고라니TV-게임개발 채널] 이거 하나면 모바일 해상도 걱정 끝! 16:9 고정해상도 만들기
+현재 가장 많이 쓰는 해상도는 9:16!
+나는 눕혀서 할꺼니까 1980:1080으로 !
+기본 제공 되는 것으로 만드니 뭔가 해상도 숫자가 이상해서 Custom으로 만드니 오케이.
+ Constant Pixel Size 대신 Scale With Screen Size로 해주면 이미지 크기들이 일정하게 유지 된다고 한다.
+그리고 Reference Resolution로 수정.
+Match Width Or Height 가 Width에 가까우면 Shrink,'>
+<meta property='og:url' content='http://example.org/docs/20210606-unity-resolution/'>
+<meta property='og:site_name' content='DEV STACK MINDMAP'>
+<meta property='og:type' content='article'><meta property='article:section' content='docs'><meta property='article:published_time' content='2021-06-06T15:19:00&#43;09:00'/><meta property='article:modified_time' content='2021-06-06T15:19:00&#43;09:00'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.81.0" />
+
+  <title>Unity 해상도 • DEV STACK MINDMAP</title>
+  <link rel='canonical' href='http://example.org/docs/20210606-unity-resolution/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.ab98e12b.css'><link rel='stylesheet' href='/css/custom.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
+  
+
+</head>
+<body class='page type-docs has-sidebar'>
+
+  <div class='site'><div id='sidebar' class='sidebar'>
+  <a class='screen-reader-text' href='#main-menu'>Skip to Main Menu</a>
+
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+      <a href='/'>
+      DEV STACK MINDMAP
+      </a>
+    </h2>
+    <div class='desc'>
+    devstack&#39;s library
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-search sep-after'>
+  <header>
+    <h4 class='title widget-title'>Search</h4>
+  </header>
+
+  <form action='/search' id='search-form' class='search-form'>
+    <label>
+      <span class='screen-reader-text'>Search</span>
+      <input id='search-term' class='search-term' type='search' name='q' placeholder='Search&hellip;'>
+    </label></form>
+
+</section>
+<section class='widget widget-sidebar_menu sep-after'><nav id='sidebar-menu' class='menu sidebar-menu' aria-label='Sidebar Menu'>
+    <div class='container'>
+      <ul><li class='item'>
+  <a href='/docs/'>Docs</a></li></ul>
+    </div>
+  </nav>
+
+</section><section class='widget widget-taxonomy_cloud sep-after'>
+  <header>
+    <h4 class='title widget-title'>Tags</h4>
+  </header>
+
+  <div class='container list-container'>
+  <ul class='list taxonomy-cloud'><span>Not a single Tag!</span></ul>
+</div>
+
+
+</section>
+</div>
+
+  <div class='sidebar-overlay'></div>
+</div><div class='main'><nav id='main-menu' class='menu main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    <a class='screen-reader-text' href='#content'>Skip to Content</a>
+
+<button id='sidebar-toggler' class='sidebar-toggler' aria-controls='sidebar'>
+  <span class='screen-reader-text'>Toggle Sidebar</span>
+  <span class='open'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="3" y1="12" x2="21" y2="12" />
+<line x1="3" y1="6" x2="21" y2="6" />
+<line x1="3" y1="18" x2="21" y2="18" />
+</svg>
+</span>
+  <span class='close'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="18" y1="6" x2="6" y2="18" />
+<line x1="6" y1="6" x2="18" y2="18" />
+</svg>
+</span>
+</button>
+    <ul><li class='item'>
+        <a href='/docs/'>Docs</a>
+      </li></ul>
+  </div>
+</nav><div class='header-widgets'>
+        <div class='container'>
+    
+    <style>.widget-breadcrumbs li:after{content:'\2f '}</style>
+  <section class='widget widget-breadcrumbs sep-after'>
+    <nav id='breadcrumbs'>
+      <ol><li><a href='/'>DEV STACK MINDMAP</a></li><li><a href='/docs/'>Docs</a></li><li><span>Unity 해상도</span></li></ol>
+    </nav>
+  </section></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>DEV STACK MINDMAP</p><p class='desc site-desc'>devstack&#39;s library</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>Unity 해상도</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+<line x1="16" y1="2" x2="16" y2="6" />
+<line x1="8" y1="2" x2="8" y2="6" />
+<line x1="3" y1="10" x2="21" y2="10" />
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2021-06-06T15:19:00&#43;09:00'>2021, Jun 06</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><circle cx="12" cy="12" r="10" />
+<polyline points="12 6 12 12 15 15" />
+</svg>
+2 mins read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  <p>Unity 해상도에 대해 아래 영상을 통해 배운 것을 정리 해보자</p>
+<p><a href="https://www.youtube.com/watch?v=uQZFawccnNg">[고라니TV-게임개발 채널] 이거 하나면 모바일 해상도 걱정 끝! 16:9 고정해상도 만들기</a></p>
+<br>
+<p>현재 가장 많이 쓰는 해상도는 9:16!</p>
+<p>나는 눕혀서 할꺼니까 1980:1080으로 !</p>
+<p>기본 제공 되는 것으로 만드니 뭔가 해상도 숫자가 이상해서 Custom으로 만드니 오케이.</p>
+<p><img src="/images/unity-resolution/0001.png" alt="/images/unity-resolution/0001.png"></p>
+<hr>
+<p>Constant Pixel Size 대신 Scale With Screen Size로 해주면 이미지 크기들이 일정하게 유지 된다고 한다.<br>
+그리고 Reference Resolution로 수정.</p>
+<p><img src="/images/unity-resolution/0002.png" alt="/images/unity-resolution/0002.png"></p>
+<p>Match Width Or Height 가 Width에 가까우면 Shrink,<br>
+Height에 가까우면 Expand 랑 똑 같은 것<br>
+Expand로 하면 가장자리가 짤리지 않음<br>
+일단 Expand로 설정</p>
+<hr>
+<p>이미지를 키워서 Canvas 크기에 맞춰보자.</p>
+<p><img src="/images/unity-resolution/0003.png" alt="/images/unity-resolution/0003.png"></p>
+<p>메인카메라에 Viewport Rect 가 있다. 이것의 X, Y, W, H를 조절해보면 카메가의 크기를 조정할 수 있다.<br>
+CameraResolution 스크립트를 하나 만들어서 Main Camera에 넣어주자. 카메라가 여러개라면 다 넣어주자.</p>
+<p><img src="/images/unity-resolution/0004.png" alt="/images/unity-resolution/0004.png"></p>
+<hr>
+<p>스크립트에 아래 코드 작성.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-csharp" data-lang="csharp"><span style="font-weight:bold">using</span> <span style="font-weight:bold">UnityEngine</span>;
+
+<span style="font-weight:bold">public</span> <span style="font-weight:bold">class</span> <span style="font-weight:bold">CameraResolution</span> : MonoBehaviour
+{
+    <span style="font-weight:bold">private</span> <span style="font-weight:bold">void</span> Awake()
+    {
+        Camera camera = GetComponent&lt;Camera&gt;();
+        Rect rect = camera.rect;
+        <span style="">float</span> scaleheight = ((<span style="">float</span>)Screen.width / Screen.height) / ((<span style="">float</span>)16 / 9);
+        <span style="">float</span> scalewidth = 1f / scaleheight;
+        <span style="font-weight:bold">if</span> (scaleheight &lt; 1)
+        {
+            rect.height = scaleheight;
+            rect.y = (1f - scaleheight) / 2f;
+        }
+        <span style="font-weight:bold">else</span>
+        {
+            rect.width = scalewidth;
+            rect.x = (1f - scalewidth) / 2f;
+        }
+        camera.rect = rect;
+    }
+}
+</code></pre></div><hr>
+<p>Screen 에서 나온 것은 기기의 해상도. 정확한 값을 위해 float 사용. 그리고 뒤에 16/9 넣어준 값은 우리가 고정한 비율</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-csharp" data-lang="csharp"><span style="">float</span> scaleheight = ((<span style="">float</span>)Screen.width / Screen.height) / ((<span style="">float</span>)16 / 9);
+</code></pre></div><p>scaleheight  값이 1보다 작거나 큰 값이 나온다.<br>
+1보다 작은 경우는 날씬한 경우.<br>
+이렇게 설정하고 난뒤 Rect 툴로 두고 조정하고 앵커를 조정하면 안된다.</p>
+<hr>
+<p>이미지를 저런 식으로 올리고 빌드 한번 해보자.</p>
+<p><img src="/images/unity-resolution/0005.png" alt="/images/unity-resolution/0005.png"></p>
+<p>File &gt; Build Settings &gt; Player Settings &gt; Player &gt; Resolution and Presentation 에 가면</p>
+<p>Portrait : 핸드폰 세로로 들었을 때</p>
+<p>Portrait Upside Down : 핸드폰 세로로 거꾸로 뒤집었을 때</p>
+<p>Landscape Right : 홈 버튼이 오른쪽으로 갔을 때</p>
+<p>Landscape Left : 홈 버튼이 왼쪽으로 갔을 때</p>
+<p>나는 가로 게임을 하려고 하니</p>
+<p>Auto Rotation 에 Landscape Right와 Landscapde Left 만 체크 !!</p>
+<p>그리고 Company Name 과 Other Settings에 Package Name 수정.</p>
+<hr>
+<p>그리고 빌드!!! 오잉?</p>
+<p><img src="/images/unity-resolution/0006.jpg" alt="/images/unity-resolution/0006.jpg"></p>
+<p>카메라 Backgroupd 색을 검은색으로 수정하고 !!</p>
+<p><img src="/images/unity-resolution/0007.jpg" alt="/images/unity-resolution/0007.jpg"></p>
+<p>요까지 !!!!</p>
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'>
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/docs/20210521-gamelift-primer-script/'>
+        <span aria-hidden='true'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="20" y1="12" x2="4" y2="12" />
+<polyline points="10 18 4 12 10 6" />
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>GameLift Primer Script</a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='mailto:devstackmindmap@gmail.com' target='_blank' rel='noopener me'>
+          <span class='screen-reader-text'>Contact via Email</span><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+<polyline points="22,6 12,13 2,6" />
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section><div class='copyright'>
+  <p> &copy; 2021 Dev stack Kim </p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="/assets/js/"</script>
+
+<script src='/assets/js/main.c3bcf2df.js'></script><script src='/js/custom.js'></script>
+
+</body>
+
+</html>
+

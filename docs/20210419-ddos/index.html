@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang='en' dir='auto'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='DDoS 는 비 정상적인 네트워크 트래픽을 공격 대상에 과다하게 발생 시켜 공격 대상의 자원을 소비시킵니다. 크게 인프라 레벨 자원 대상 공격과 애플리케이션 레벨의 자원 대상 공격으로 구분할 수 있습니다.
+DDos 방어를 위해 제공되는 AWS 서비스는 AWS Shield, AWS WAF가 있습니다.
+AWS Shield AWS Shield는 AWS의 DDoS 공격을 방어하기 위해 개발된 서비스입니다.
+AWS Shield Standard, AWS Shield Advanced 서비스가 있으며 AWS Shield Standard의 경우 추가 비용 없이 모든 AWS 고객에게 자동으로 활성화됩니다.'>
+<meta name='theme-color' content='#ffcd00'>
+
+<meta property='og:title' content='DDoS 방어를 위한 AWS 서비스 • DEV STACK MINDMAP'>
+<meta property='og:description' content='DDoS 는 비 정상적인 네트워크 트래픽을 공격 대상에 과다하게 발생 시켜 공격 대상의 자원을 소비시킵니다. 크게 인프라 레벨 자원 대상 공격과 애플리케이션 레벨의 자원 대상 공격으로 구분할 수 있습니다.
+DDos 방어를 위해 제공되는 AWS 서비스는 AWS Shield, AWS WAF가 있습니다.
+AWS Shield AWS Shield는 AWS의 DDoS 공격을 방어하기 위해 개발된 서비스입니다.
+AWS Shield Standard, AWS Shield Advanced 서비스가 있으며 AWS Shield Standard의 경우 추가 비용 없이 모든 AWS 고객에게 자동으로 활성화됩니다.'>
+<meta property='og:url' content='http://example.org/docs/20210419-ddos/'>
+<meta property='og:site_name' content='DEV STACK MINDMAP'>
+<meta property='og:type' content='article'><meta property='article:section' content='docs'><meta property='article:published_time' content='2021-04-19T09:55:00&#43;09:00'/><meta property='article:modified_time' content='2021-04-19T09:55:00&#43;09:00'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.81.0" />
+
+  <title>DDoS 방어를 위한 AWS 서비스 • DEV STACK MINDMAP</title>
+  <link rel='canonical' href='http://example.org/docs/20210419-ddos/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.ab98e12b.css'><link rel='stylesheet' href='/css/custom.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
+  
+
+</head>
+<body class='page type-docs has-sidebar'>
+
+  <div class='site'><div id='sidebar' class='sidebar'>
+  <a class='screen-reader-text' href='#main-menu'>Skip to Main Menu</a>
+
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+      <a href='/'>
+      DEV STACK MINDMAP
+      </a>
+    </h2>
+    <div class='desc'>
+    devstack&#39;s library
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-search sep-after'>
+  <header>
+    <h4 class='title widget-title'>Search</h4>
+  </header>
+
+  <form action='/search' id='search-form' class='search-form'>
+    <label>
+      <span class='screen-reader-text'>Search</span>
+      <input id='search-term' class='search-term' type='search' name='q' placeholder='Search&hellip;'>
+    </label></form>
+
+</section>
+<section class='widget widget-sidebar_menu sep-after'><nav id='sidebar-menu' class='menu sidebar-menu' aria-label='Sidebar Menu'>
+    <div class='container'>
+      <ul><li class='item'>
+  <a href='/docs/'>Docs</a></li></ul>
+    </div>
+  </nav>
+
+</section><section class='widget widget-taxonomy_cloud sep-after'>
+  <header>
+    <h4 class='title widget-title'>Tags</h4>
+  </header>
+
+  <div class='container list-container'>
+  <ul class='list taxonomy-cloud'><span>Not a single Tag!</span></ul>
+</div>
+
+
+</section>
+</div>
+
+  <div class='sidebar-overlay'></div>
+</div><div class='main'><nav id='main-menu' class='menu main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    <a class='screen-reader-text' href='#content'>Skip to Content</a>
+
+<button id='sidebar-toggler' class='sidebar-toggler' aria-controls='sidebar'>
+  <span class='screen-reader-text'>Toggle Sidebar</span>
+  <span class='open'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="3" y1="12" x2="21" y2="12" />
+<line x1="3" y1="6" x2="21" y2="6" />
+<line x1="3" y1="18" x2="21" y2="18" />
+</svg>
+</span>
+  <span class='close'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="18" y1="6" x2="6" y2="18" />
+<line x1="6" y1="6" x2="18" y2="18" />
+</svg>
+</span>
+</button>
+    <ul><li class='item'>
+        <a href='/docs/'>Docs</a>
+      </li></ul>
+  </div>
+</nav><div class='header-widgets'>
+        <div class='container'>
+    
+    <style>.widget-breadcrumbs li:after{content:'\2f '}</style>
+  <section class='widget widget-breadcrumbs sep-after'>
+    <nav id='breadcrumbs'>
+      <ol><li><a href='/'>DEV STACK MINDMAP</a></li><li><a href='/docs/'>Docs</a></li><li><span>DDoS 방어를 위한 AWS 서비스</span></li></ol>
+    </nav>
+  </section></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>DEV STACK MINDMAP</p><p class='desc site-desc'>devstack&#39;s library</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>DDoS 방어를 위한 AWS 서비스</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+<line x1="16" y1="2" x2="16" y2="6" />
+<line x1="8" y1="2" x2="8" y2="6" />
+<line x1="3" y1="10" x2="21" y2="10" />
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2021-04-19T09:55:00&#43;09:00'>2021, Apr 19</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><circle cx="12" cy="12" r="10" />
+<polyline points="12 6 12 12 15 15" />
+</svg>
+2 mins read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  <p>DDoS 는 비 정상적인 네트워크 트래픽을 공격 대상에 과다하게 발생 시켜 공격 대상의 자원을 소비시킵니다. 크게 인프라 레벨 자원 대상 공격과 애플리케이션 레벨의 자원 대상 공격으로 구분할 수 있습니다.</p>
+<p>DDos 방어를 위해 제공되는 AWS 서비스는 <a href="https://aws.amazon.com/ko/shield">AWS Shield</a>, <a href="https://aws.amazon.com/ko/waf/">AWS WAF</a>가 있습니다.</p>
+<h3 id="aws-shield">AWS Shield</h3>
+<p>AWS Shield는 AWS의 DDoS 공격을 방어하기 위해 개발된 서비스입니다.</p>
+<p>AWS Shield Standard, AWS Shield Advanced 서비스가 있으며 AWS Shield Standard의 경우 추가 비용 없이 모든 AWS 고객에게 자동으로 활성화됩니다. AWS Shield Advanced의 경우 선택이 가능한 유료 서비스입니다.</p>
+<p>AWS Shield Standard는 가장 일반적이고 빈번히 발생하는 인프라 계층 공격(UDP floods 등)과 상태 고갈 공격(TCP SYN floods 등)으로부터 AWS에서 실행되는 웹 애플리케이션을 자동으로 보호합니다. 또한, 고객은 AWS WAF를 사용하여 HTTP POST 또는 GET floods와 같은 애플리케이션 계층 공격으로부터 보호할 수 있습니다.</p>
+<h3 id="aws-waf">AWS WAF</h3>
+<p>AWS WAF는 API Gateway, Application Load Balancer, CloudFront의 앞에 적용할 수 있는 웹 애플리케이션 방화벽 서비스이며 웹 애플리케이션이나 API 서비스의 경우 DDoS 외에도 SQL Injection이나 Cross Site Scripting 등 애플리케이션의 취약점에 대한 보안 공격으로부터 보호 할 수 있습니다.</p>
+<p>AWS WAF 의 속도 기반 규칙을 사용하여 웹 계층 DDoS 공격, 무작위 로그인 시도 및 배드 봇과 같은 공격으로부터 보호하도록 설계되었습니다.</p>
+<p>더 자세한 내용은 아래의 블로그와 Document, 첨부 파일을 통해 확인 하실 수 있습니다.</p>
+<p><a href="https://aws.amazon.com/ko/blogs/korea/anti-ddos-for-game/">▶ AWS 기반 게임 개발자를 위한 안내서 – 1부. DDoS 공격 방어 방법</a></p>
+<p><a href="https://docs.aws.amazon.com/ko_kr/waf/latest/developerguide/ddos-overview.html">▶ AWS Shield 작동 방식</a></p>
+<p><a href="https://sata.kr/entry/DOSDDOS-SYN-Flooding-%EA%B3%B5%EA%B2%A9%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90">▶ SYN Flooding 공격</a></p>
+<p><a href="https://m.blog.naver.com/wnrjsxo/221338322734">▶ UDP Flooding Attack 공격과 방어</a></p>
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'>
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/docs/20210415-questions/'>
+        <span aria-hidden='true'><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="20" y1="12" x2="4" y2="12" />
+<polyline points="10 18 4 12 10 6" />
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>Questions</a>
+    </div><div class='next-entry sep-before'>
+      <a href='/docs/20210420-beanstalk/'>
+        <span class='screen-reader-text'>Next post: </span>AWS Elastic Beanstalk<span aria-hidden='true'>Next <svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><line x1="4" y1="12" x2="20" y2="12" />
+<polyline points="14 6 20 12 14 18" />
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='mailto:devstackmindmap@gmail.com' target='_blank' rel='noopener me'>
+          <span class='screen-reader-text'>Contact via Email</span><svg
+  class="icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewbox="0 0 24 24"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  aria-hidden="true"
+><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+<polyline points="22,6 12,13 2,6" />
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section><div class='copyright'>
+  <p> &copy; 2021 Dev stack Kim </p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="/assets/js/"</script>
+
+<script src='/assets/js/main.c3bcf2df.js'></script><script src='/js/custom.js'></script>
+
+</body>
+
+</html>
+

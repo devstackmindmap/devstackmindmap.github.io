@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.81.0" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="dykim" />
+  <meta property="og:url" content="http://example.org/posts/20210430-redis-cluster/" />
+  <link rel="canonical" href="http://example.org/posts/20210430-redis-cluster/" /><link rel="alternate" type="application/atom+xml" href="http://example.org/index.xml" title="DEV STACK MINDMAP">
+
+  <script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "http:\/\/example.org\/"
+      },
+      "articleSection" : "posts",
+      "name" : "Redis Cluster",
+      "headline" : "Redis Cluster",
+      "description" : "2개 샤드, 0개 Replicas로 클러스터 생성 Cloud9 실행 cluster client 라이브러리 설치 sudo pip3 install redis-py-cluster Code 실행   import rediscluster import sys if __name__ == \u0026#34;__main__\u0026#34;: # Connect Cluster startup_nodes = [{ \u0026#34;host\u0026#34;: \u0026#34;test-redis-cluster-0001-001.xcugux.0001.apn2.cache.amazonaws.com\u0026#34;, \u0026#34;port\u0026#34;: \u0026#34;6379\u0026#34;}, {\u0026#34;host\u0026#34;: \u0026#34;test-redis-cluster-0002-001.xcugux.0001.apn2.cache.amazonaws.com\u0026#34;, \u0026#34;port\u0026#34;:\u0026#34;6379\u0026#34;}, {\u0026#34;test-redis-cluster-0003-001.xcugux.0001.apn2.cache.amazonaws.com\u0026#34;, \u0026#34;port\u0026#34;:\u0026#34;6379\u0026#34;}] client = rediscluster.RedisCluster(startup_nodes=startup_nodes, decode_responses=True, skip_full_coverage_check=True) # Get Slot Info slots = client.cluster(\u0026#39;slots\u0026#39;) # SET Slots INFO slotsDic = {} for slot in slots: slotsDic[slot] = { \u0026#39;IP\u0026#39; : slots[slot][\u0026#39;master\u0026#39;][0], \u0026#39;from\u0026#39; : slot[0], \u0026#39;to\u0026#39; : slot[1], \u0026#39;keyCount\u0026#39; : 0 } for i in range(1, 1000): client.",
+      "inLanguage" : "en-US",
+      "author" : "dykim",
+      "creator" : "dykim",
+      "publisher": "dykim",
+      "accountablePerson" : "dykim",
+      "copyrightHolder" : "dykim",
+      "copyrightYear" : "2021",
+      "datePublished": "2021-04-30 10:13:00 \u002b0900 KST",
+      "dateModified" : "2021-04-30 10:13:00 \u002b0900 KST",
+      "url" : "http:\/\/example.org\/posts\/20210430-redis-cluster\/",
+      "keywords" : [  ]
+  }
+</script>
+<title>Redis Cluster</title>
+  <meta property="og:title" content="Redis Cluster" />
+  <meta property="og:type" content="article" />
+  <meta property="og:description" content="2개 샤드, 0개 Replicas로 클러스터 생성 Cloud9 실행 cluster client 라이브러리 설치 sudo pip3 install redis-py-cluster Code 실행   import rediscluster import sys if __name__ == &amp;#34;__main__&amp;#34;: # Connect Cluster startup_nodes = [{ &amp;#34;host&amp;#34;: &amp;#34;test-redis-cluster-0001-001.xcugux.0001.apn2.cache.amazonaws.com&amp;#34;, &amp;#34;port&amp;#34;: &amp;#34;6379&amp;#34;}, {&amp;#34;host&amp;#34;: &amp;#34;test-redis-cluster-0002-001.xcugux.0001.apn2.cache.amazonaws.com&amp;#34;, &amp;#34;port&amp;#34;:&amp;#34;6379&amp;#34;}, {&amp;#34;test-redis-cluster-0003-001.xcugux.0001.apn2.cache.amazonaws.com&amp;#34;, &amp;#34;port&amp;#34;:&amp;#34;6379&amp;#34;}] client = rediscluster.RedisCluster(startup_nodes=startup_nodes, decode_responses=True, skip_full_coverage_check=True) # Get Slot Info slots = client.cluster(&amp;#39;slots&amp;#39;) # SET Slots INFO slotsDic = {} for slot in slots: slotsDic[slot] = { &amp;#39;IP&amp;#39; : slots[slot][&amp;#39;master&amp;#39;][0], &amp;#39;from&amp;#39; : slot[0], &amp;#39;to&amp;#39; : slot[1], &amp;#39;keyCount&amp;#39; : 0 } for i in range(1, 1000): client." />
+  <meta name="description" content="2개 샤드, 0개 Replicas로 클러스터 생성 Cloud9 실행 cluster client 라이브러리 설치 sudo pip3 install redis-py-cluster Code 실행   import rediscluster import sys if __name__ == &amp;#34;__main__&amp;#34;: # Connect Cluster startup_nodes = [{ &amp;#34;host&amp;#34;: &amp;#34;test-redis-cluster-0001-001.xcugux.0001.apn2.cache.amazonaws.com&amp;#34;, &amp;#34;port&amp;#34;: &amp;#34;6379&amp;#34;}, {&amp;#34;host&amp;#34;: &amp;#34;test-redis-cluster-0002-001.xcugux.0001.apn2.cache.amazonaws.com&amp;#34;, &amp;#34;port&amp;#34;:&amp;#34;6379&amp;#34;}, {&amp;#34;test-redis-cluster-0003-001.xcugux.0001.apn2.cache.amazonaws.com&amp;#34;, &amp;#34;port&amp;#34;:&amp;#34;6379&amp;#34;}] client = rediscluster.RedisCluster(startup_nodes=startup_nodes, decode_responses=True, skip_full_coverage_check=True) # Get Slot Info slots = client.cluster(&amp;#39;slots&amp;#39;) # SET Slots INFO slotsDic = {} for slot in slots: slotsDic[slot] = { &amp;#39;IP&amp;#39; : slots[slot][&amp;#39;master&amp;#39;][0], &amp;#39;from&amp;#39; : slot[0], &amp;#39;to&amp;#39; : slot[1], &amp;#39;keyCount&amp;#39; : 0 } for i in range(1, 1000): client." />
+  <meta property="og:locale" content="en-us" />
+
+  
+    <style>body{font-family:bree serif,sans-serif;-webkit-font-smoothing:antialiased;margin:0 20px}article{max-width:800px;margin-left:auto;margin-right:auto}a{color:#000;text-decoration:none}a:hover{font-weight:600;text-decoration:underline}.post-ads{margin:50px 0}.markdown-body{font-size:18px;max-width:100%}.markdown-body a{text-decoration:underline;text-decoration-color:#000}.markdown-body pre{padding:16px;overflow:auto;border-radius:10px}.markdown-body code{padding:.2em .4em;font-size:85%;background-color:#f6f8fa;border-radius:6px}.markdown-body pre>code{padding:0;font-size:100%;background-color:inherit;border:0}.Chinese .markdown-body{line-height:200%}.site-date-catalog{font-size:2rem}.header-title{font-size:2rem;font-weight:700;margin-top:32px;font-family:bungee shade,sans-serif}.header-title a{text-decoration:none}.header-subtitle{color:#666}.header-items{margin:10px 0}.header-item{margin:0 5px}.header-line{width:100%;border-width:2px;border-color:#482936;border-style:solid none none none}.lang-switch{font-weight:600}#posts-list{min-height:600px}.posts-line{font-size:1.2rem;margin:12px 0}.posts-categories{font-size:.8rem;margin:auto;text-align:center}.posts-category{padding:3px 0;border:#000 2px solid;border-radius:5px}.site-footer{margin-top:50px}.site-footer-item{margin-right:12px}.post-content img{max-width:100%;display:block;margin-left:auto;margin-right:auto;margin-top:12px}.post-header{margin-bottom:50px}.post-title{font-size:2rem;font-weight:600}.post-category{display:inline;font-weight:600;padding:2px 5px;border:#000 2px solid;border-radius:5px}.post-date{font-weight:800;font-style:italic}.post-author{float:right;font-weight:600}.page-content{min-height:60%}.post-content{margin-bottom:50px}.post-content p{hyphens:auto;line-height:1.8;text-justify:ideographic;margin-bottom:1em}.related-content{border-width:3px;border-style:solid;border-color:#000;padding:0 10px;margin-bottom:50px;margin-top:100px}.related-content li{margin:5px 0}.taxonomy-term{font-size:3rem}.gallery-img{text-align:center}.gallery-img span{text-align:center}.gallery-img-desc{font-size:.8em;font-weight:800}#disqus_thread{position:relative}#disqus_thread:after{content:"";display:block;height:55px;width:100%;position:absolute;bottom:0;background:#fff}@media screen and (max-width:600px){.header-title,.header-subtitle,.header-items{text-align:center}.posts-line{font-size:16px}.markdown-body{font-size:16px}.post-title{font-size:2rem}.post-content p{letter-spacing:.05em}}@media screen and (max-width:48em){.posts-category{display:none}}</style>
+  
+  
+    <style>.container,.container-fluid{margin-right:auto;margin-left:auto}.container-fluid{padding-right:2rem;padding-left:2rem}.row{box-sizing:border-box;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:0;-ms-flex:0 1 auto;flex:initial;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:-.5rem;margin-left:-.5rem}.row.reverse{-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse}.col.reverse{-webkit-box-orient:vertical;-webkit-box-direction:reverse;-ms-flex-direction:column-reverse;flex-direction:column-reverse}.col-xs,.col-xs-1,.col-xs-10,.col-xs-11,.col-xs-12,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9,.col-xs-offset-0,.col-xs-offset-1,.col-xs-offset-10,.col-xs-offset-11,.col-xs-offset-12,.col-xs-offset-2,.col-xs-offset-3,.col-xs-offset-4,.col-xs-offset-5,.col-xs-offset-6,.col-xs-offset-7,.col-xs-offset-8,.col-xs-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-xs{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-xs-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-xs-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-xs-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-xs-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-xs-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-xs-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-xs-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-xs-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-xs-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-xs-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-xs-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-xs-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-xs-offset-0{margin-left:0}.col-xs-offset-1{margin-left:8.33333333%}.col-xs-offset-2{margin-left:16.66666667%}.col-xs-offset-3{margin-left:25%}.col-xs-offset-4{margin-left:33.33333333%}.col-xs-offset-5{margin-left:41.66666667%}.col-xs-offset-6{margin-left:50%}.col-xs-offset-7{margin-left:58.33333333%}.col-xs-offset-8{margin-left:66.66666667%}.col-xs-offset-9{margin-left:75%}.col-xs-offset-10{margin-left:83.33333333%}.col-xs-offset-11{margin-left:91.66666667%}.start-xs{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-xs{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-xs{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-xs{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-xs{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-xs{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-xs{-ms-flex-pack:distribute;justify-content:space-around}.between-xs{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-xs{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-xs{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}@media only screen and (min-width:48em){.container{width:49rem}.col-sm,.col-sm-1,.col-sm-10,.col-sm-11,.col-sm-12,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-offset-0,.col-sm-offset-1,.col-sm-offset-10,.col-sm-offset-11,.col-sm-offset-12,.col-sm-offset-2,.col-sm-offset-3,.col-sm-offset-4,.col-sm-offset-5,.col-sm-offset-6,.col-sm-offset-7,.col-sm-offset-8,.col-sm-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-sm{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-sm-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-sm-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-sm-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-sm-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-sm-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-sm-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-sm-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-sm-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-sm-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-sm-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-sm-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-sm-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-sm-offset-0{margin-left:0}.col-sm-offset-1{margin-left:8.33333333%}.col-sm-offset-2{margin-left:16.66666667%}.col-sm-offset-3{margin-left:25%}.col-sm-offset-4{margin-left:33.33333333%}.col-sm-offset-5{margin-left:41.66666667%}.col-sm-offset-6{margin-left:50%}.col-sm-offset-7{margin-left:58.33333333%}.col-sm-offset-8{margin-left:66.66666667%}.col-sm-offset-9{margin-left:75%}.col-sm-offset-10{margin-left:83.33333333%}.col-sm-offset-11{margin-left:91.66666667%}.start-sm{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-sm{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-sm{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-sm{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-sm{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-sm{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-sm{-ms-flex-pack:distribute;justify-content:space-around}.between-sm{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-sm{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-sm{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:64em){.container{width:65rem}.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-md-offset-0,.col-md-offset-1,.col-md-offset-10,.col-md-offset-11,.col-md-offset-12,.col-md-offset-2,.col-md-offset-3,.col-md-offset-4,.col-md-offset-5,.col-md-offset-6,.col-md-offset-7,.col-md-offset-8,.col-md-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-md{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-md-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-md-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-md-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-md-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-md-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-md-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-md-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-md-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-md-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-md-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-md-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-md-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-md-offset-0{margin-left:0}.col-md-offset-1{margin-left:8.33333333%}.col-md-offset-2{margin-left:16.66666667%}.col-md-offset-3{margin-left:25%}.col-md-offset-4{margin-left:33.33333333%}.col-md-offset-5{margin-left:41.66666667%}.col-md-offset-6{margin-left:50%}.col-md-offset-7{margin-left:58.33333333%}.col-md-offset-8{margin-left:66.66666667%}.col-md-offset-9{margin-left:75%}.col-md-offset-10{margin-left:83.33333333%}.col-md-offset-11{margin-left:91.66666667%}.start-md{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-md{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-md{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-md{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-md{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-md{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-md{-ms-flex-pack:distribute;justify-content:space-around}.between-md{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-md{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-md{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:75em){.container{width:76rem}.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-lg-offset-0,.col-lg-offset-1,.col-lg-offset-10,.col-lg-offset-11,.col-lg-offset-12,.col-lg-offset-2,.col-lg-offset-3,.col-lg-offset-4,.col-lg-offset-5,.col-lg-offset-6,.col-lg-offset-7,.col-lg-offset-8,.col-lg-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:none;padding-right:.5rem;padding-left:.5rem}.col-lg{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-lg-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-lg-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-lg-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-lg-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-lg-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-lg-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-lg-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-lg-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-lg-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-lg-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-lg-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-lg-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-lg-offset-0{margin-left:0}.col-lg-offset-1{margin-left:8.33333333%}.col-lg-offset-2{margin-left:16.66666667%}.col-lg-offset-3{margin-left:25%}.col-lg-offset-4{margin-left:33.33333333%}.col-lg-offset-5{margin-left:41.66666667%}.col-lg-offset-6{margin-left:50%}.col-lg-offset-7{margin-left:58.33333333%}.col-lg-offset-8{margin-left:66.66666667%}.col-lg-offset-9{margin-left:75%}.col-lg-offset-10{margin-left:83.33333333%}.col-lg-offset-11{margin-left:91.66666667%}.start-lg{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-lg{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-lg{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-lg{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-lg{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-lg{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-lg{-ms-flex-pack:distribute;justify-content:space-around}.between-lg{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-lg{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-lg{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}</style>
+  
+
+  
+
+  <link href="/index.xml" rel="alternate" type="application/rss+xml"
+    title="DEV STACK MINDMAP">
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Bungee+Shade" rel="stylesheet">
+  
+  
+
+  
+  
+</head>
+
+
+<body>
+  <article class="post " id="article">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="site-header">
+          
+<header>
+  <div class="header-title">
+    <a href="/"
+      >dev stack mindmap</a
+    >
+  </div>
+  <div class="header-subtitle"></div>
+</header>
+<div class="row end-md center-xs header-items">
+  
+</div>
+<div class="row end-xs">
+   
+</div>
+<div class="header-line"></div>
+
+        </div>
+        <header class="post-header">
+          <h1 class="post-title">Redis Cluster</h1>
+          
+          <div class="row post-desc">
+            <div class="col-xs-6">
+              
+              <time class="post-date" datetime="2021-04-30 10:13:00 KST">
+                30 Apr 2021
+              </time>
+              
+            </div>
+            <div class="col-xs-6">
+              
+              <div class="post-author">
+                <a target="_blank" href="">@dykim</a>
+              </div>
+              
+            </div>
+          </div>
+          
+        </header>
+
+        <div class="post-content markdown-body">
+          
+          <hr>
+<ol>
+<li>2개 샤드, 0개 Replicas로 클러스터 생성</li>
+<li>Cloud9 실행</li>
+<li>cluster client 라이브러리 설치 sudo pip3 install redis-py-cluster</li>
+<li>Code 실행</li>
+<li></li>
+</ol>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-python" data-lang="python"><span style="font-weight:bold">import</span> <span style="font-weight:bold">rediscluster</span>
+<span style="font-weight:bold">import</span> <span style="font-weight:bold">sys</span>
+
+<span style="font-weight:bold">if</span> __name__ == <span style="font-style:italic">&#34;__main__&#34;</span>:
+    
+    <span style="font-style:italic"># Connect Cluster</span>
+    startup_nodes = [{ <span style="font-style:italic">&#34;host&#34;</span>: <span style="font-style:italic">&#34;test-redis-cluster-0001-001.xcugux.0001.apn2.cache.amazonaws.com&#34;</span>, <span style="font-style:italic">&#34;port&#34;</span>: <span style="font-style:italic">&#34;6379&#34;</span>}, {<span style="font-style:italic">&#34;host&#34;</span>: <span style="font-style:italic">&#34;test-redis-cluster-0002-001.xcugux.0001.apn2.cache.amazonaws.com&#34;</span>, <span style="font-style:italic">&#34;port&#34;</span>:<span style="font-style:italic">&#34;6379&#34;</span>},
+    {<span style="font-style:italic">&#34;test-redis-cluster-0003-001.xcugux.0001.apn2.cache.amazonaws.com&#34;</span>, <span style="font-style:italic">&#34;port&#34;</span>:<span style="font-style:italic">&#34;6379&#34;</span>}]
+    client = rediscluster.RedisCluster(startup_nodes=startup_nodes, decode_responses=True, skip_full_coverage_check=True)
+    
+    <span style="font-style:italic"># Get Slot Info</span>
+    slots = client.cluster(<span style="font-style:italic">&#39;slots&#39;</span>)
+    
+    <span style="font-style:italic"># SET Slots INFO</span>
+    slotsDic = {}
+    
+    <span style="font-weight:bold">for</span> slot <span style="font-weight:bold">in</span> slots:
+        slotsDic[slot] = { <span style="font-style:italic">&#39;IP&#39;</span> : slots[slot][<span style="font-style:italic">&#39;master&#39;</span>][0], <span style="font-style:italic">&#39;from&#39;</span> : slot[0], <span style="font-style:italic">&#39;to&#39;</span> : slot[1], <span style="font-style:italic">&#39;keyCount&#39;</span> : 0 }  
+    
+    
+    <span style="font-weight:bold">for</span> i <span style="font-weight:bold">in</span> range(1, 1000):
+        client.set(<span style="font-style:italic">&#34;foo&#34;</span> + str(i), <span style="font-style:italic">&#34;bar&#34;</span> + str(i))
+        <span style="font-style:italic">#print(&#34;Key:&#34; + &#34;foo&#34; + str(i) + &#34;, Value:&#34; + str(client.get(&#34;foo&#34; + str(i))) + &#34;, Key Slot:&#34; + str(client.cluster(&#34;keyslot&#34;, &#34;foo&#34; + str(i))))</span>
+        
+        keySlot = client.cluster(<span style="font-style:italic">&#34;keyslot&#34;</span>, <span style="font-style:italic">&#34;foo&#34;</span> + str(i))
+        <span style="font-weight:bold">for</span> slot <span style="font-weight:bold">in</span> slotsDic:
+            <span style="font-weight:bold">if</span> keySlot &gt;= slotsDic[slot][<span style="font-style:italic">&#39;from&#39;</span>] <span style="font-weight:bold">and</span> slotsDic[slot][<span style="font-style:italic">&#39;to&#39;</span>] &gt;= keySlot:
+                slotsDic[slot][<span style="font-style:italic">&#39;keyCount&#39;</span>] = slotsDic[slot][<span style="font-style:italic">&#39;keyCount&#39;</span>] + 1
+                
+      
+    <span style="font-weight:bold">for</span> slot <span style="font-weight:bold">in</span> slotsDic:
+        <span style="font-weight:bold">print</span> (slotsDic[slot])
+</code></pre></div><h3 id="cloud9에서-python으로-redis-test">Cloud9에서 python으로 redis test</h3>
+<blockquote>
+<p>sudo pip3 install redis</p>
+</blockquote>
+<hr>
+<h3 id="데이터-샤딩">데이터 샤딩</h3>
+<p>Redis는 모든 캐시 키가 &ldquo;해시 슬롯&quot;에 매핑되는 샤딩 형태를 활용합니다. 클러스터 내에서 16,384 개의 해시 슬롯을 사용할 수 있습니다. 이러한 슬롯은 클러스터의 총 샤드 수로 나뉩니다. 기본적으로 ElastiCache는 샤드에 슬롯을 균등하게 배포하지만 필요한 경우 배포 체계를 사용자 지정할 수도 있습니다.<br>
+<br>
+클러스터에 데이터를 쓰거나 읽을 때 클라이언트는 CRC16 (key) mod 16384와 같은 간단한 알고리즘을 통해 사용할 해시 슬롯을 계산합니다. Redis 용 ElastiCache의 경우 클라이언트 자체가 키를 기반으로 사용할 샤드를 결정합니다. 우주. 더 많은 작업을 클라이언트에 푸시함으로써 클라이언트가 클러스터의 모든 샤드에 도달 할 수 있도록하여 잠재적 인 단일 장애 지점을 완화합니다. 곧 알게 되겠지만, Redis 클러스터에 대한 초기 연결에서 클라이언트는 특정 해시 키를 찾을 수있는 노드를 식별하는 데 사용할 수있는 키 공간 매핑을 확인하고 관리합니다.</p>
+<hr>
+<h3 id="클러스터에-연결">클러스터에 연결</h3>
+<p>클러스터가 &ldquo;사용 가능&quot;되면 사용할 준비가 된 것입니다. AWS Management Console에 나열된 구성 엔드 포인트를 사용하여 클러스터에 연결할 수 있습니다. 예를 들어 Redis CLI를 사용하여 클러스터에 연결하고 클러스터의 키 공간 / 슬롯에 대한 정보를 쿼리 할 수 ​​있습니다.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-fallback" data-lang="fallback">$ redis-cli -c -h mycluster.cache.amazonaws.com -p 6379
+
+mycluster:6379&gt; CLUSTER SLOTS
+1) 1) (integer) 0
+   2) (integer) 5461
+   3) 1) &#34;172.31.26.164&#34;
+      2) (integer) 6379
+      3) &#34;bb550a5c91a35d88caa9e636bffa1830093d4895&#34;
+   4) 1) &#34;172.31.49.34&#34;
+      2) (integer) 6379
+      3) &#34;0200ff55ccc7e5cb6b4387443ebdb9652af23504&#34;
+   5) 1) &#34;172.31.8.200&#34;
+      2) (integer) 6379
+      3) &#34;31646876f16baaab749043c406e06d0553287655&#34;
+2) ...
+3) ...
+
+mycluster:6379&gt; CLUSTER KEYSLOT foo
+(integer) 12182
+</code></pre></div><p>sudo pip3 install redis-py-cluster</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-python" data-lang="python"><span style="font-weight:bold">import</span> <span style="font-weight:bold">rediscluster</span>
+
+<span style="font-weight:bold">if</span> __name__ == <span style="font-style:italic">&#34;__main__&#34;</span>:
+    startup_nodes = [{ <span style="font-style:italic">&#34;host&#34;</span>: <span style="font-style:italic">&#34;test-redis-cluster-0001-001.xcugux.0001.apn2.cache.amazonaws.com&#34;</span>, <span style="font-style:italic">&#34;port&#34;</span>: <span style="font-style:italic">&#34;6379&#34;</span>}, {<span style="font-style:italic">&#34;host&#34;</span>: <span style="font-style:italic">&#34;test-redis-cluster-0002-001.xcugux.0001.apn2.cache.amazonaws.com&#34;</span>, <span style="font-style:italic">&#34;port&#34;</span>:<span style="font-style:italic">&#34;6379&#34;</span>}]
+
+    client = rediscluster.RedisCluster(startup_nodes=startup_nodes, decode_responses=True, skip_full_coverage_check=True)
+    client.set(<span style="font-style:italic">&#34;foo&#34;</span>, <span style="font-style:italic">&#34;bar&#34;</span>)
+    <span style="font-weight:bold">print</span>(client.get(<span style="font-style:italic">&#34;foo&#34;</span>))
+</code></pre></div><hr>
+<h3 id="links">Links</h3>
+<p><a href="https://planbs.tistory.com/entry/Python-pip">▶ pip</a></p>
+<p><a href="https://docs.aws.amazon.com/ko_kr/AmazonElastiCache/latest/red-ug/CacheNodes.NodeGroups.html">https://docs.aws.amazon.com/ko_kr/AmazonElastiCache/latest/red-ug/CacheNodes.NodeGroups.html</a><br>
+<a href="https://docs.aws.amazon.com/ko_kr/AmazonElastiCache/latest/red-ug/Shards.html">https://docs.aws.amazon.com/ko_kr/AmazonElastiCache/latest/red-ug/Shards.html</a><br>
+<a href="https://docs.aws.amazon.com/ko_kr/AmazonElastiCache/latest/red-ug/Clusters.html">https://docs.aws.amazon.com/ko_kr/AmazonElastiCache/latest/red-ug/Clusters.html</a><br>
+<a href="https://aws.amazon.com/ko/blogs/database/work-with-cluster-mode-on-amazon-elasticache-for-redis">Redis 용 Amazon ElastiCache에서 클러스터 모드로 작업하는 방법</a></p>
+
+        </div>
+
+        <div class="row middle-xs">
+          <div class="col-xs-12">
+            
+          </div>
+        </div>
+        
+          <div class="row">
+            <div class="col-xs-12">
+              
+            </div>
+          </div>
+
+          
+
+
+
+          
+          
+          <div style="height: 50px;"></div>
+          
+        
+
+        <div class="site-footer">
+  
+  
+</div>
+
+      </div>
+    </div>
+  </article>
+
+  
+
+<script>
+  
+  
+    
+    
+  
+</script>
+
+  
+
+</body>
+
+</html>

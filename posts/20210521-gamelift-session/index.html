@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.80.0" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="dykim" />
+  <meta property="og:url" content="http://example.org/posts/20210521-gamelift-session/" />
+  <link rel="canonical" href="http://example.org/posts/20210521-gamelift-session/" /><link rel="alternate" type="application/atom+xml" href="http://example.org/index.xml" title="DEV STACK MINDMAP">
+
+  <script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "http:\/\/example.org\/"
+      },
+      "articleSection" : "posts",
+      "name" : "GameLift, Unity로 세션 생성, 입장, 가위바위보 게임 만들기",
+      "headline" : "GameLift, Unity로 세션 생성, 입장, 가위바위보 게임 만들기",
+      "description" : "Overview 목표 장점 제약사항 Architecture Step 1. 설치  Step 1.1. Unity Hub 설치 Step 1.2. AWS Toolkit for Visual Studio 설치   Step 2. 프로젝트 가져오기  Step 2.1. Server Step 2.2. Client   Step 3. 네트워크 생성  Step 3.1. VPC 생성 Step 3.2. Subnet 생성 Step 3.3. 인터넷 게이트웨이 생성 및 연결 Step 3.4. NAT 게이트웨이 생성 Step 3.5. 라우팅 테이블 생성 및 설정   Step 4.",
+      "inLanguage" : "en-US",
+      "author" : "dykim",
+      "creator" : "dykim",
+      "publisher": "dykim",
+      "accountablePerson" : "dykim",
+      "copyrightHolder" : "dykim",
+      "copyrightYear" : "2021",
+      "datePublished": "2021-05-21 11:16:00 \u002b0900 KST",
+      "dateModified" : "2021-05-21 11:16:00 \u002b0900 KST",
+      "url" : "http:\/\/example.org\/posts\/20210521-gamelift-session\/",
+      "keywords" : [  ]
+  }
+</script>
+<title>GameLift, Unity로 세션 생성, 입장, 가위바위보 게임 만들기</title>
+  <meta property="og:title" content="GameLift, Unity로 세션 생성, 입장, 가위바위보 게임 만들기" />
+  <meta property="og:type" content="article" />
+  <meta property="og:description" content="Overview 목표 장점 제약사항 Architecture Step 1. 설치  Step 1.1. Unity Hub 설치 Step 1.2. AWS Toolkit for Visual Studio 설치   Step 2. 프로젝트 가져오기  Step 2.1. Server Step 2.2. Client   Step 3. 네트워크 생성  Step 3.1. VPC 생성 Step 3.2. Subnet 생성 Step 3.3. 인터넷 게이트웨이 생성 및 연결 Step 3.4. NAT 게이트웨이 생성 Step 3.5. 라우팅 테이블 생성 및 설정   Step 4." />
+  <meta name="description" content="Overview 목표 장점 제약사항 Architecture Step 1. 설치  Step 1.1. Unity Hub 설치 Step 1.2. AWS Toolkit for Visual Studio 설치   Step 2. 프로젝트 가져오기  Step 2.1. Server Step 2.2. Client   Step 3. 네트워크 생성  Step 3.1. VPC 생성 Step 3.2. Subnet 생성 Step 3.3. 인터넷 게이트웨이 생성 및 연결 Step 3.4. NAT 게이트웨이 생성 Step 3.5. 라우팅 테이블 생성 및 설정   Step 4." />
+  <meta property="og:locale" content="en-us" />
+
+  
+    <style>body{font-family:bree serif,sans-serif;-webkit-font-smoothing:antialiased;margin:0 20px}article{max-width:800px;margin-left:auto;margin-right:auto}a{color:#000;text-decoration:none}a:hover{font-weight:600;text-decoration:underline}.post-ads{margin:50px 0}.markdown-body{font-size:18px;max-width:100%}.markdown-body a{text-decoration:underline;text-decoration-color:#000}.markdown-body pre{padding:16px;overflow:auto;border-radius:10px}.markdown-body code{padding:.2em .4em;font-size:85%;background-color:#f6f8fa;border-radius:6px}.markdown-body pre>code{padding:0;font-size:100%;background-color:inherit;border:0}.Chinese .markdown-body{line-height:200%}.site-date-catalog{font-size:2rem}.header-title{font-size:2rem;font-weight:700;margin-top:32px;font-family:bungee shade,sans-serif}.header-title a{text-decoration:none}.header-subtitle{color:#666}.header-items{margin:10px 0}.header-item{margin:0 5px}.header-line{width:100%;border-width:2px;border-color:#482936;border-style:solid none none none}.lang-switch{font-weight:600}#posts-list{min-height:600px}.posts-line{font-size:1.2rem;margin:12px 0}.posts-categories{font-size:.8rem;margin:auto;text-align:center}.posts-category{padding:3px 0;border:#000 2px solid;border-radius:5px}.site-footer{margin-top:50px}.site-footer-item{margin-right:12px}.post-content img{max-width:100%;display:block;margin-left:auto;margin-right:auto;margin-top:12px}.post-header{margin-bottom:50px}.post-title{font-size:2rem;font-weight:600}.post-category{display:inline;font-weight:600;padding:2px 5px;border:#000 2px solid;border-radius:5px}.post-date{font-weight:800;font-style:italic}.post-author{float:right;font-weight:600}.page-content{min-height:60%}.post-content{margin-bottom:50px}.post-content p{hyphens:auto;line-height:1.8;text-justify:ideographic;margin-bottom:1em}.related-content{border-width:3px;border-style:solid;border-color:#000;padding:0 10px;margin-bottom:50px;margin-top:100px}.related-content li{margin:5px 0}.taxonomy-term{font-size:3rem}.gallery-img{text-align:center}.gallery-img span{text-align:center}.gallery-img-desc{font-size:.8em;font-weight:800}#disqus_thread{position:relative}#disqus_thread:after{content:"";display:block;height:55px;width:100%;position:absolute;bottom:0;background:#fff}@media screen and (max-width:600px){.header-title,.header-subtitle,.header-items{text-align:center}.posts-line{font-size:16px}.markdown-body{font-size:16px}.post-title{font-size:2rem}.post-content p{letter-spacing:.05em}}@media screen and (max-width:48em){.posts-category{display:none}}</style>
+  
+  
+    <style>.container,.container-fluid{margin-right:auto;margin-left:auto}.container-fluid{padding-right:2rem;padding-left:2rem}.row{box-sizing:border-box;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:0;-ms-flex:0 1 auto;flex:0 1 auto;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:-.5rem;margin-left:-.5rem}.row.reverse{-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse}.col.reverse{-webkit-box-orient:vertical;-webkit-box-direction:reverse;-ms-flex-direction:column-reverse;flex-direction:column-reverse}.col-xs,.col-xs-1,.col-xs-10,.col-xs-11,.col-xs-12,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9,.col-xs-offset-0,.col-xs-offset-1,.col-xs-offset-10,.col-xs-offset-11,.col-xs-offset-12,.col-xs-offset-2,.col-xs-offset-3,.col-xs-offset-4,.col-xs-offset-5,.col-xs-offset-6,.col-xs-offset-7,.col-xs-offset-8,.col-xs-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:0 0 auto;padding-right:.5rem;padding-left:.5rem}.col-xs{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-xs-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-xs-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-xs-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-xs-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-xs-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-xs-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-xs-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-xs-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-xs-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-xs-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-xs-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-xs-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-xs-offset-0{margin-left:0}.col-xs-offset-1{margin-left:8.33333333%}.col-xs-offset-2{margin-left:16.66666667%}.col-xs-offset-3{margin-left:25%}.col-xs-offset-4{margin-left:33.33333333%}.col-xs-offset-5{margin-left:41.66666667%}.col-xs-offset-6{margin-left:50%}.col-xs-offset-7{margin-left:58.33333333%}.col-xs-offset-8{margin-left:66.66666667%}.col-xs-offset-9{margin-left:75%}.col-xs-offset-10{margin-left:83.33333333%}.col-xs-offset-11{margin-left:91.66666667%}.start-xs{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-xs{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-xs{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-xs{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-xs{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-xs{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-xs{-ms-flex-pack:distribute;justify-content:space-around}.between-xs{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-xs{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-xs{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}@media only screen and (min-width:48em){.container{width:49rem}.col-sm,.col-sm-1,.col-sm-10,.col-sm-11,.col-sm-12,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-offset-0,.col-sm-offset-1,.col-sm-offset-10,.col-sm-offset-11,.col-sm-offset-12,.col-sm-offset-2,.col-sm-offset-3,.col-sm-offset-4,.col-sm-offset-5,.col-sm-offset-6,.col-sm-offset-7,.col-sm-offset-8,.col-sm-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:0 0 auto;padding-right:.5rem;padding-left:.5rem}.col-sm{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-sm-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-sm-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-sm-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-sm-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-sm-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-sm-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-sm-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-sm-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-sm-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-sm-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-sm-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-sm-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-sm-offset-0{margin-left:0}.col-sm-offset-1{margin-left:8.33333333%}.col-sm-offset-2{margin-left:16.66666667%}.col-sm-offset-3{margin-left:25%}.col-sm-offset-4{margin-left:33.33333333%}.col-sm-offset-5{margin-left:41.66666667%}.col-sm-offset-6{margin-left:50%}.col-sm-offset-7{margin-left:58.33333333%}.col-sm-offset-8{margin-left:66.66666667%}.col-sm-offset-9{margin-left:75%}.col-sm-offset-10{margin-left:83.33333333%}.col-sm-offset-11{margin-left:91.66666667%}.start-sm{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-sm{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-sm{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-sm{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-sm{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-sm{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-sm{-ms-flex-pack:distribute;justify-content:space-around}.between-sm{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-sm{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-sm{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:64em){.container{width:65rem}.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-md-offset-0,.col-md-offset-1,.col-md-offset-10,.col-md-offset-11,.col-md-offset-12,.col-md-offset-2,.col-md-offset-3,.col-md-offset-4,.col-md-offset-5,.col-md-offset-6,.col-md-offset-7,.col-md-offset-8,.col-md-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:0 0 auto;padding-right:.5rem;padding-left:.5rem}.col-md{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-md-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-md-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-md-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-md-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-md-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-md-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-md-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-md-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-md-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-md-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-md-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-md-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-md-offset-0{margin-left:0}.col-md-offset-1{margin-left:8.33333333%}.col-md-offset-2{margin-left:16.66666667%}.col-md-offset-3{margin-left:25%}.col-md-offset-4{margin-left:33.33333333%}.col-md-offset-5{margin-left:41.66666667%}.col-md-offset-6{margin-left:50%}.col-md-offset-7{margin-left:58.33333333%}.col-md-offset-8{margin-left:66.66666667%}.col-md-offset-9{margin-left:75%}.col-md-offset-10{margin-left:83.33333333%}.col-md-offset-11{margin-left:91.66666667%}.start-md{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-md{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-md{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-md{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-md{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-md{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-md{-ms-flex-pack:distribute;justify-content:space-around}.between-md{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-md{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-md{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}@media only screen and (min-width:75em){.container{width:76rem}.col-lg,.col-lg-1,.col-lg-10,.col-lg-11,.col-lg-12,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-lg-offset-0,.col-lg-offset-1,.col-lg-offset-10,.col-lg-offset-11,.col-lg-offset-12,.col-lg-offset-2,.col-lg-offset-3,.col-lg-offset-4,.col-lg-offset-5,.col-lg-offset-6,.col-lg-offset-7,.col-lg-offset-8,.col-lg-offset-9{box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:0 0 auto;padding-right:.5rem;padding-left:.5rem}.col-lg{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%}.col-lg-1{-ms-flex-preferred-size:8.33333333%;flex-basis:8.33333333%;max-width:8.33333333%}.col-lg-2{-ms-flex-preferred-size:16.66666667%;flex-basis:16.66666667%;max-width:16.66666667%}.col-lg-3{-ms-flex-preferred-size:25%;flex-basis:25%;max-width:25%}.col-lg-4{-ms-flex-preferred-size:33.33333333%;flex-basis:33.33333333%;max-width:33.33333333%}.col-lg-5{-ms-flex-preferred-size:41.66666667%;flex-basis:41.66666667%;max-width:41.66666667%}.col-lg-6{-ms-flex-preferred-size:50%;flex-basis:50%;max-width:50%}.col-lg-7{-ms-flex-preferred-size:58.33333333%;flex-basis:58.33333333%;max-width:58.33333333%}.col-lg-8{-ms-flex-preferred-size:66.66666667%;flex-basis:66.66666667%;max-width:66.66666667%}.col-lg-9{-ms-flex-preferred-size:75%;flex-basis:75%;max-width:75%}.col-lg-10{-ms-flex-preferred-size:83.33333333%;flex-basis:83.33333333%;max-width:83.33333333%}.col-lg-11{-ms-flex-preferred-size:91.66666667%;flex-basis:91.66666667%;max-width:91.66666667%}.col-lg-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}.col-lg-offset-0{margin-left:0}.col-lg-offset-1{margin-left:8.33333333%}.col-lg-offset-2{margin-left:16.66666667%}.col-lg-offset-3{margin-left:25%}.col-lg-offset-4{margin-left:33.33333333%}.col-lg-offset-5{margin-left:41.66666667%}.col-lg-offset-6{margin-left:50%}.col-lg-offset-7{margin-left:58.33333333%}.col-lg-offset-8{margin-left:66.66666667%}.col-lg-offset-9{margin-left:75%}.col-lg-offset-10{margin-left:83.33333333%}.col-lg-offset-11{margin-left:91.66666667%}.start-lg{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;text-align:start}.center-lg{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}.end-lg{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:end}.top-lg{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.middle-lg{-webkit-box-align:center;-ms-flex-align:center;align-items:center}.bottom-lg{-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.around-lg{-ms-flex-pack:distribute;justify-content:space-around}.between-lg{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.first-lg{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.last-lg{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}}</style>
+  
+
+  
+
+  <link href="/index.xml" rel="alternate" type="application/rss+xml"
+    title="DEV STACK MINDMAP">
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Bungee+Shade" rel="stylesheet">
+  
+  
+
+  
+  
+</head>
+
+
+<body>
+  <article class="post " id="article">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="site-header">
+          
+<header>
+  <div class="header-title">
+    <a href="/"
+      >dev stack mindmap</a
+    >
+  </div>
+  <div class="header-subtitle"></div>
+</header>
+<div class="row end-md center-xs header-items">
+  
+</div>
+<div class="row end-xs">
+   
+</div>
+<div class="header-line"></div>
+
+        </div>
+        <header class="post-header">
+          <h1 class="post-title">GameLift, Unity로 세션 생성, 입장, 가위바위보 게임 만들기</h1>
+          
+          <div class="row post-desc">
+            <div class="col-xs-6">
+              
+              <time class="post-date" datetime="2021-05-21 11:16:00 KST">
+                21 May 2021
+              </time>
+              
+            </div>
+            <div class="col-xs-6">
+              
+              <div class="post-author">
+                <a target="_blank" href="">@dykim</a>
+              </div>
+              
+            </div>
+          </div>
+          
+        </header>
+
+        <div class="post-content markdown-body">
+          
+          <ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#%EB%AA%A9%ED%91%9C">목표</a></li>
+<li><a href="#%EC%9E%A5%EC%A0%90">장점</a></li>
+<li><a href="#%EC%A0%9C%EC%95%BD%EC%82%AC%ED%95%AD">제약사항</a></li>
+<li><a href="#architecture">Architecture</a></li>
+<li><a href="#step-1-%EC%84%A4%EC%B9%98">Step 1. 설치</a>
+<ul>
+<li><a href="#step-11-unity-hub-%EC%84%A4%EC%B9%98">Step 1.1. Unity Hub 설치</a></li>
+<li><a href="#step-12-aws-toolkit-for-visual-studio-%EC%84%A4%EC%B9%98">Step 1.2. AWS Toolkit for Visual Studio 설치</a></li>
+</ul>
+</li>
+<li><a href="#step-2-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0">Step 2. 프로젝트 가져오기</a>
+<ul>
+<li><a href="#step-21-server">Step 2.1. Server</a></li>
+<li><a href="#step-22-client">Step 2.2. Client</a></li>
+</ul>
+</li>
+<li><a href="#step-3-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EC%83%9D%EC%84%B1">Step 3. 네트워크 생성</a>
+<ul>
+<li><a href="#step-31-vpc-%EC%83%9D%EC%84%B1">Step 3.1. VPC 생성</a></li>
+<li><a href="#step-32-subnet-%EC%83%9D%EC%84%B1">Step 3.2. Subnet 생성</a></li>
+<li><a href="#step-33-%EC%9D%B8%ED%84%B0%EB%84%B7-%EA%B2%8C%EC%9D%B4%ED%8A%B8%EC%9B%A8%EC%9D%B4-%EC%83%9D%EC%84%B1-%EB%B0%8F-%EC%97%B0%EA%B2%B0">Step 3.3. 인터넷 게이트웨이 생성 및 연결</a></li>
+<li><a href="#step-34-nat-%EA%B2%8C%EC%9D%B4%ED%8A%B8%EC%9B%A8%EC%9D%B4-%EC%83%9D%EC%84%B1">Step 3.4. NAT 게이트웨이 생성</a></li>
+<li><a href="#step-35-%EB%9D%BC%EC%9A%B0%ED%8C%85-%ED%85%8C%EC%9D%B4%EB%B8%94-%EC%83%9D%EC%84%B1-%EB%B0%8F-%EC%84%A4%EC%A0%95">Step 3.5. 라우팅 테이블 생성 및 설정</a></li>
+</ul>
+</li>
+<li><a href="#step-4-%EB%B3%B4%EC%95%88-%EA%B7%B8%EB%A3%B9-%EB%A7%8C%EB%93%A4%EA%B8%B0">Step 4. 보안 그룹 만들기</a>
+<ul>
+<li><a href="#step-41-lambda-%EC%97%90%EC%84%9C-%EC%82%AC%EC%9A%A9%ED%95%A0-%EB%B3%B4%EC%95%88-%EA%B7%B8%EB%A3%B9-%EB%A7%8C%EB%93%A4%EA%B8%B0">Step 4.1. Lambda 에서 사용할 보안 그룹 만들기</a></li>
+<li><a href="#step-42-rds-%EC%97%90%EC%84%9C-%EC%82%AC%EC%9A%A9%ED%95%A0-%EB%B3%B4%EC%95%88-%EA%B7%B8%EB%A3%B9-%EC%83%9D%EC%84%B1">Step 4.2. RDS 에서 사용할 보안 그룹 생성</a></li>
+</ul>
+</li>
+<li><a href="#step-5-iam-%EC%84%A4%EC%A0%95">Step 5. IAM 설정</a>
+<ul>
+<li><a href="#step-51-gamelift-%EC%A0%95%EC%B1%85-%EB%A7%8C%EB%93%A4%EA%B8%B0">Step 5.1. GameLift 정책 만들기</a></li>
+<li><a href="#step-52-lambda%EA%B0%80-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%97%AD%ED%95%A0-%EB%A7%8C%EB%93%A4%EA%B8%B0">Step 5.2. Lambda가 사용할 역할 만들기</a></li>
+<li><a href="#step-53-fleet-%EC%9D%B8%EC%8A%A4%ED%84%B4%EC%8A%A4%EC%97%90%EC%84%9C-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%97%AD%ED%95%A0-%EB%A7%8C%EB%93%A4%EA%B8%B0">Step 5.3. Fleet 인스턴스에서 사용할 역할 만들기</a></li>
+</ul>
+</li>
+<li><a href="#step-6-rds-%EC%83%9D%EC%84%B1">Step 6. RDS 생성</a>
+<ul>
+<li><a href="#step-61-rds-%EC%84%9C%EB%B8%8C%EB%84%B7-%EA%B7%B8%EB%A3%B9-%EC%83%9D%EC%84%B1">Step 6.1. RDS 서브넷 그룹 생성</a></li>
+<li><a href="#step-62-rds-%EC%83%9D%EC%84%B1">Step 6.2. RDS 생성</a></li>
+<li><a href="#step-63-cloud9-%EC%83%9D%EC%84%B1">Step 6.3. RDS 생성</a></li>
+<li><a href="#step-64-database-table-%EC%83%9D%EC%84%B1">Step 6.4. Database, Table 생성</a></li>
+</ul>
+</li>
+<li><a href="#step-7-lambda-%ED%95%A8%EC%88%98-%EC%83%9D%EC%84%B1-accountjoin-login-battleresult">Step 7. Lambda 함수 생성 (AccountJoin, Login, BattleResult)</a>
+<ul>
+<li><a href="#step-71-accountjoin-lambda-%ED%95%A8%EC%88%98-%EC%97%85%EB%A1%9C%EB%93%9C">Step 7.1. AccountJoin Lambda 함수 업로드</a></li>
+<li><a href="#step-72-login-lambda-%ED%95%A8%EC%88%98-%EC%97%85%EB%A1%9C%EB%93%9C">Step 7.2. Login Lambda 함수 업로드</a></li>
+<li><a href="#step-73-api-gateway-accountjoin-login-%EB%A6%AC%EC%86%8C%EC%8A%A4-%EC%83%9D%EC%84%B1">Step 7.3. API Gateway, AccountJoin, Login 리소스 생성</a></li>
+<li><a href="#step-74-battleresult-%EB%9E%8C%EB%8B%A4-%ED%95%A8%EC%88%98-%EC%97%85%EB%A1%9C%EB%93%9C">Step 7.4. BattleResult 람다 함수 업로드</a></li>
+<li><a href="#step-75-sqs-%EC%83%9D%EC%84%B1">Step 7.5. SQS 생성</a></li>
+</ul>
+</li>
+<li><a href="#step-8-%EC%84%9C%EB%B2%84-%EB%B0%B0%ED%8F%AC">Step 8. 서버 배포</a>
+<ul>
+<li><a href="#step-81-gamelift%EC%97%90-%EC%84%9C%EB%B2%84-%EB%B0%B0%ED%8F%AC%EB%A5%BC-%EC%9C%84%ED%95%9C-%EC%82%AC%EC%9A%A9%EC%9E%90-%EB%B3%80%EC%88%98-%EC%84%A4%EC%A0%95">Step 8.1. GameLift에 서버 배포를 위한 사용자 변수 설정</a></li>
+<li><a href="#step-82-code-%EC%88%98%EC%A0%95-%EC%82%AC%ED%95%AD">Step 8.2. Code 수정 사항</a></li>
+<li><a href="#step-83-gamelift%EC%97%90-%EC%97%85%EB%A1%9C%EB%93%9C%ED%95%A0-%EC%84%9C%EB%B2%84-%EB%B9%8C%EB%93%9C">Step 8.3. GameLift에 업로드할 서버 빌드</a></li>
+<li><a href="#step-84-gamelift%EC%97%90-%EC%97%85%EB%A1%9C%EB%93%9C%ED%95%A0-%EB%8C%80%EC%83%81-%ED%8C%8C%EC%9D%BC%EB%93%A4%EC%9D%B4-%EC%9E%88%EB%8A%94-%EB%94%94%EB%A0%89%ED%86%A0%EB%A6%AC%EB%A1%9C-%EC%9D%98%EC%A1%B4%EC%84%B1-%ED%8C%8C%EC%9D%BC-%EB%B3%B5%EC%82%AC">Step 8.4. GameLift에 업로드할 대상 파일들이 있는 디렉토리로 의존성 파일 복사</a></li>
+<li><a href="#step-85-gamelift%EC%97%90-%EC%84%9C%EB%B2%84-%EB%B0%94%EC%9D%B4%EB%84%88%EB%A6%AC-%EC%9D%98%EC%A1%B4%EC%84%B1-%ED%8C%8C%EC%9D%BC-%EC%97%85%EB%A1%9C%EB%93%9C">Step 8.5. GameLift에 서버 바이너리, 의존성 파일 업로드</a></li>
+<li><a href="#step-86-%ED%94%8C%EB%A6%BF-%EC%83%9D%EC%84%B1">Step 8.6. 플릿 생성</a></li>
+</ul>
+</li>
+<li><a href="#step-9-lambda-%ED%95%A8%EC%88%98-%EC%83%9D%EC%84%B1-creategame-createplayer-searchgame">Step 9. Lambda 함수 생성 (CreateGame, CreatePlayer, SearchGame)</a>
+<ul>
+<li><a href="#step-91-creategame-createplayer-searchgame-lambda-%ED%95%A8%EC%88%98-%EC%97%85%EB%A1%9C%EB%93%9C">Step 9.1. CreateGame, CreatePlayer, SearchGame, Lambda 함수 업로드</a></li>
+<li><a href="#step-92-api-gateway-creategame-createplayer-searchgame-%EB%A6%AC%EC%86%8C%EC%8A%A4-%EC%83%9D%EC%84%B1">Step 9.2. API Gateway, CreateGame, CreatePlayer, SearchGame 리소스 생성</a></li>
+</ul>
+</li>
+<li><a href="#step-10-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8">Step 10. 클라이언트</a>
+<ul>
+<li><a href="#step-101-client-config-%EC%88%98%EC%A0%95">Step 10.1. Client Config 수정</a></li>
+<li><a href="#step-102-client-build">Step 10.2. Client Build</a></li>
+</ul>
+</li>
+<li><a href="#step-11-play">Step 11. Play</a></li>
+<li><a href="#step-12-next">Step 12. Next</a>
+<ul>
+<li><a href="#step-121-queue-alias-rule-set">Step 12.1. Queue, Alias, Rule Set</a></li>
+<li><a href="#step-122-ioc">Step 12.2. IoC</a></li>
+<li><a href="#step-123-cicd">Step 12.3. CI/CD</a></li>
+<li><a href="#step-124-%ED%95%98%EB%93%9C-%EC%BD%94%EB%94%A9-%EB%B6%80%EB%B6%84-%EC%88%98%EC%A0%95">Step 12.4. 하드 코딩 부분 수정</a></li>
+<li><a href="#step-125-%EB%A1%9C%EA%B7%B8-%EC%88%98%EC%A7%91">Step 12.5. 로그 수집</a></li>
+</ul>
+</li>
+<li><a href="#step-13-etc">Step 13. ETC</a>
+<ul>
+<li><a href="#step-131-amazon-gamelift-primer-script">Step 13.1. Amazon GameLift Primer Script</a></li>
+<li><a href="#step-132-matchmaking-%EA%B5%AC%ED%98%84-%EC%8B%9C-%EA%B6%8C%EA%B3%A0-%EC%82%AC%ED%95%AD">Step 13.2. Matchmaking 구현 시 권고 사항</a></li>
+<li><a href="#step-133-fleet-%EC%9D%B8%EC%8A%A4%ED%84%B4%EC%8A%A4-%EA%B5%AC%EC%84%B1%EC%97%90-%EB%8C%80%ED%95%9C-best-practices">Step 13.3. Fleet 인스턴스 구성에 대한 Best practices</a></li>
+<li><a href="#step-134-fleet-%EC%83%9D%EC%84%B1-%EC%8B%9C-%EC%84%9C%EB%B2%84-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EC%84%A4%EC%A0%95">Step 13.4. Fleet 생성 시 서버 프로세스 설정</a></li>
+<li><a href="#step-135-fleet-%EC%9D%B8%EC%8A%A4%ED%84%B4%EC%8A%A4-scaling">Step 13.5. Fleet 인스턴스 Scaling</a></li>
+<li><a href="#step-136-unity%EB%A1%9C-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8-%EC%84%9C%EB%B2%84-%ED%86%B5%ED%95%A9-%EA%B5%AC%ED%98%84">Step 13.6. Unity로 클라이언트, 서버 통합 구현</a></li>
+</ul>
+</li>
+<li><a href="#step-14-%EB%A6%AC%EC%86%8C%EC%8A%A4-%EC%A0%95%EB%A6%AC">Step 14. 리소스 정리</a></li>
+</ul>
+<h2 id="overview">Overview</h2>
+<p>GameLift와 API Gateway, Lambda, SQS, RDS를 통해 Session을 만들고 입장하여 가위, 바위, 보 게임을 진행하고 결과를 저장해봅니다.</p>
+<hr>
+<h2 id="목표">목표</h2>
+<p>GameLift의 기본적인 Build, Fleet 생성 및 구조 이해.</p>
+<hr>
+<h2 id="장점">장점</h2>
+<p><img src="/images/gamelift/0001.png" alt="images/gamelift/0001.png"></p>
+<p>GameLift 는 Session 게임에 특화된 서비스 입니다. 시작과 끝이 명확한 Session 형 게임을 FleetIQ를 이용하여 Spot 인스턴스를 활용하고 비용을 절감합니다.</p>
+<p>또한 Session 형 게임 서버의 손쉬운 Auto-scaling 및 Matchmaking을 지원하고 있습니다.</p>
+<hr>
+<h2 id="제약사항">제약사항</h2>
+<p>GameLift 는 인프라에 대한 서비스입니다.</p>
+<p>Photon 등과 같이 P2P, Relay, Dedicated 서버 구현에 대한 서비스가 아닙니다.</p>
+<p>고객들은 서버 구현 서비스로 오해하고 접근하는 경우가 많이 있습니다.</p>
+<hr>
+<h2 id="가격정책">가격정책</h2>
+<p><a href="https://aws.amazon.com/ko/ec2/pricing/on-demand/">https://aws.amazon.com/ko/ec2/pricing/on-demand/</a></p>
+<p><a href="https://aws.amazon.com/ko/gamelift/pricing/">https://aws.amazon.com/ko/gamelift/pricing/</a></p>
+<p>GameLift 는 Spot 인스턴스의 중단률을 낮출 수 있는 FleetIQ를 사용합니다.</p>
+<p>Fleet을 Spot 인스턴스로 구성하면 Linux 기준 EC2  대비 30~40%의 인스턴스 비용이 발생합니다.</p>
+<hr>
+<h2 id="architecture">Architecture</h2>
+<p><img src="/images/gamelift/Infra-001.png" alt="/images/gamelift/Infra-001.png"></p>
+<h2 id="step-1-설치">Step 1. 설치</h2>
+<h3 id="step-11-unity-hub-설치">Step 1.1. Unity Hub 설치</h3>
+<p>여러 버전의 Unity를 설치하고 관리할 수 있는 <a href="https://unity3d.com/kr/get-unity/download">Unity Hub를 설치</a>합니다.</p>
+<p><img src="/images/gamelift/Unity-001.png" alt="/images/gamelift/Unity-001.png"></p>
+<p>Unity Hub를 실행한 후 왼쪽 설치 탭으로 이동합니다.</p>
+<p><img src="/images/gamelift/Unity-002.png" alt="/images/gamelift/Unity-002.png"></p>
+<p>프로젝트에서 사용한 2020.1.11f1 버전을 설치합니다.</p>
+<p><img src="/images/gamelift/Unity-003.png" alt="/images/gamelift/Unity-003.png"></p>
+<p>원하는 버전이 목록에 없다면 <a href="https://unity3d.com/get-unity/download/archive">Unity 다운로드 아카이브</a>로 이동합니다.</p>
+<p><img src="/images/gamelift/Unity-004.png" alt="/images/gamelift/Unity-004.png"></p>
+<p>원하는 버전을 찾습니다.</p>
+<p><img src="/images/gamelift/Unity-005.png" alt="/images/gamelift/Unity-005.png"></p>
+<p>Unity Hub 버튼을 누르시면 설치가 진행됩니다.</p>
+<p>&ldquo;Unity Hub를 여시겠습니까?&rdquo; 라는 팝업이 열리시면 Unity Hub 열기 버튼을 누르시면 됩니다.</p>
+<p><img src="/images/gamelift/Unity-006.png" alt="/images/gamelift/Unity-006.png"></p>
+<p>기본적으로 Android Build Support와 Windows Build Support(IL2CPP)가 선택 되어 있습니다.(Windows 기준), 추가로 iOS Build Support 등을 선택 하실 수 있습니다. 또한 Visual Studio Community 2019 설치 또한 기본 선택되어 있습니다. 없으시다면 함께 INSTALL 하시고 설치되어 있으시다면 <strong>체크 해제</strong>하시면 됩니다.</p>
+<p><img src="/images/gamelift/Unity-007.png" alt="/images/gamelift/Unity-007.png"></p>
+<h3 id="step-12-aws-toolkit-for-visual-studio-설치">Step 1.2. AWS Toolkit for Visual Studio 설치</h3>
+<p>Visual Studio 2019를 실행하고 AWS Toolkit for Visual Studio 를 설치합니다.</p>
+<p><img src="/images/gamelift/toolkit-001.png" alt="/images/gamelift/toolkit-001.png"></p>
+<p><img src="/images/gamelift/toolkit-002.png" alt="/images/gamelift/toolkit-002.png"></p>
+<p><img src="/images/gamelift/toolkit-003.png" alt="/images/gamelift/toolkit-003.png"></p>
+<p><img src="/images/gamelift/toolkit-004.png" alt="/images/gamelift/toolkit-004.png"></p>
+<p><img src="/images/gamelift/toolkit-005.png" alt="/images/gamelift/toolkit-005.png"></p>
+<p><img src="/images/gamelift/toolkit-006.png" alt="/images/gamelift/toolkit-006.png"></p>
+<p><img src="/images/gamelift/toolkit-007.png" alt="/images/gamelift/toolkit-007.png"></p>
+<h2 id="step-2-프로젝트-가져오기">Step 2. 프로젝트 가져오기</h2>
+<h3 id="step-21-server">Step 2.1. Server</h3>
+<p>프로젝트 :</p>
+<p>저장소 :</p>
+<h3 id="step-22-client">Step 2.2. Client</h3>
+<p>프로젝트 :</p>
+<p>저장소 :</p>
+<h2 id="step-3-네트워크-생성">Step 3. 네트워크 생성</h2>
+<h3 id="step-31-vpc-생성">Step 3.1. VPC 생성</h3>
+<p>VPC 대시보드로 이동하여 VPC 생성을 아래와 같이 진행합니다.</p>
+<p><img src="/images/gamelift/VPC-001.png" alt="/image"></p>
+<h3 id="step-32-subnet-생성">Step 3.2. Subnet 생성</h3>
+<p>2개의 퍼블릭 서브넷, 2개의 프라이빗 서브넷 생성을 아래와 같이 진행합니다.</p>
+<p><img src="/images/gamelift/Subnet-001.png" alt="/image"></p>
+<p><img src="/images/gamelift/Subnet-002.png" alt="/image"></p>
+<p><img src="/images/gamelift/Subnet-003.png" alt="/image"></p>
+<p><img src="/images/gamelift/Subnet-004.png" alt="/image"></p>
+<p><img src="/images/gamelift/Subnet-005.png" alt="/image"></p>
+<h3 id="step-33-인터넷-게이트웨이-생성-및-연결">Step 3.3. 인터넷 게이트웨이 생성 및 연결</h3>
+<p>Internet Gateway를 생성하고 VPC에 연결하는 작업을 진행합니다.
+VPC 대시보드에서 <strong>인터넷 게이트웨이</strong>를 클릭 후, <strong>인터넷 게이트웨이 생성</strong> 버튼을 클릭합니다.</p>
+<p><img src="/images/gamelift/IG-001.png" alt="/image"></p>
+<p><img src="/images/gamelift/IG-002.png" alt="/image"></p>
+<p>인터넷 게이트웨이를 VPC에 연결합니다.</p>
+<p>다음으로 생성한 인터넷 게이트웨이를 VPC에 연결하는 작업을 진행합니다.</p>
+<p><strong>mzc-game-ig</strong>를 선택 후, 작업 탭을 확장하여 <strong>VPC에 연결</strong>을 클릭합니다.</p>
+<p><img src="/images/gamelift/IG-003.png" alt="/image"></p>
+<p><strong>VPC 연결</strong> 설정창에서 생성한 mzc-game-vpc를 선택 후, <strong>인터넷 게이트웨이 연결</strong> 버튼을 클릭합니다.</p>
+<p><img src="/images/gamelift/IG-004.png" alt="/image"></p>
+<h3 id="step-34-nat-게이트웨이-생성">Step 3.4. NAT 게이트웨이 생성</h3>
+<p><img src="/images/gamelift/NATGateway-001.png" alt="/image"></p>
+<p><img src="/images/gamelift/NATGateway-002.png" alt="/image"></p>
+<h3 id="step-35-라우팅-테이블-생성-및-설정">Step 3.5. 라우팅 테이블 생성 및 설정</h3>
+<p>라우팅 테이블 생성 및 설정을 진행합니다.</p>
+<p><strong>라우팅 테이블 생성</strong> 버튼을 클릭합니다.</p>
+<p><img src="/images/gamelift/RT-001.png" alt="/image"></p>
+<p>먼저 퍼블릭 라우팅 테이블을 생성합니다.</p>
+<p><img src="/images/gamelift/RT-002.png" alt="/image"></p>
+<p><img src="/images/gamelift/RT-003.png" alt="/image"></p>
+<p><img src="/images/gamelift/RT-004.png" alt="/image"></p>
+<p><img src="/images/gamelift/RT-005.png" alt="/image"></p>
+<p><img src="/images/gamelift/RT-006.png" alt="/image"></p>
+<p>프라이빗 라우팅 테이블을 생성합니다.</p>
+<p><img src="/images/gamelift/RT-007.png" alt="/image"></p>
+<p><img src="/images/gamelift/RT-008.png" alt="/image"></p>
+<p><img src="/images/gamelift/RT-009.png" alt="/image"></p>
+<p><img src="/images/gamelift/RT-010.png" alt="/image"></p>
+<p><img src="/images/gamelift/RT-011.png" alt="/image"></p>
+<h2 id="step-4-보안-그룹-만들기">Step 4. 보안 그룹 만들기</h2>
+<h3 id="step-41-lambda-에서-사용할-보안-그룹-만들기">Step 4.1. Lambda 에서 사용할 보안 그룹 만들기</h3>
+<p><img src="/images/gamelift/SecurityGroup-001.png" alt="/image"></p>
+<p><img src="/images/gamelift/SecurityGroup-002.png" alt="/image"></p>
+<p><img src="/images/gamelift/SecurityGroup-003.png" alt="/image"></p>
+<h3 id="step-42-rds-에서-사용할-보안-그룹-생성">Step 4.2. RDS 에서 사용할 보안 그룹 생성</h3>
+<p><img src="/images/gamelift/RDS-SG-001.png" alt="/image"></p>
+<p><img src="/images/gamelift/RDS-SG-002.png" alt="/image"></p>
+<p><img src="/images/gamelift/RDS-SG-003.png" alt="/image"></p>
+<h2 id="step-5-iam-설정">Step 5. IAM 설정</h2>
+<h3 id="step-51-gamelift-정책-만들기">Step 5.1. GameLift 정책 만들기</h3>
+<p>이 후 만들 역할에서 사용할 정책을 GameLift 정책을 생성 하겠습니다.</p>
+<p><img src="/images/gamelift/IAM-001.png" alt="/image"></p>
+<p>서비스에서 <strong>GameLift</strong>를 선택합니다.</p>
+<p>작업에서 <strong>모든 GameLift 작업</strong> 을 체크합니다.</p>
+<p>리소스에서 <strong>모든 리소스</strong>를 선택합니다.</p>
+<p><img src="/images/gamelift/IAM-003.png" alt="/image"></p>
+<p><img src="/images/gamelift/IAM-004.png" alt="/image"></p>
+<p><img src="/images/gamelift/IAM-005.png" alt="/image"></p>
+<h3 id="step-52-lambda가-사용할-역할-만들기">Step 5.2. Lambda가 사용할 역할 만들기</h3>
+<p>프로젝트에서 사용할 Lambda가 2가지 형태가 있습니다. GameLift와 Network하는 Lambda 함수와 RDS 서비스를 사용하는 Lambda 함수가 있습니다. 2가지 Lambda 함수에서 사용할 역할을 나눌 수 있으나 이번 프로젝트에서는 통합 역할을 만들겠습니다.</p>
+<p><img src="/images/gamelift/IAM-006.png" alt="/image"></p>
+<p><img src="/images/gamelift/IAM-007.png" alt="/image"></p>
+<p>아래의 정책들을 찾아서 체크 한 후 <strong>다음:태그</strong>를 누릅니다.</p>
+<p>AmazonRDSDataFullAccess</p>
+<p>AWSLambdaSQSQueueExecutionRole</p>
+<p>AWSLambdaBasicExecutionRole</p>
+<p>AWSLambdaVPCAccessExecutionRole</p>
+<p>GameLiftFullAccess</p>
+<p><img src="/images/gamelift/IAM-008.png" alt="/image"></p>
+<p>태그를 설정하고 <strong>다음:검토</strong>를 누릅니다.</p>
+<p><img src="/images/gamelift/IAM-009.png" alt="/image"></p>
+<p>역할 이름을 설정 후 <strong>역할 만들기</strong>를 누릅니다.</p>
+<p><img src="/images/gamelift/IAM-010.png" alt="/image"></p>
+<h3 id="step-53-fleet-인스턴스에서-사용할-역할-만들기">Step 5.3. Fleet 인스턴스에서 사용할 역할 만들기</h3>
+<p><img src="/images/gamelift/IAM-011.png" alt="/image"></p>
+<p><img src="/images/gamelift/IAM-012.png" alt="/image"></p>
+<p><img src="/images/gamelift/IAM-013.png" alt="/image"></p>
+<p><img src="/images/gamelift/IAM-014.png" alt="/image"></p>
+<p><img src="/images/gamelift/IAM-015.png" alt="/image"></p>
+<p><img src="/images/gamelift/IAM-016.png" alt="/image"></p>
+<p><img src="/images/gamelift/IAM-017.png" alt="/image"></p>
+<p>생성된 역할 mzc-game-gamelift-fleet-role의 <strong>역할 ARN</strong> 을 메모합니다.</p>
+<h2 id="step-6-rds-생성">Step 6. RDS 생성</h2>
+<h3 id="step-61-rds-서브넷-그룹-생성">Step 6.1. RDS 서브넷 그룹 생성</h3>
+<p><strong>서브넷 그룹</strong>을 생성합니다.</p>
+<p><img src="/images/gamelift/RDS-subnet-group-001.png" alt="/image"></p>
+<p>아래와 같이 설정 후 생성을 누릅니다.</p>
+<p><img src="/images/gamelift/RDS-subnet-group-002.png" alt="/image"></p>
+<p><img src="/images/gamelift/RDS-subnet-group-003.png" alt="/image"></p>
+<h3 id="step-62-rds-생성">Step 6.2. RDS 생성</h3>
+<p>아래에 없는 수정 내용은 전부 default 로 진행하였습니다.</p>
+<p><img src="/images/gamelift/RDS-001.png" alt="/image"></p>
+<p><img src="/images/gamelift/RDS-002.png" alt="/image"></p>
+<p><img src="/images/gamelift/RDS-003.png" alt="/image"></p>
+<p>DB 마스터 암호는 <strong>Admin1!!</strong> 로 설정했습니다.</p>
+<p><img src="/images/gamelift/RDS-004.png" alt="/image"></p>
+<p><img src="/images/gamelift/RDS-005.png" alt="/image"></p>
+<p><strong>스토리지 자동 조정을 비활성화</strong> 합니다.</p>
+<p><img src="/images/gamelift/RDS-005-2.png" alt="/image"></p>
+<p><img src="/images/gamelift/RDS-006.png" alt="/image"></p>
+<p><img src="/images/gamelift/RDS-007.png" alt="/image"></p>
+<p><img src="/images/gamelift/RDS-008.png" alt="/image"></p>
+<p>생성이 완료되면 <strong>엔드포인트</strong>를 확인합니다.</p>
+<p><img src="/images/gamelift/RDS-009.png" alt="/image"></p>
+<h3 id="step-63-cloud9-생성">Step 6.3. Cloud9 생성</h3>
+<p>DB, Table 생성을 Cloud9 위에서 진행하겠습니다.</p>
+<p><img src="/images/gamelift/Cloud9-001.png" alt="/image"></p>
+<p><img src="/images/gamelift/Cloud9-002.png" alt="/image"></p>
+<p><img src="/images/gamelift/Cloud9-003.png" alt="/image"></p>
+<p><strong>Create environment</strong> 를 눌러 생성합니다.</p>
+<h3 id="step-64-database-table-생성">Step 6.4. Database, Table 생성</h3>
+<p>생성된 Cloud9에서 DB 엔드포인트로 <strong>DB에 접속</strong>합니다.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">mysql -h mzc-game-rds.cqoanobel0pg.ap-northeast-2.rds.amazonaws.com -u admin -p
+</code></pre></div><p><img src="/images/gamelift/DBJob-001.png" alt="/image"></p>
+<p>Database를 생성합니다.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sql" data-lang="sql"><span style="font-weight:bold">create</span> <span style="font-weight:bold">database</span> accounts;
+</code></pre></div><p><img src="/images/gamelift/DBJob-002.png" alt="/image"></p>
+<p>서버 프로젝트에 있는 테이블 생성문을 복사해서 테이블을 가져옵니다.</p>
+<p>아래 코드를 복사하셔도 됩니다.</p>
+<p>붙여 넣어 테이블을 생성합니다.</p>
+<p>(ctc-game-server\DBSchema\accounts\V1__create_table_users.sql)</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sql" data-lang="sql">use accounts;
+<span style="font-weight:bold">CREATE</span> <span style="font-weight:bold">TABLE</span> `users` (
+	`userid` INT(11) <span style="font-weight:bold">NOT</span> <span style="font-weight:bold">NULL</span> AUTO_INCREMENT,
+	`nickname` VARCHAR(50) <span style="font-weight:bold">NULL</span> <span style="font-weight:bold">DEFAULT</span> <span style="font-weight:bold">NULL</span> <span style="font-weight:bold">COLLATE</span> <span style="font-style:italic">&#39;utf8_general_ci&#39;</span>,
+	`win` INT(11) <span style="font-weight:bold">NULL</span> <span style="font-weight:bold">DEFAULT</span> <span style="font-weight:bold">NULL</span>,
+	`loss` INT(11) <span style="font-weight:bold">NULL</span> <span style="font-weight:bold">DEFAULT</span> <span style="font-weight:bold">NULL</span>,
+	`draw` INT(11) <span style="font-weight:bold">NULL</span> <span style="font-weight:bold">DEFAULT</span> <span style="font-weight:bold">NULL</span>,
+	`point` INT(11) <span style="font-weight:bold">NULL</span> <span style="font-weight:bold">DEFAULT</span> <span style="font-weight:bold">NULL</span>,
+	<span style="font-weight:bold">PRIMARY</span> <span style="font-weight:bold">KEY</span> (`userid`) <span style="font-weight:bold">USING</span> BTREE,
+	<span style="font-weight:bold">UNIQUE</span> <span style="font-weight:bold">INDEX</span> `UX_users_nickname` (`nickname`) <span style="font-weight:bold">USING</span> BTREE
+)
+<span style="font-weight:bold">COLLATE</span>=<span style="font-style:italic">&#39;utf8_general_ci&#39;</span>
+ENGINE=InnoDB
+;
+</code></pre></div><p><img src="/images/gamelift/DBJob-003.png" alt="/image"></p>
+<h2 id="step-7-lambda-함수-생성-accountjoin-login-battleresult">Step 7. Lambda 함수 생성 (AccountJoin, Login, BattleResult)</h2>
+<h3 id="step-71-accountjoin-lambda-함수-업로드">Step 7.1. AccountJoin Lambda 함수 업로드</h3>
+<p><img src="/images/gamelift/LambdaPublish-001.png" alt="/image"></p>
+<p><img src="/images/gamelift/LambdaPublish-002.png" alt="/image"></p>
+<p><img src="/images/gamelift/LambdaPublish-003.png" alt="/image"></p>
+<p><img src="/images/gamelift/LambdaPublish-004.png" alt="/image"></p>
+<p><img src="/images/gamelift/LambdaPublish-005.png" alt="/image"></p>
+<h3 id="step-72-login-lambda-함수-업로드">Step 7.2. Login Lambda 함수 업로드</h3>
+<p><img src="/images/gamelift/LambdaPublishLogin-001.png" alt="/image"></p>
+<p><img src="/images/gamelift/LambdaPublishLogin-002.png" alt="/image"></p>
+<p><img src="/images/gamelift/LambdaPublishLogin-003.png" alt="/image"></p>
+<p><img src="/images/gamelift/LambdaPublishLogin-004.png" alt="/image"></p>
+<p><img src="/images/gamelift/LambdaPublishLogin-005.png" alt="/image"></p>
+<h3 id="step-73-api-gateway-accountjoin-login-리소스-생성">Step 7.3. API Gateway, AccountJoin, Login 리소스 생성</h3>
+<p><img src="/images/gamelift/APIGateway-001.png" alt="/image"></p>
+<p><img src="/images/gamelift/APIGateway-002.png" alt="/image"></p>
+<p><strong>AccountJoin 생성</strong></p>
+<p><img src="/images/gamelift/APIGateway-006.png" alt="/image"></p>
+<p><img src="/images/gamelift/APIGateway-007.png" alt="/image"></p>
+<p><img src="/images/gamelift/APIGateway-008.png" alt="/image"></p>
+<p><img src="/images/gamelift/APIGateway-009.png" alt="/image"></p>
+<p><img src="/images/gamelift/APIGateway-010.png" alt="/image"></p>
+<p><img src="/images/gamelift/APIGateway-011.png" alt="/image"></p>
+<p><img src="/images/gamelift/APIGateway-012.png" alt="/image"></p>
+<p><img src="/images/gamelift/APIGateway-013.png" alt="/image"></p>
+<p><strong>URL 확인</strong></p>
+<p><img src="/images/gamelift/APIGateway-014.png" alt="/image"></p>
+<p>같은 방법으로 Login도 생성합니다.</p>
+<p><strong>리소스 생성</strong><br>
+리소스 이름 : Login<br>
+리소스 경로 : Login<br>
+API Gateway CORS 활성화 체크</p>
+<p><strong>메서드 생성</strong><br>
+ANY<br>
+Lambda 함수 : Login</p>
+<p><strong>API 배포</strong></p>
+<p>배포 스테이지 : test</p>
+<p><img src="/images/gamelift/APIGateway-015.png" alt="/image"></p>
+<h3 id="step-74-battleresult-람다-함수-업로드">Step 7.4. BattleResult 람다 함수 업로드</h3>
+<p>Function Name : BattleResult</p>
+<p>Assembly : BattleResult</p>
+<p>Type : BattleResult.Function</p>
+<p>Method : FunctionHandler</p>
+<p>Role Name, VPC Subnets, Security Groups : AccountLogin과 똑같이 설정</p>
+<p><img src="/images/gamelift/BattleResult-001.png" alt="/image"></p>
+<h3 id="step-75-sqs-생성">Step 7.5. SQS 생성</h3>
+<p><img src="/images/gamelift/SQS-001.png" alt="/image"></p>
+<p><img src="/images/gamelift/SQS-002.png" alt="/image"></p>
+<p>나머지는 기본 값으로 <strong>대기열 생성</strong> 합니다.</p>
+<p><img src="/images/gamelift/SQS-003.png" alt="/image"></p>
+<p><img src="/images/gamelift/SQS-004.png" alt="/image"></p>
+<p>SQS <strong>URL</strong> 을 확인합니다.</p>
+<p><img src="/images/gamelift/SQS-005.png" alt="/image"></p>
+<h2 id="step-8-서버-배포">Step 8. 서버 배포</h2>
+<h3 id="step-81-gamelift에-서버-배포를-위한-사용자-변수-설정">Step 8.1. GameLift에 서버 배포를 위한 사용자 변수 설정</h3>
+<p>GameLift에 빌드를 배포하는 스크립트에서 사용할 사용자 변수를 설정 합니다.</p>
+<p>(Windows 기준)</p>
+<p><strong>고급 시스템 설정 보기 &gt; 환경 변수 &gt; 새로 만들기(사용자 변수)</strong></p>
+<p><img src="/images/gamelift/Environment-001.png" alt="/image"></p>
+<p><img src="/images/gamelift/Environment-002.png" alt="/image"></p>
+<h3 id="step-82-code-수정-사항">Step 8.2. Code 수정 사항</h3>
+<p>서버 배포 전 하드 코딩 된 부분을 수정해야 합니다.</p>
+<p><strong>\ctc-game-server\BattleServer\Game\Room\Room.cs</strong></p>
+<p>위 경로의 파일에서 <strong>BattleResultSendToSQS</strong> 함수에서 수정합니다.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-csharp" data-lang="csharp"><span style="font-weight:bold">public</span> <span style="font-weight:bold">void</span> BattleResultSendToSQS(PlayerType winPlayer)
+{
+    <span style="">var</span> sqsConfig = <span style="font-weight:bold">new</span> AmazonSQSConfig();
+    sqsConfig.ServiceURL = <span style="font-style:italic">&#34;https://sqs.ap-northeast-2.amazonaws.com/831150897155/mzc-game-sqs&#34;</span>;
+    sqsConfig.RegionEndpoint = RegionEndpoint.APNortheast2;
+    <span style="">var</span> credential = <span style="font-weight:bold">new</span> BasicAWSCredentials(<span style="font-style:italic">&#34;AccessKey&#34;</span>, <span style="font-style:italic">&#34;SecretKey&#34;</span>);
+    <span style="">var</span> sqsClient = <span style="font-weight:bold">new</span> AmazonSQSClient(credential, sqsConfig);
+
+    SQSClientSendMessage(sqsClient, PlayerType.Player1, winPlayer);
+    SQSClientSendMessage(sqsClient, PlayerType.Player2, winPlayer);
+}
+</code></pre></div><p>아래 부분을 SQS URL과 자신의 AccessKey, SecretKey로 수정해야합니다.</p>
+<p><img src="/images/gamelift/Code-001.png" alt="/image"></p>
+<p><strong>SQSClientSendMessage</strong> 함수에서 수정합니다.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-csharp" data-lang="csharp"><span style="font-weight:bold">private</span> <span style="font-weight:bold">void</span> SQSClientSendMessage(AmazonSQSClient sqsClient, PlayerType player, PlayerType winPlayer)
+{
+    sqsClient.SendMessageAsync(<span style="font-weight:bold">new</span> SendMessageRequest(
+        <span style="font-style:italic">&#34;https://sqs.ap-northeast-2.amazonaws.com/831150897155/mzc-game-sqs&#34;</span>,
+        JsonConvert.SerializeObject(<span style="font-weight:bold">new</span> CommonProtocol.SqsBattleResult
+        {
+            UserId = _players[player].Session.UserId,
+            WinType = GetWinType(player, winPlayer)
+        })));
+}
+</code></pre></div><p>아래 부분에서 SQS URL을 수정합니다.</p>
+<p><img src="/images/gamelift/Code-002.png" alt="/image"></p>
+<p>URL과 Credentials 참조 부분은  다른 방식(Config, 환경 변수 참조 등)으로 개선 해야 합니다.</p>
+<h3 id="step-83-gamelift에-업로드할-서버-빌드">Step 8.3. GameLift에 업로드할 서버 빌드</h3>
+<p>빌드를 진행합니다.</p>
+<p><img src="/images/gamelift/ServerDeploy-001.png" alt="/image"></p>
+<h3 id="step-84-gamelift에-업로드할-대상-파일들이-있는-디렉토리로-의존성-파일-복사">Step 8.4. GameLift에 업로드할 대상 파일들이 있는 디렉토리로 의존성 파일 복사</h3>
+<p>아래 경로 2개의 파일을</p>
+<p><strong>\ctc-game-server\BattleServer\Dependency\install.sh</strong></p>
+<p><strong>\ctc-game-server\BattleServer\Dependency\NDP472-KB4054530-x86-x64-AllOS-ENU.exe</strong></p>
+<p>아래의 경로에 복사합니다.</p>
+<p><strong>\ctc-game-server\BattleServer\bin\Debug</strong></p>
+<h3 id="step-85-gamelift에-서버-바이너리-의존성-파일-업로드">Step 8.5. GameLift에 서버 바이너리, 의존성 파일 업로드</h3>
+<p>GameLift에 빌드를 업로드 합니다.</p>
+<p><strong>\ctc-game-server\scripts\GameLift\01-GameLift-UploadBuild.sh 를</strong> 실행합니다.</p>
+<p><img src="/images/gamelift/ServerDeploy-002.png" alt="/image"></p>
+<p>실행 후 나온 <strong>Build ID</strong> 를 메모합니다.</p>
+<h3 id="step-86-플릿-생성">Step 8.6. 플릿 생성</h3>
+<p>플릿 생성 스크립트를 수정합니다.</p>
+<p>(<strong>\ctc-game-server\scripts\GameLift\02-GameLift-CreateFleet.sh)</strong></p>
+<p><strong>Build ID</strong>를 수정합니다.</p>
+<p>위에서 생성한 역할 mzc-game-gamelift-fleet-role의 <strong>역할 ARN</strong> 을 수정합니다.</p>
+<p><img src="/images/gamelift/ServerDeploy-003.png" alt="/image"></p>
+<p><strong>\ctc-game-server\scripts\GameLift\02-GameLift-CreateFleet.sh</strong> 를 실행합니다.</p>
+<p>GameLift 대시보드로 이동하면 업로드한 빌드와 생성한 플릿이 보입니다.</p>
+<p><img src="/images/gamelift/ServerDeploy-004.png" alt="/image"></p>
+<p>플릿 생성 완료까지 약 20분이 소요됩니다.</p>
+<p>플릿 생성과정에서 GameLift 와 통신하는 필수 통합 코드가 있습니다. GameLift는 플릿 인스턴스의 서버 프로세스와 테스트 통신을 통해서 통합 코드를 잘 구현 했는지 검증합니다. 해당 내용을 통과하지 못하면 활성(Activate) 상태로 가지 못합니다.</p>
+<p>정상적으로 작동하는 코드임에도 <strong>활성</strong> 상태로 가지 못할 때가 있습니다.</p>
+<p>만약 <strong>활성화하는 중(Activating)</strong> 상태가 오래 지속되면 다시 플릿 생성을 합니다.</p>
+<p>플릿이 정상적으로 활성화 되면 아래와 같이 확인할 수 있습니다.</p>
+<p>이벤트 탭에서 플릿 생성 과정을 확인할 수 있습니다.</p>
+<p><strong>플릿 ID</strong>를 메모합니다.</p>
+<p><img src="/images/gamelift/ServerDeploy-005.png" alt="/image"></p>
+<p>이제 플릿과 통신할 수 있는 상태가 되었습니다.</p>
+<h2 id="step-9-lambda-함수-생성-creategame-createplayer-searchgame">Step 9. Lambda 함수 생성 (CreateGame, CreatePlayer, SearchGame)</h2>
+<p>해당 함수들은 플릿 ID가 필요하므로 플릿 생성 시도 후 ID가 나오면 생성을 진행 할 수 있습니다.</p>
+<h3 id="step-91-creategame-createplayer-searchgame-lambda-함수-업로드">Step 9.1. CreateGame, CreatePlayer, SearchGame, Lambda 함수 업로드</h3>
+<p>CreateGame 람다 함수를 업로드 합니다.</p>
+<p><img src="/images/gamelift/ForGameLiftFuntcionUpload-001.png" alt="/image"></p>
+<p><img src="/images/gamelift/ForGameLiftFuntcionUpload-002.png" alt="/image"></p>
+<p><img src="/images/gamelift/ForGameLiftFuntcionUpload-003.png" alt="/image"></p>
+<p><img src="/images/gamelift/ForGameLiftFuntcionUpload-004.png" alt="/image"></p>
+<p><img src="/images/gamelift/ForGameLiftFuntcionUpload-005.png" alt="/image"></p>
+<p>CreatePlayer, SearchGame 람다 함수도 같은 방식으로 업로드 합니다.</p>
+<p><img src="/images/gamelift/ForGameLiftFuntcionUpload-006.png" alt="/image"></p>
+<p><strong>CreatePlayer</strong></p>
+<p>Function Name : CreateGame</p>
+<p>Assembly : CreatePlayer</p>
+<p>Type : CreatePlayer.Function</p>
+<p>Method : FunctionHandler</p>
+<p>Role Name, VPC Subnets, Security Groups : CreateGame과 똑같이 설정</p>
+<p>Variable : GAMELIFT_FLEET_ID</p>
+<p>Value :  플릿 ID (fleet-0f9b2bb2-53bc-424a-8682-0xxxxxxxxxxxx)</p>
+<p><strong>SearchGame</strong></p>
+<p>Function Name : SearchGame</p>
+<p>Assembly : SearchGame</p>
+<p>Type : SearchGame.Function</p>
+<p>Method : FunctionHandler</p>
+<p>Role Name, VPC Subnets, Security Groups : CreateGame과 똑같이 설정</p>
+<p>Variable : GAMELIFT_FLEET_ID</p>
+<p>Value :  플릿 ID (fleet-0f9b2bb2-53bc-424a-8682-0xxxxxxxxxxxx)</p>
+<h3 id="step-92-api-gateway-creategame-createplayer-searchgame-리소스-생성">Step 9.2. API Gateway, CreateGame, CreatePlayer, SearchGame 리소스 생성</h3>
+<p>위에서 AccountJoin, Login 생성했던것 과 같은 방법으로 CreateGame, CreatePlayer, SearchGame 리소스를 생성합니다.</p>
+<p><strong>리소스 생성</strong>
+리소스 이름 : CreateGame
+리소스 경로 : CreateGame
+API Gateway CORS 활성화 체크</p>
+<p><strong>메서드 생성</strong>
+ANY
+Lambda 함수 : CreateGame</p>
+<p><strong>API 배포</strong></p>
+<p>배포 스테이지 : test</p>
+<p><strong>리소스 생성</strong>
+리소스 이름 : CreatePlayer
+리소스 경로 : CreatePlayer
+API Gateway CORS 활성화 체크</p>
+<p><strong>메서드 생성</strong>
+ANY
+Lambda 함수 : CreatePlayer</p>
+<p><strong>API 배포</strong></p>
+<p>배포 스테이지 : test</p>
+<h2 id="step-10-클라이언트">Step 10. 클라이언트</h2>
+<h3 id="step-101-client-config-수정">Step 10.1. Client Config 수정</h3>
+<p>경로 : <strong>\ctc-game-client\Assets\Resources\Dev\Connect.json</strong></p>
+<p>Address 부분을 API Gateway URL 확인한 경로로 수정합니다.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-json" data-lang="json">{
+  <span style="font-weight:bold">&#34;GameServer&#34;</span>: {
+    <span style="font-weight:bold">&#34;Address&#34;</span>: <span style="font-style:italic">&#34;https://a9j3pkj9j9.execute-api.ap-northeast-2.amazonaws.com/test/&#34;</span>
+  }
+}
+</code></pre></div><h3 id="step-102-client-build">Step 10.2. Client Build</h3>
+<p><img src="/images/gamelift/ClientBuild-001.png" alt="/image"></p>
+<p><img src="/images/gamelift/ClientBuild-002.png" alt="/image"></p>
+<p>Build 바이너리와 종속 파일에 생성될 폴더를 생성 후 상위 경로에서 폴더 선택을 누릅니다.</p>
+<p><img src="/images/gamelift/ClientBuild-003.png" alt="/image"></p>
+<h2 id="step-11-play">Step 11. Play</h2>
+<p><img src="/images/gamelift/Play-001.png" alt="/image"></p>
+<p>2개의 클라이언트를 실행하고 <strong>이름을 입력</strong>하고 <strong>가입</strong>합니다. API 호출 시 cold start delay가 있습니다.</p>
+<p>한쪽 클라이언트에서는 <strong>방 만들기</strong>를 하고</p>
+<p>다른 쪽 클라이언트에서는 <strong>방 검색</strong>을 합니다.</p>
+<p>검색된 이름을 클릭하면 게임을 시작합니다.</p>
+<p>상단에 있는 초가 0이 되었을 때 최근에 눌렀던 가위, 바위, 보를 가지고 상대방과 비교하여 승패 판정을 하게 됩니다.</p>
+<p>5 라운드가 진행되며 3선 승을 하게 되면 게임이 종료됩니다.</p>
+<p><img src="/images/gamelift/Play-002.png" alt="/image"></p>
+<p>게임이 끝나고 DB를 조회 해 보면 승리, 패배, 무승부 카운트 및 점수 값이 반영되어 있습니다.</p>
+<p><img src="/images/gamelift/Play-003.png" alt="/image"></p>
+<h2 id="step-12-next">Step 12. Next</h2>
+<h3 id="step-121-queue-alias-rule-set">Step 12.1. Queue, Alias, Rule Set</h3>
+<h3 id="step-122-ioc">Step 12.2. IoC</h3>
+<h3 id="step-123-cicd">Step 12.3. CI/CD</h3>
+<h3 id="step-124-하드-코딩-부분-수정">Step 12.4. 하드 코딩 부분 수정</h3>
+<p>하드 코딩된 부분 수정 후 CI/CD에 통합</p>
+<h3 id="step-125-로그-수집">Step 12.5. 로그 수집</h3>
+<p><img src="/images/gamelift/FleetLog-001.png" alt="/image"></p>
+<p>Game Server 의 각 Fleet 에서 Kinesis Data Firehose 라는 서비스를 이용해서 가장 쉽고 안정적으로 S3 로 로드할 수 있습니다.</p>
+<p>Kinesis Data Firehose 를 사용하신다면 실시간으로 게임 서버에서 발생하시는 로그를 별도의 인프라 관리의 필요없이 S3 로 준실시간으로 수집할 수 있는 파이프라인을 제공합니다.</p>
+<p>말씀드린 것처럼 Kinesis Data Firehose 는 데이터를 전송하는 버퍼 역할을 수행하며, 1-128MB 단위로 값을 지정해서 버퍼 크기 기준 또는 60-900초 간격 사이에서 값을 지정하여 버퍼 시간 기준으로 S3 에 스트리밍 데이터를 전달합니다.</p>
+<p>따라서 가장 실시간성으로는 데이터 쌓이는 시간이 1분, 데이터 쌓이는 양이 1MB 중 더 빠른 시간안에 데이터를 전송하실 수 있다고 생각해주시면 됩니다.</p>
+<p>(<a href="https://docs.aws.amazon.com/ko_kr/firehose/latest/dev/what-is-this-service.html">https://docs.aws.amazon.com/ko_kr/firehose/latest/dev/what-is-this-service.html</a>)</p>
+<p>(<a href="https://docs.aws.amazon.com/ko_kr/firehose/latest/dev/basic-deliver.html">https://docs.aws.amazon.com/ko_kr/firehose/latest/dev/basic-deliver.html</a>)</p>
+<p>S3 에 적재하신 이후에는 S3 를 중심 Data Lake 로 사용하시거나, 목표하시는 바대로 빅쿼리로 옮기셔서 중앙 관리하실 수 있는 방안이 있으실 것으로 보입니다.</p>
+<h2 id="step-13-etc">Step 13. ETC</h2>
+<h3 id="step-131-amazon-gamelift-primer-script">Step 13.1. Amazon GameLift Primer Script</h3>
+<p><a href="https://www.aws.training/Details/eLearning?id=66534">Amazon GameLift Primer</a> 과정은 GameLift를 이해하는데 많은 도움이 됩니다.</p>
+<p>해당 과정의 스크립트를 공유합니다.</p>
+<ul>
+<li>Amazon GameLift Primer(개요)</li>
+<li>게임 호스팅 요구 사항</li>
+<li>Amazon GameLift의 주요 이점</li>
+<li>GameLift 이해</li>
+<li>게임 서비스 로직</li>
+<li>인프라 관리 시스템</li>
+<li>세션 관리 시스템</li>
+<li>게임 세션 배치 시스템</li>
+<li>매치메이킹 시스템</li>
+<li>GameLift 개발 개요</li>
+<li>게임 데이터</li>
+<li>게임 재무</li>
+</ul>
+<h3 id="step-132-matchmaking-구현-시-권고-사항">Step 13.2. Matchmaking 구현 시 권고 사항</h3>
+<p>Game Client에서 Lambda를 통해 StartMatchmaking API를 호출 한 후 폴링 방식으로 DescribeMatchmaking API 를 호출하는 경우, 실 서비스 환경에서 Throttling이 발생할 수 있습니다.</p>
+<p><img src="/images/gamelift/Match-001.png" alt="/image"></p>
+<p>그래서 GameLift 쪽으로 DescribeMatchmaking API를 폴링 방식으로 호출하는 것이 아니라</p>
+<p>아래와 같이 다른 곳으로 Match Status 결과를 저장하고 그 곳을 확인 하는 것을 권장하고 있습니다.</p>
+<p><img src="/images/gamelift/Match-002.png" alt="/image"></p>
+<p>다음과 같이 SNS Topic을 생성하고 MatchEvent API 구독하도록 구성합니다.</p>
+<p><img src="/images/gamelift/Match-003.png" alt="/image"></p>
+<p>그리고 다음과 같이 매치메이킹 구성 시 Notification 대상으로 SNS ARN을 입력합니다.</p>
+<p><img src="/images/gamelift/Match-004.png" alt="/image"></p>
+<p>위와 같이 구성 시 GameLift 매치가 SNS Topic 으로 바로 푸시되며, Lambda 함수가 이를 받아서 처리할 수 있습니다.</p>
+<h3 id="step-133-fleet-인스턴스-구성에-대한-best-practices">Step 13.3. Fleet 인스턴스 구성에 대한 Best practices</h3>
+<p>Spot Fleet을 서로 다른 2개 타입으로 구성하면 GameLift 의 FleetIQ 알고리즘에 따라 Spot Interruption 이 가장 덜 발생할 것으로 추정되는 Spot Fleet 으로 게임 세션이 배치 됩니다.</p>
+<p>여기에 On-demand Fleet을 하나 두시면 게임 자체의 안정성을 크게 올리실 수 있습니다.</p>
+<p><a href="https://docs.aws.amazon.com/ko_kr/gamelift/latest/developerguide/queues-best-practices.html#queues-design-spot">https://docs.aws.amazon.com/ko_kr/gamelift/latest/developerguide/queues-best-practices.html#queues-design-spot</a></p>
+<p><img src="/images/gamelift/FleetScaling-001.png" alt="/image"></p>
+<h3 id="step-134-fleet-생성-시-서버-프로세스-설정">Step 13.4. Fleet 생성 시 서버 프로세스 설정</h3>
+<p>위에서 진행한 프로젝트에서는 하나의 프로세스가 하나의 게임 세션을 담당합니다.</p>
+<p>플릿 생성 시 사용했던 CLI 를 살펴봅니다.</p>
+<p><strong>\ctc-game-server\scripts\GameLift\02-GameLift-CreateFleet.sh</strong></p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="font-style:italic"># https://docs.aws.amazon.com/cli/latest/reference/gamelift/create-fleet.html</span>
+<span style="font-style:italic"># Set variables to suit your development environment</span>
+FLEET_NAME=BattleFleet
+BUILD_ID=build-6eaa542c-f1bc-4c96-90ba-c6ce44b62d98
+EC2_INSTANCE_TYPE=c5.large
+FLEET_TYPE=SPOT
+LAUNCH_PATH=BattleServer.exe
+RUNTIME_CONFIGURATION=<span style="font-style:italic">&#39;ServerProcesses=[
+</span><span style="font-style:italic">{LaunchPath=&#34;C:\Game\BattleServer.exe&#34;,Parameters=50001,ConcurrentExecutions=1},
+</span><span style="font-style:italic">{LaunchPath=&#34;C:\Game\BattleServer.exe&#34;,Parameters=50002,ConcurrentExecutions=1},
+</span><span style="font-style:italic">{LaunchPath=&#34;C:\Game\BattleServer.exe&#34;,Parameters=50003,ConcurrentExecutions=1},
+</span><span style="font-style:italic">{LaunchPath=&#34;C:\Game\BattleServer.exe&#34;,Parameters=50004,ConcurrentExecutions=1},
+</span><span style="font-style:italic">{LaunchPath=&#34;C:\Game\BattleServer.exe&#34;,Parameters=50005,ConcurrentExecutions=1}
+</span><span style="font-style:italic">]&#39;</span>
+INSTANCE_ROLE_ARN=<span style="font-style:italic">&#39;arn:aws:iam::831150897155:role/mzc-game-gamelift-fleet-role&#39;</span>
+
+aws gamelift create-fleet <span style="font-weight:bold;font-style:italic">\
+</span><span style="font-weight:bold;font-style:italic"></span>--name <span style="font-style:italic">&#34;</span>$FLEET_NAME<span style="font-style:italic">&#34;</span> <span style="font-weight:bold;font-style:italic">\
+</span><span style="font-weight:bold;font-style:italic"></span>--build-id <span style="font-style:italic">&#34;</span>$BUILD_ID<span style="font-style:italic">&#34;</span> <span style="font-weight:bold;font-style:italic">\
+</span><span style="font-weight:bold;font-style:italic"></span>--ec2-instance-type <span style="font-style:italic">&#34;</span>$EC2_INSTANCE_TYPE<span style="font-style:italic">&#34;</span> <span style="font-weight:bold;font-style:italic">\
+</span><span style="font-weight:bold;font-style:italic"></span>--fleet-type <span style="font-style:italic">&#34;</span>$FLEET_TYPE<span style="font-style:italic">&#34;</span> <span style="font-weight:bold;font-style:italic">\
+</span><span style="font-weight:bold;font-style:italic"></span>--runtime-configuration <span style="font-style:italic">&#34;</span>$RUNTIME_CONFIGURATION<span style="font-style:italic">&#34;</span> <span style="font-weight:bold;font-style:italic">\
+</span><span style="font-weight:bold;font-style:italic"></span>--instance-role-arn <span style="font-style:italic">&#34;</span>$INSTANCE_ROLE_ARN<span style="font-style:italic">&#34;</span> <span style="font-weight:bold;font-style:italic">\
+</span><span style="font-weight:bold;font-style:italic"></span>--ec2-inbound-permissions <span style="font-style:italic">&#39;FromPort=50001,ToPort=50005,IpRange=0.0.0.0/0,Protocol=TCP&#39;</span>
+</code></pre></div><p><img src="/images/gamelift/ServerProcesses-001.png" alt="/image"></p>
+<p>runtime configuration을 설정한 부분을 보면 5개의 프로세스를 설정 해 놓은 것을 볼 수 있습니다.  이렇게 설정 했을 때 실제 5개의 게임 세션까지 게임을 진행할 수 있습니다.</p>
+<p>만약 1000개의 프로세스를 띄운다면 Launch parameters로 넘겨준 Port 할당이 50001~51000이 될 것입니다.</p>
+<p><img src="/images/gamelift/ServerProcesses-002.png" alt="/image"></p>
+<p>서버 구현 후 단일 인스턴스 내에서 몇 개의 프로세스를 띄우고 플레이 가능 한지 부하 테스트 진행 후 Fleet 생성 시 해당 수 만큼 ServerProcesses값을 설정 해줘야 합니다. CI/CD 구성 시 CLI 또는 SDK 를 통한 Fleet 생성 시 프로세스 수를 받아서 그만큼 프로세스를 생성하는 과정이 통합되어야 합니다.</p>
+<h3 id="step-135-fleet-인스턴스-scaling">Step 13.5. Fleet 인스턴스 Scaling</h3>
+<p>Fleet이 활성화되면 콘솔의 Scaling 탭에서 손쉽게 Scaling 정책을 설정할 수 있습니다.</p>
+<p><img src="/images/gamelift/Scaling-001.png" alt="/image"></p>
+<p><img src="/images/gamelift/Scaling-002.png" alt="/image"></p>
+<p>기본이 되는 target tracking scaling 정책 외에도 특수한 상황을 처리하기 위해 target tracking 기반 scaling을 보완하는데 쓸 수 있는 rule-based policies scaling 정책을 적용 할 수 있습니다.</p>
+<p><a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-autoscaling.html">https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-autoscaling.html</a></p>
+<h3 id="step-136-unity로-클라이언트-서버-통합-구현">Step 13.6. Unity로 클라이언트, 서버 통합 구현</h3>
+<p><a href="https://docs-multiplayer.unity3d.com/docs/getting-started/about-mlapi">Unity MLAPI</a>는 Unity 게임 엔진이 네트워킹을 추상화하기 위해 구축 된 중간 수준의 네트워킹 라이브러리입니다. 이를 통해 개발자는 낮은 수준의 프로토콜과 네트워킹 프레임 워크가 아닌 게임에 집중할 수 있습니다.</p>
+<p>Unity의 MLAPI를 이용하면 클라이언트는 조작, 서버에서 조작에 대한 계산 및 브로드캐스팅하는 방식으로 개발하는 것이 아니라 통합으로 개발 후 서버로 빌드, 클라이언트로 빌드 할 수 있습니다.</p>
+<h2 id="step-14-리소스-정리">Step 14. 리소스 정리</h2>
+<ol>
+<li>API 게이트웨이
+<ol>
+<li>GameAPI</li>
+</ol>
+</li>
+<li>Lambda
+<ol>
+<li>CreateGame</li>
+<li>SearchGame</li>
+<li>Login</li>
+<li>CreatePlayer</li>
+<li>AccountJoin</li>
+<li>BattleResult</li>
+</ol>
+</li>
+<li>SQS
+<ol>
+<li>mzc-game-sqs</li>
+</ol>
+</li>
+<li>GameLift Fleet</li>
+<li>GameLift Build</li>
+<li>RDS
+<ol>
+<li>mzc-game-rds</li>
+</ol>
+</li>
+<li>RDS Subnet group
+<ol>
+<li>mzc-game-db-subnetgroup</li>
+</ol>
+</li>
+<li>Cloud9</li>
+<li>IAM
+<ol>
+<li>역할
+<ol>
+<li>mzc-game-gamelift-fleet-role</li>
+<li>mzc-game-lambda-role</li>
+</ol>
+</li>
+<li>정책
+<ol>
+<li>GameLiftFullAccess</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>NAT 게이트웨이
+<ol>
+<li>mzc-game-nat</li>
+</ol>
+</li>
+<li>인터넷 게이트웨이
+<ol>
+<li>mzc-game-ig</li>
+</ol>
+</li>
+<li>서브넷
+<ol>
+<li>mzc-game-public-subnet1</li>
+<li>mzc-game-public-subnet2</li>
+<li>mzc-game-private-subnet1</li>
+<li>mzc-game-private-subnet2</li>
+</ol>
+</li>
+<li>라우트 테이블
+<ol>
+<li>mzc-game-private-rt</li>
+<li>mzc-game-public-rt</li>
+</ol>
+</li>
+<li>VPC
+<ol>
+<li>mzc-game-vpc
+<ol>
+<li>보안 그룹이 같이 삭제 됩니다.
+<ol>
+<li>mzc-game-lambda-sg</li>
+<li>mzc-game-rds-sg</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="heading">…</h2>
+<hr>
+<p><strong>END</strong></p>
+
+        </div>
+
+        <div class="row middle-xs">
+          <div class="col-xs-12">
+            
+          </div>
+        </div>
+        
+          <div class="row">
+            <div class="col-xs-12">
+              
+            </div>
+          </div>
+
+          
+
+
+
+          
+          
+          <div style="height: 50px;"></div>
+          
+        
+
+        <div class="site-footer">
+  
+  
+</div>
+
+      </div>
+    </div>
+  </article>
+
+  
+
+<script>
+  
+  
+    
+    
+  
+</script>
+
+  
+
+</body>
+
+</html>
