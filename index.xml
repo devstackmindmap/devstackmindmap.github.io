@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Home title on Hugo Techdoc Theme</title>
+    <link>https://example.com/</link>
+    <description>Recent content in Home title on Hugo Techdoc Theme</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 19 Oct 2017 15:26:15 +0000</lastBuildDate><atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Markdown Syntax</title>
+      <link>https://example.com/sample/markdown-syntax/</link>
+      <pubDate>Tue, 17 Nov 2020 15:26:15 +0000</pubDate>
+      
+      <guid>https://example.com/sample/markdown-syntax/</guid>
+      <description>Headings # Heading level 1 ## Heading level 2 ### Heading level 3 #### Heading level 4 ##### Heading level 5 ###### Heading level 6 Emphasis *Italic* **Bold** ~~Strikethrough~~ Horizontal Rule --- Lists Unordered Lists - First item - Second item - Third item - Fourth item or
+* First item * Second item * Third item * Fourth item Ordered Lists 1. First item 2. Second item 3. Third item 4.</description>
+    </item>
+    
+    <item>
+      <title>Build-in Shortcodes</title>
+      <link>https://example.com/sample/build-in-shortcodes/</link>
+      <pubDate>Tue, 17 Oct 2017 15:26:15 +0000</pubDate>
+      
+      <guid>https://example.com/sample/build-in-shortcodes/</guid>
+      <description>See https://gohugo.io/content-management/shortcodes/#use-hugos-built-in-shortcodes
+figure   2 People Sitting With View of Yellow Flowers during Daytime   gist  highlight &amp;lt;section id=&amp;#34;main&amp;#34;&amp;gt; &amp;lt;div&amp;gt; &amp;lt;h1 id=&amp;#34;title&amp;#34;&amp;gt;{{ .Title }}&amp;lt;/h1&amp;gt; {{ range .Data.Pages }} {{ .Render &amp;#34;summary&amp;#34;}} {{ end }} &amp;lt;/div&amp;gt; &amp;lt;/section&amp;gt; tweet Hugo 0.24 Released: Big archetype update + @Netlify _redirects etc. file supporthttps://t.co/X94FmYDEZJ #gohugo #golang @spf13 @bepsays
+&amp;mdash; GoHugo.io (@GoHugoIO) June 21, 2017  vimeo   youtube   </description>
+    </item>
+    
+    <item>
+      <title>Chapter 2-3 (weight: 10)</title>
+      <link>https://example.com/chapter2/3/</link>
+      <pubDate>Tue, 17 Oct 2017 15:26:15 +0000</pubDate>
+      
+      <guid>https://example.com/chapter2/3/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+    </item>
+    
+    <item>
+      <title>Custom Shortcodes</title>
+      <link>https://example.com/sample/custom-shortcodes/</link>
+      <pubDate>Tue, 17 Oct 2017 15:26:15 +0000</pubDate>
+      
+      <guid>https://example.com/sample/custom-shortcodes/</guid>
+      <description>Code highlight with clipboard sample/custom-shortcodes.html Copy{{&amp;lt; highlight html &amp;gt;}} &amp;lt;section id=&amp;#34;main&amp;#34;&amp;gt; &amp;lt;div&amp;gt; &amp;lt;h1 id=&amp;#34;title&amp;#34;&amp;gt;{{ .Title }}&amp;lt;/h1&amp;gt; {{ range .Pages }} {{ .Render &amp;#34;summary&amp;#34;}} {{ end }} &amp;lt;/div&amp;gt; &amp;lt;/section&amp;gt; {{&amp;lt; /highlight &amp;gt;}} Alert panel Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</description>
+    </item>
+    
+    <item>
+      <title>Table of Contents</title>
+      <link>https://example.com/sample/table-of-contents/</link>
+      <pubDate>Tue, 17 Oct 2017 15:26:15 +0000</pubDate>
+      
+      <guid>https://example.com/sample/table-of-contents/</guid>
+      <description>&amp;nbsp;NoteThe TableOfContents field with true in your content’s front matter will render a table of contents.
+TableOfContents: trueSetting the built-in .TableOfContents variables can configure what heading levels you want to include in TOC. See the built-in .TableOfContents variables settings
+Section 1 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</description>
+    </item>
+    
+    <item>
+      <title>Creating a New Theme</title>
+      <link>https://example.com/post/creating-a-new-theme/</link>
+      <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/creating-a-new-theme/</guid>
+      <description>Introduction This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content. I&amp;rsquo;ll explain how Hugo uses templates and how you can organize your templates to create a theme. I won&amp;rsquo;t cover using CSS to style your theme.
+We&amp;rsquo;ll start with creating a new site with a very basic template.</description>
+    </item>
+    
+    <item>
+      <title>Migrate to Hugo from Jekyll</title>
+      <link>https://example.com/post/migrate-from-jekyll/</link>
+      <pubDate>Mon, 10 Mar 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/migrate-from-jekyll/</guid>
+      <description>Move static content to static Jekyll has a rule that any directory not starting with _ will be copied as-is to the _site output. Hugo keeps all static content under static. You should therefore move it all there. With Jekyll, something that looked like
+▾ &amp;lt;root&amp;gt;/▾ images/logo.png should become
+▾ &amp;lt;root&amp;gt;/▾ static/▾ images/logo.png Additionally, you&amp;rsquo;ll want any files that should reside at the root (such as CNAME) to be moved to static.</description>
+    </item>
+    
+    <item>
+      <title>Hello world!</title>
+      <link>https://example.com/hello_world/</link>
+      <pubDate>Tue, 17 Oct 2017 14:00:45 +0000</pubDate>
+      
+      <guid>https://example.com/hello_world/</guid>
+      <description>Hello world!</description>
+    </item>
+    
+    <item>
+      <title>Hello_world</title>
+      <link>https://example.com/posts/hello_world/</link>
+      <pubDate>Tue, 17 Oct 2017 14:00:45 +0000</pubDate>
+      
+      <guid>https://example.com/posts/hello_world/</guid>
+      <description>aaaaaa
+vvvv
+aaa</description>
+    </item>
+    
+    <item>
+      <title>Chapter 2-4 (weight: 20)</title>
+      <link>https://example.com/chapter2/4/</link>
+      <pubDate>Tue, 17 Oct 2017 15:26:15 +0000</pubDate>
+      
+      <guid>https://example.com/chapter2/4/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+    </item>
+    
+    <item>
+      <title>Chapter 2-2 (weight: 30)</title>
+      <link>https://example.com/chapter2/2/</link>
+      <pubDate>Tue, 17 Oct 2017 15:26:15 +0000</pubDate>
+      
+      <guid>https://example.com/chapter2/2/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+    </item>
+    
+    <item>
+      <title>Chapter 2-1 (weight: 40)</title>
+      <link>https://example.com/chapter2/1/</link>
+      <pubDate>Tue, 17 Oct 2017 15:26:15 +0000</pubDate>
+      
+      <guid>https://example.com/chapter2/1/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+    </item>
+    
+    <item>
+      <title>Search Shortcode</title>
+      <link>https://example.com/sample/search-shortcode/</link>
+      <pubDate>Mon, 30 Mar 2020 18:49:06 +0000</pubDate>
+      
+      <guid>https://example.com/sample/search-shortcode/</guid>
+      <description>&amp;nbsp;NoteSearch Shortcode powered by Algolia
+You can create a search page just by adding search shortcode.
+var search = instantsearch({indexName: &#39;hugo-demo-techdoc&#39;,searchClient: algoliasearch(&#39;7W4SAN4PLK&#39;,&#39;cbf12a63ff72d9c5dc0c10c195cf9128&#39;),routing: true,});const renderHits = (renderOptions, isFirstRender) = {const { hits } = renderOptions;document.querySelector(&#39;#hits&#39;).innerHTML = `${hits.map(item =`${ item.title }${ dayjs(item.lastmod).format(&#34;YYYY/MM/DD&#34;) } - ${ item.description ? item.</description>
+    </item>
+    
+    <item>
+      <title>Hello_world2</title>
+      <link>https://example.com/archives/hello_world2/</link>
+      <pubDate>Sun, 17 Dec 2017 14:00:45 +0000</pubDate>
+      
+      <guid>https://example.com/archives/hello_world2/</guid>
+      <description>aaaaaa
+vvvv
+aaa</description>
+    </item>
+    
+    <item>
+      <title>Hello_world2</title>
+      <link>https://example.com/blog/hello_world2/</link>
+      <pubDate>Sun, 17 Dec 2017 14:00:45 +0000</pubDate>
+      
+      <guid>https://example.com/blog/hello_world2/</guid>
+      <description>aaaaaa
+vvvv
+aaa</description>
+    </item>
+    
+    <item>
+      <title>Hello_world2</title>
+      <link>https://example.com/entry/hello_world2/</link>
+      <pubDate>Sun, 17 Dec 2017 14:00:45 +0000</pubDate>
+      
+      <guid>https://example.com/entry/hello_world2/</guid>
+      <description>aaaaaa
+vvvv
+aaa</description>
+    </item>
+    
+    <item>
+      <title>Hello_world1</title>
+      <link>https://example.com/archives/hello_world1/</link>
+      <pubDate>Fri, 17 Nov 2017 14:00:45 +0000</pubDate>
+      
+      <guid>https://example.com/archives/hello_world1/</guid>
+      <description>aaaaaa
+vvvv
+aaa</description>
+    </item>
+    
+    <item>
+      <title>Hello_world1</title>
+      <link>https://example.com/blog/hello_world1/</link>
+      <pubDate>Fri, 17 Nov 2017 14:00:45 +0000</pubDate>
+      
+      <guid>https://example.com/blog/hello_world1/</guid>
+      <description>aaaaaa
+vvvv
+aaa</description>
+    </item>
+    
+    <item>
+      <title>Hello_world1</title>
+      <link>https://example.com/entry/hello_world1/</link>
+      <pubDate>Fri, 17 Nov 2017 14:00:45 +0000</pubDate>
+      
+      <guid>https://example.com/entry/hello_world1/</guid>
+      <description>aaaaaa
+vvvv
+aaa</description>
+    </item>
+    
+    <item>
+      <title>Chapter 1-1</title>
+      <link>https://example.com/chapter1/1/</link>
+      <pubDate>Tue, 17 Oct 2017 15:26:15 +0000</pubDate>
+      
+      <guid>https://example.com/chapter1/1/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+    </item>
+    
+    <item>
+      <title>Chapter 1-2</title>
+      <link>https://example.com/chapter1/2/</link>
+      <pubDate>Tue, 17 Oct 2017 15:26:15 +0000</pubDate>
+      
+      <guid>https://example.com/chapter1/2/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+    </item>
+    
+    <item>
+      <title>Chapter 1-3</title>
+      <link>https://example.com/chapter1/3/</link>
+      <pubDate>Tue, 17 Oct 2017 15:26:15 +0000</pubDate>
+      
+      <guid>https://example.com/chapter1/3/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+    </item>
+    
+    <item>
+      <title>Chapter 1-4</title>
+      <link>https://example.com/chapter1/4/</link>
+      <pubDate>Tue, 17 Oct 2017 15:26:15 +0000</pubDate>
+      
+      <guid>https://example.com/chapter1/4/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+    </item>
+    
+    <item>
+      <title>Chapter 1-4</title>
+      <link>https://example.com/chapter1/5/</link>
+      <pubDate>Tue, 17 Oct 2017 15:26:15 +0000</pubDate>
+      
+      <guid>https://example.com/chapter1/5/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+    </item>
+    
+    <item>
+      <title>Chapter 2-0 (weight: no set)</title>
+      <link>https://example.com/chapter2/5/</link>
+      <pubDate>Tue, 17 Oct 2017 15:26:15 +0000</pubDate>
+      
+      <guid>https://example.com/chapter2/5/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+    </item>
+    
+    <item>
+      <title>Chapter 3-1</title>
+      <link>https://example.com/chapter3/1/</link>
+      <pubDate>Tue, 17 Oct 2017 15:26:15 +0000</pubDate>
+      
+      <guid>https://example.com/chapter3/1/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+    </item>
+    
+    <item>
+      <title>Chapter 3-2-1</title>
+      <link>https://example.com/chapter3/chapter3-2/1/</link>
+      <pubDate>Tue, 17 Oct 2017 15:26:15 +0000</pubDate>
+      
+      <guid>https://example.com/chapter3/chapter3-2/1/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+    </item>
+    
+    <item>
+      <title>Chapter 3-2-2</title>
+      <link>https://example.com/chapter3/chapter3-2/2/</link>
+      <pubDate>Tue, 17 Oct 2017 15:26:15 +0000</pubDate>
+      
+      <guid>https://example.com/chapter3/chapter3-2/2/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+    </item>
+    
+    <item>
+      <title>Chapter 3-2-3</title>
+      <link>https://example.com/chapter3/chapter3-2/3/</link>
+      <pubDate>Tue, 17 Oct 2017 15:26:15 +0000</pubDate>
+      
+      <guid>https://example.com/chapter3/chapter3-2/3/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+    </item>
+    
+    <item>
+      <title>Chapter 3-2-4</title>
+      <link>https://example.com/chapter3/chapter3-2/4/</link>
+      <pubDate>Tue, 17 Oct 2017 15:26:15 +0000</pubDate>
+      
+      <guid>https://example.com/chapter3/chapter3-2/4/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+    </item>
+    
+    <item>
+      <title>Chapter 3-3</title>
+      <link>https://example.com/chapter3/3/</link>
+      <pubDate>Tue, 17 Oct 2017 15:26:15 +0000</pubDate>
+      
+      <guid>https://example.com/chapter3/3/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+    </item>
+    
+    <item>
+      <title>Chapter 3-4</title>
+      <link>https://example.com/chapter3/4/</link>
+      <pubDate>Tue, 17 Oct 2017 15:26:15 +0000</pubDate>
+      
+      <guid>https://example.com/chapter3/4/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+    </item>
+    
+    <item>
+      <title>Hello_world</title>
+      <link>https://example.com/archives/hello_world/</link>
+      <pubDate>Tue, 17 Oct 2017 14:00:45 +0000</pubDate>
+      
+      <guid>https://example.com/archives/hello_world/</guid>
+      <description>aaaaaa
+vvvv
+aaa</description>
+    </item>
+    
+    <item>
+      <title>Hello_world</title>
+      <link>https://example.com/blog/hello_world/</link>
+      <pubDate>Tue, 17 Oct 2017 14:00:45 +0000</pubDate>
+      
+      <guid>https://example.com/blog/hello_world/</guid>
+      <description>aaaaaa
+vvvv
+aaa</description>
+    </item>
+    
+    <item>
+      <title>Hello_world</title>
+      <link>https://example.com/entry/hello_world/</link>
+      <pubDate>Tue, 17 Oct 2017 14:00:45 +0000</pubDate>
+      
+      <guid>https://example.com/entry/hello_world/</guid>
+      <description>aaaaaa
+vvvv
+aaa</description>
+    </item>
+    
+    <item>
+      <title>About Hugo</title>
+      <link>https://example.com/about/</link>
+      <pubDate>Wed, 09 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/about/</guid>
+      <description>Hugo is a static site engine written in Go.
+It makes use of a variety of open source projects including:
+ Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>(Hu)go Template Primer</title>
+      <link>https://example.com/post/goisforlovers/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/goisforlovers/</guid>
+      <description>Hugo uses the excellent Go html/template library for its template engine. It is an extremely lightweight engine that provides a very small amount of logic. In our experience that it is just the right amount of logic to be able to create a good static website. If you have used other template systems from different languages or frameworks you will find a lot of similarities in Go templates.
+This document is a brief primer on using Go templates.</description>
+    </item>
+    
+    <item>
+      <title>Getting Started with Hugo</title>
+      <link>https://example.com/post/hugoisforlovers/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/post/hugoisforlovers/</guid>
+      <description>Step 1. Install Hugo Go to Hugo releases and download the appropriate version for your OS and architecture.
+Save it somewhere specific as we will be using it in the next step.
+More complete instructions are available at Install Hugo
+Step 2. Build the Docs Hugo has its own example site which happens to also be the documentation site you are reading right now.
+Follow the following steps:
+ Clone the Hugo repository Go into the repo Run hugo in server mode and build the docs Open your browser to http://localhost:1313  Corresponding pseudo commands:</description>
+    </item>
+    
+    <item>
+      <title>Apache vs Nginx</title>
+      <link>https://example.com/dev/apachevsnginx/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/dev/apachevsnginx/</guid>
+      <description>PHP와 Apache로 웹 서버를 만들고 있었다. 그때 대표님이 nginx를 도입해보라고 권유하셔서 nginx 검토 및 apache에서 nginx로 교체하였다. 다</description>
+    </item>
+    
+    <item>
+      <title>ClientReadMe</title>
+      <link>https://example.com/dev/clientreadme/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/dev/clientreadme/</guid>
+      <description>Game Project Simple Git Flow Rule develop 브랜치에서 신규 브랜치 생성 feature/[new-branch-name] feature/[new-branch-name] 에서 작업 후 merge request 하기 전 develop 에서 feature/[new-branch-name] 으로 merge 충돌이 있다면 충돌 부분 작업자와 논의 후 충돌 해결 feature/[new-branch-name] 에서 develop으</description>
+    </item>
+    
+    <item>
+      <title>CloudFront</title>
+      <link>https://example.com/dev/aws/cloudfront/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/dev/aws/cloudfront/</guid>
+      <description>Q. Edge location에 대한 속도 테스트를 진행하거나 속도 저하나 실패의 원인이 따로 있을지요. 성능측정방법: 해당 지역에 EC2 instance, 컨테이너 등을 이용해 측정 가능합</description>
+    </item>
+    
+    <item>
+      <title>GameLift Docs</title>
+      <link>https://example.com/dev/aws/gamelift/gamelift-docs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/dev/aws/gamelift/gamelift-docs/</guid>
+      <description>https://docs.aws.amazon.com/ko_kr/gamelift/latest/developerguide/gamelift-ec2-instances.html 인스턴스 서비스 할당량 AWS는 AWS 계정에서 사용할 수 있는 총 Amazon EC2 인스턴스 수(온디맨드 또는 스팟)를 제한합니다. 또한 각 인스턴스 유형에는 리전에 따라 다른 최</description>
+    </item>
+    
+    <item>
+      <title>GameLift FAQ</title>
+      <link>https://example.com/dev/aws/gamelift/gamelift-faq/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/dev/aws/gamelift/gamelift-faq/</guid>
+      <description>GameSession, PlayerSession 정리 GameSession Capacity가 왜 50 제한 인가 프로세스 하나가 게임 세션 하나만 가지는지 게임이 끝나면(ProcessEnding) 프로세스 종료 시키는지</description>
+    </item>
+    
+    <item>
+      <title>GameLift Pain-Point</title>
+      <link>https://example.com/dev/aws/gamelift/gamelift-painpoint/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/dev/aws/gamelift/gamelift-painpoint/</guid>
+      <description>GameLift Local Pain-Point SearchGameSession is not implemented yet. Amazon.GameLift.AmazonGameLiftException: API GameLift.DescribeGameSessionDetails is not recognized by GameLift Local. GameSessionId : This parameter is no longer preferred. Please use IdempotencyToken instead. 그런데 IdempotencyToken 값이 SDK에서 접근 했을때 없네? SearchGameSessionsAsync 의 최대 결과 수가 20을 넘길 수 없다.</description>
+    </item>
+    
+    <item>
+      <title>GameLift To do</title>
+      <link>https://example.com/dev/aws/gamelift/gamelift-todo/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/dev/aws/gamelift/gamelift-todo/</guid>
+      <description>SearchGameSession에서 Filter 값 넣어보기 게임 세션 정리 방법 (Log 넣어 제대로 확인해보기)</description>
+    </item>
+    
+    <item>
+      <title>Nginx</title>
+      <link>https://example.com/dev/nginx/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/dev/nginx/</guid>
+      <description>Nginx</description>
+    </item>
+    
+    <item>
+      <title>Proxy</title>
+      <link>https://example.com/dev/proxy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/dev/proxy/</guid>
+      <description>Proxy</description>
+    </item>
+    
+    <item>
+      <title>ServerReadMe</title>
+      <link>https://example.com/dev/serverreadme/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/dev/serverreadme/</guid>
+      <description>Game Project Simple Git Flow Rule develop 브랜치에서 신규 브랜치 생성 feature/[new-branch-name] feature/[new-branch-name] 에서 작업 후 merge request 하기 전 develop 에서 feature/[new-branch-name] 으로 merge 충돌이 있다면 충돌 부분 작업자와 논의 후 충돌 해결 feature/[new-branch-name] 에서 develop으</description>
+    </item>
+    
+    <item>
+      <title>Unity FAQ</title>
+      <link>https://example.com/dev/unity/unity-faq/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/dev/unity/unity-faq/</guid>
+      <description>Q. GameObject.SetActive(false) 했을 때 Update() 함수가 호출 되지 않나요? A. 아닙니다. 계속 Update() 함수가 호출 됩니다.</description>
+    </item>
+    
+    <item>
+      <title>xxxxx</title>
+      <link>https://example.com/dev/xxxxx/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/dev/xxxxx/</guid>
+      <description>PHP와 Apache로 웹 서버를 만들고 있었다. 그때 대표님이 nginx를 도입해보라고 권유하셔서 nginx 검토 및 apache에서 nginx로 교체하였다. 다</description>
+    </item>
+    
+    <item>
+      <title>비속어 검출</title>
+      <link>https://example.com/dev/slangfilter/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/dev/slangfilter/</guid>
+      <description>게임 개발 시 닉네임 생성등에서 비속어 검출이 간단한 문제는 아니다. 비속어 리스트를 참고 http://pearl.cs.pusan.ac.kr/~wiki/images/3/38/REP0903VULGAR.pdf</description>
+    </item>
+    
+  </channel>
+</rss>

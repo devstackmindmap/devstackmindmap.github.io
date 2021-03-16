@@ -3,11 +3,11 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Home title - Hugo Techdoc Theme</title>
-<meta name="description" content="Text about this post">
+<title>GameLift FAQ - Hugo Techdoc Theme</title>
+<meta name="description" content="Dev Stack Mindmap">
 <meta name="generator" content="Hugo 0.81.0" />
 <link href="https://example.com/index.xml" rel="alternate" type="application/rss+xml">
-<link rel="canonical" href="https://example.com/">
+<link rel="canonical" href="https://example.com/dev/aws/gamelift/gamelift-faq/">
 <link rel="stylesheet" href="https://example.com/css/theme.min.css">
 <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <link rel="stylesheet" href="https://example.com/css/chroma.min.css">
@@ -17,18 +17,23 @@
 <script src="https://example.com/js/bundle.js"></script><style>
 :root {}
 </style>
-<meta property="og:title" content="Home title" />
-<meta property="og:description" content="Text about this post" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://example.com/" /><meta property="og:image" content="https://example.com/images/pexels-photo-196666.jpeg" /><meta property="og:site_name" content="Hugo Techdoc Theme" />
+<meta property="og:title" content="GameLift FAQ" />
+<meta property="og:description" content="GameSession, PlayerSession 정리 GameSession Capacity가 왜 50 제한 인가 프로세스 하나가 게임 세션 하나만 가지는지 게임이 끝나면(ProcessEnding) 프로세스 종료 시키는지" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.com/dev/aws/gamelift/gamelift-faq/" /><meta property="og:image" content="https://example.com/images/og-image.png"/><meta property="article:section" content="Dev" />
+
+<meta property="og:site_name" content="Hugo Techdoc Theme" />
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://example.com/images/pexels-photo-196666.jpeg"/>
+<meta name="twitter:image" content="https://example.com/images/og-image.png"/>
 
-<meta name="twitter:title" content="Home title"/>
-<meta name="twitter:description" content="Text about this post"/>
-<meta itemprop="name" content="Home title">
-<meta itemprop="description" content="Text about this post"></head>
+<meta name="twitter:title" content="GameLift FAQ"/>
+<meta name="twitter:description" content="GameSession, PlayerSession 정리 GameSession Capacity가 왜 50 제한 인가 프로세스 하나가 게임 세션 하나만 가지는지 게임이 끝나면(ProcessEnding) 프로세스 종료 시키는지"/>
+<meta itemprop="name" content="GameLift FAQ">
+<meta itemprop="description" content="GameSession, PlayerSession 정리 GameSession Capacity가 왜 50 제한 인가 프로세스 하나가 게임 세션 하나만 가지는지 게임이 끝나면(ProcessEnding) 프로세스 종료 시키는지">
+
+<meta itemprop="wordCount" content="69"><meta itemprop="image" content="https://example.com/images/og-image.png"/>
+<meta itemprop="keywords" content="" /></head>
 <body><div class="container"><header>
 <h1>Hugo Techdoc Theme</h1><span class="version">Version 0.9.7</span><a href="https://github.com/thingsym/hugo-theme-techdoc" class="github"><i class="fab fa-github"></i></a>
 <p class="description">Dev Stack Mindmap</p>
@@ -50,42 +55,25 @@
 </nav>
 </div>
 <div class="content-container">
-<main><h1 id="개발-경험을-정리하기-위해">개발 경험을 정리하기 위해</h1>
-<h2 id="the-techdoc-is-a-hugo-theme-for-technical-documentation">The Techdoc is a Hugo Theme for technical documentation.</h2>
-<h2 id="features">Features</h2>
+<main><h1>GameLift FAQ</h1>
 <ul>
-<li>Modern, Simple layout</li>
-<li>Responsive web design</li>
-<li>Documentation menu (Select <a href="getting-started/screenshot/#menu-style">Menu style</a>)</li>
-<li><a href="sample/table-of-contents/">Table Of Contents</a> for the page (selective)</li>
-<li><a href="getting-started/screenshot/#theme-color">Theme color</a></li>
-<li><a href="getting-started/screenshot/#edit-link">Edit link</a> to documentation repository</li>
-<li><a href="sample/custom-shortcodes/">Custom Shortcodes</a>
-<ul>
-<li>Code highlight with clipboard</li>
-<li>Alert panel</li>
-<li>Button</li>
+<li>GameSession, PlayerSession 정리</li>
+<li>GameSession Capacity가 왜 50 제한 인가</li>
+<li>프로세스 하나가 게임 세션 하나만 가지는지</li>
+<li>게임이 끝나면(ProcessEnding) 프로세스 종료 시키는지</li>
 </ul>
-</li>
-<li><a href="sample/search-shortcode/">Search Shortcode</a> powered by <a href="https://www.algolia.com/">Algolia</a></li>
-<li>Open Graph</li>
-<li>Analytics with Google Analytics, Google Tag Manager</li>
-</ul>
-<nav class="pagination"><a class="nav nav-next" href="https://example.com/getting-started/" title="Why">Next - Why <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-</nav><div class="edit-meta">
-Last updated on 26 Oct 2019
+<div class="edit-meta">
 
-
-<br>
-Published on 23 Nov 2018
-<br><a href="https://github.com/thingsym/hugo-theme-techdoc/edit/master/content/_index.md" class="edit-page"><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><footer><p class="powered">Powered by <a href="https://gohugo.io">Hugo</a>. Theme by <a href="https://themes.gohugo.io/hugo-theme-techdoc/">TechDoc</a>. Designed by <a href="https://github.com/thingsym/hugo-theme-techdoc">Thingsym</a>.</p>
+<br><a href="https://github.com/thingsym/hugo-theme-techdoc/edit/master/content/Dev%5cAWS%5cGameLift%5cgamelift-faq.md" class="edit-page"><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class="pagination"><a class="nav nav-prev" href="https://example.com/dev/aws/gamelift/gamelift-docs/" title="GameLift Docs"><i class="fas fa-arrow-left" aria-hidden="true"></i>&nbsp;Prev - GameLift Docs</a>
+<a class="nav nav-next" href="https://example.com/dev/aws/gamelift/gamelift-painpoint/" title="GameLift Pain-Point">Next - GameLift Pain-Point <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+</nav><footer><p class="powered">Powered by <a href="https://gohugo.io">Hugo</a>. Theme by <a href="https://themes.gohugo.io/hugo-theme-techdoc/">TechDoc</a>. Designed by <a href="https://github.com/thingsym/hugo-theme-techdoc">Thingsym</a>.</p>
 </footer>
 </main>
 <div class="sidebar">
 
 <nav class="slide-menu">
 <ul>
-<li class="active"><a href="https://example.com">Home</a></li>
+<li class=""><a href="https://example.com">Home</a></li>
 
 <li class=""><a href="https://example.com/getting-started/">Why</a>
   
@@ -204,21 +192,21 @@ Published on 23 Nov 2018
 
 
 
-<li class=" has-sub-menu"><a href="https://example.com/dev/">Dev<span class="mark closed">+</span></a>
+<li class="parent has-sub-menu"><a href="https://example.com/dev/">Dev<span class="mark opened">-</span></a>
   
 <ul class="sub-menu">
 <li class=""><a href="https://example.com/dev/apachevsnginx/">Apache vs Nginx</a></li>
 
-<li class=" has-sub-menu"><a href="https://example.com/dev/aws/">AWS<span class="mark closed">+</span></a>
+<li class="parent has-sub-menu"><a href="https://example.com/dev/aws/">AWS<span class="mark opened">-</span></a>
   
 <ul class="sub-menu">
 <li class=""><a href="https://example.com/dev/aws/cloudfront/">CloudFront</a></li>
 
-<li class=" has-sub-menu"><a href="https://example.com/dev/aws/gamelift/">GameLift<span class="mark closed">+</span></a>
+<li class="parent has-sub-menu"><a href="https://example.com/dev/aws/gamelift/">GameLift<span class="mark opened">-</span></a>
   
 <ul class="sub-menu">
 <li class=""><a href="https://example.com/dev/aws/gamelift/gamelift-docs/">GameLift Docs</a></li>
-<li class=""><a href="https://example.com/dev/aws/gamelift/gamelift-faq/">GameLift FAQ</a></li>
+<li class="active"><a href="https://example.com/dev/aws/gamelift/gamelift-faq/">GameLift FAQ</a></li>
 <li class=""><a href="https://example.com/dev/aws/gamelift/gamelift-painpoint/">GameLift Pain-Point</a></li>
 <li class=""><a href="https://example.com/dev/aws/gamelift/gamelift-todo/">GameLift To do</a></li>
 </ul>

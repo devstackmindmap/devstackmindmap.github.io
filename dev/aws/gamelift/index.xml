@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GameLift on Hugo Techdoc Theme</title>
+    <link>https://example.com/dev/aws/gamelift/</link>
+    <description>Recent content in GameLift on Hugo Techdoc Theme</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="https://example.com/dev/aws/gamelift/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GameLift Docs</title>
+      <link>https://example.com/dev/aws/gamelift/gamelift-docs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/dev/aws/gamelift/gamelift-docs/</guid>
+      <description>https://docs.aws.amazon.com/ko_kr/gamelift/latest/developerguide/gamelift-ec2-instances.html 인스턴스 서비스 할당량 AWS는 AWS 계정에서 사용할 수 있는 총 Amazon EC2 인스턴스 수(온디맨드 또는 스팟)를 제한합니다. 또한 각 인스턴스 유형에는 리전에 따라 다른 최</description>
+    </item>
+    
+    <item>
+      <title>GameLift FAQ</title>
+      <link>https://example.com/dev/aws/gamelift/gamelift-faq/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/dev/aws/gamelift/gamelift-faq/</guid>
+      <description>GameSession, PlayerSession 정리 GameSession Capacity가 왜 50 제한 인가 프로세스 하나가 게임 세션 하나만 가지는지 게임이 끝나면(ProcessEnding) 프로세스 종료 시키는지</description>
+    </item>
+    
+    <item>
+      <title>GameLift Pain-Point</title>
+      <link>https://example.com/dev/aws/gamelift/gamelift-painpoint/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/dev/aws/gamelift/gamelift-painpoint/</guid>
+      <description>GameLift Local Pain-Point SearchGameSession is not implemented yet. Amazon.GameLift.AmazonGameLiftException: API GameLift.DescribeGameSessionDetails is not recognized by GameLift Local. GameSessionId : This parameter is no longer preferred. Please use IdempotencyToken instead. 그런데 IdempotencyToken 값이 SDK에서 접근 했을때 없네? SearchGameSessionsAsync 의 최대 결과 수가 20을 넘길 수 없다.</description>
+    </item>
+    
+    <item>
+      <title>GameLift To do</title>
+      <link>https://example.com/dev/aws/gamelift/gamelift-todo/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/dev/aws/gamelift/gamelift-todo/</guid>
+      <description>SearchGameSession에서 Filter 값 넣어보기 게임 세션 정리 방법 (Log 넣어 제대로 확인해보기)</description>
+    </item>
+    
+  </channel>
+</rss>
