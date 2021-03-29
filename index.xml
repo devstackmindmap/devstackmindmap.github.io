@@ -15,11 +15,10 @@
       <guid>http://example.org/posts/20210329-right-sizing/</guid>
       <description>AWS 리소스의 Right Sizing을 위해서는 인스턴스의 코어 수, 메모리, 네트워크 성능 등, 인스턴스 스펙을 확인해야 한다.
 인스턴스의 스펙이 확인 되었다면 실제 사용하고 있는 Active 인스턴스들의 Metric들을 확인 해야 한다.
-Metric의 경우 표준 지표와 커스텀 지표가 있다. 그리고 지표에 따라 적절한 통계 값을 확인 해야 한다.
-Amazon EC2 인스턴스 유형
-Amazon RDS for MySQL 요금
-Amazon CloudWatch 설명서
-특정 리소스에 대한 통계 얻기</description>
+현재 인스턴스의 스펙과 Metric에 나타난 데이터를 확인하여 인스턴스 타입과 Size 변경의 필요한지 분석해야 한다.
+Metric의 경우 표준 지표와 커스텀 지표가 있다.
+그리고 지표에 따라 적절한 통계 값을 확인 해야 한다.
+    통계 설명     Minimum 특정 기간 동안에서의 측정된 가장 낮은 값.</description>
     </item>
     
     <item>
