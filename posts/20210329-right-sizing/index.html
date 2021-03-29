@@ -7,8 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="author" content="dykim" />
-  <meta property="og:url" content="http://example.org/posts/" />
-  <link rel="canonical" href="http://example.org/posts/" /><link rel="alternate" type="application/atom+xml" href="http://example.org/index.xml" title="My New Hugo Site">
+  <meta property="og:url" content="http://example.org/posts/20210329-right-sizing/" />
+  <link rel="canonical" href="http://example.org/posts/20210329-right-sizing/" /><link rel="alternate" type="application/atom+xml" href="http://example.org/index.xml" title="My New Hugo Site">
 
   <script type="application/ld+json">
   {
@@ -19,9 +19,9 @@
            "@id": "http:\/\/example.org\/"
       },
       "articleSection" : "posts",
-      "name" : "Posts",
-      "headline" : "Posts",
-      "description" : "",
+      "name" : "Right Sizing",
+      "headline" : "Right Sizing",
+      "description" : "AWS 리소스의 Right Sizing을 위해서는 인스턴스의 코어 수, 메모리, 네트워크 성능 등, 인스턴스 스펙을 확인해야 한다.\n인스턴스의 스펙이 확인 되었다면 실제 사용하고 있는 Active 인스턴스들의 Metric들을 확인 해야 한다.\nMetric의 경우 표준 지표와 커스텀 지표가 있다. 그리고 지표에 따라 적절한 통계 값을 확인 해야 한다.\nAmazon EC2 인스턴스 유형\nAmazon RDS for MySQL 요금\nAmazon CloudWatch 설명서\n특정 리소스에 대한 통계 얻기",
       "inLanguage" : "en-US",
       "author" : "dykim",
       "creator" : "dykim",
@@ -31,15 +31,27 @@
       "copyrightYear" : "2021",
       "datePublished": "2021-03-29 21:36:00 \u002b0900 KST",
       "dateModified" : "2021-03-29 21:36:00 \u002b0900 KST",
-      "url" : "http:\/\/example.org\/posts\/",
+      "url" : "http:\/\/example.org\/posts\/20210329-right-sizing\/",
       "keywords" : [  ]
   }
 </script>
-<title>Posts</title>
-  <meta property="og:title" content="Posts" />
+<title>Right Sizing</title>
+  <meta property="og:title" content="Right Sizing" />
   <meta property="og:type" content="article" />
-  <meta property="og:description" content="" />
-  <meta name="description" content="" />
+  <meta property="og:description" content="AWS 리소스의 Right Sizing을 위해서는 인스턴스의 코어 수, 메모리, 네트워크 성능 등, 인스턴스 스펙을 확인해야 한다.
+인스턴스의 스펙이 확인 되었다면 실제 사용하고 있는 Active 인스턴스들의 Metric들을 확인 해야 한다.
+Metric의 경우 표준 지표와 커스텀 지표가 있다. 그리고 지표에 따라 적절한 통계 값을 확인 해야 한다.
+Amazon EC2 인스턴스 유형
+Amazon RDS for MySQL 요금
+Amazon CloudWatch 설명서
+특정 리소스에 대한 통계 얻기" />
+  <meta name="description" content="AWS 리소스의 Right Sizing을 위해서는 인스턴스의 코어 수, 메모리, 네트워크 성능 등, 인스턴스 스펙을 확인해야 한다.
+인스턴스의 스펙이 확인 되었다면 실제 사용하고 있는 Active 인스턴스들의 Metric들을 확인 해야 한다.
+Metric의 경우 표준 지표와 커스텀 지표가 있다. 그리고 지표에 따라 적절한 통계 값을 확인 해야 한다.
+Amazon EC2 인스턴스 유형
+Amazon RDS for MySQL 요금
+Amazon CloudWatch 설명서
+특정 리소스에 대한 통계 얻기" />
   <meta property="og:locale" content="en-us" />
 
   
@@ -65,10 +77,11 @@
 
 
 <body>
-  <article class="posts">
+  <article class="post " id="article">
     <div class="row">
       <div class="col-xs-12">
-        
+        <div class="site-header">
+          
 <header>
   <div class="header-title">
     <a href="/"
@@ -85,42 +98,63 @@
 </div>
 <div class="header-line"></div>
 
-
-        <h1 class="taxonomy-term"></h1>
-        <div id="posts-list">
-          <section>
-            <h1 class="site-date-catalog">2021</h1>
-
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-2">
-                <time datetime="2021-03-29 21:36:00 KST">Mar 29</time>
-              </div>
-              <div class="posts-title col-xs-10">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <a href="/posts/20210329-right-sizing/">Right Sizing</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-2">
-                <time datetime="2021-03-21 22:51:37 KST">Mar 21</time>
-              </div>
-              <div class="posts-title col-xs-10">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <a href="/posts/20210321-start/">시작</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-          </section>
-          
         </div>
+        <header class="post-header">
+          <h1 class="post-title">Right Sizing</h1>
+          
+          <div class="row post-desc">
+            <div class="col-xs-6">
+              
+              <time class="post-date" datetime="2021-03-29 21:36:00 KST">
+                29 Mar 2021
+              </time>
+              
+            </div>
+            <div class="col-xs-6">
+              
+              <div class="post-author">
+                <a target="_blank" href="">@dykim</a>
+              </div>
+              
+            </div>
+          </div>
+          
+        </header>
+
+        <div class="post-content markdown-body">
+          
+          <p>AWS 리소스의 Right Sizing을 위해서는 인스턴스의 코어 수, 메모리, 네트워크 성능 등, 인스턴스 스펙을 확인해야 한다.</p>
+<p>인스턴스의 스펙이 확인 되었다면 실제 사용하고 있는 Active 인스턴스들의 Metric들을 확인 해야 한다.</p>
+<p>Metric의 경우 <strong>표준 지표</strong>와 <strong>커스텀 지표</strong>가 있다.
+그리고 지표에 따라 적절한 통계 값을 확인 해야 한다.</p>
+<p><a href="https://aws.amazon.com/ko/ec2/instance-types/">Amazon EC2 인스턴스 유형</a></p>
+<p><a href="https://aws.amazon.com/ko/rds/mysql/pricing/">Amazon RDS for MySQL 요금</a></p>
+<p><a href="https://docs.aws.amazon.com/ko_kr/cloudwatch/index.html">Amazon CloudWatch 설명서</a></p>
+<p><a href="https://docs.aws.amazon.com/ko_kr/AmazonCloudWatch/latest/monitoring/US_SingleMetricPerInstance.html">특정 리소스에 대한 통계 얻기</a></p>
+
+        </div>
+
+        <div class="row middle-xs">
+          <div class="col-xs-12">
+            
+          </div>
+        </div>
+        
+          <div class="row">
+            <div class="col-xs-12">
+              
+            </div>
+          </div>
+
+          
+
+
+
+          
+          
+          <div style="height: 50px;"></div>
+          
+        
 
         <div class="site-footer">
   
@@ -140,6 +174,8 @@
     
   
 </script>
+
+  
 
 </body>
 

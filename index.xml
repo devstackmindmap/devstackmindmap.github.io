@@ -6,13 +6,28 @@
     <description>Recent content on My New Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 21 Mar 2021 22:51:37 +0900</lastBuildDate><atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 29 Mar 2021 21:36:00 +0900</lastBuildDate><atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Right Sizing</title>
+      <link>http://example.org/posts/20210329-right-sizing/</link>
+      <pubDate>Mon, 29 Mar 2021 21:36:00 +0900</pubDate>
+      
+      <guid>http://example.org/posts/20210329-right-sizing/</guid>
+      <description>AWS 리소스의 Right Sizing을 위해서는 인스턴스의 코어 수, 메모리, 네트워크 성능 등, 인스턴스 스펙을 확인해야 한다.
+인스턴스의 스펙이 확인 되었다면 실제 사용하고 있는 Active 인스턴스들의 Metric들을 확인 해야 한다.
+Metric의 경우 표준 지표와 커스텀 지표가 있다. 그리고 지표에 따라 적절한 통계 값을 확인 해야 한다.
+Amazon EC2 인스턴스 유형
+Amazon RDS for MySQL 요금
+Amazon CloudWatch 설명서
+특정 리소스에 대한 통계 얻기</description>
+    </item>
+    
     <item>
       <title>시작</title>
-      <link>http://example.org/posts/start/</link>
+      <link>http://example.org/posts/20210321-start/</link>
       <pubDate>Sun, 21 Mar 2021 22:51:37 +0900</pubDate>
       
-      <guid>http://example.org/posts/start/</guid>
+      <guid>http://example.org/posts/20210321-start/</guid>
       <description>적지 않은 시간 개발자로 일해왔다.
 프로젝트에 집중했지만 기술에 대해 기록하고 정리하는 시간을 가지지 못했다.
 100세 시대인 만큼 지금까지 일한 기간 보다 더 오랜 기간 개발자로서 일해야 하기에 기록을 하기로 했다.</description>
