@@ -7,8 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="author" content="dykim" />
-  <meta property="og:url" content="http://example.org/posts/" />
-  <link rel="canonical" href="http://example.org/posts/" /><link rel="alternate" type="application/atom+xml" href="http://example.org/index.xml" title="DEV STACK MINDMAP">
+  <meta property="og:url" content="http://example.org/posts/20210329-auto-scaling/" />
+  <link rel="canonical" href="http://example.org/posts/20210329-auto-scaling/" /><link rel="alternate" type="application/atom+xml" href="http://example.org/index.xml" title="DEV STACK MINDMAP">
 
   <script type="application/ld+json">
   {
@@ -19,9 +19,9 @@
            "@id": "http:\/\/example.org\/"
       },
       "articleSection" : "posts",
-      "name" : "Posts",
-      "headline" : "Posts",
-      "description" : "",
+      "name" : "Auto Scaling",
+      "headline" : "Auto Scaling",
+      "description" : "Auto Scaling은 익히들 알고 있을 것이다.\n실제 테스트 해보면서 개념들을 적용해 볼 수 있도록 하자.\nLaunch Configurations 설정 필요한 것\n(필수)\nAMI\n인스턴스 타입\n보안 그룹 EBS 볼륨\n키 페어\n(선택) Request Spot Instances\nIAM instance profile\nEnable EC2 instance detailed monitoring within CloudWatch\nLaunch as EBS-optimized instance Advanced details\nUser data\nAuto Scaling Groups ",
       "inLanguage" : "en-US",
       "author" : "dykim",
       "creator" : "dykim",
@@ -29,17 +29,43 @@
       "accountablePerson" : "dykim",
       "copyrightHolder" : "dykim",
       "copyrightYear" : "2021",
-      "datePublished": "2021-03-30 11:27:00 \u002b0900 KST",
-      "dateModified" : "2021-03-30 11:27:00 \u002b0900 KST",
-      "url" : "http:\/\/example.org\/posts\/",
+      "datePublished": "2021-03-29 23:44:00 \u002b0900 KST",
+      "dateModified" : "2021-03-29 23:44:00 \u002b0900 KST",
+      "url" : "http:\/\/example.org\/posts\/20210329-auto-scaling\/",
       "keywords" : [  ]
   }
 </script>
-<title>Posts</title>
-  <meta property="og:title" content="Posts" />
+<title>Auto Scaling</title>
+  <meta property="og:title" content="Auto Scaling" />
   <meta property="og:type" content="article" />
-  <meta property="og:description" content="" />
-  <meta name="description" content="" />
+  <meta property="og:description" content="Auto Scaling은 익히들 알고 있을 것이다.
+실제 테스트 해보면서 개념들을 적용해 볼 수 있도록 하자.
+Launch Configurations 설정 필요한 것
+(필수)
+AMI
+인스턴스 타입
+보안 그룹 EBS 볼륨
+키 페어
+(선택) Request Spot Instances
+IAM instance profile
+Enable EC2 instance detailed monitoring within CloudWatch
+Launch as EBS-optimized instance Advanced details
+User data
+Auto Scaling Groups " />
+  <meta name="description" content="Auto Scaling은 익히들 알고 있을 것이다.
+실제 테스트 해보면서 개념들을 적용해 볼 수 있도록 하자.
+Launch Configurations 설정 필요한 것
+(필수)
+AMI
+인스턴스 타입
+보안 그룹 EBS 볼륨
+키 페어
+(선택) Request Spot Instances
+IAM instance profile
+Enable EC2 instance detailed monitoring within CloudWatch
+Launch as EBS-optimized instance Advanced details
+User data
+Auto Scaling Groups " />
   <meta property="og:locale" content="en-us" />
 
   
@@ -65,10 +91,11 @@
 
 
 <body>
-  <article class="posts">
+  <article class="post " id="article">
     <div class="row">
       <div class="col-xs-12">
-        
+        <div class="site-header">
+          
 <header>
   <div class="header-title">
     <a href="/"
@@ -85,68 +112,73 @@
 </div>
 <div class="header-line"></div>
 
-
-        <h1 class="taxonomy-term"></h1>
-        <div id="posts-list">
-          <section>
-            <h1 class="site-date-catalog">2021</h1>
-
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-2">
-                <time datetime="2021-03-30 11:27:00 KST">Mar 30</time>
-              </div>
-              <div class="posts-title col-xs-10">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <a href="/posts/20210330-cloudfront-acm-route53/">CF &#43; ACM &#43; Route53</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-2">
-                <time datetime="2021-03-29 23:44:00 KST">Mar 29</time>
-              </div>
-              <div class="posts-title col-xs-10">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <a href="/posts/20210329-auto-scaling/">Auto Scaling</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-2">
-                <time datetime="2021-03-29 21:36:00 KST">Mar 29</time>
-              </div>
-              <div class="posts-title col-xs-10">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <a href="/posts/20210329-right-sizing/">Right Sizing</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-2">
-                <time datetime="2021-03-21 22:51:37 KST">Mar 21</time>
-              </div>
-              <div class="posts-title col-xs-10">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <a href="/posts/20210321-start/">시작</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-          </section>
-          
         </div>
+        <header class="post-header">
+          <h1 class="post-title">Auto Scaling</h1>
+          
+          <div class="row post-desc">
+            <div class="col-xs-6">
+              
+              <time class="post-date" datetime="2021-03-29 23:44:00 KST">
+                29 Mar 2021
+              </time>
+              
+            </div>
+            <div class="col-xs-6">
+              
+              <div class="post-author">
+                <a target="_blank" href="">@dykim</a>
+              </div>
+              
+            </div>
+          </div>
+          
+        </header>
+
+        <div class="post-content markdown-body">
+          
+          <p>Auto Scaling은 익히들 알고 있을 것이다.</p>
+<p>실제 테스트 해보면서 개념들을 적용해 볼 수 있도록 하자.</p>
+<h3 id="launch-configurations-설정">Launch Configurations 설정</h3>
+<p>필요한 것<br>
+(필수)<br>
+AMI<br>
+인스턴스 타입<br>
+보안 그룹
+EBS 볼륨<br>
+키 페어<br>
+(선택)
+Request Spot Instances<br>
+IAM instance profile<br>
+Enable EC2 instance detailed monitoring within CloudWatch<br>
+Launch as EBS-optimized instance
+Advanced details<br>
+User data</p>
+<h3 id="auto-scaling-groups">Auto Scaling Groups</h3>
+
+        </div>
+
+        <div class="row middle-xs">
+          <div class="col-xs-12">
+            
+          </div>
+        </div>
+        
+          <div class="row">
+            <div class="col-xs-12">
+              
+            </div>
+          </div>
+
+          
+
+
+
+          
+          
+          <div style="height: 50px;"></div>
+          
+        
 
         <div class="site-footer">
   
@@ -166,6 +198,8 @@
     
   
 </script>
+
+  
 
 </body>
 

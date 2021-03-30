@@ -6,13 +6,24 @@
     <description>Recent content in Posts on DEV STACK MINDMAP</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 29 Mar 2021 23:44:00 +0900</lastBuildDate><atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 30 Mar 2021 11:27:00 +0900</lastBuildDate><atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CF &#43; ACM &#43; Route53</title>
+      <link>http://example.org/posts/20210330-cloudfront-acm-route53/</link>
+      <pubDate>Tue, 30 Mar 2021 11:27:00 +0900</pubDate>
+      
+      <guid>http://example.org/posts/20210330-cloudfront-acm-route53/</guid>
+      <description>ACM ACM 은 SSL/TLS 인증서를 구매, 업로드 및 갱신하는 데 드는 시간 소모적인 수동 프로세스를 대신 처리합니다.
+AWS Certificate Manager에서는 사용자가 신속하게 인증서를 요청하고, Elastic Load Balancer, Amazon CloudFront 배포, API Gateway 기반 API와 같은 ACM 통합 AWS 리소스에 배포한 후, AWS Certificate Manager가 인증서 갱신을 처리하도록 할 수 있습니다.
+내부 리소스에 대한 사설 인증서를 생성하고 중앙에서 인증서 수명 주기를 관리할 수도 있습니다. ACM 통합 서비스에 사용하도록 AWS Certificate Manager를 통해 프로비저닝한 공인 및 사설 인증서는 무료입니다.</description>
+    </item>
+    
     <item>
       <title>Auto Scaling</title>
-      <link>http://example.org/posts/20210330-auto-scaling/</link>
+      <link>http://example.org/posts/20210329-auto-scaling/</link>
       <pubDate>Mon, 29 Mar 2021 23:44:00 +0900</pubDate>
       
-      <guid>http://example.org/posts/20210330-auto-scaling/</guid>
+      <guid>http://example.org/posts/20210329-auto-scaling/</guid>
       <description>Auto Scaling은 익히들 알고 있을 것이다.
 실제 테스트 해보면서 개념들을 적용해 볼 수 있도록 하자.
 Launch Configurations 설정 필요한 것
