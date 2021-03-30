@@ -37,7 +37,7 @@ IAM instance profile
 Enable EC2 instance detailed monitoring within CloudWatch
 Launch as EBS-optimized instance Advanced details
 User data
-Auto Scaling Groups </description>
+Auto Scaling Groups 해보기  AMI 생성 Launch Configurations 생성 Auto Scaling Groups 생성  </description>
     </item>
     
     <item>
