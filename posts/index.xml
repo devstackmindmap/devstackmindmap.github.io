@@ -6,7 +6,18 @@
     <description>Recent content in Posts on DEV STACK MINDMAP</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 30 Mar 2021 11:27:00 +0900</lastBuildDate><atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 01 Apr 2021 14:38:00 +0900</lastBuildDate><atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GameLift Fleet 원격 접속</title>
+      <link>http://example.org/posts/20210401-gamelift/</link>
+      <pubDate>Thu, 01 Apr 2021 14:38:00 +0900</pubDate>
+      
+      <guid>http://example.org/posts/20210401-gamelift/</guid>
+      <description>연결할 인스턴스 ID 찾기 aws gamelift describe-instances --fleet-id FLEET-ID
+인스턴스에 대한 액세스 자격 증명을 요청 aws gamelift get-instance-access --fleet-id FLEET-ID --instance-id INSTANCE-ID
+원격 연결을 위한 포트 열기 aws gamelift update-fleet-port-settings --fleet-id FLEET-ID --inbound-permission-authorizations &amp;ldquo;FromPort=3389,ToPort=3389,IpRange=LOCAL-IP/32,Protocol=TCP&amp;rdquo;</description>
+    </item>
+    
     <item>
       <title>CF &#43; S3 &#43; ACM &#43; Route53</title>
       <link>http://example.org/posts/20210330-cloudfront-acm-route53/</link>

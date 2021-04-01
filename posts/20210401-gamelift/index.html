@@ -7,8 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="author" content="dykim" />
-  <meta property="og:url" content="http://example.org/posts/20210329-right-sizing/" />
-  <link rel="canonical" href="http://example.org/posts/20210329-right-sizing/" /><link rel="alternate" type="application/atom+xml" href="http://example.org/index.xml" title="DEV STACK MINDMAP">
+  <meta property="og:url" content="http://example.org/posts/20210401-gamelift/" />
+  <link rel="canonical" href="http://example.org/posts/20210401-gamelift/" /><link rel="alternate" type="application/atom+xml" href="http://example.org/index.xml" title="DEV STACK MINDMAP">
 
   <script type="application/ld+json">
   {
@@ -19,9 +19,9 @@
            "@id": "http:\/\/example.org\/"
       },
       "articleSection" : "posts",
-      "name" : "Right Sizing",
-      "headline" : "Right Sizing",
-      "description" : "AWS 리소스의 Right Sizing을 위해서는 인스턴스의 코어 수, 메모리, 네트워크 성능 등, 인스턴스 스펙을 확인해야 한다.\n인스턴스의 스펙이 확인 되었다면 실제 사용하고 있는 Active 인스턴스들의 Metric들을 확인 해야 한다.\n현재 인스턴스의 스펙과 Metric에 나타난 데이터를 확인하여 인스턴스 타입과 Size 변경의 필요한지 분석해야 한다.\nMetric의 경우 표준 지표와 커스텀 지표가 있다.\n그리고 지표에 따라 적절한 통계 값을 확인 해야 한다.\n    통계 설명     Minimum 특정 기간 동안에서의 측정된 가장 낮은 값.",
+      "name" : "GameLift Fleet 원격 접속",
+      "headline" : "GameLift Fleet 원격 접속",
+      "description" : "연결할 인스턴스 ID 찾기 aws gamelift describe-instances --fleet-id FLEET-ID\n인스턴스에 대한 액세스 자격 증명을 요청 aws gamelift get-instance-access --fleet-id FLEET-ID --instance-id INSTANCE-ID\n원격 연결을 위한 포트 열기 aws gamelift update-fleet-port-settings --fleet-id FLEET-ID --inbound-permission-authorizations \u0026ldquo;FromPort=3389,ToPort=3389,IpRange=LOCAL-IP\/32,Protocol=TCP\u0026rdquo;",
       "inLanguage" : "en-US",
       "author" : "dykim",
       "creator" : "dykim",
@@ -29,27 +29,21 @@
       "accountablePerson" : "dykim",
       "copyrightHolder" : "dykim",
       "copyrightYear" : "2021",
-      "datePublished": "2021-03-29 21:36:00 \u002b0900 KST",
-      "dateModified" : "2021-03-29 21:36:00 \u002b0900 KST",
-      "url" : "http:\/\/example.org\/posts\/20210329-right-sizing\/",
+      "datePublished": "2021-04-01 14:38:00 \u002b0900 KST",
+      "dateModified" : "2021-04-01 14:38:00 \u002b0900 KST",
+      "url" : "http:\/\/example.org\/posts\/20210401-gamelift\/",
       "keywords" : [  ]
   }
 </script>
-<title>Right Sizing</title>
-  <meta property="og:title" content="Right Sizing" />
+<title>GameLift Fleet 원격 접속</title>
+  <meta property="og:title" content="GameLift Fleet 원격 접속" />
   <meta property="og:type" content="article" />
-  <meta property="og:description" content="AWS 리소스의 Right Sizing을 위해서는 인스턴스의 코어 수, 메모리, 네트워크 성능 등, 인스턴스 스펙을 확인해야 한다.
-인스턴스의 스펙이 확인 되었다면 실제 사용하고 있는 Active 인스턴스들의 Metric들을 확인 해야 한다.
-현재 인스턴스의 스펙과 Metric에 나타난 데이터를 확인하여 인스턴스 타입과 Size 변경의 필요한지 분석해야 한다.
-Metric의 경우 표준 지표와 커스텀 지표가 있다.
-그리고 지표에 따라 적절한 통계 값을 확인 해야 한다.
-    통계 설명     Minimum 특정 기간 동안에서의 측정된 가장 낮은 값." />
-  <meta name="description" content="AWS 리소스의 Right Sizing을 위해서는 인스턴스의 코어 수, 메모리, 네트워크 성능 등, 인스턴스 스펙을 확인해야 한다.
-인스턴스의 스펙이 확인 되었다면 실제 사용하고 있는 Active 인스턴스들의 Metric들을 확인 해야 한다.
-현재 인스턴스의 스펙과 Metric에 나타난 데이터를 확인하여 인스턴스 타입과 Size 변경의 필요한지 분석해야 한다.
-Metric의 경우 표준 지표와 커스텀 지표가 있다.
-그리고 지표에 따라 적절한 통계 값을 확인 해야 한다.
-    통계 설명     Minimum 특정 기간 동안에서의 측정된 가장 낮은 값." />
+  <meta property="og:description" content="연결할 인스턴스 ID 찾기 aws gamelift describe-instances --fleet-id FLEET-ID
+인스턴스에 대한 액세스 자격 증명을 요청 aws gamelift get-instance-access --fleet-id FLEET-ID --instance-id INSTANCE-ID
+원격 연결을 위한 포트 열기 aws gamelift update-fleet-port-settings --fleet-id FLEET-ID --inbound-permission-authorizations &amp;ldquo;FromPort=3389,ToPort=3389,IpRange=LOCAL-IP/32,Protocol=TCP&amp;rdquo;" />
+  <meta name="description" content="연결할 인스턴스 ID 찾기 aws gamelift describe-instances --fleet-id FLEET-ID
+인스턴스에 대한 액세스 자격 증명을 요청 aws gamelift get-instance-access --fleet-id FLEET-ID --instance-id INSTANCE-ID
+원격 연결을 위한 포트 열기 aws gamelift update-fleet-port-settings --fleet-id FLEET-ID --inbound-permission-authorizations &amp;ldquo;FromPort=3389,ToPort=3389,IpRange=LOCAL-IP/32,Protocol=TCP&amp;rdquo;" />
   <meta property="og:locale" content="en-us" />
 
   
@@ -98,13 +92,13 @@ Metric의 경우 표준 지표와 커스텀 지표가 있다.
 
         </div>
         <header class="post-header">
-          <h1 class="post-title">Right Sizing</h1>
+          <h1 class="post-title">GameLift Fleet 원격 접속</h1>
           
           <div class="row post-desc">
             <div class="col-xs-6">
               
-              <time class="post-date" datetime="2021-03-29 21:36:00 KST">
-                29 Mar 2021
+              <time class="post-date" datetime="2021-04-01 14:38:00 KST">
+                01 Apr 2021
               </time>
               
             </div>
@@ -121,54 +115,12 @@ Metric의 경우 표준 지표와 커스텀 지표가 있다.
 
         <div class="post-content markdown-body">
           
-          <p>AWS 리소스의 Right Sizing을 위해서는 인스턴스의 코어 수, 메모리, 네트워크 성능 등, 인스턴스 스펙을 확인해야 한다.</p>
-<p>인스턴스의 스펙이 확인 되었다면 실제 사용하고 있는 Active 인스턴스들의 Metric들을 확인 해야 한다.</p>
-<p>현재 인스턴스의 스펙과 Metric에 나타난 데이터를 확인하여 인스턴스 타입과 Size 변경의 필요한지 분석해야 한다.</p>
-<p>Metric의 경우 <strong>표준 지표</strong>와 <strong>커스텀 지표</strong>가 있다.<br>
-그리고 지표에 따라 적절한 통계 값을 확인 해야 한다.</p>
-<hr>
-<table>
-<thead>
-<tr>
-<th>통계</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Minimum</td>
-<td>특정 기간 동안에서의 측정된 가장 낮은 값. 이 값을 사용해서 응용 프로그램의 낮은 용량 활동을 확인할 수 있음.</td>
-</tr>
-<tr>
-<td>Maxmum</td>
-<td>특정 기간 동안에서의 측정된 가장 높은 값. 이 값을 사용해서 응용 프로그램의 높음 용량활동을 확인할 수 있음.</td>
-</tr>
-<tr>
-<td>Sum</td>
-<td>해당 지표에 가산 된 모든 합계. 이 통계는 지표의 총 용량을 결정하는데 도움이 됨.</td>
-</tr>
-<tr>
-<td>Average</td>
-<td>지정기간Sum/SampleCount 값. 이통계를Maximun, Minimum과 비교하여지표의특성을파악하고, 평균사용량이 최대치와 최소치 중 어느쪽에 가까운지 확인할 수 있음. 이러한 비교는 필요에 따라 언제 자원을 증감할 것인가 아는데 도움이 됨.</td>
-</tr>
-<tr>
-<td>SampleCount</td>
-<td>계 계산에 사용되는 데이터의 포인트 개수</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h1 id="links">Links</h1>
-<p><a href="https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/viewing_metrics_with_cloudwatch.html">▶ 지표 설명</a></p>
-<p><a href="https://aws.amazon.com/ko/ec2/instance-types/">▶ Amazon EC2 인스턴스 유형</a></p>
-<p><a href="https://aws.amazon.com/ko/rds/mysql/pricing/">▶ Amazon RDS for MySQL 요금</a></p>
-<p><a href="https://aws.amazon.com/ko/elasticache/pricing/">▶ Amazon ElastiCache 요금</a></p>
-<p><a href="https://docs.aws.amazon.com/ko_kr/cloudwatch/index.html">▶ Amazon CloudWatch 설명서</a></p>
-<p><a href="https://docs.aws.amazon.com/ko_kr/AmazonCloudWatch/latest/monitoring/US_SingleMetricPerInstance.html">▶ 특정 리소스에 대한 통계 얻기</a></p>
-<p><a href="https://aws.amazon.com/ko/premiumsupport/knowledge-center/rds-aurora-mysql-logs-cloudwatch/">▶ Amazon RDS 또는 Aurora MySQL 인스턴스의 로그를 CloudWatch에 게시하려면 어떻게 해야 합니까?</a></p>
-<p><a href="https://docs.aws.amazon.com/ko_kr/AmazonCloudWatch/latest/monitoring/metrics-collected-by-CloudWatch-agent.html">▶ CloudWatch 에이전트가 수집하는 지표</a></p>
-<p><a href="https://www.youtube.com/watch?v=PbUS0Lu-uAQ&amp;t=2s">▶ AWS CLOUD Gaming 5. CloudWatch 성능 모니터링과 신속한 대응을 위한 노하우</a> <a href="https://www.slideshare.net/awskorea/cloudwatch-aws-cloud-track-3-gaming">(slideshare)</a></p>
-<p><a href="https://wisen.co.kr/pages/blog/blog-detail.html?idx=7751">▶ EC2 인스턴스의 타입별 대역폭을 살펴보자</a></p>
+          <h3 id="연결할-인스턴스-id-찾기">연결할 인스턴스 ID 찾기</h3>
+<p>aws gamelift describe-instances --fleet-id FLEET-ID</p>
+<h3 id="인스턴스에-대한-액세스-자격-증명을-요청">인스턴스에 대한 액세스 자격 증명을 요청</h3>
+<p>aws gamelift get-instance-access --fleet-id FLEET-ID --instance-id INSTANCE-ID</p>
+<h3 id="원격-연결을-위한-포트-열기">원격 연결을 위한 포트 열기</h3>
+<p>aws gamelift update-fleet-port-settings --fleet-id FLEET-ID --inbound-permission-authorizations &ldquo;FromPort=3389,ToPort=3389,IpRange=LOCAL-IP/32,Protocol=TCP&rdquo;</p>
 
         </div>
 
