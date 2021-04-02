@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us" prefix="og: http://ogp.me/ns#">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="generator" content="Hugo 0.80.0" />
@@ -7,8 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="author" content="dykim" />
-  <meta property="og:url" content="http://example.org/" />
-  <link rel="canonical" href="http://example.org/" /><link rel="alternate" type="application/atom+xml" href="http://example.org/index.xml" title="DEV STACK MINDMAP">
+  <meta property="og:url" content="http://example.org/posts/20210402-aws-storage-pricing/" />
+  <link rel="canonical" href="http://example.org/posts/20210402-aws-storage-pricing/" /><link rel="alternate" type="application/atom+xml" href="http://example.org/index.xml" title="DEV STACK MINDMAP">
 
   <script type="application/ld+json">
   {
@@ -18,10 +18,10 @@
            "@type": "WebPage",
            "@id": "http:\/\/example.org\/"
       },
-      "articleSection" : "",
-      "name" : "DEV STACK MINDMAP",
-      "headline" : "DEV STACK MINDMAP",
-      "description" : "",
+      "articleSection" : "posts",
+      "name" : "AWS Storage, DB 요금",
+      "headline" : "AWS Storage, DB 요금",
+      "description" : "주요 서비스의 기본 요금만 비교해 보자.\nAmazon S3 요금\nS3 Standard, GB당 0.025 USD (월) ▶ 상세\nAmazon Aurora\nGB당 0.12 USD (월) ▶ 상세\nAmazon EBS 볼륨\n범용 SSD(gp3), GB당 0.0912 USD (월) ▶ 상세\nAmazon EFS\nStandard 스토리지, GB당 0.33 USD (월) ▶ 상세\n로그를 저장 한다면 S3가 저렴하다. 그리고 이제 S3에서도 데이터를 쿼리하고 분석할 수 있는 기반이 많이 있다.",
       "inLanguage" : "en-US",
       "author" : "dykim",
       "creator" : "dykim",
@@ -29,17 +29,35 @@
       "accountablePerson" : "dykim",
       "copyrightHolder" : "dykim",
       "copyrightYear" : "2021",
-      "datePublished": "2021-04-02 17:45:00 \u002b0900 KST",
-      "dateModified" : "2021-04-02 17:45:00 \u002b0900 KST",
-      "url" : "http:\/\/example.org\/",
+      "datePublished": "2021-04-02 15:31:00 \u002b0900 KST",
+      "dateModified" : "2021-04-02 15:31:00 \u002b0900 KST",
+      "url" : "http:\/\/example.org\/posts\/20210402-aws-storage-pricing\/",
       "keywords" : [  ]
   }
 </script>
-<title>DEV STACK MINDMAP</title>
-  <meta property="og:title" content="DEV STACK MINDMAP" />
-  <meta property="og:type" content="website" />
-  <meta property="og:description" content="" />
-  <meta name="description" content="" />
+<title>AWS Storage, DB 요금</title>
+  <meta property="og:title" content="AWS Storage, DB 요금" />
+  <meta property="og:type" content="article" />
+  <meta property="og:description" content="주요 서비스의 기본 요금만 비교해 보자.
+Amazon S3 요금
+S3 Standard, GB당 0.025 USD (월) ▶ 상세
+Amazon Aurora
+GB당 0.12 USD (월) ▶ 상세
+Amazon EBS 볼륨
+범용 SSD(gp3), GB당 0.0912 USD (월) ▶ 상세
+Amazon EFS
+Standard 스토리지, GB당 0.33 USD (월) ▶ 상세
+로그를 저장 한다면 S3가 저렴하다. 그리고 이제 S3에서도 데이터를 쿼리하고 분석할 수 있는 기반이 많이 있다." />
+  <meta name="description" content="주요 서비스의 기본 요금만 비교해 보자.
+Amazon S3 요금
+S3 Standard, GB당 0.025 USD (월) ▶ 상세
+Amazon Aurora
+GB당 0.12 USD (월) ▶ 상세
+Amazon EBS 볼륨
+범용 SSD(gp3), GB당 0.0912 USD (월) ▶ 상세
+Amazon EFS
+Standard 스토리지, GB당 0.33 USD (월) ▶ 상세
+로그를 저장 한다면 S3가 저렴하다. 그리고 이제 S3에서도 데이터를 쿼리하고 분석할 수 있는 기반이 많이 있다." />
   <meta property="og:locale" content="en-us" />
 
   
@@ -65,10 +83,11 @@
 
 
 <body>
-  <article class="posts">
+  <article class="post " id="article">
     <div class="row">
       <div class="col-xs-12">
-        
+        <div class="site-header">
+          
 <header>
   <div class="header-title">
     <a href="/"
@@ -85,142 +104,65 @@
 </div>
 <div class="header-line"></div>
 
-        <div id="posts-list">
-          <section>
-            <h1 class="site-date-catalog">2021</h1>
-
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-3 col-sm-2">
-                <time datetime="2021-04-02 17:45:00 KST">Apr 02</time>
-              </div>
-              <div class="posts-title col-xs-9 col-sm-10">
-                <div class="row">
-                  <div class="col-xs-11 col-sm-10">
-                    <a href="/posts/20210402-cdk/">CDK in C# </a>
-                  </div>
-                  <div class="col-xs-1 col-sm-2 posts-categories">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-3 col-sm-2">
-                <time datetime="2021-04-02 15:31:00 KST">Apr 02</time>
-              </div>
-              <div class="posts-title col-xs-9 col-sm-10">
-                <div class="row">
-                  <div class="col-xs-11 col-sm-10">
-                    <a href="/posts/20210402-aws-storage-pricing/">AWS Storage, DB 요금</a>
-                  </div>
-                  <div class="col-xs-1 col-sm-2 posts-categories">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-3 col-sm-2">
-                <time datetime="2021-04-02 10:00:00 KST">Apr 02</time>
-              </div>
-              <div class="posts-title col-xs-9 col-sm-10">
-                <div class="row">
-                  <div class="col-xs-11 col-sm-10">
-                    <a href="/posts/20210402-okr/">OKR</a>
-                  </div>
-                  <div class="col-xs-1 col-sm-2 posts-categories">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-3 col-sm-2">
-                <time datetime="2021-04-01 14:38:00 KST">Apr 01</time>
-              </div>
-              <div class="posts-title col-xs-9 col-sm-10">
-                <div class="row">
-                  <div class="col-xs-11 col-sm-10">
-                    <a href="/posts/20210401-gamelift-remote/">GameLift Fleet 인스턴스 원격 접속</a>
-                  </div>
-                  <div class="col-xs-1 col-sm-2 posts-categories">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-3 col-sm-2">
-                <time datetime="2021-03-30 11:27:00 KST">Mar 30</time>
-              </div>
-              <div class="posts-title col-xs-9 col-sm-10">
-                <div class="row">
-                  <div class="col-xs-11 col-sm-10">
-                    <a href="/posts/20210330-cloudfront-acm-route53/">CF &#43; S3 &#43; ACM &#43; Route53</a>
-                  </div>
-                  <div class="col-xs-1 col-sm-2 posts-categories">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-3 col-sm-2">
-                <time datetime="2021-03-29 23:44:00 KST">Mar 29</time>
-              </div>
-              <div class="posts-title col-xs-9 col-sm-10">
-                <div class="row">
-                  <div class="col-xs-11 col-sm-10">
-                    <a href="/posts/20210329-auto-scaling/">Auto Scaling</a>
-                  </div>
-                  <div class="col-xs-1 col-sm-2 posts-categories">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-3 col-sm-2">
-                <time datetime="2021-03-29 21:36:00 KST">Mar 29</time>
-              </div>
-              <div class="posts-title col-xs-9 col-sm-10">
-                <div class="row">
-                  <div class="col-xs-11 col-sm-10">
-                    <a href="/posts/20210329-right-sizing/">Right Sizing</a>
-                  </div>
-                  <div class="col-xs-1 col-sm-2 posts-categories">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-3 col-sm-2">
-                <time datetime="2021-03-21 22:51:37 KST">Mar 21</time>
-              </div>
-              <div class="posts-title col-xs-9 col-sm-10">
-                <div class="row">
-                  <div class="col-xs-11 col-sm-10">
-                    <a href="/posts/20210321-start/">시작</a>
-                  </div>
-                  <div class="col-xs-1 col-sm-2 posts-categories">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-          </section>
-          
         </div>
+        <header class="post-header">
+          <h1 class="post-title">AWS Storage, DB 요금</h1>
+          
+          <div class="row post-desc">
+            <div class="col-xs-6">
+              
+              <time class="post-date" datetime="2021-04-02 15:31:00 KST">
+                02 Apr 2021
+              </time>
+              
+            </div>
+            <div class="col-xs-6">
+              
+              <div class="post-author">
+                <a target="_blank" href="">@dykim</a>
+              </div>
+              
+            </div>
+          </div>
+          
+        </header>
+
+        <div class="post-content markdown-body">
+          
+          <p>주요 서비스의 기본 요금만 비교해 보자.</p>
+<p>Amazon S3 요금<br>
+S3 Standard, GB당 0.025 USD (월)  <a href="https://aws.amazon.com/ko/s3/pricing/">▶ 상세</a></p>
+<p>Amazon Aurora<br>
+GB당 0.12 USD (월)  <a href="https://aws.amazon.com/ko/rds/aurora/pricing/">▶ 상세</a></p>
+<p>Amazon EBS 볼륨<br>
+범용 SSD(gp3), GB당 0.0912 USD (월) <a href="https://aws.amazon.com/ko/ebs/pricing/?nc1=h_ls">▶ 상세</a></p>
+<p>Amazon EFS<br>
+Standard 스토리지, GB당 0.33 USD (월) <a href="https://aws.amazon.com/ko/efs/pricing/">▶ 상세</a></p>
+<p>로그를 저장 한다면 S3가 저렴하다. 그리고 이제 S3에서도 데이터를 쿼리하고 분석할 수 있는 기반이 많이 있다.</p>
+
+        </div>
+
+        <div class="row middle-xs">
+          <div class="col-xs-12">
+            
+          </div>
+        </div>
+        
+          <div class="row">
+            <div class="col-xs-12">
+              
+            </div>
+          </div>
+
+          
+
+
+
+          
+          
+          <div style="height: 50px;"></div>
+          
+        
 
         <div class="site-footer">
   
@@ -240,6 +182,8 @@
     
   
 </script>
+
+  
 
 </body>
 
