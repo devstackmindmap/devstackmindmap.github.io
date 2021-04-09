@@ -21,7 +21,7 @@
       "articleSection" : "posts",
       "name" : "CDK in C# ",
       "headline" : "CDK in C# ",
-      "description" : "\u0026ldquo;백문이 불여일견이요, 백견이 불여일각이며, 백각이 불여일행.\u0026rdquo;\nmkdir HelloServerlessCDK\ncd HelloServerlessCDK\ncdk init app \u0026ndash;language csharp (디렉토리가 비어 있어야 한다)\nLinks ▶ Working with the AWS CDK in C#\n▶ Building Serverless Applications with CDK - Workshop",
+      "description" : "환경 Windows \/ Visual Studio 2019 \/ C#\n\u0026ldquo;백문이 불여일견이요, 백견이 불여일각이며, 백각이 불여일행.\u0026rdquo;\n mkdir HelloServerlessCDK cd HelloServerlessCDK cdk init app --language csharp (디렉토리가 비어 있어야 한다) [project]\\src 에서 *.sln 열기 Ctrl \u002b F5, 성공하면 출력이 없어야 한다. Ctrl \u002b `, 터미널을 연다, 개발자 명령 프롬프트 (개발자 PowerShell 말고) cd .. NuGet에서 기본 설치되어 있는 Amazon.CDK를 업그레이드 하거나 삭제 후 최신버전 설치 NuGet에서 Amazone.CDK.AWS.S3 설치 Infra 코딩 (테스트 코드에 BucketName 수정) 자동으로 생성된 Stack 클래스의 생성자 함수 내부에 인프라 코드 입력  var bucket = new Bucket(this, \u0026#34;MyBucket\u0026#34;, new BucketProps { Versioned = false, BucketName = \u0026#34;test-bucket\u0026#34; }); cdk bootstrap (Project root) cdk synth or Ctrl \u002b F5 cdk deploy cdk destroy  Links ▶ Working with the AWS CDK in C#",
       "inLanguage" : "en-US",
       "author" : "dykim",
       "creator" : "dykim",
@@ -38,18 +38,12 @@
 <title>CDK in C# </title>
   <meta property="og:title" content="CDK in C# " />
   <meta property="og:type" content="article" />
-  <meta property="og:description" content="&amp;ldquo;백문이 불여일견이요, 백견이 불여일각이며, 백각이 불여일행.&amp;rdquo;
-mkdir HelloServerlessCDK
-cd HelloServerlessCDK
-cdk init app &amp;ndash;language csharp (디렉토리가 비어 있어야 한다)
-Links ▶ Working with the AWS CDK in C#
-▶ Building Serverless Applications with CDK - Workshop" />
-  <meta name="description" content="&amp;ldquo;백문이 불여일견이요, 백견이 불여일각이며, 백각이 불여일행.&amp;rdquo;
-mkdir HelloServerlessCDK
-cd HelloServerlessCDK
-cdk init app &amp;ndash;language csharp (디렉토리가 비어 있어야 한다)
-Links ▶ Working with the AWS CDK in C#
-▶ Building Serverless Applications with CDK - Workshop" />
+  <meta property="og:description" content="환경 Windows / Visual Studio 2019 / C#
+&amp;ldquo;백문이 불여일견이요, 백견이 불여일각이며, 백각이 불여일행.&amp;rdquo;
+ mkdir HelloServerlessCDK cd HelloServerlessCDK cdk init app --language csharp (디렉토리가 비어 있어야 한다) [project]\src 에서 *.sln 열기 Ctrl &#43; F5, 성공하면 출력이 없어야 한다. Ctrl &#43; `, 터미널을 연다, 개발자 명령 프롬프트 (개발자 PowerShell 말고) cd .. NuGet에서 기본 설치되어 있는 Amazon.CDK를 업그레이드 하거나 삭제 후 최신버전 설치 NuGet에서 Amazone.CDK.AWS.S3 설치 Infra 코딩 (테스트 코드에 BucketName 수정) 자동으로 생성된 Stack 클래스의 생성자 함수 내부에 인프라 코드 입력  var bucket = new Bucket(this, &amp;#34;MyBucket&amp;#34;, new BucketProps { Versioned = false, BucketName = &amp;#34;test-bucket&amp;#34; }); cdk bootstrap (Project root) cdk synth or Ctrl &#43; F5 cdk deploy cdk destroy  Links ▶ Working with the AWS CDK in C#" />
+  <meta name="description" content="환경 Windows / Visual Studio 2019 / C#
+&amp;ldquo;백문이 불여일견이요, 백견이 불여일각이며, 백각이 불여일행.&amp;rdquo;
+ mkdir HelloServerlessCDK cd HelloServerlessCDK cdk init app --language csharp (디렉토리가 비어 있어야 한다) [project]\src 에서 *.sln 열기 Ctrl &#43; F5, 성공하면 출력이 없어야 한다. Ctrl &#43; `, 터미널을 연다, 개발자 명령 프롬프트 (개발자 PowerShell 말고) cd .. NuGet에서 기본 설치되어 있는 Amazon.CDK를 업그레이드 하거나 삭제 후 최신버전 설치 NuGet에서 Amazone.CDK.AWS.S3 설치 Infra 코딩 (테스트 코드에 BucketName 수정) 자동으로 생성된 Stack 클래스의 생성자 함수 내부에 인프라 코드 입력  var bucket = new Bucket(this, &amp;#34;MyBucket&amp;#34;, new BucketProps { Versioned = false, BucketName = &amp;#34;test-bucket&amp;#34; }); cdk bootstrap (Project root) cdk synth or Ctrl &#43; F5 cdk deploy cdk destroy  Links ▶ Working with the AWS CDK in C#" />
   <meta property="og:locale" content="en-us" />
 
   
@@ -121,10 +115,33 @@ Links ▶ Working with the AWS CDK in C#
 
         <div class="post-content markdown-body">
           
-          <p>&ldquo;백문이 불여일견이요, 백견이 불여일각이며, 백각이 불여일행.&rdquo;</p>
-<p>mkdir HelloServerlessCDK<br>
-cd HelloServerlessCDK<br>
-cdk init app &ndash;language csharp (디렉토리가 비어 있어야 한다)</p>
+          <h4 id="환경">환경</h4>
+<p>Windows / Visual Studio 2019 / C#</p>
+<p>&ldquo;백문이 불여일견이요, 백견이 불여일각이며, 백각이 불여일행.&rdquo;</p>
+<ol>
+<li>mkdir HelloServerlessCDK</li>
+<li>cd HelloServerlessCDK</li>
+<li>cdk init app --language csharp (디렉토리가 비어 있어야 한다)</li>
+<li>[project]\src 에서 *.sln 열기</li>
+<li>Ctrl + F5, 성공하면 출력이 없어야 한다.</li>
+<li>Ctrl + `, 터미널을 연다, 개발자 명령 프롬프트 (개발자 PowerShell 말고)</li>
+<li>cd ..</li>
+<li>NuGet에서 기본 설치되어 있는 Amazon.CDK를 업그레이드 하거나 삭제 후 최신버전 설치</li>
+<li>NuGet에서 Amazone.CDK.AWS.S3 설치</li>
+<li>Infra 코딩 (테스트 코드에 BucketName 수정)
+자동으로 생성된 Stack 클래스의 생성자 함수 내부에 인프라 코드 입력</li>
+</ol>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-csharp" data-lang="csharp"><span style="">var</span> bucket = <span style="font-weight:bold">new</span> Bucket(<span style="font-weight:bold">this</span>, <span style="font-style:italic">&#34;MyBucket&#34;</span>, <span style="font-weight:bold">new</span> BucketProps
+{
+    Versioned = <span style="font-weight:bold">false</span>,
+    BucketName = <span style="font-style:italic">&#34;test-bucket&#34;</span>
+});
+</code></pre></div><ol start="11">
+<li>cdk bootstrap (Project root)</li>
+<li>cdk synth or Ctrl + F5</li>
+<li>cdk deploy</li>
+<li>cdk destroy</li>
+</ol>
 <h3 id="links">Links</h3>
 <p><a href="https://docs.aws.amazon.com/ko_kr/cdk/latest/guide/work-with-cdk-csharp.html">▶ Working with the AWS CDK in C#</a><br>
 <a href="https://github.com/darko-mesaros/workshop-serverless-with-cdk/">▶ Building Serverless Applications with CDK - Workshop</a></p>
