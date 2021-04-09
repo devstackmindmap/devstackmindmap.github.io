@@ -7,8 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="author" content="dykim" />
-  <meta property="og:url" content="http://example.org/posts/" />
-  <link rel="canonical" href="http://example.org/posts/" /><link rel="alternate" type="application/atom+xml" href="http://example.org/index.xml" title="DEV STACK MINDMAP">
+  <meta property="og:url" content="http://example.org/posts/20210409-cdk-deepdive-vpc/" />
+  <link rel="canonical" href="http://example.org/posts/20210409-cdk-deepdive-vpc/" /><link rel="alternate" type="application/atom+xml" href="http://example.org/index.xml" title="DEV STACK MINDMAP">
 
   <script type="application/ld+json">
   {
@@ -19,9 +19,9 @@
            "@id": "http:\/\/example.org\/"
       },
       "articleSection" : "posts",
-      "name" : "Posts",
-      "headline" : "Posts",
-      "description" : "",
+      "name" : "AWS CDK VPC",
+      "headline" : "AWS CDK VPC",
+      "description" : "VPC 생성하기 var vpc = new Vpc(this, \u0026#34;test-vpc\u0026#34;, new VpcProps { Cidr = \u0026#34;10.100.0.0\/16\u0026#34;, MaxAzs = 2, }); 생성된 리소스 List VPC : 10.100.0.0\/16\nSubnet :\nPublicSubnet1 : 10.100.0.0\/18\nPrivateSubnet2 : 10.100.64.0\/18\nPublicSubnet1 : 10.100.128.0\/18\nPrivateSubnet2 : 10.100.192.0\/18\nInternet gateways 1개 생성됨\nNAT Gateways 2개 생성됨\nSecurity Groups 생성됨\nRoute Tables 4개 생성됨\nNetwork ACLs 1개 생성됨\nElastic IPs 2개 생성됨\nA default VPC configuration will create public and private subnets.",
       "inLanguage" : "en-US",
       "author" : "dykim",
       "creator" : "dykim",
@@ -31,15 +31,39 @@
       "copyrightYear" : "2021",
       "datePublished": "2021-04-09 10:21:00 \u002b0900 KST",
       "dateModified" : "2021-04-09 10:21:00 \u002b0900 KST",
-      "url" : "http:\/\/example.org\/posts\/",
+      "url" : "http:\/\/example.org\/posts\/20210409-cdk-deepdive-vpc\/",
       "keywords" : [  ]
   }
 </script>
-<title>Posts</title>
-  <meta property="og:title" content="Posts" />
+<title>AWS CDK VPC</title>
+  <meta property="og:title" content="AWS CDK VPC" />
   <meta property="og:type" content="article" />
-  <meta property="og:description" content="" />
-  <meta name="description" content="" />
+  <meta property="og:description" content="VPC 생성하기 var vpc = new Vpc(this, &amp;#34;test-vpc&amp;#34;, new VpcProps { Cidr = &amp;#34;10.100.0.0/16&amp;#34;, MaxAzs = 2, }); 생성된 리소스 List VPC : 10.100.0.0/16
+Subnet :
+PublicSubnet1 : 10.100.0.0/18
+PrivateSubnet2 : 10.100.64.0/18
+PublicSubnet1 : 10.100.128.0/18
+PrivateSubnet2 : 10.100.192.0/18
+Internet gateways 1개 생성됨
+NAT Gateways 2개 생성됨
+Security Groups 생성됨
+Route Tables 4개 생성됨
+Network ACLs 1개 생성됨
+Elastic IPs 2개 생성됨
+A default VPC configuration will create public and private subnets." />
+  <meta name="description" content="VPC 생성하기 var vpc = new Vpc(this, &amp;#34;test-vpc&amp;#34;, new VpcProps { Cidr = &amp;#34;10.100.0.0/16&amp;#34;, MaxAzs = 2, }); 생성된 리소스 List VPC : 10.100.0.0/16
+Subnet :
+PublicSubnet1 : 10.100.0.0/18
+PrivateSubnet2 : 10.100.64.0/18
+PublicSubnet1 : 10.100.128.0/18
+PrivateSubnet2 : 10.100.192.0/18
+Internet gateways 1개 생성됨
+NAT Gateways 2개 생성됨
+Security Groups 생성됨
+Route Tables 4개 생성됨
+Network ACLs 1개 생성됨
+Elastic IPs 2개 생성됨
+A default VPC configuration will create public and private subnets." />
   <meta property="og:locale" content="en-us" />
 
   
@@ -65,10 +89,11 @@
 
 
 <body>
-  <article class="posts">
+  <article class="post " id="article">
     <div class="row">
       <div class="col-xs-12">
-        
+        <div class="site-header">
+          
 <header>
   <div class="header-title">
     <a href="/"
@@ -85,159 +110,89 @@
 </div>
 <div class="header-line"></div>
 
-
-        <h1 class="taxonomy-term"></h1>
-        <div id="posts-list">
-          <section>
-            <h1 class="site-date-catalog">2021</h1>
-
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-2">
-                <time datetime="2021-04-09 10:21:00 KST">Apr 09</time>
-              </div>
-              <div class="posts-title col-xs-10">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <a href="/posts/20210409-lambda-in-csharp/">AWS Lambda in C#</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-2">
-                <time datetime="2021-04-09 10:21:00 KST">Apr 09</time>
-              </div>
-              <div class="posts-title col-xs-10">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <a href="/posts/20210409-cdk-deepdive-vpc/">AWS CDK VPC</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-2">
-                <time datetime="2021-04-09 10:09:00 KST">Apr 09</time>
-              </div>
-              <div class="posts-title col-xs-10">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <a href="/posts/20210409-aws-price/">AWS Price</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-2">
-                <time datetime="2021-04-02 17:45:00 KST">Apr 02</time>
-              </div>
-              <div class="posts-title col-xs-10">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <a href="/posts/20210402-cdk/">CDK in C# </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-2">
-                <time datetime="2021-04-02 15:31:00 KST">Apr 02</time>
-              </div>
-              <div class="posts-title col-xs-10">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <a href="/posts/20210402-aws-storage-pricing/">AWS Storage, DB 요금</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-2">
-                <time datetime="2021-04-02 10:00:00 KST">Apr 02</time>
-              </div>
-              <div class="posts-title col-xs-10">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <a href="/posts/20210402-okr/">OKR</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-2">
-                <time datetime="2021-04-01 14:38:00 KST">Apr 01</time>
-              </div>
-              <div class="posts-title col-xs-10">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <a href="/posts/20210401-gamelift-remote/">GameLift Fleet 인스턴스 원격 접속</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-2">
-                <time datetime="2021-03-30 11:27:00 KST">Mar 30</time>
-              </div>
-              <div class="posts-title col-xs-10">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <a href="/posts/20210330-cloudfront-acm-route53/">CF &#43; S3 &#43; ACM &#43; Route53</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-2">
-                <time datetime="2021-03-29 23:44:00 KST">Mar 29</time>
-              </div>
-              <div class="posts-title col-xs-10">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <a href="/posts/20210329-auto-scaling/">Auto Scaling</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-2">
-                <time datetime="2021-03-29 21:36:00 KST">Mar 29</time>
-              </div>
-              <div class="posts-title col-xs-10">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <a href="/posts/20210329-right-sizing/">Right Sizing</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-2">
-                <time datetime="2021-03-21 22:51:37 KST">Mar 21</time>
-              </div>
-              <div class="posts-title col-xs-10">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <a href="/posts/20210321-start/">시작</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-          </section>
-          
         </div>
+        <header class="post-header">
+          <h1 class="post-title">AWS CDK VPC</h1>
+          
+          <div class="row post-desc">
+            <div class="col-xs-6">
+              
+              <time class="post-date" datetime="2021-04-09 10:21:00 KST">
+                09 Apr 2021
+              </time>
+              
+            </div>
+            <div class="col-xs-6">
+              
+              <div class="post-author">
+                <a target="_blank" href="">@dykim</a>
+              </div>
+              
+            </div>
+          </div>
+          
+        </header>
+
+        <div class="post-content markdown-body">
+          
+          <hr>
+<h3 id="vpc-생성하기">VPC 생성하기</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-csharp" data-lang="csharp"><span style="">var</span> vpc = <span style="font-weight:bold">new</span> Vpc(<span style="font-weight:bold">this</span>, <span style="font-style:italic">&#34;test-vpc&#34;</span>, <span style="font-weight:bold">new</span> VpcProps
+{
+    Cidr = <span style="font-style:italic">&#34;10.100.0.0/16&#34;</span>,
+    MaxAzs = 2,     
+});
+</code></pre></div><h4 id="생성된-리소스-list">생성된 리소스 List</h4>
+<p>VPC : 
+10.100.0.0/16<br>
+Subnet :<br>
+PublicSubnet1 : 10.100.0.0/18<br>
+PrivateSubnet2 : 10.100.64.0/18<br>
+PublicSubnet1 : 10.100.128.0/18<br>
+PrivateSubnet2 : 10.100.192.0/18</p>
+<p>Internet gateways 1개 생성됨<br>
+NAT Gateways 2개 생성됨<br>
+Security Groups 생성됨<br>
+Route Tables 4개 생성됨<br>
+Network ACLs 1개 생성됨<br>
+Elastic IPs 2개 생성됨</p>
+<p>A default VPC configuration will create public and private subnets. However, if natGateways:0 and subnetConfiguration is undefined, default VPC configuration will create public and isolated subnets.</p>
+<hr>
+<h3 id="availabilityzone-한정-하기">AvailabilityZone 한정 하기</h3>
+<p>Stack 클래스의 AvailabilityZones 함수를 override 하면 된다.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-csharp" data-lang="csharp"><span style="font-weight:bold">public</span> <span style="font-weight:bold">override</span> <span style="">string</span>[] AvailabilityZones
+{ 
+    <span style="font-weight:bold">get</span> { <span style="font-weight:bold">return</span> <span style="font-weight:bold">new</span> <span style="">string</span>[] { <span style="font-style:italic">&#34;ap-northeast-2a&#34;</span>, <span style="font-style:italic">&#34;ap-northeast-2c&#34;</span> }; } 
+}
+</code></pre></div><hr>
+<hr>
+<h3 id="links">Links</h3>
+<p><a href="https://aws.amazon.com/ko/vpc/faqs/">▶ Amazon VPC FAQ</a><br>
+<a href="https://aws.amazon.com/ko/vpc/pricing/">▶ Amazon VPC 요금</a></p>
+
+        </div>
+
+        <div class="row middle-xs">
+          <div class="col-xs-12">
+            
+          </div>
+        </div>
+        
+          <div class="row">
+            <div class="col-xs-12">
+              
+            </div>
+          </div>
+
+          
+
+
+
+          
+          
+          <div style="height: 50px;"></div>
+          
+        
 
         <div class="site-footer">
   
@@ -257,6 +212,8 @@
     
   
 </script>
+
+  
 
 </body>
 
