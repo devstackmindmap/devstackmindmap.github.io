@@ -141,15 +141,30 @@ Visual Studio를 열면 AWS Getting Started 창이 열리고 Access Key, Secret 
 <img src="/images/lambda-009.png" alt="image" title="sample"></p>
 <p>강력한 템플릿들이 있네요. 일단 Empty Function으로 만들어 봅시다.
 <img src="/images/lambda-010.png" alt="image" title="sample"></p>
-<p><img src="/images/lambda-011.png" alt="image" title="sample"><br>
-<img src="/images/lambda-012.png" alt="image" title="sample"><br>
-<img src="/images/lambda-013.png" alt="image" title="sample"><br>
+<p>자동으로 생성된 구성입니다.
+<img src="/images/lambda-011.png" alt="image" title="sample"></p>
+<p>함수를 작성하고 솔루션 탐색기 프로젝트에서 오른 클릭하여 &ldquo;Publish to AWS Lambda&hellip;&ldquo;를 통해 배포할 수 있습니다.<br>
+<img src="/images/lambda-012.png" alt="image" title="sample"></p>
+<p>배포하기 전 해당 람다 함수의 Security Group과 Role을 추가 하였습니다.<br>
+람다 생성 시 준 권한들</p>
+<ul>
+<li>AmazonRDSDataFullAccess</li>
+<li>AWSLambdaBasicExecutionRole</li>
+<li>AWSLambdaVPCAccessExecutionRole</li>
+</ul>
+<p>Lambda 함수 업로드(Upload Lambda Function) 창에서 함수의 이름을 입력하거나 이전에 게시된 함수를 선택하여 다시 게시합니다. 그런 다음 [Next]를 선택합니다.<br>
+<img src="/images/lambda-013.png" alt="image" title="sample"></p>
+<p>미리 생성한 Role과 Security Group을 설정하고 subnet도 설정하고 Upload 합니다.
 <img src="/images/lambda-014.png" alt="image" title="sample"><br>
 <img src="/images/lambda-015.png" alt="image" title="sample"><br>
 <img src="/images/lambda-016.png" alt="image" title="sample"></p>
+<p>AWSLambdaVPCAccessExecutionRole  권한의 경우
+<a href="https://docs.aws.amazon.com/ko_kr/lambda/latest/dg/configuration-vpc.html">https://docs.aws.amazon.com/ko_kr/lambda/latest/dg/configuration-vpc.html</a></p>
 <hr>
 <h3 id="links">Links</h3>
-<p><a href="https://aws.amazon.com/ko/blogs/korea/developing-net-core-aws-lambda-functions/">▶ AWS Lambda 함수로 .NET 애플리케이션 개발하기</a></p>
+<p><a href="https://aws.amazon.com/ko/blogs/korea/developing-net-core-aws-lambda-functions/">▶ AWS Lambda 함수로 .NET 애플리케이션 개발하기</a><br>
+<a href="https://docs.aws.amazon.com/ko_kr/lambda/latest/dg/csharp-package-toolkit.html">▶ AWS Toolkit for Visual Studio</a><br>
+<a href="https://aws.amazon.com/ko/blogs/korea/aws-lambda-layers-with-net-core/">▶ .NET Core에서 AWS Lambda Layer 기능 활용하기</a></p>
 
         </div>
 

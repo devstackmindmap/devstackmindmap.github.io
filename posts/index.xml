@@ -51,8 +51,7 @@ Visual Studio를 열면 AWS Getting Started 창이 열리고 Access Key, Secret 
 VPC 생성 : VPC 자체를 생성 및 사용하는 데에는 별도의 비용이 없습니다.
 VPN과 연결 : VPN 연결 시간(VPN 연결이 &amp;ldquo;사용 가능&amp;rdquo; 상태인 시간)당 요금
 VPN 연결을 통해 전송된 데이터는 표준 AWS 데이터 전송 요금이 청구됩니다.
-Links ▶ Amazon VPC FAQ
-▶ Amazon VPC 요금</description>
+Amazon API Gateway Amazon API Gateway를 사용하면 API를 사용할 때만 비용을 지불하면 됩니다. 최소 요금이나 사전 약정은 없습니다. HTTP API와 REST API의 경우 수신한 API 호출과 전송한 데이터 양에 대해서만 요금을 지불하면 됩니다.</description>
     </item>
     
     <item>
