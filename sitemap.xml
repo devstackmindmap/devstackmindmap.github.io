@@ -3,22 +3,32 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://example.org/posts/20210414-api-gateway/</loc>
+    <lastmod>2021-04-14T18:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/</loc>
+    <lastmod>2021-04-14T18:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/posts/</loc>
+    <lastmod>2021-04-14T18:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/posts/20210414-lambda-csharp-serialize/</loc>
+    <lastmod>2021-04-14T09:56:00+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://example.org/posts/20210409-cdk-deepdive-vpc/</loc>
     <lastmod>2021-04-09T10:21:00+09:00</lastmod>
   </url>
   
   <url>
     <loc>http://example.org/posts/20210409-lambda-in-csharp/</loc>
-    <lastmod>2021-04-09T10:21:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://example.org/</loc>
-    <lastmod>2021-04-09T10:21:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://example.org/posts/</loc>
     <lastmod>2021-04-09T10:21:00+09:00</lastmod>
   </url>
   

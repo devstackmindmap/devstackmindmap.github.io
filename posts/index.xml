@@ -6,7 +6,32 @@
     <description>Recent content in Posts on DEV STACK MINDMAP</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 09 Apr 2021 10:21:00 +0900</lastBuildDate><atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 14 Apr 2021 18:00:00 +0900</lastBuildDate><atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AWS API Gateway</title>
+      <link>http://example.org/posts/20210414-api-gateway/</link>
+      <pubDate>Wed, 14 Apr 2021 18:00:00 +0900</pubDate>
+      
+      <guid>http://example.org/posts/20210414-api-gateway/</guid>
+      <description>미리 만들어 놓은 Lambda 함수와 연결합니다.
+1 2 3 4 5 </description>
+    </item>
+    
+    <item>
+      <title>AWS Lambda in C# 구현</title>
+      <link>http://example.org/posts/20210414-lambda-csharp-serialize/</link>
+      <pubDate>Wed, 14 Apr 2021 09:56:00 +0900</pubDate>
+      
+      <guid>http://example.org/posts/20210414-lambda-csharp-serialize/</guid>
+      <description>AWS Toolkit for Visual Studio에는 Visual Studio용 AWS Lambda .NET Core 프로젝트 템플릿이 포함되어 있습니다. .NET Core CLI(명령줄 인터페이스)를 사용하여 Visual Studio에 내장된 Lambda 함수를 배포할 수 있습니다.
+Visual Studio의 확장 관리로 갑시다.
+ Links ▶ AWS Lambda 함수로 .NET 애플리케이션 개발하기
+▶ AWS Toolkit for Visual Studio
+▶ .NET Core에서 AWS Lambda Layer 기능 활용하기 ▶ VPC에서 리소스에 액세스하도록 Lambda 함수 구성
+▶ HttpWebRequest 활용
+▶ Custom Serializer Settings</description>
+    </item>
+    
     <item>
       <title>AWS CDK VPC</title>
       <link>http://example.org/posts/20210409-cdk-deepdive-vpc/</link>
@@ -29,7 +54,7 @@ A default VPC configuration will create public and private subnets.</description
     </item>
     
     <item>
-      <title>AWS Lambda in C#</title>
+      <title>AWS Lambda with Visual Studio and C#</title>
       <link>http://example.org/posts/20210409-lambda-in-csharp/</link>
       <pubDate>Fri, 09 Apr 2021 10:21:00 +0900</pubDate>
       
