@@ -6,7 +6,21 @@
     <description>Recent content in Posts on DEV STACK MINDMAP</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 14 Apr 2021 18:00:00 +0900</lastBuildDate><atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 15 Apr 2021 16:56:00 +0900</lastBuildDate><atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Questions</title>
+      <link>http://example.org/posts/20210415-questions/</link>
+      <pubDate>Thu, 15 Apr 2021 16:56:00 +0900</pubDate>
+      
+      <guid>http://example.org/posts/20210415-questions/</guid>
+      <description>Lambda 통합을 사용하여 API Gateway REST API 구축
+: Lambda 프록시 통합, Lambda 비 프록시 통합 차이?
+Amazon API Gateway 요금
+: 처음 3억 3천 3백만 건에서 백만 건당 3.50 USD 인데 1건은 얼마?
+자습서: Lambda 비 프록시 통합을 사용하여 API Gateway REST API 빌드
+: 템플릿 경로 변수란?</description>
+    </item>
+    
     <item>
       <title>AWS API Gateway</title>
       <link>http://example.org/posts/20210414-api-gateway/</link>
@@ -14,7 +28,8 @@
       
       <guid>http://example.org/posts/20210414-api-gateway/</guid>
       <description>미리 만들어 놓은 Lambda 함수와 연결합니다.
-1 2 3 4 5 </description>
+1 2 3 4 5  Links AWS API type HTTP API vs REST API
+자습서: Lambda 비 프록시 통합을 사용하여 API Gateway REST API 빌드</description>
     </item>
     
     <item>
@@ -72,11 +87,10 @@ Visual Studio를 열면 AWS Getting Started 창이 열리고 Access Key, Secret 
       <pubDate>Fri, 09 Apr 2021 10:09:00 +0900</pubDate>
       
       <guid>http://example.org/posts/20210409-aws-price/</guid>
-      <description>회사에서 작성하고 평가하고 있는 OKR에 대해서 알아보자.
-VPC 생성 : VPC 자체를 생성 및 사용하는 데에는 별도의 비용이 없습니다.
+      <description>VPC 생성 : VPC 자체를 생성 및 사용하는 데에는 별도의 비용이 없습니다.
 VPN과 연결 : VPN 연결 시간(VPN 연결이 &amp;ldquo;사용 가능&amp;rdquo; 상태인 시간)당 요금
 VPN 연결을 통해 전송된 데이터는 표준 AWS 데이터 전송 요금이 청구됩니다.
-Amazon API Gateway Amazon API Gateway를 사용하면 API를 사용할 때만 비용을 지불하면 됩니다. 최소 요금이나 사전 약정은 없습니다. HTTP API와 REST API의 경우 수신한 API 호출과 전송한 데이터 양에 대해서만 요금을 지불하면 됩니다.</description>
+Amazon API Gateway Amazon API Gateway를 사용하면 API를 사용할 때만 비용을 지불하면 됩니다. 최소 요금이나 사전 약정은 없습니다. HTTP API와 REST API의 경우 수신한 API 호출과 전송한 데이터 양에 대해서만 요금을 지불하면 됩니다. 프라이빗 API에 대한 데이터 전송 요금은 없습니다.</description>
     </item>
     
     <item>
