@@ -6,7 +6,16 @@
     <description>Recent content in Posts on DEV STACK MINDMAP</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 19 Apr 2021 09:55:00 +0900</lastBuildDate><atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 20 Apr 2021 11:08:00 +0900</lastBuildDate><atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AWS Elastic Beanstalk</title>
+      <link>http://example.org/posts/20210420-beanstalk/</link>
+      <pubDate>Tue, 20 Apr 2021 11:08:00 +0900</pubDate>
+      
+      <guid>http://example.org/posts/20210420-beanstalk/</guid>
+      <description>AWS Elastic Beanstalk 란?  Elastic Beanstalk를 사용하면 애플리케이션을 실행하는 인프라에 대해 자세히 알지 못해도 AWS 클라우드에서 애플리케이션을 신속하게 배포하고 관리할 수 있습니다. Elastic Beanstalk를 사용하면 선택 또는 제어에 대한 제한 없이 관리 복잡성을 줄일 수 있습니다. 애플리케이션을 업로드하기만 하면 Elastic Beanstalk에서 용량 프로비저닝, 로드 밸런싱, 조정, 애플리케이션 상태 모니터링에 대한 세부 정보를 자동으로 처리합니다. Elastic Beanstalk는 Go, Java, .NET, Node.js, PHP, Python 및 Ruby에서 개발된 애플리케이션을 지원합니다.   Links ▶ AWS Elastic Beanstalk Documentation</description>
+    </item>
+    
     <item>
       <title>DDoS 방어를 위한 AWS 서비스</title>
       <link>http://example.org/posts/20210419-ddos/</link>
@@ -20,7 +29,7 @@ AWS Shield Standard, AWS Shield Advanced 서비스가 있으며 AWS Shield Stand
     </item>
     
     <item>
-      <title>DDoS 방어를 위한 AWS 서비스</title>
+      <title>Questions</title>
       <link>http://example.org/posts/20210415-questions/</link>
       <pubDate>Thu, 15 Apr 2021 16:56:00 +0900</pubDate>
       
