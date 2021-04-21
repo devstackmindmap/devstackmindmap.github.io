@@ -39,7 +39,12 @@ AWS Shield Standard, AWS Shield Advanced 서비스가 있으며 AWS Shield Stand
 Amazon API Gateway 요금
 : 처음 3억 3천 3백만 건에서 백만 건당 3.50 USD 인데 1건은 얼마?
 자습서: Lambda 비 프록시 통합을 사용하여 API Gateway REST API 빌드
-: 템플릿 경로 변수란?</description>
+: 템플릿 경로 변수란?
+GameLift에서 IAM을 사용하는 방법
+GameLiftGameServerGroupPolicy
+https://docs.aws.amazon.com/ko_kr/lambda/latest/dg/lambda-intro-execution-role.html
+aws iam create-role &amp;ndash;role-name lambda-ex &amp;ndash;assume-role-policy-document file://trust-policy.json
+{ &amp;ldquo;Role&amp;rdquo;: { &amp;ldquo;Path&amp;rdquo;: &amp;ldquo;/&amp;rdquo;, &amp;ldquo;RoleName&amp;rdquo;: &amp;ldquo;lambda-ex&amp;rdquo;, &amp;ldquo;RoleId&amp;rdquo;: &amp;ldquo;AROAQFOXMPL6TZ6ITKWND&amp;rdquo;, &amp;ldquo;Arn&amp;rdquo;: &amp;ldquo;arn:aws:iam::123456789012:role/lambda-ex&amp;rdquo;, &amp;ldquo;CreateDate&amp;rdquo;: &amp;ldquo;2020-01-17T23:19:12Z&amp;rdquo;, &amp;ldquo;AssumeRolePolicyDocument&amp;rdquo;: { &amp;ldquo;Version&amp;rdquo;: &amp;ldquo;2012-10-17&amp;rdquo;, &amp;ldquo;Statement&amp;rdquo;: [ { &amp;ldquo;Effect&amp;rdquo;: &amp;ldquo;Allow&amp;rdquo;, &amp;ldquo;Principal&amp;rdquo;: { &amp;ldquo;Service&amp;rdquo;: &amp;ldquo;lambda.</description>
     </item>
     
     <item>
