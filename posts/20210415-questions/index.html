@@ -201,6 +201,14 @@ private subnet 2개 생성</p>
 </ol>
 <hr>
 <p><a href="https://docs.aws.amazon.com/ko_kr/gamelift/latest/developerguide/vpc-peering.html">GameLift에 대한 VPC 피어링</a></p>
+<ol>
+<li>GameLift가 있는 그리고 비 GameLift 리소스의 AWS Account ID를 준비한다.</li>
+<li>GameLift의 VPC ID (Fleet ID), 비 GameLift 리소스의 VPC ID를 준비한다.</li>
+<li>VPC peering을 승인한다.</li>
+</ol>
+<p>create-vpc-peering-authorization
+&ndash;game-lift-aws-account-id <value>
+&ndash;peer-vpc-id <value></p>
 <p>aws gamelift create-vpc-peering-authorization &ndash;game-lift-aws-account-id 831150897155 &ndash;peer-vpc-id vpc-87be03ec
 {
 &ldquo;VpcPeeringAuthorization&rdquo;: {
@@ -209,6 +217,18 @@ private subnet 2개 생성</p>
 &ldquo;PeerVpcId&rdquo;: &ldquo;vpc-87be03ec&rdquo;,
 &ldquo;CreationTime&rdquo;: &ldquo;2021-04-22T14:05:10.867000+09:00&rdquo;,
 &ldquo;ExpirationTime&rdquo;: &ldquo;2021-04-23T14:05:10+09:00&rdquo;
+}
+}</p>
+<hr>
+<p>20210423<br>
+$ aws gamelift create-vpc-peering-authorization &ndash;game-lift-aws-account-id 831150897155 &ndash;peer-vpc-id 831150897155
+{
+&ldquo;VpcPeeringAuthorization&rdquo;: {
+&ldquo;GameLiftAwsAccountId&rdquo;: &ldquo;831150897155&rdquo;,
+&ldquo;PeerVpcAwsAccountId&rdquo;: &ldquo;831150897155&rdquo;,
+&ldquo;PeerVpcId&rdquo;: &ldquo;831150897155&rdquo;,
+&ldquo;CreationTime&rdquo;: &ldquo;2021-04-22T15:17:37.754000+09:00&rdquo;,
+&ldquo;ExpirationTime&rdquo;: &ldquo;2021-04-24T15:21:22+09:00&rdquo;
 }
 }</p>
 <p>aws gamelift describe-vpc-peering-connections &ndash;fleet-id fleet-d53207f4-6a43-467c-8c96-50edf1852a31</p>

@@ -6,7 +6,34 @@
     <description>Recent content in Posts on DEV STACK MINDMAP</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 20 Apr 2021 11:08:00 +0900</lastBuildDate><atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 23 Apr 2021 14:08:00 +0900</lastBuildDate><atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AWS EC2 문제들</title>
+      <link>http://example.org/posts/20210423-ec2-issues/</link>
+      <pubDate>Fri, 23 Apr 2021 14:08:00 +0900</pubDate>
+      
+      <guid>http://example.org/posts/20210423-ec2-issues/</guid>
+      <description>M4 To M5 변경 시 고려 사항 Linux 인스턴스에서 ENA(Elastic Network Adapter)를 사용하여 향상된 네트워킹 활성화
+ENA Linux Kernel Driver Release notes
+https://forums.aws.amazon.com/thread.jspa?threadID=268592
+ Links ▶</description>
+    </item>
+    
+    <item>
+      <title>GameLift Peering</title>
+      <link>http://example.org/posts/20210423-gamelift-peering/</link>
+      <pubDate>Fri, 23 Apr 2021 14:08:00 +0900</pubDate>
+      
+      <guid>http://example.org/posts/20210423-gamelift-peering/</guid>
+      <description>EC2에서 원격 GameLift로 CreateGameSession
+Local에서 원격 GameLift로 CreateGameSession
+둘다 되는데
+Lambda에서 원격 GameLift로 CreateGameSession 이 안됨.
+ CloudTrail에서 로그를 보면 CreateGameSession 호출 자체를 못함 CloudWatch에서 로그를 확인하면 호출 직전 로그 찍힘 해당 람다는 VPC 내에 있음 람다가 가지고 있는 Role   CustomLambdaRole : GameLiftFullAccess, AmazonRDSDataFullAccess, AWSLambdaBasicExecutionRole, AWSLambdaVPCAccessExecutionRole   권한 문제는 없고 네트워크 문제였음. 람다는 GameLift로 바로 통신되지 않음
+  람다가 VPC 외부에 있다면 바로 됨.
+VPC 내부에 있다면 Internet Gateway를 탈 수 없기 때문에 NAT를 통해 통신 해야함</description>
+    </item>
+    
     <item>
       <title>AWS Elastic Beanstalk</title>
       <link>http://example.org/posts/20210420-beanstalk/</link>
