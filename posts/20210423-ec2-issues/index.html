@@ -21,7 +21,7 @@
       "articleSection" : "posts",
       "name" : "AWS EC2 문제들",
       "headline" : "AWS EC2 문제들",
-      "description" : "M4 To M5 변경 시 고려 사항 Linux 인스턴스에서 ENA(Elastic Network Adapter)를 사용하여 향상된 네트워킹 활성화\nENA Linux Kernel Driver Release notes\nhttps:\/\/forums.aws.amazon.com\/thread.jspa?threadID=268592\n Links ▶",
+      "description" : "Credit 및 Burster 내용 이해 및 숙지 T Type Instance에 대해 알아보자.\n문서에서 확인해보면 성능 순간 확장 가능 인스턴스 라고 한다.\n기본 수준의 CPU 성능과 함께 워크로드에서 필요한 만큼 성능을 높이는 버스트 기능을 제공하도록 설계되어 있다. 여기서 기본 수준이 어느 정도이고 필요한 만큼 성능을 높이는 버스트 기능이 어떻게 작동하는지 이해해야 하겠다.\n시간 당 요금이 비슷한 인스턴스들을 가지고 조금 비교해 보자. (서울 기준)\n    인스턴스 이름 온디맨드 시간당 요금 vCPU 메모리 스토리지 네트워크 성능     t3.",
       "inLanguage" : "en-US",
       "author" : "dykim",
       "creator" : "dykim",
@@ -38,14 +38,16 @@
 <title>AWS EC2 문제들</title>
   <meta property="og:title" content="AWS EC2 문제들" />
   <meta property="og:type" content="article" />
-  <meta property="og:description" content="M4 To M5 변경 시 고려 사항 Linux 인스턴스에서 ENA(Elastic Network Adapter)를 사용하여 향상된 네트워킹 활성화
-ENA Linux Kernel Driver Release notes
-https://forums.aws.amazon.com/thread.jspa?threadID=268592
- Links ▶" />
-  <meta name="description" content="M4 To M5 변경 시 고려 사항 Linux 인스턴스에서 ENA(Elastic Network Adapter)를 사용하여 향상된 네트워킹 활성화
-ENA Linux Kernel Driver Release notes
-https://forums.aws.amazon.com/thread.jspa?threadID=268592
- Links ▶" />
+  <meta property="og:description" content="Credit 및 Burster 내용 이해 및 숙지 T Type Instance에 대해 알아보자.
+문서에서 확인해보면 성능 순간 확장 가능 인스턴스 라고 한다.
+기본 수준의 CPU 성능과 함께 워크로드에서 필요한 만큼 성능을 높이는 버스트 기능을 제공하도록 설계되어 있다. 여기서 기본 수준이 어느 정도이고 필요한 만큼 성능을 높이는 버스트 기능이 어떻게 작동하는지 이해해야 하겠다.
+시간 당 요금이 비슷한 인스턴스들을 가지고 조금 비교해 보자. (서울 기준)
+    인스턴스 이름 온디맨드 시간당 요금 vCPU 메모리 스토리지 네트워크 성능     t3." />
+  <meta name="description" content="Credit 및 Burster 내용 이해 및 숙지 T Type Instance에 대해 알아보자.
+문서에서 확인해보면 성능 순간 확장 가능 인스턴스 라고 한다.
+기본 수준의 CPU 성능과 함께 워크로드에서 필요한 만큼 성능을 높이는 버스트 기능을 제공하도록 설계되어 있다. 여기서 기본 수준이 어느 정도이고 필요한 만큼 성능을 높이는 버스트 기능이 어떻게 작동하는지 이해해야 하겠다.
+시간 당 요금이 비슷한 인스턴스들을 가지고 조금 비교해 보자. (서울 기준)
+    인스턴스 이름 온디맨드 시간당 요금 vCPU 메모리 스토리지 네트워크 성능     t3." />
   <meta property="og:locale" content="en-us" />
 
   
@@ -117,13 +119,63 @@ https://forums.aws.amazon.com/thread.jspa?threadID=268592
 
         <div class="post-content markdown-body">
           
-          <h3 id="m4-to-m5-변경-시-고려-사항">M4 To M5 변경 시 고려 사항</h3>
+          <hr>
+<h3 id="credit-및-burster-내용-이해-및-숙지">Credit 및 Burster 내용 이해 및 숙지</h3>
+<p>T Type Instance에 대해 알아보자.<br>
+<br>
+문서에서 확인해보면  <a href="https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/burstable-performance-instances.html">성능 순간 확장 가능 인스턴스</a> 라고 한다.<br>
+기본 수준의 CPU 성능과 함께 워크로드에서 필요한 만큼 성능을 높이는 버스트 기능을 제공하도록 설계되어 있다. 여기서 <strong>기본 수준</strong>이 어느 정도이고 필요한 만큼 성능을 높이는 <strong>버스트 기능</strong>이 어떻게 작동하는지 이해해야 하겠다.</p>
+<p>시간 당 <a href="https://aws.amazon.com/ko/ec2/pricing/on-demand/">요금</a>이 비슷한 인스턴스들을 가지고 조금 비교해 보자. (서울 기준)</p>
+<hr>
+<table>
+<thead>
+<tr>
+<th>인스턴스 이름</th>
+<th>온디맨드 시간당 요금</th>
+<th>vCPU</th>
+<th>메모리</th>
+<th>스토리지</th>
+<th>네트워크 성능</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>t3.xlarge</td>
+<td>0.208 USD</td>
+<td>4</td>
+<td>16GiB</td>
+<td>EBS 전용</td>
+<td>최대 5기가비트</td>
+</tr>
+<tr>
+<td>m5.xlarge</td>
+<td>0.236 USD</td>
+<td>4</td>
+<td>16Gib</td>
+<td>EBS 전용</td>
+<td>최대 10기가비트</td>
+</tr>
+<tr>
+<td>c5.xlarge</td>
+<td>0.192 USD</td>
+<td>4</td>
+<td>8 Gib</td>
+<td>EBS 전용</td>
+<td>최대 10기가비트</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>이것만 봐서 성능을 잘 모르겠다.<br>
+다행히 자세한 문서가 있다.</p>
+<p><a href="https://aws.amazon.com/ko/ec2/instance-types/m5/">https://aws.amazon.com/ko/ec2/instance-types/m5/</a><br>
+<a href="https://aws.amazon.com/ko/ec2/instance-types/t3/">https://aws.amazon.com/ko/ec2/instance-types/t3/</a><br>
+<a href="https://aws.amazon.com/ko/ec2/instance-types/c5/">https://aws.amazon.com/ko/ec2/instance-types/c5/</a></p>
+<hr>
+<h3 id="links">Links</h3>
 <p><a href="https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/enhanced-networking-ena.html">Linux 인스턴스에서 ENA(Elastic Network Adapter)를 사용하여 향상된 네트워킹 활성화</a></p>
 <p><a href="https://github.com/amzn/amzn-drivers/blob/master/kernel/linux/ena/RELEASENOTES.md">ENA Linux Kernel Driver Release notes</a></p>
 <p><a href="https://forums.aws.amazon.com/thread.jspa?threadID=268592">https://forums.aws.amazon.com/thread.jspa?threadID=268592</a></p>
-<hr>
-<h3 id="links">Links</h3>
-<p><a href="">▶</a></p>
 
         </div>
 

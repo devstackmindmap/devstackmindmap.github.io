@@ -13,10 +13,11 @@
       <pubDate>Fri, 23 Apr 2021 14:08:00 +0900</pubDate>
       
       <guid>http://example.org/posts/20210423-ec2-issues/</guid>
-      <description>M4 To M5 변경 시 고려 사항 Linux 인스턴스에서 ENA(Elastic Network Adapter)를 사용하여 향상된 네트워킹 활성화
-ENA Linux Kernel Driver Release notes
-https://forums.aws.amazon.com/thread.jspa?threadID=268592
- Links ▶</description>
+      <description>Credit 및 Burster 내용 이해 및 숙지 T Type Instance에 대해 알아보자.
+문서에서 확인해보면 성능 순간 확장 가능 인스턴스 라고 한다.
+기본 수준의 CPU 성능과 함께 워크로드에서 필요한 만큼 성능을 높이는 버스트 기능을 제공하도록 설계되어 있다. 여기서 기본 수준이 어느 정도이고 필요한 만큼 성능을 높이는 버스트 기능이 어떻게 작동하는지 이해해야 하겠다.
+시간 당 요금이 비슷한 인스턴스들을 가지고 조금 비교해 보자. (서울 기준)
+    인스턴스 이름 온디맨드 시간당 요금 vCPU 메모리 스토리지 네트워크 성능     t3.</description>
     </item>
     
     <item>
@@ -143,7 +144,7 @@ Visual Studio를 열면 AWS Getting Started 창이 열리고 Access Key, Secret 
       <description>VPC 생성 : VPC 자체를 생성 및 사용하는 데에는 별도의 비용이 없습니다.
 VPN과 연결 : VPN 연결 시간(VPN 연결이 &amp;ldquo;사용 가능&amp;rdquo; 상태인 시간)당 요금
 VPN 연결을 통해 전송된 데이터는 표준 AWS 데이터 전송 요금이 청구됩니다.
-Amazon API Gateway Amazon API Gateway를 사용하면 API를 사용할 때만 비용을 지불하면 됩니다. 최소 요금이나 사전 약정은 없습니다. HTTP API와 REST API의 경우 수신한 API 호출과 전송한 데이터 양에 대해서만 요금을 지불하면 됩니다. 프라이빗 API에 대한 데이터 전송 요금은 없습니다.</description>
+ Amazon API Gateway Amazon API Gateway를 사용하면 API를 사용할 때만 비용을 지불하면 됩니다. 최소 요금이나 사전 약정은 없습니다. HTTP API와 REST API의 경우 수신한 API 호출과 전송한 데이터 양에 대해서만 요금을 지불하면 됩니다. 프라이빗 API에 대한 데이터 전송 요금은 없습니다.</description>
     </item>
     
     <item>
@@ -200,7 +201,7 @@ OKR 설정은 어떻게 하는 것인지?
       <guid>http://example.org/posts/20210401-gamelift-remote/</guid>
       <description>연결할 인스턴스 ID 찾기 aws gamelift describe-instances --fleet-id FLEET-ID
 인스턴스에 대한 액세스 자격 증명을 요청 aws gamelift get-instance-access --fleet-id FLEET-ID --instance-id INSTANCE-ID
-원격 연결을 위한 포트 열기 aws gamelift update-fleet-port-settings --fleet-id FLEET-ID --inbound-permission-authorizations &amp;ldquo;FromPort=3389,ToPort=3389,IpRange=LOCAL-IP/32,Protocol=TCP&amp;rdquo;
+원격 연결을 위한 포트 열기 aws gamelift update-fleet-port-settings --fleet-id FLEET-ID --inbound-permission-authorizations &amp;ldquo;FromPort=3389,ToPort=3389,IpRange=LOCAL-PUBLIC-IP/32,Protocol=TCP&amp;rdquo;
 Links ▶ 원격으로 GameLift 플릿 인스턴스에 액세스</description>
     </item>
     
@@ -258,14 +259,15 @@ Metric의 경우 표준 지표와 커스텀 지표가 있다.
     </item>
     
     <item>
-      <title>시작</title>
+      <title>블로그 시작</title>
       <link>http://example.org/posts/20210321-start/</link>
       <pubDate>Sun, 21 Mar 2021 22:51:37 +0900</pubDate>
       
       <guid>http://example.org/posts/20210321-start/</guid>
-      <description>적지 않은 시간 개발자로 일해왔다.
-프로젝트에 집중했지만 기술에 대해 기록하고 정리하는 시간을 가지지 못했다.
-100세 시대인 만큼 지금까지 일한 기간 보다 더 오랜 기간 개발자로서 일해야 하기에 기록을 하기로 했다.</description>
+      <description>적지 않은 시간을 개발자로 일해왔다.
+프로젝트에 집중했지만, 기술에 대해 기록하고 정리하는 시간을 가지지 않았다.
+정리에 자신 있는 편은 아니지만 정리하지 않으면 경험했던 기술이 내 것으로 되지 않는 것 같다.
+기록하고 기술을 내 것으로 만들자.</description>
     </item>
     
   </channel>

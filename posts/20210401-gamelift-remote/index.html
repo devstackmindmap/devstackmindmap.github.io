@@ -21,7 +21,7 @@
       "articleSection" : "posts",
       "name" : "GameLift Fleet 인스턴스 원격 접속",
       "headline" : "GameLift Fleet 인스턴스 원격 접속",
-      "description" : "연결할 인스턴스 ID 찾기 aws gamelift describe-instances --fleet-id FLEET-ID\n인스턴스에 대한 액세스 자격 증명을 요청 aws gamelift get-instance-access --fleet-id FLEET-ID --instance-id INSTANCE-ID\n원격 연결을 위한 포트 열기 aws gamelift update-fleet-port-settings --fleet-id FLEET-ID --inbound-permission-authorizations \u0026ldquo;FromPort=3389,ToPort=3389,IpRange=LOCAL-IP\/32,Protocol=TCP\u0026rdquo;\nLinks ▶ 원격으로 GameLift 플릿 인스턴스에 액세스",
+      "description" : "연결할 인스턴스 ID 찾기 aws gamelift describe-instances --fleet-id FLEET-ID\n인스턴스에 대한 액세스 자격 증명을 요청 aws gamelift get-instance-access --fleet-id FLEET-ID --instance-id INSTANCE-ID\n원격 연결을 위한 포트 열기 aws gamelift update-fleet-port-settings --fleet-id FLEET-ID --inbound-permission-authorizations \u0026ldquo;FromPort=3389,ToPort=3389,IpRange=LOCAL-PUBLIC-IP\/32,Protocol=TCP\u0026rdquo;\nLinks ▶ 원격으로 GameLift 플릿 인스턴스에 액세스",
       "inLanguage" : "en-US",
       "author" : "dykim",
       "creator" : "dykim",
@@ -40,11 +40,11 @@
   <meta property="og:type" content="article" />
   <meta property="og:description" content="연결할 인스턴스 ID 찾기 aws gamelift describe-instances --fleet-id FLEET-ID
 인스턴스에 대한 액세스 자격 증명을 요청 aws gamelift get-instance-access --fleet-id FLEET-ID --instance-id INSTANCE-ID
-원격 연결을 위한 포트 열기 aws gamelift update-fleet-port-settings --fleet-id FLEET-ID --inbound-permission-authorizations &amp;ldquo;FromPort=3389,ToPort=3389,IpRange=LOCAL-IP/32,Protocol=TCP&amp;rdquo;
+원격 연결을 위한 포트 열기 aws gamelift update-fleet-port-settings --fleet-id FLEET-ID --inbound-permission-authorizations &amp;ldquo;FromPort=3389,ToPort=3389,IpRange=LOCAL-PUBLIC-IP/32,Protocol=TCP&amp;rdquo;
 Links ▶ 원격으로 GameLift 플릿 인스턴스에 액세스" />
   <meta name="description" content="연결할 인스턴스 ID 찾기 aws gamelift describe-instances --fleet-id FLEET-ID
 인스턴스에 대한 액세스 자격 증명을 요청 aws gamelift get-instance-access --fleet-id FLEET-ID --instance-id INSTANCE-ID
-원격 연결을 위한 포트 열기 aws gamelift update-fleet-port-settings --fleet-id FLEET-ID --inbound-permission-authorizations &amp;ldquo;FromPort=3389,ToPort=3389,IpRange=LOCAL-IP/32,Protocol=TCP&amp;rdquo;
+원격 연결을 위한 포트 열기 aws gamelift update-fleet-port-settings --fleet-id FLEET-ID --inbound-permission-authorizations &amp;ldquo;FromPort=3389,ToPort=3389,IpRange=LOCAL-PUBLIC-IP/32,Protocol=TCP&amp;rdquo;
 Links ▶ 원격으로 GameLift 플릿 인스턴스에 액세스" />
   <meta property="og:locale" content="en-us" />
 
@@ -122,7 +122,7 @@ Links ▶ 원격으로 GameLift 플릿 인스턴스에 액세스" />
 <h3 id="인스턴스에-대한-액세스-자격-증명을-요청">인스턴스에 대한 액세스 자격 증명을 요청</h3>
 <p>aws gamelift get-instance-access --fleet-id FLEET-ID --instance-id INSTANCE-ID</p>
 <h3 id="원격-연결을-위한-포트-열기">원격 연결을 위한 포트 열기</h3>
-<p>aws gamelift update-fleet-port-settings --fleet-id FLEET-ID --inbound-permission-authorizations &ldquo;FromPort=3389,ToPort=3389,IpRange=LOCAL-IP/32,Protocol=TCP&rdquo;</p>
+<p>aws gamelift update-fleet-port-settings --fleet-id FLEET-ID --inbound-permission-authorizations &ldquo;FromPort=3389,ToPort=3389,IpRange=LOCAL-PUBLIC-IP/32,Protocol=TCP&rdquo;</p>
 <h3 id="links">Links</h3>
 <p><a href="https://docs.aws.amazon.com/ko_kr/gamelift/latest/developerguide/fleets-remote-access.html">▶ 원격으로 GameLift 플릿 인스턴스에 액세스</a></p>
 
