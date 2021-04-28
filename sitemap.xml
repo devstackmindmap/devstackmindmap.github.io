@@ -3,22 +3,27 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://example.org/posts/20210428-rds-performance/</loc>
+    <lastmod>2021-04-28T13:47:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/</loc>
+    <lastmod>2021-04-28T13:47:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://example.org/posts/</loc>
+    <lastmod>2021-04-28T13:47:00+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://example.org/posts/20210423-ec2-issues/</loc>
     <lastmod>2021-04-23T14:08:00+09:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/</loc>
-    <lastmod>2021-04-23T14:08:00+09:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://example.org/posts/20210423-gamelift-peering/</loc>
-    <lastmod>2021-04-23T14:08:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://example.org/posts/</loc>
     <lastmod>2021-04-23T14:08:00+09:00</lastmod>
   </url>
   

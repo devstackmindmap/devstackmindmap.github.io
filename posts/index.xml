@@ -6,7 +6,17 @@
     <description>Recent content in Posts on DEV STACK MINDMAP</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 23 Apr 2021 14:08:00 +0900</lastBuildDate><atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 28 Apr 2021 13:47:00 +0900</lastBuildDate><atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Aboud RDS Performance</title>
+      <link>http://example.org/posts/20210428-rds-performance/</link>
+      <pubDate>Wed, 28 Apr 2021 13:47:00 +0900</pubDate>
+      
+      <guid>http://example.org/posts/20210428-rds-performance/</guid>
+      <description>▶ Amazon RDS DB 인스턴스 스토리지 ▶ 스토리지 성능에 영향을 끼치는 요인
+ Links ▶</description>
+    </item>
+    
     <item>
       <title>AWS EC2 문제들</title>
       <link>http://example.org/posts/20210423-ec2-issues/</link>
