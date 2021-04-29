@@ -6,15 +6,33 @@
     <description>Recent content on DEV STACK MINDMAP</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 28 Apr 2021 13:47:00 +0900</lastBuildDate><atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 29 Apr 2021 11:00:00 +0900</lastBuildDate><atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Aboud RDS Performance</title>
+      <title>Data Lake</title>
+      <link>http://example.org/posts/20210429-etl/</link>
+      <pubDate>Thu, 29 Apr 2021 11:00:00 +0900</pubDate>
+      
+      <guid>http://example.org/posts/20210429-etl/</guid>
+      <description>Data Lake 란 가공되지 않은 다양한 종류의 데이터를 한 곳에 모아둔 저장소의 집합이다.
+ Data Warehouse(DW) 란 사용자의 의사 결정에 도움을 주기 위하여 기간시스템의 데이터베이스에 축적된 데이터를 공통의 형식으로 변환해서 관리하는 데이터베이스를 말한다. 줄여서 DW로도 불린다.
+ Data Lake vs DW 비정형 vs 정형
+ ETL 이란 추출(Extract), 변환(Transform), 로드(Load)
+ ELK 란 ELK( ELK Stack )는 Elastic사 에서 제공하는 Elasticsearch, Logstash, Kibana의 세 가지 오픈 소스 프로젝트의 약자입니다.</description>
+    </item>
+    
+    <item>
+      <title>About RDS</title>
       <link>http://example.org/posts/20210428-rds-performance/</link>
       <pubDate>Wed, 28 Apr 2021 13:47:00 +0900</pubDate>
       
       <guid>http://example.org/posts/20210428-rds-performance/</guid>
-      <description>▶ Amazon RDS DB 인스턴스 스토리지 ▶ 스토리지 성능에 영향을 끼치는 요인
- Links ▶</description>
+      <description>RDS 생성 시 Storage 용량 지정 Allocated Storage와 Maximum storage threshold 값 지정
+Maximum storage threshold 값은 최대 값.
+만약 Allocated Storage 값을 넘어서면 자동으로 storage가 확장되며
+자동으로 확장된다면 비용이 지불된다.
+Storage type Provisioned IOPS는 IOPS를 특정 범위 (1,000 ~ 80,000 IOPS) 내에서 지정할 수 있지만
+Storage type General Purpose는 1GiB당 3 IOPS 이다.
+만약 Storage 1 Tib 에 20,000 IOPS를 원한다면 Genral Purpose Storage type 이 아니라 Provisioned IOPS를 선택해야 한다.</description>
     </item>
     
     <item>
