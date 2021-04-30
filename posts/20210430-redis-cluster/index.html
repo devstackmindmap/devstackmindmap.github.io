@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us" prefix="og: http://ogp.me/ns#">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="generator" content="Hugo 0.80.0" />
@@ -7,8 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="author" content="dykim" />
-  <meta property="og:url" content="http://example.org/" />
-  <link rel="canonical" href="http://example.org/" /><link rel="alternate" type="application/atom+xml" href="http://example.org/index.xml" title="DEV STACK MINDMAP">
+  <meta property="og:url" content="http://example.org/posts/20210430-redis-cluster/" />
+  <link rel="canonical" href="http://example.org/posts/20210430-redis-cluster/" /><link rel="alternate" type="application/atom+xml" href="http://example.org/index.xml" title="DEV STACK MINDMAP">
 
   <script type="application/ld+json">
   {
@@ -18,10 +18,10 @@
            "@type": "WebPage",
            "@id": "http:\/\/example.org\/"
       },
-      "articleSection" : "",
-      "name" : "DEV STACK MINDMAP",
-      "headline" : "DEV STACK MINDMAP",
-      "description" : "",
+      "articleSection" : "posts",
+      "name" : "Redis Cluster",
+      "headline" : "Redis Cluster",
+      "description" : "2개 샤드, 0개 Replicas로 클러스터 생성 Cloud9 실행 cluster client 라이브러리 설치 sudo pip3 install redis-py-cluster Code 실행   import rediscluster import sys if __name__ == \u0026#34;__main__\u0026#34;: # Connect Cluster startup_nodes = [{ \u0026#34;host\u0026#34;: \u0026#34;test-redis-cluster-0001-001.xcugux.0001.apn2.cache.amazonaws.com\u0026#34;, \u0026#34;port\u0026#34;: \u0026#34;6379\u0026#34;}, {\u0026#34;host\u0026#34;: \u0026#34;test-redis-cluster-0002-001.xcugux.0001.apn2.cache.amazonaws.com\u0026#34;, \u0026#34;port\u0026#34;:\u0026#34;6379\u0026#34;}, {\u0026#34;test-redis-cluster-0003-001.xcugux.0001.apn2.cache.amazonaws.com\u0026#34;, \u0026#34;port\u0026#34;:\u0026#34;6379\u0026#34;}] client = rediscluster.RedisCluster(startup_nodes=startup_nodes, decode_responses=True, skip_full_coverage_check=True) # Get Slot Info slots = client.cluster(\u0026#39;slots\u0026#39;) # SET Slots INFO slotsDic = {} for slot in slots: slotsDic[slot] = { \u0026#39;IP\u0026#39; : slots[slot][\u0026#39;master\u0026#39;][0], \u0026#39;from\u0026#39; : slot[0], \u0026#39;to\u0026#39; : slot[1], \u0026#39;keyCount\u0026#39; : 0 } for i in range(1, 1000): client.",
       "inLanguage" : "en-US",
       "author" : "dykim",
       "creator" : "dykim",
@@ -31,15 +31,15 @@
       "copyrightYear" : "2021",
       "datePublished": "2021-04-30 10:13:00 \u002b0900 KST",
       "dateModified" : "2021-04-30 10:13:00 \u002b0900 KST",
-      "url" : "http:\/\/example.org\/",
+      "url" : "http:\/\/example.org\/posts\/20210430-redis-cluster\/",
       "keywords" : [  ]
   }
 </script>
-<title>DEV STACK MINDMAP</title>
-  <meta property="og:title" content="DEV STACK MINDMAP" />
-  <meta property="og:type" content="website" />
-  <meta property="og:description" content="" />
-  <meta name="description" content="" />
+<title>Redis Cluster</title>
+  <meta property="og:title" content="Redis Cluster" />
+  <meta property="og:type" content="article" />
+  <meta property="og:description" content="2개 샤드, 0개 Replicas로 클러스터 생성 Cloud9 실행 cluster client 라이브러리 설치 sudo pip3 install redis-py-cluster Code 실행   import rediscluster import sys if __name__ == &amp;#34;__main__&amp;#34;: # Connect Cluster startup_nodes = [{ &amp;#34;host&amp;#34;: &amp;#34;test-redis-cluster-0001-001.xcugux.0001.apn2.cache.amazonaws.com&amp;#34;, &amp;#34;port&amp;#34;: &amp;#34;6379&amp;#34;}, {&amp;#34;host&amp;#34;: &amp;#34;test-redis-cluster-0002-001.xcugux.0001.apn2.cache.amazonaws.com&amp;#34;, &amp;#34;port&amp;#34;:&amp;#34;6379&amp;#34;}, {&amp;#34;test-redis-cluster-0003-001.xcugux.0001.apn2.cache.amazonaws.com&amp;#34;, &amp;#34;port&amp;#34;:&amp;#34;6379&amp;#34;}] client = rediscluster.RedisCluster(startup_nodes=startup_nodes, decode_responses=True, skip_full_coverage_check=True) # Get Slot Info slots = client.cluster(&amp;#39;slots&amp;#39;) # SET Slots INFO slotsDic = {} for slot in slots: slotsDic[slot] = { &amp;#39;IP&amp;#39; : slots[slot][&amp;#39;master&amp;#39;][0], &amp;#39;from&amp;#39; : slot[0], &amp;#39;to&amp;#39; : slot[1], &amp;#39;keyCount&amp;#39; : 0 } for i in range(1, 1000): client." />
+  <meta name="description" content="2개 샤드, 0개 Replicas로 클러스터 생성 Cloud9 실행 cluster client 라이브러리 설치 sudo pip3 install redis-py-cluster Code 실행   import rediscluster import sys if __name__ == &amp;#34;__main__&amp;#34;: # Connect Cluster startup_nodes = [{ &amp;#34;host&amp;#34;: &amp;#34;test-redis-cluster-0001-001.xcugux.0001.apn2.cache.amazonaws.com&amp;#34;, &amp;#34;port&amp;#34;: &amp;#34;6379&amp;#34;}, {&amp;#34;host&amp;#34;: &amp;#34;test-redis-cluster-0002-001.xcugux.0001.apn2.cache.amazonaws.com&amp;#34;, &amp;#34;port&amp;#34;:&amp;#34;6379&amp;#34;}, {&amp;#34;test-redis-cluster-0003-001.xcugux.0001.apn2.cache.amazonaws.com&amp;#34;, &amp;#34;port&amp;#34;:&amp;#34;6379&amp;#34;}] client = rediscluster.RedisCluster(startup_nodes=startup_nodes, decode_responses=True, skip_full_coverage_check=True) # Get Slot Info slots = client.cluster(&amp;#39;slots&amp;#39;) # SET Slots INFO slotsDic = {} for slot in slots: slotsDic[slot] = { &amp;#39;IP&amp;#39; : slots[slot][&amp;#39;master&amp;#39;][0], &amp;#39;from&amp;#39; : slot[0], &amp;#39;to&amp;#39; : slot[1], &amp;#39;keyCount&amp;#39; : 0 } for i in range(1, 1000): client." />
   <meta property="og:locale" content="en-us" />
 
   
@@ -65,10 +65,11 @@
 
 
 <body>
-  <article class="posts">
+  <article class="post " id="article">
     <div class="row">
       <div class="col-xs-12">
-        
+        <div class="site-header">
+          
 <header>
   <div class="header-title">
     <a href="/"
@@ -85,350 +86,142 @@
 </div>
 <div class="header-line"></div>
 
-        <div id="posts-list">
-          <section>
-            <h1 class="site-date-catalog">2021</h1>
-
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-3 col-sm-2">
-                <time datetime="2021-04-30 10:13:00 KST">Apr 30</time>
-              </div>
-              <div class="posts-title col-xs-9 col-sm-10">
-                <div class="row">
-                  <div class="col-xs-11 col-sm-10">
-                    <a href="/posts/20210430-redis-cluster/">Redis Cluster</a>
-                  </div>
-                  <div class="col-xs-1 col-sm-2 posts-categories">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-3 col-sm-2">
-                <time datetime="2021-04-29 11:00:00 KST">Apr 29</time>
-              </div>
-              <div class="posts-title col-xs-9 col-sm-10">
-                <div class="row">
-                  <div class="col-xs-11 col-sm-10">
-                    <a href="/posts/20210429-data-lake/">Data Lake</a>
-                  </div>
-                  <div class="col-xs-1 col-sm-2 posts-categories">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-3 col-sm-2">
-                <time datetime="2021-04-28 13:47:00 KST">Apr 28</time>
-              </div>
-              <div class="posts-title col-xs-9 col-sm-10">
-                <div class="row">
-                  <div class="col-xs-11 col-sm-10">
-                    <a href="/posts/20210428-rds-performance/">About RDS</a>
-                  </div>
-                  <div class="col-xs-1 col-sm-2 posts-categories">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-3 col-sm-2">
-                <time datetime="2021-04-23 14:08:00 KST">Apr 23</time>
-              </div>
-              <div class="posts-title col-xs-9 col-sm-10">
-                <div class="row">
-                  <div class="col-xs-11 col-sm-10">
-                    <a href="/posts/20210423-gamelift-peering/">GameLift Peering</a>
-                  </div>
-                  <div class="col-xs-1 col-sm-2 posts-categories">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-3 col-sm-2">
-                <time datetime="2021-04-23 14:08:00 KST">Apr 23</time>
-              </div>
-              <div class="posts-title col-xs-9 col-sm-10">
-                <div class="row">
-                  <div class="col-xs-11 col-sm-10">
-                    <a href="/posts/20210423-ec2-issues/">AWS EC2 문제들</a>
-                  </div>
-                  <div class="col-xs-1 col-sm-2 posts-categories">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-3 col-sm-2">
-                <time datetime="2021-04-20 11:08:00 KST">Apr 20</time>
-              </div>
-              <div class="posts-title col-xs-9 col-sm-10">
-                <div class="row">
-                  <div class="col-xs-11 col-sm-10">
-                    <a href="/posts/20210420-beanstalk/">AWS Elastic Beanstalk</a>
-                  </div>
-                  <div class="col-xs-1 col-sm-2 posts-categories">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-3 col-sm-2">
-                <time datetime="2021-04-19 09:55:00 KST">Apr 19</time>
-              </div>
-              <div class="posts-title col-xs-9 col-sm-10">
-                <div class="row">
-                  <div class="col-xs-11 col-sm-10">
-                    <a href="/posts/20210419-ddos/">DDoS 방어를 위한 AWS 서비스</a>
-                  </div>
-                  <div class="col-xs-1 col-sm-2 posts-categories">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-3 col-sm-2">
-                <time datetime="2021-04-15 16:56:00 KST">Apr 15</time>
-              </div>
-              <div class="posts-title col-xs-9 col-sm-10">
-                <div class="row">
-                  <div class="col-xs-11 col-sm-10">
-                    <a href="/posts/20210415-questions/">Questions</a>
-                  </div>
-                  <div class="col-xs-1 col-sm-2 posts-categories">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-3 col-sm-2">
-                <time datetime="2021-04-14 18:00:00 KST">Apr 14</time>
-              </div>
-              <div class="posts-title col-xs-9 col-sm-10">
-                <div class="row">
-                  <div class="col-xs-11 col-sm-10">
-                    <a href="/posts/20210414-api-gateway/">AWS API Gateway</a>
-                  </div>
-                  <div class="col-xs-1 col-sm-2 posts-categories">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-3 col-sm-2">
-                <time datetime="2021-04-14 09:56:00 KST">Apr 14</time>
-              </div>
-              <div class="posts-title col-xs-9 col-sm-10">
-                <div class="row">
-                  <div class="col-xs-11 col-sm-10">
-                    <a href="/posts/20210414-lambda-csharp-serialize/">AWS Lambda in C# 구현</a>
-                  </div>
-                  <div class="col-xs-1 col-sm-2 posts-categories">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-3 col-sm-2">
-                <time datetime="2021-04-09 10:21:00 KST">Apr 09</time>
-              </div>
-              <div class="posts-title col-xs-9 col-sm-10">
-                <div class="row">
-                  <div class="col-xs-11 col-sm-10">
-                    <a href="/posts/20210409-lambda-in-csharp/">AWS Lambda with Visual Studio and C#</a>
-                  </div>
-                  <div class="col-xs-1 col-sm-2 posts-categories">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-3 col-sm-2">
-                <time datetime="2021-04-09 10:21:00 KST">Apr 09</time>
-              </div>
-              <div class="posts-title col-xs-9 col-sm-10">
-                <div class="row">
-                  <div class="col-xs-11 col-sm-10">
-                    <a href="/posts/20210409-cdk-deepdive-vpc/">AWS CDK VPC</a>
-                  </div>
-                  <div class="col-xs-1 col-sm-2 posts-categories">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-3 col-sm-2">
-                <time datetime="2021-04-09 10:09:00 KST">Apr 09</time>
-              </div>
-              <div class="posts-title col-xs-9 col-sm-10">
-                <div class="row">
-                  <div class="col-xs-11 col-sm-10">
-                    <a href="/posts/20210409-aws-price/">AWS Price</a>
-                  </div>
-                  <div class="col-xs-1 col-sm-2 posts-categories">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-3 col-sm-2">
-                <time datetime="2021-04-02 17:45:00 KST">Apr 02</time>
-              </div>
-              <div class="posts-title col-xs-9 col-sm-10">
-                <div class="row">
-                  <div class="col-xs-11 col-sm-10">
-                    <a href="/posts/20210402-cdk/">CDK in C# </a>
-                  </div>
-                  <div class="col-xs-1 col-sm-2 posts-categories">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-3 col-sm-2">
-                <time datetime="2021-04-02 15:31:00 KST">Apr 02</time>
-              </div>
-              <div class="posts-title col-xs-9 col-sm-10">
-                <div class="row">
-                  <div class="col-xs-11 col-sm-10">
-                    <a href="/posts/20210402-aws-storage-pricing/">AWS Storage, DB 요금</a>
-                  </div>
-                  <div class="col-xs-1 col-sm-2 posts-categories">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-3 col-sm-2">
-                <time datetime="2021-04-02 10:00:00 KST">Apr 02</time>
-              </div>
-              <div class="posts-title col-xs-9 col-sm-10">
-                <div class="row">
-                  <div class="col-xs-11 col-sm-10">
-                    <a href="/posts/20210402-okr/">OKR</a>
-                  </div>
-                  <div class="col-xs-1 col-sm-2 posts-categories">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-3 col-sm-2">
-                <time datetime="2021-04-01 14:38:00 KST">Apr 01</time>
-              </div>
-              <div class="posts-title col-xs-9 col-sm-10">
-                <div class="row">
-                  <div class="col-xs-11 col-sm-10">
-                    <a href="/posts/20210401-gamelift-remote/">GameLift Fleet 인스턴스 원격 접속</a>
-                  </div>
-                  <div class="col-xs-1 col-sm-2 posts-categories">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-3 col-sm-2">
-                <time datetime="2021-03-30 11:27:00 KST">Mar 30</time>
-              </div>
-              <div class="posts-title col-xs-9 col-sm-10">
-                <div class="row">
-                  <div class="col-xs-11 col-sm-10">
-                    <a href="/posts/20210330-cloudfront-acm-route53/">CF &#43; S3 &#43; ACM &#43; Route53</a>
-                  </div>
-                  <div class="col-xs-1 col-sm-2 posts-categories">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-3 col-sm-2">
-                <time datetime="2021-03-29 23:44:00 KST">Mar 29</time>
-              </div>
-              <div class="posts-title col-xs-9 col-sm-10">
-                <div class="row">
-                  <div class="col-xs-11 col-sm-10">
-                    <a href="/posts/20210329-auto-scaling/">Auto Scaling</a>
-                  </div>
-                  <div class="col-xs-1 col-sm-2 posts-categories">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-3 col-sm-2">
-                <time datetime="2021-03-29 21:36:00 KST">Mar 29</time>
-              </div>
-              <div class="posts-title col-xs-9 col-sm-10">
-                <div class="row">
-                  <div class="col-xs-11 col-sm-10">
-                    <a href="/posts/20210329-right-sizing/">Right Sizing</a>
-                  </div>
-                  <div class="col-xs-1 col-sm-2 posts-categories">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="row posts-line">
-              <div class="posts-date col-xs-3 col-sm-2">
-                <time datetime="2021-03-21 22:51:37 KST">Mar 21</time>
-              </div>
-              <div class="posts-title col-xs-9 col-sm-10">
-                <div class="row">
-                  <div class="col-xs-11 col-sm-10">
-                    <a href="/posts/20210321-start/">블로그 시작</a>
-                  </div>
-                  <div class="col-xs-1 col-sm-2 posts-categories">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-          </section>
-          
         </div>
+        <header class="post-header">
+          <h1 class="post-title">Redis Cluster</h1>
+          
+          <div class="row post-desc">
+            <div class="col-xs-6">
+              
+              <time class="post-date" datetime="2021-04-30 10:13:00 KST">
+                30 Apr 2021
+              </time>
+              
+            </div>
+            <div class="col-xs-6">
+              
+              <div class="post-author">
+                <a target="_blank" href="">@dykim</a>
+              </div>
+              
+            </div>
+          </div>
+          
+        </header>
+
+        <div class="post-content markdown-body">
+          
+          <hr>
+<ol>
+<li>2개 샤드, 0개 Replicas로 클러스터 생성</li>
+<li>Cloud9 실행</li>
+<li>cluster client 라이브러리 설치 sudo pip3 install redis-py-cluster</li>
+<li>Code 실행</li>
+<li></li>
+</ol>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-python" data-lang="python"><span style="font-weight:bold">import</span> <span style="font-weight:bold">rediscluster</span>
+<span style="font-weight:bold">import</span> <span style="font-weight:bold">sys</span>
+
+<span style="font-weight:bold">if</span> __name__ == <span style="font-style:italic">&#34;__main__&#34;</span>:
+    
+    <span style="font-style:italic"># Connect Cluster</span>
+    startup_nodes = [{ <span style="font-style:italic">&#34;host&#34;</span>: <span style="font-style:italic">&#34;test-redis-cluster-0001-001.xcugux.0001.apn2.cache.amazonaws.com&#34;</span>, <span style="font-style:italic">&#34;port&#34;</span>: <span style="font-style:italic">&#34;6379&#34;</span>}, {<span style="font-style:italic">&#34;host&#34;</span>: <span style="font-style:italic">&#34;test-redis-cluster-0002-001.xcugux.0001.apn2.cache.amazonaws.com&#34;</span>, <span style="font-style:italic">&#34;port&#34;</span>:<span style="font-style:italic">&#34;6379&#34;</span>},
+    {<span style="font-style:italic">&#34;test-redis-cluster-0003-001.xcugux.0001.apn2.cache.amazonaws.com&#34;</span>, <span style="font-style:italic">&#34;port&#34;</span>:<span style="font-style:italic">&#34;6379&#34;</span>}]
+    client = rediscluster.RedisCluster(startup_nodes=startup_nodes, decode_responses=True, skip_full_coverage_check=True)
+    
+    <span style="font-style:italic"># Get Slot Info</span>
+    slots = client.cluster(<span style="font-style:italic">&#39;slots&#39;</span>)
+    
+    <span style="font-style:italic"># SET Slots INFO</span>
+    slotsDic = {}
+    
+    <span style="font-weight:bold">for</span> slot <span style="font-weight:bold">in</span> slots:
+        slotsDic[slot] = { <span style="font-style:italic">&#39;IP&#39;</span> : slots[slot][<span style="font-style:italic">&#39;master&#39;</span>][0], <span style="font-style:italic">&#39;from&#39;</span> : slot[0], <span style="font-style:italic">&#39;to&#39;</span> : slot[1], <span style="font-style:italic">&#39;keyCount&#39;</span> : 0 }  
+    
+    
+    <span style="font-weight:bold">for</span> i <span style="font-weight:bold">in</span> range(1, 1000):
+        client.set(<span style="font-style:italic">&#34;foo&#34;</span> + str(i), <span style="font-style:italic">&#34;bar&#34;</span> + str(i))
+        <span style="font-style:italic">#print(&#34;Key:&#34; + &#34;foo&#34; + str(i) + &#34;, Value:&#34; + str(client.get(&#34;foo&#34; + str(i))) + &#34;, Key Slot:&#34; + str(client.cluster(&#34;keyslot&#34;, &#34;foo&#34; + str(i))))</span>
+        
+        keySlot = client.cluster(<span style="font-style:italic">&#34;keyslot&#34;</span>, <span style="font-style:italic">&#34;foo&#34;</span> + str(i))
+        <span style="font-weight:bold">for</span> slot <span style="font-weight:bold">in</span> slotsDic:
+            <span style="font-weight:bold">if</span> keySlot &gt;= slotsDic[slot][<span style="font-style:italic">&#39;from&#39;</span>] <span style="font-weight:bold">and</span> slotsDic[slot][<span style="font-style:italic">&#39;to&#39;</span>] &gt;= keySlot:
+                slotsDic[slot][<span style="font-style:italic">&#39;keyCount&#39;</span>] = slotsDic[slot][<span style="font-style:italic">&#39;keyCount&#39;</span>] + 1
+                
+      
+    <span style="font-weight:bold">for</span> slot <span style="font-weight:bold">in</span> slotsDic:
+        <span style="font-weight:bold">print</span> (slotsDic[slot])
+</code></pre></div><h3 id="cloud9에서-python으로-redis-test">Cloud9에서 python으로 redis test</h3>
+<blockquote>
+<p>sudo pip3 install redis</p>
+</blockquote>
+<hr>
+<h3 id="데이터-샤딩">데이터 샤딩</h3>
+<p>Redis는 모든 캐시 키가 &ldquo;해시 슬롯&quot;에 매핑되는 샤딩 형태를 활용합니다. 클러스터 내에서 16,384 개의 해시 슬롯을 사용할 수 있습니다. 이러한 슬롯은 클러스터의 총 샤드 수로 나뉩니다. 기본적으로 ElastiCache는 샤드에 슬롯을 균등하게 배포하지만 필요한 경우 배포 체계를 사용자 지정할 수도 있습니다.<br>
+<br>
+클러스터에 데이터를 쓰거나 읽을 때 클라이언트는 CRC16 (key) mod 16384와 같은 간단한 알고리즘을 통해 사용할 해시 슬롯을 계산합니다. Redis 용 ElastiCache의 경우 클라이언트 자체가 키를 기반으로 사용할 샤드를 결정합니다. 우주. 더 많은 작업을 클라이언트에 푸시함으로써 클라이언트가 클러스터의 모든 샤드에 도달 할 수 있도록하여 잠재적 인 단일 장애 지점을 완화합니다. 곧 알게 되겠지만, Redis 클러스터에 대한 초기 연결에서 클라이언트는 특정 해시 키를 찾을 수있는 노드를 식별하는 데 사용할 수있는 키 공간 매핑을 확인하고 관리합니다.</p>
+<hr>
+<h3 id="클러스터에-연결">클러스터에 연결</h3>
+<p>클러스터가 &ldquo;사용 가능&quot;되면 사용할 준비가 된 것입니다. AWS Management Console에 나열된 구성 엔드 포인트를 사용하여 클러스터에 연결할 수 있습니다. 예를 들어 Redis CLI를 사용하여 클러스터에 연결하고 클러스터의 키 공간 / 슬롯에 대한 정보를 쿼리 할 수 ​​있습니다.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-fallback" data-lang="fallback">$ redis-cli -c -h mycluster.cache.amazonaws.com -p 6379
+
+mycluster:6379&gt; CLUSTER SLOTS
+1) 1) (integer) 0
+   2) (integer) 5461
+   3) 1) &#34;172.31.26.164&#34;
+      2) (integer) 6379
+      3) &#34;bb550a5c91a35d88caa9e636bffa1830093d4895&#34;
+   4) 1) &#34;172.31.49.34&#34;
+      2) (integer) 6379
+      3) &#34;0200ff55ccc7e5cb6b4387443ebdb9652af23504&#34;
+   5) 1) &#34;172.31.8.200&#34;
+      2) (integer) 6379
+      3) &#34;31646876f16baaab749043c406e06d0553287655&#34;
+2) ...
+3) ...
+
+mycluster:6379&gt; CLUSTER KEYSLOT foo
+(integer) 12182
+</code></pre></div><p>sudo pip3 install redis-py-cluster</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-python" data-lang="python"><span style="font-weight:bold">import</span> <span style="font-weight:bold">rediscluster</span>
+
+<span style="font-weight:bold">if</span> __name__ == <span style="font-style:italic">&#34;__main__&#34;</span>:
+    startup_nodes = [{ <span style="font-style:italic">&#34;host&#34;</span>: <span style="font-style:italic">&#34;test-redis-cluster-0001-001.xcugux.0001.apn2.cache.amazonaws.com&#34;</span>, <span style="font-style:italic">&#34;port&#34;</span>: <span style="font-style:italic">&#34;6379&#34;</span>}, {<span style="font-style:italic">&#34;host&#34;</span>: <span style="font-style:italic">&#34;test-redis-cluster-0002-001.xcugux.0001.apn2.cache.amazonaws.com&#34;</span>, <span style="font-style:italic">&#34;port&#34;</span>:<span style="font-style:italic">&#34;6379&#34;</span>}]
+
+    client = rediscluster.RedisCluster(startup_nodes=startup_nodes, decode_responses=True, skip_full_coverage_check=True)
+    client.set(<span style="font-style:italic">&#34;foo&#34;</span>, <span style="font-style:italic">&#34;bar&#34;</span>)
+    <span style="font-weight:bold">print</span>(client.get(<span style="font-style:italic">&#34;foo&#34;</span>))
+</code></pre></div><hr>
+<h3 id="links">Links</h3>
+<p><a href="https://planbs.tistory.com/entry/Python-pip">▶ pip</a></p>
+<p><a href="https://docs.aws.amazon.com/ko_kr/AmazonElastiCache/latest/red-ug/CacheNodes.NodeGroups.html">https://docs.aws.amazon.com/ko_kr/AmazonElastiCache/latest/red-ug/CacheNodes.NodeGroups.html</a><br>
+<a href="https://docs.aws.amazon.com/ko_kr/AmazonElastiCache/latest/red-ug/Shards.html">https://docs.aws.amazon.com/ko_kr/AmazonElastiCache/latest/red-ug/Shards.html</a><br>
+<a href="https://docs.aws.amazon.com/ko_kr/AmazonElastiCache/latest/red-ug/Clusters.html">https://docs.aws.amazon.com/ko_kr/AmazonElastiCache/latest/red-ug/Clusters.html</a><br>
+<a href="https://aws.amazon.com/ko/blogs/database/work-with-cluster-mode-on-amazon-elasticache-for-redis">Redis 용 Amazon ElastiCache에서 클러스터 모드로 작업하는 방법</a></p>
+
+        </div>
+
+        <div class="row middle-xs">
+          <div class="col-xs-12">
+            
+          </div>
+        </div>
+        
+          <div class="row">
+            <div class="col-xs-12">
+              
+            </div>
+          </div>
+
+          
+
+
+
+          
+          
+          <div style="height: 50px;"></div>
+          
+        
 
         <div class="site-footer">
   
@@ -448,6 +241,8 @@
     
   
 </script>
+
+  
 
 </body>
 

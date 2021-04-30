@@ -6,13 +6,22 @@
     <description>Recent content on DEV STACK MINDMAP</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 29 Apr 2021 11:00:00 +0900</lastBuildDate><atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 30 Apr 2021 10:13:00 +0900</lastBuildDate><atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Redis Cluster</title>
+      <link>http://example.org/posts/20210430-redis-cluster/</link>
+      <pubDate>Fri, 30 Apr 2021 10:13:00 +0900</pubDate>
+      
+      <guid>http://example.org/posts/20210430-redis-cluster/</guid>
+      <description>2개 샤드, 0개 Replicas로 클러스터 생성 Cloud9 실행 cluster client 라이브러리 설치 sudo pip3 install redis-py-cluster Code 실행   import rediscluster import sys if __name__ == &amp;#34;__main__&amp;#34;: # Connect Cluster startup_nodes = [{ &amp;#34;host&amp;#34;: &amp;#34;test-redis-cluster-0001-001.xcugux.0001.apn2.cache.amazonaws.com&amp;#34;, &amp;#34;port&amp;#34;: &amp;#34;6379&amp;#34;}, {&amp;#34;host&amp;#34;: &amp;#34;test-redis-cluster-0002-001.xcugux.0001.apn2.cache.amazonaws.com&amp;#34;, &amp;#34;port&amp;#34;:&amp;#34;6379&amp;#34;}, {&amp;#34;test-redis-cluster-0003-001.xcugux.0001.apn2.cache.amazonaws.com&amp;#34;, &amp;#34;port&amp;#34;:&amp;#34;6379&amp;#34;}] client = rediscluster.RedisCluster(startup_nodes=startup_nodes, decode_responses=True, skip_full_coverage_check=True) # Get Slot Info slots = client.cluster(&amp;#39;slots&amp;#39;) # SET Slots INFO slotsDic = {} for slot in slots: slotsDic[slot] = { &amp;#39;IP&amp;#39; : slots[slot][&amp;#39;master&amp;#39;][0], &amp;#39;from&amp;#39; : slot[0], &amp;#39;to&amp;#39; : slot[1], &amp;#39;keyCount&amp;#39; : 0 } for i in range(1, 1000): client.</description>
+    </item>
+    
     <item>
       <title>Data Lake</title>
-      <link>http://example.org/posts/20210429-etl/</link>
+      <link>http://example.org/posts/20210429-data-lake/</link>
       <pubDate>Thu, 29 Apr 2021 11:00:00 +0900</pubDate>
       
-      <guid>http://example.org/posts/20210429-etl/</guid>
+      <guid>http://example.org/posts/20210429-data-lake/</guid>
       <description>Data Lake 란 가공되지 않은 다양한 종류의 데이터를 한 곳에 모아둔 저장소의 집합이다.
  Data Warehouse(DW) 란 사용자의 의사 결정에 도움을 주기 위하여 기간시스템의 데이터베이스에 축적된 데이터를 공통의 형식으로 변환해서 관리하는 데이터베이스를 말한다. 줄여서 DW로도 불린다.
  Data Lake vs DW 비정형 vs 정형
