@@ -6,7 +6,16 @@
     <description>Recent content in Posts on DEV STACK MINDMAP</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 04 May 2021 15:13:00 +0900</lastBuildDate><atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 06 May 2021 13:34:00 +0900</lastBuildDate><atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Docker 해보기</title>
+      <link>http://example.org/posts/20210506-do-docker/</link>
+      <pubDate>Thu, 06 May 2021 13:34:00 +0900</pubDate>
+      
+      <guid>http://example.org/posts/20210506-do-docker/</guid>
+      <description>https://docs.docker.com/get-started/ 에서 Windows 버전 도커 설치 파일 다운로드 후 실행  Docker Desktop requires the Server service to be enabled. 메시지로 실행 실패 Hyper-V 옵션 켜기 윈도우 시작버튼 -&amp;gt; 서비스 Server 의 속성으로 가서 시작 유형을 &amp;ldquo;자동&amp;quot;으로 수정 후 설치 파일 다시 실행 WSL2 설치, 활성화     docker run -d -p 80:80 docker/getting-started  Install Docker Desktop       Links ▶ docker docs</description>
+    </item>
+    
     <item>
       <title>AWS Container Service</title>
       <link>http://example.org/posts/20210504-aws-containers/</link>
