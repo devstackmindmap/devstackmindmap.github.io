@@ -21,7 +21,7 @@
       "articleSection" : "posts",
       "name" : "Redis Cluster 샤드 추가\/삭제에 따른 데이터 재 조정 확인",
       "headline" : "Redis Cluster 샤드 추가\/삭제에 따른 데이터 재 조정 확인",
-      "description" : "Overview Redis는 캐싱, 랭킹, 세션 정보 저장, PubSub 등에 쓰이는 고성능 key-value 저장소로서 리스트, 해시, 셋, 정렬된 셋 등 여러 형식의 자료구조를 지원하는 인 메모리 데이터 스토어 NoSQL입니다.\n다양한 규모에서 쓰이는 Redis를 운용하다 보면 한번 쯤 클러스터 모드 적용에 대해 고민하게 됩니다. 간단한 테스트를 통해 클러스터의 샤드, 노드가 확장, 축소 될 때 자동으로 노드간에 키 공간의 재 할당, 균형 조정 되는 것을 눈으로 확인해 보고자 합니다.\n 목표 Redis 클러스터의 샤드 확장, 축소 시 데이터의 재 조정을 눈으로 확인하고 특정 워크로드에서 Redis 클러스터의 활용에 대해 고민할 수 있도록 합니다.",
+      "description" : "Overview 목표 Step 1. 네트워크 구성  Step 1.1. VPC 생성 Step 1.2. 서브넷 생성 Step 1.3. 보안 그룹 생성 Step 1.4. 인터넷 게이트웨이 생성 Step 1.5. 인터넷 게이트웨이 VPC에 연결 Step 1.6. 라우팅 테이블 생성 Step 1.7. 라우팅 편집 Step 1.8. 서브넷 연결   Step 2. Redis Cluster 생성  Step 2.1. 서브넷 그룹 생성 Step 2.2. Redis Cluster 생성   Step 3. AWS Cloud9 생성 Step 4.",
       "inLanguage" : "en-US",
       "author" : "dykim",
       "creator" : "dykim",
@@ -38,12 +38,8 @@
 <title>Redis Cluster 샤드 추가/삭제에 따른 데이터 재 조정 확인</title>
   <meta property="og:title" content="Redis Cluster 샤드 추가/삭제에 따른 데이터 재 조정 확인" />
   <meta property="og:type" content="article" />
-  <meta property="og:description" content="Overview Redis는 캐싱, 랭킹, 세션 정보 저장, PubSub 등에 쓰이는 고성능 key-value 저장소로서 리스트, 해시, 셋, 정렬된 셋 등 여러 형식의 자료구조를 지원하는 인 메모리 데이터 스토어 NoSQL입니다.
-다양한 규모에서 쓰이는 Redis를 운용하다 보면 한번 쯤 클러스터 모드 적용에 대해 고민하게 됩니다. 간단한 테스트를 통해 클러스터의 샤드, 노드가 확장, 축소 될 때 자동으로 노드간에 키 공간의 재 할당, 균형 조정 되는 것을 눈으로 확인해 보고자 합니다.
- 목표 Redis 클러스터의 샤드 확장, 축소 시 데이터의 재 조정을 눈으로 확인하고 특정 워크로드에서 Redis 클러스터의 활용에 대해 고민할 수 있도록 합니다." />
-  <meta name="description" content="Overview Redis는 캐싱, 랭킹, 세션 정보 저장, PubSub 등에 쓰이는 고성능 key-value 저장소로서 리스트, 해시, 셋, 정렬된 셋 등 여러 형식의 자료구조를 지원하는 인 메모리 데이터 스토어 NoSQL입니다.
-다양한 규모에서 쓰이는 Redis를 운용하다 보면 한번 쯤 클러스터 모드 적용에 대해 고민하게 됩니다. 간단한 테스트를 통해 클러스터의 샤드, 노드가 확장, 축소 될 때 자동으로 노드간에 키 공간의 재 할당, 균형 조정 되는 것을 눈으로 확인해 보고자 합니다.
- 목표 Redis 클러스터의 샤드 확장, 축소 시 데이터의 재 조정을 눈으로 확인하고 특정 워크로드에서 Redis 클러스터의 활용에 대해 고민할 수 있도록 합니다." />
+  <meta property="og:description" content="Overview 목표 Step 1. 네트워크 구성  Step 1.1. VPC 생성 Step 1.2. 서브넷 생성 Step 1.3. 보안 그룹 생성 Step 1.4. 인터넷 게이트웨이 생성 Step 1.5. 인터넷 게이트웨이 VPC에 연결 Step 1.6. 라우팅 테이블 생성 Step 1.7. 라우팅 편집 Step 1.8. 서브넷 연결   Step 2. Redis Cluster 생성  Step 2.1. 서브넷 그룹 생성 Step 2.2. Redis Cluster 생성   Step 3. AWS Cloud9 생성 Step 4." />
+  <meta name="description" content="Overview 목표 Step 1. 네트워크 구성  Step 1.1. VPC 생성 Step 1.2. 서브넷 생성 Step 1.3. 보안 그룹 생성 Step 1.4. 인터넷 게이트웨이 생성 Step 1.5. 인터넷 게이트웨이 VPC에 연결 Step 1.6. 라우팅 테이블 생성 Step 1.7. 라우팅 편집 Step 1.8. 서브넷 연결   Step 2. Redis Cluster 생성  Step 2.1. 서브넷 그룹 생성 Step 2.2. Redis Cluster 생성   Step 3. AWS Cloud9 생성 Step 4." />
   <meta property="og:locale" content="en-us" />
 
   
@@ -115,7 +111,42 @@
 
         <div class="post-content markdown-body">
           
-          <h2 id="overview">Overview</h2>
+          <ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#%EB%AA%A9%ED%91%9C">목표</a></li>
+<li><a href="#step-1-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EA%B5%AC%EC%84%B1">Step 1. 네트워크 구성</a>
+<ul>
+<li><a href="#step-11-vpc-%EC%83%9D%EC%84%B1">Step 1.1. VPC 생성</a></li>
+<li><a href="#step-12-%EC%84%9C%EB%B8%8C%EB%84%B7-%EC%83%9D%EC%84%B1">Step 1.2. 서브넷 생성</a></li>
+<li><a href="#step-13-%EB%B3%B4%EC%95%88-%EA%B7%B8%EB%A3%B9-%EC%83%9D%EC%84%B1">Step 1.3. 보안 그룹 생성</a></li>
+<li><a href="#step-14-%EC%9D%B8%ED%84%B0%EB%84%B7-%EA%B2%8C%EC%9D%B4%ED%8A%B8%EC%9B%A8%EC%9D%B4-%EC%83%9D%EC%84%B1">Step 1.4. 인터넷 게이트웨이 생성</a></li>
+<li><a href="#step-15-%EC%9D%B8%ED%84%B0%EB%84%B7-%EA%B2%8C%EC%9D%B4%ED%8A%B8%EC%9B%A8%EC%9D%B4-vpc%EC%97%90-%EC%97%B0%EA%B2%B0">Step 1.5. 인터넷 게이트웨이 VPC에 연결</a></li>
+<li><a href="#step-16-%EB%9D%BC%EC%9A%B0%ED%8C%85-%ED%85%8C%EC%9D%B4%EB%B8%94-%EC%83%9D%EC%84%B1">Step 1.6. 라우팅 테이블 생성</a></li>
+<li><a href="#step-17-%EB%9D%BC%EC%9A%B0%ED%8C%85-%ED%8E%B8%EC%A7%91">Step 1.7. 라우팅 편집</a></li>
+<li><a href="#step-18-%EC%84%9C%EB%B8%8C%EB%84%B7-%EC%97%B0%EA%B2%B0">Step 1.8. 서브넷 연결</a></li>
+</ul>
+</li>
+<li><a href="#step-2-redis-cluster-%EC%83%9D%EC%84%B1">Step 2. Redis Cluster 생성</a>
+<ul>
+<li><a href="#step-21-%EC%84%9C%EB%B8%8C%EB%84%B7-%EA%B7%B8%EB%A3%B9-%EC%83%9D%EC%84%B1">Step 2.1. 서브넷 그룹 생성</a></li>
+<li><a href="#step-22-redis-cluster-%EC%83%9D%EC%84%B1">Step 2.2. Redis Cluster 생성</a></li>
+</ul>
+</li>
+<li><a href="#step-3-aws-cloud9-%EC%83%9D%EC%84%B1">Step 3. AWS Cloud9 생성</a></li>
+<li><a href="#step-4-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%A7%84%ED%96%89">Step 4. 테스트 진행</a>
+<ul>
+<li><a href="#step-41-redis-py-cluster-%EC%84%A4%EC%B9%98">Step 4.1. redis-py-cluster 설치</a></li>
+<li><a href="#step-42-%ED%85%8C%EC%8A%A4%ED%8A%B8-script-%EC%9E%91%EC%84%B1">Step 4.2. 테스트 Script 작성</a></li>
+<li><a href="#step-43-script-%EC%8B%A4%ED%96%89">Step 4.3. Script 실행</a></li>
+<li><a href="#step-44-%EC%83%A4%EB%93%9C-%EC%B6%94%EA%B0%80">Step 4.4. 샤드 추가</a></li>
+<li><a href="#step-45-script-%EC%8B%A4%ED%96%89-%EC%8A%AC%EB%A1%AF%ED%82%A4%EC%8A%A4%ED%8E%98%EC%9D%B4%EC%8A%A4-%ED%99%95%EC%9D%B8">Step 4.5. Script 실행, 슬롯/키스페이스 확인</a></li>
+<li><a href="#step-46-%EC%83%A4%EB%93%9C-%EC%82%AD%EC%A0%9C">Step 4.6. 샤드 삭제</a></li>
+</ul>
+</li>
+<li><a href="#%EB%A6%AC%EC%86%8C%EC%8A%A4-%EC%A0%95%EB%A6%AC">리소스 정리</a></li>
+<li><a href="#%EC%B0%B8%EA%B3%A0-%EB%AC%B8%ED%97%8C">참고 문헌</a></li>
+</ul>
+<h2 id="overview">Overview</h2>
 <p>Redis는 캐싱, 랭킹, 세션 정보 저장, PubSub 등에 쓰이는 고성능 key-value 저장소로서 리스트, 해시, 셋, 정렬된 셋 등 여러 형식의 자료구조를 지원하는 인 메모리 데이터 스토어 NoSQL입니다.</p>
 <p>다양한 규모에서 쓰이는 Redis를 운용하다 보면 한번 쯤 클러스터 모드 적용에 대해 고민하게 됩니다.  간단한 테스트를 통해 클러스터의 샤드, 노드가 확장, 축소 될 때 자동으로 노드간에 키 공간의 재 할당,  균형 조정 되는 것을 눈으로 확인해 보고자 합니다.</p>
 <hr>
@@ -142,10 +173,10 @@
 <p><img src="/images/redis-cluster/0004-rt5.png" alt="76210655-0fe0-4ab3-856f-c019a5d641df/0004-rt5.png"></p>
 <h3 id="step-16-라우팅-테이블-생성">Step 1.6. 라우팅 테이블 생성</h3>
 <p><img src="/images/redis-cluster/0004-rt.png" alt="df8a39af-7a44-4aef-b626-7fbe204c71d9/0004-rt.png"></p>
-<h3 id="step-16-라우팅-편집">Step 1.6. 라우팅 편집</h3>
+<h3 id="step-17-라우팅-편집">Step 1.7. 라우팅 편집</h3>
 <p><img src="/images/redis-cluster/0004-rt2.png" alt="556464dd-d142-46d1-92e4-010ff39ec0a1/0004-rt2.png"></p>
 <p><img src="/images/redis-cluster/0004-rt6.png" alt="19edb113-d98f-434a-88f4-26907cb2fda9/0004-rt6.png"></p>
-<h3 id="step-17-서브넷-연결">Step 1.7. 서브넷 연결</h3>
+<h3 id="step-18-서브넷-연결">Step 1.8. 서브넷 연결</h3>
 <p><img src="/images/redis-cluster/0004-rt7.png" alt="1786ec05-4df5-44be-97ba-deb4ad71cb70/0004-rt7.png"></p>
 <p><img src="/images/redis-cluster/0004-rt8.png" alt="71acab08-3518-453f-9e8c-9675af5d3ff4/0004-rt8.png"></p>
 <hr>
@@ -278,7 +309,7 @@
 <li>서브넷 삭제</li>
 <li>VPC 삭제</li>
 </ol>
-<h2 id="참고문헌">참고문헌</h2>
+<h2 id="참고-문헌">참고 문헌</h2>
 <ul>
 <li><a href="https://aws.amazon.com/ko/blogs/database/work-with-cluster-mode-on-amazon-elasticache-for-redis/">How to work with Cluster Mode on Amazon ElastiCache for Redis</a></li>
 </ul>
