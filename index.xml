@@ -6,7 +6,35 @@
     <description>Recent content on DEV STACK MINDMAP</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 06 May 2021 13:34:00 +0900</lastBuildDate><atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 21 May 2021 11:16:00 +0900</lastBuildDate><atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GameLift, Unity로 세션 생성, 입장, 가위바위보 게임 만들기</title>
+      <link>http://example.org/posts/20210521-gamelift-primer-script/</link>
+      <pubDate>Fri, 21 May 2021 11:16:00 +0900</pubDate>
+      
+      <guid>http://example.org/posts/20210521-gamelift-primer-script/</guid>
+      <description>Overview GameLift와 API Gateway, Lambda, SQS, RDS를 통해 Session을 만들고 입장하여 가위, 바위, 보 게임을 진행하고 결과를 저장해봅니다.
+ 목표 GameLift의 기본적인 Build, Fleet 생성 및 구조 이해.
+ 장점 GameLift 는 Session 게임에 특화된 서비스 입니다. 시작과 끝이 명확한 Session 형 게임을 FleetIQ를 이용하여 Spot 인스턴스를 활용하고 비용을 절감합니다.
+또한 Session 형 게임 서버의 손쉬운 Auto-scaling 및 Matchmaking을 지원하고 있습니다.
+ 제약사항 GameLift 는 인프라에 대한 서비스입니다.
+Photon 등과 같이 P2P, Relay, Dedicated 서버 구현에 대한 서비스가 아닙니다.</description>
+    </item>
+    
+    <item>
+      <title>GameLift, Unity로 세션 생성, 입장, 가위바위보 게임 만들기</title>
+      <link>http://example.org/posts/20210521-gamelift-session/</link>
+      <pubDate>Fri, 21 May 2021 11:16:00 +0900</pubDate>
+      
+      <guid>http://example.org/posts/20210521-gamelift-session/</guid>
+      <description>Overview GameLift와 API Gateway, Lambda, SQS, RDS를 통해 Session을 만들고 입장하여 가위, 바위, 보 게임을 진행하고 결과를 저장해봅니다.
+ 목표 GameLift의 기본적인 Build, Fleet 생성 및 구조 이해.
+ 장점 GameLift 는 Session 게임에 특화된 서비스 입니다. 시작과 끝이 명확한 Session 형 게임을 FleetIQ를 이용하여 Spot 인스턴스를 활용하고 비용을 절감합니다.
+또한 Session 형 게임 서버의 손쉬운 Auto-scaling 및 Matchmaking을 지원하고 있습니다.
+ 제약사항 GameLift 는 인프라에 대한 서비스입니다.
+Photon 등과 같이 P2P, Relay, Dedicated 서버 구현에 대한 서비스가 아닙니다.</description>
+    </item>
+    
     <item>
       <title>Docker 해보기</title>
       <link>http://example.org/posts/20210506-do-docker/</link>
