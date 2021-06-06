@@ -6,7 +6,23 @@
     <description>Recent content on DEV STACK MINDMAP</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 21 May 2021 11:16:00 +0900</lastBuildDate><atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 06 Jun 2021 15:19:00 +0900</lastBuildDate><atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Unity 해상도</title>
+      <link>http://example.org/docs/20210606-unity-resolution/</link>
+      <pubDate>Sun, 06 Jun 2021 15:19:00 +0900</pubDate>
+      
+      <guid>http://example.org/docs/20210606-unity-resolution/</guid>
+      <description>Unity 해상도에 대해 아래 영상을 통해 배운 것을 정리 해보자
+[고라니TV-게임개발 채널] 이거 하나면 모바일 해상도 걱정 끝! 16:9 고정해상도 만들기
+현재 가장 많이 쓰는 해상도는 9:16!
+나는 눕혀서 할꺼니까 1980:1080으로 !
+기본 제공 되는 것으로 만드니 뭔가 해상도 숫자가 이상해서 Custom으로 만드니 오케이.
+ Constant Pixel Size 대신 Scale With Screen Size로 해주면 이미지 크기들이 일정하게 유지 된다고 한다.
+그리고 Reference Resolution로 수정.
+Match Width Or Height 가 Width에 가까우면 Shrink,</description>
+    </item>
+    
     <item>
       <title>GameLift Primer Script</title>
       <link>http://example.org/docs/20210521-gamelift-primer-script/</link>
