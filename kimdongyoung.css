@@ -3,8 +3,13 @@
 .container {
     text-align:center;
     color:blue;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.2;
+    
 }
 
 .who {
-    font-size:20pt;
+    font-size: 2rem;
+    font-weight: bold;
+    border: 1px solid black;
 }
