@@ -1,0 +1,31 @@
+
+
+p{
+    border: 10px solid red;
+    padding: 30px;
+    margin: 30px;
+    width: 12rem;
+}
+
+/* div{
+    margin: 10px;
+    width: 150px;    
+    box-sizing: border-box; 
+} */
+
+
+
+#small{
+    border: 10px solid black;
+}
+
+#large{
+    border: 30px solid black;
+}
+
+
+.position{
+    border: 5px solid tomato;
+    margin: 10px;
+}
+
