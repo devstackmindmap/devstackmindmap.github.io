@@ -1,5 +1,16 @@
+/*
+container
+    first
+        name
+    second
+        profile
+        contact
+        education
+    third
+*/
+
 *{
-    border: 1px solid black;
+    /* border: 1px solid black; */
     box-sizing: border-box;
 } 
 
@@ -12,16 +23,23 @@ body{
     color: darkred;
 }
 
-
 /* container */
 .container{
-    width: 60rem;
-    height: 70rem;
+    /* width: 60rem;
+    height: 70rem; */
     margin: auto;
     display:flex;
     flex-direction:column;
-    flex-wrap: wrap;
+    padding-top: 1rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    /* flex-wrap: wrap; */
     
+}
+
+.name{
+    font-size: 2rem;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 /* container */
@@ -61,6 +79,37 @@ body{
 
 .education{
     flex-grow: 1;
+}
+
+.company-head{
+    background-color:lightskyblue;
+}
+.company-dt{
+    text-align: right;
+}
+.company-region{
+    font-size: small;
+}
+.company-name{
+    font-weight: bold;
+}
+
+code{
+    color:crimson;
+}
+
+.mywork{
+    border-left: 3px dotted #b5e87e;
+}
+.role{
+    background-color:#e2e2e2;
+}
+.role-detail{
+    padding: 3px;
+}
+
+game-title{
+    color: crimson;
 }
 
 /* .third{
