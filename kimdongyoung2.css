@@ -1,35 +1,61 @@
-
 *{
     border: 1px solid black;
-}
-.who {
-    font-size: 2rem;
-    font-weight: bold;
-    /* border: 1px solid black; */
+    box-sizing: border-box;
+} 
+
+body{
+    align-items: center;
 }
 
-.container {
-    text-align:center;
-    /* text-align: justify; */
-    color:blue;
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.2;
+.title{
+    font-size: larger;
+    color: darkred;
+}
+
+
+/* container */
+.container{
+    width: 60rem;
+    height: 70rem;
+    margin: auto;
+    display:flex;
+    flex-direction:column;
+    flex-wrap: wrap;
     
 }
 
-.top{
-    /* border: 1px solid black; */
-    background-color:cornflowerblue;
-}
+/* container */
+.item{
+    display:flex;
+    flex-direction:row;
+} 
 
-.middle{
-    display: flex;
-    flex-direction: row;
+.icon > img, .icon > a > img{
+    height: 1.1rem;
     
-    /* border: 1px solid red; */
 }
 
-.contract{
+.icon > a{
+    height: 1.2rem;
+}
+
+ .first{
+    text-align: center;
+} 
+
+/* container */
+.second{
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.profile > img{
+    height: 9rem;
+    border: 1px solid black;
+    margin: 1rem;
+}
+
+.contact{
     flex-grow: 1;
 }
 
@@ -37,15 +63,6 @@
     flex-grow: 1;
 }
 
-.bottom{
-    /* border: 1px solid green; */
-    display: flex;
-}
+/* .third{
 
-.work-experience{
-    flex-flow: 1;
-}
-
-.aboutme{
-    flex-flow: 1;
-}
+}  */

@@ -1,11 +1,7 @@
 
 *{
+    box-sizing: border-box;
     border: 1px solid black;
-}
-.who {
-    font-size: 2rem;
-    font-weight: bold;
-    /* border: 1px solid black; */
 }
 
 .container {
@@ -14,27 +10,41 @@
     color:blue;
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.2;
-    
-}
+    /* width: 5rem; */
+    padding-top: 2rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    position: relative;
+    justify-content: center;
+} 
+
 
 .top{
     /* border: 1px solid black; */
     background-color:cornflowerblue;
+    /* width: 5rem; */
+}
+
+.who {
+    font-size: 2rem;
+    font-weight: bold;
+    /* border: 1px solid black; */
 }
 
 .middle{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     
     /* border: 1px solid red; */
 }
 
 .contract{
-    flex-grow: 1;
+    /* flex-grow: 1; */
 }
 
 .education{
-    flex-grow: 1;
+    /* flex-grow: 1; */
 }
 
 .bottom{
