@@ -134,8 +134,10 @@
                             <div class="role">Cloud<code>Aws</code></div>
                             <div class="role-detail">
                                 <p>
-                                    <li>개발 서버 구성, 매치메이킹, AWS IAM 계정 관리, CI/CD, 스케줄러, 로그, 도메인, 인증서등을 위해 아래와 같은 서비스를 사용하였습니다.</li>
-                                    <li>EC2, VPC, S3, CloudFront, ACM, Route53, IAM, GameLift, CodePipeline, EventBridge, Lambda, OpenSearch, CloudWatch, SNS</li>
+                                    <ui>
+                                        <li>개발 서버 구성, 매치메이킹, AWS IAM 계정 관리, CI/CD, 스케줄러, 로그, 도메인, 인증서등을 위해 아래와 같은 서비스를 사용하였습니다.</li>
+                                        <li>EC2, VPC, S3, CloudFront, ACM, Route53, IAM, GameLift, CodePipeline, EventBridge, Lambda, OpenSearch, CloudWatch, SNS</li>
+                                    </ui>
                                 </p>
                             </div>
                             <div class="role">서버팀장<code>팀 리드</code></div>
@@ -159,8 +161,18 @@
                                 오늘도 환생 등 총 9개의 게임을 개발 및 운영하고 있습니다. </p>
                         </div>
                         <div class="mywork">
-                            <div class="role">서버 개발<code>C#</code></div>
-                            <div class="role-detail">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate, nam atque facilis consequatur nostrum dignissimos ut corporis sapiente rem, dolores aperiam ducimus distinctio blanditiis laborum neque ratione quas ipsum saepe.</div>
+                            <div class="role">서버 개발<code>Python</code></div>
+                            <div class="role-detail">
+                                <p>
+                                    <ui>
+                                        <li><a target="_blank" href="https://play.google.com/store/apps/details?id=com.ekkorr.autopuzzle">오토퍼즐디펜스</a>팀에 소속되어 서버 개발을 하였습니다.</li>
+                                        <li>Python, <a target="_blank" href="https://fastapi.tiangolo.com/">FastAPI</a> Framework,
+                                            PostgreSQL, Photon으로 개발되어 있었으며 로컬 개발, 테스트 환경이 구성되어있지 않아 개선하였고, 콘텐츠 개발 및 업데이트에 참여하였습니다.
+                                        </li>
+                                        <li>프로젝트의 어려움으로  팀이 해제과정을 밟았으나 회사의 클라우드 인프라 관리, DevOps 업무를 맡아 보는 것이 어떻겠냐는 제안이 있었지만, 이직을 선택하였습니다.</li>
+                                    </ui>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -179,7 +191,22 @@
                         </div>
                         <div class="mywork">
                             <div class="role">Solutions Architect<code>AWS</code></div>
-                            <div class="role-detail">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate, nam atque facilis consequatur nostrum dignissimos ut corporis sapiente rem, dolores aperiam ducimus distinctio blanditiis laborum neque ratione quas ipsum saepe.</div>
+                            <div class="role-detail">
+                                <p>
+                                    <ui>
+                                        <li>
+                                            <a target="_blank" href="https://mzcsa.notion.site/Welcome-to-CTC-a3a799bcc82a4d45853d5076e7083b0f">
+                                                CTC</a>팀에서 Solutions Architect로 일하였습니다.
+                                        </li>
+                                        <li>팀의 핵심가치인 Tech와 고객만족을 내재화하기 위한 <a target="_blank" href="https://mzcsa.notion.site/CTC-798eabc0a7324d2f920a6166443784f5">온보딩</a> 프로그램을 수료하였습니다.</li>
+                                        <li>게임 개발사를 방문하여 최적의 클라우드 아키텍처를 제공하기 위한 미팅을 진행하였습니다.</li>
+                                        <li><a target="_blank" href="https://mzcsa.notion.site/Gaming-Elastic-Architect-Team-f1977dacce19416dbbf90fdbe293a17a">
+                                            CTC Gaming Team</a>에서 진행하였던 GameLift 리셀러 자격 획득 프로젝트에서 중요한 역할을 맡아 
+                                            <a target="_blank" href="http://www.kmnanews.com/news/articleView.html?idxno=3352">
+                                                자격 취득</a>까지 완료하고 퇴사하였습니다.</li>
+                                    </ui>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -197,9 +224,45 @@
                         </div>
                         <div class="mywork">
                             <div class="role">서버 개발<code>C#</code></div>
-                            <div class="role-detail">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate, nam atque facilis consequatur nostrum dignissimos ut corporis sapiente rem, dolores aperiam ducimus distinctio blanditiis laborum neque ratione quas ipsum saepe.</div>
+                            <div class="role-detail">
+                                <p>
+                                    <ui>
+                                        <li>API 서버, Message 서버, Battle 서버, Matching 서버를 개발하였습니다.</li>
+                                        <li>Battle 서버는 게임 룰을 구현한 Battle 로직을 기반으로 유저 간 실시간 1:1 게임을 진행하는 서버입니다. </li>
+                                        <li>Battle 로직 내부에는 구현된 일련의 BattleProgress, BattleAction, BattleController, BattleTimer과 같은 클래스들이 동기화되어 게임이 진행됩니다.</li>
+                                        <li>Matching 서버는 TCP 소켓 기반 서버이며 <code>Redis Sorted Set</code>을 이용하여 비슷한 Point 범위 내에서 랜덤 선택하여 매칭하였습니다.</li>
+                                        <li>Matchmaking 시간이 길어지면 <code>Redis Sorted Set</code>의 Point 범위를 확장하는 방식을 사용하였습니다. </li>
+                                        <li>코드 병합 전 Pull Request, Review 과정을 통해 프로젝트 완성도를 높였습니다.</li>
+                                        <li>
+                                            기타 사용 라이브러리 : <a target="_blank" href="https://github.com/neuecc/MessagePack-CSharp/">MessagePack for C#</a>,
+                                            <a target="_blank" href="https://flywaydb.org/">Flyway</a>
+                                        </li>
+                                    </ui>
+                                </p>
+                            </div>
                             <div class="role">공동대표<code>경영, 개발총괄</code></div>
-                            <div class="role-detail">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate, nam atque facilis consequatur nostrum dignissimos ut corporis sapiente rem, dolores aperiam ducimus distinctio blanditiis laborum neque ratione quas ipsum saepe.</div>
+                            <div class="role-detail">
+                                <p>
+                                    <ui>
+                                        <li>2명의 공동대표 체제였으며 전반적인 경영, 인사 등 법인 업무를 도맡아 진행하였습니다. </li>
+                                        <li>개발 부분에서는 아트를 제외한 개발 총괄 업무를 맡았습니다.</li>
+                                    </ui>
+                                </p>
+                             </div>
+                             <div class="role">기타 성과</div>
+                             <div class="role-detail">
+                                <p>
+                                    <ui>
+                                        <li>엔젤투자유치</li>
+                                        <li><a target="_blank" href="https://www.kocca.kr/kocca/bbs/view/B0000137/1835972.do?searchCnd=1&searchWrd=2018+%EC%BA%90%EB%A6%AD%ED%84%B0&cateTp1=&cateTp2=&useYn=&menuNo=204802&categorys=0&subcate=0&cateCode=&type=&instNo=0&questionTp=&ufSetting=&recovery=&option1=&option2=&year=&morePage=&qtp=&domainId=&sortCode=&pageIndex=1">
+                                            2018 캐릭터 연계 콘텐츠 제작 지원사업
+                                        </a> 진행</li>
+                                        <li>당시 기준, <a target="_blank" href="https://tumblbug.com/knightrun">나이트런:레콘키스타 텀블벅 펀딩</a>
+                                             모바일 게임 최고 모금액 달성
+                                        </li>
+                                    </ui>
+                                </p>
+                             </div>
                         </div>
                     </div>
                 </div>
@@ -233,15 +296,17 @@
                     <div class="company-body">
                         <div class="company-what">
                             <p>
-                                다야에듀테인먼트는 웹툰 IP 기반 최초, 유일 성공작인 갓 오브 하이스쿨을 개발한 회사이다. <br>
-                                이후 와이디온라인에서 이어 개발, 서비스를 이어간다.
+                                다야에듀테인먼트는 웹툰 IP 기반 최초, 유일 성공작인 갓 오브 하이스쿨을 개발한 회사입니다. <br>
+                                이후 와이디온라인과 퍼블리싱 계약 이후 사내 스튜디오로 들어가게 됩니다.
                             </p>
                         </div>
                         <div class="mywork">
-                            <div class="role">서버 개발<code>C#</code></div>
-                            <div class="role-detail">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate, nam atque facilis consequatur nostrum dignissimos ut corporis sapiente rem, dolores aperiam ducimus distinctio blanditiis laborum neque ratione quas ipsum saepe.</div>
-                            <div class="role">개발팀장<code>개발팀 리드</code></div>
-                            <div class="role-detail">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate, nam atque facilis consequatur nostrum dignissimos ut corporis sapiente rem, dolores aperiam ducimus distinctio blanditiis laborum neque ratione quas ipsum saepe.</div>
+                            <div class="role">서버 개발<code>PHP</code></div>
+                            <div class="role-detail">
+                                <p>
+
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
