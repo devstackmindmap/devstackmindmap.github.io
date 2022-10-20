@@ -180,6 +180,11 @@ code{
     padding: 3px;
 }
 
+.detail-img > img{
+    height: 15rem;
+    border: 1px solid gray;
+}
+
 game-title{
     color: crimson;
 }
