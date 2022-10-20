@@ -1,53 +1,240 @@
 <!DOCTYPE html>
-<html lang="ko-KR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html>
 <head>
-    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
-    <link rel="stylesheet" type="text/css" href="kimdongyoung2.css">
-</head>     
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="kimdongyoung.css">
+    <script src='kimdongyoung.js'></script>
+    <link rel='icon' href='favicon.ico'>
+</head>
+
 <title>김동영</title>
 
 <body>
     <div class="container">
-        <div class="top">
-            <div class="who">김동영</div>
-            <div class="what">[<a target="_blank" href="devstackmindmap.github.io.pdf"><code>PDF</code> version</a>]</div>
 
+        <!-- Name -->
+        <div class="first">
+            <div class="name">
+                김동영
+            </div>
+            <div class="social">
+                <div class="icon"><a target="_blink" href="https://www.linkedin.com/in/dong-young-kim-4b354a152/"><img src="icon/linkedin.png"></a></div>
+                <div class="icon"><a target="_blink" href="https://www.instagram.com/dykimblue/"><img src="icon/instagram.png"></a></div>
+            </div>
+            <div class="pdf">이력서 [<a target="_blank" href="kimdongyoung.pdf">PDF</a>]</div>
         </div>
-        <div class="middle">
+
+        <!-- Contact, Education -->
+        <div class="second">
+            <div class="profile">
+                <img class="img-fluid" src="profile/profile5.png">
+            </div>
             <div class="contact">
-                <div class="contact-head">인적사항</div>
-                <div class="contact-body">
-                    <div>용인, 신갈</div>
-                    <div>010-3792-0616</div>
-                    <div>dykimblue@gmail.com</div>
-                    <div>devstackmindmap.github.io</div>
-                    <div><a target="_blank" href="https://www.linkedin.com/in/dong-young-kim-4b354a152">LinkedIn</a></div>
-                </div>                
+                <div class="title">인적사항</div>
+                <div class="item">
+                    <div class="icon"><img src="icon/location.png"></a></div>
+                    용인, 신갈
+                </div>
+                <div class="item">
+                    <div class="icon"><img src="icon/phone.png"></a></div>
+                    010-3792-0616
+                </div>
+                <div class="item">
+                    <div class="icon"><img src="icon/email.png"></a></div>
+                    dykimblue@gmail.com
+                </div>
             </div>
             <div class="education">
-                <div class="education-head">학력사항</div>
+                <div class="title">학력사항</div>
                 <div class="education-body">
-                    <div>2004 - 2010 컴퓨터정보학부</div>
-                    <div><a target="_blank" href="https://www.sunmoon.ac.kr/">선문대학교</a></div>
+                    <div>
+                        2004 - 2010 
+                        <a target="_blank" href="https://www.sunmoon.ac.kr/">선문대학교</a>
+                        컴퓨터정보학부
+                    </div>
+                    
                     <div>2001 - 2004 <a target="_blank" href="https://baemoon.hs.kr/">배문고등학교</a></div>
                     
                 </div>
             </div>
-
         </div>
-        <div class="bottom">
+
+        <!-- work-experience, about-me -->
+        <div class="third">
             <div class="work-experience">
-                경력사항
+                <div class="title">경력사항</div>
+                <div class="company">
+                    <div class="company-head">
+                        <div class="company-dt">2021년 9월 ~ 현재</div>
+                        <div class="company-region">양재, 서울</div>
+                        <div class="company-name">버드레터</div>
+                    </div>
+                    <div class="company-body">
+                        <div class="company-what">
+                            <p><a target="_blank" href="https://www.birdletter.com/">버드레터</a>는 특색있고 캐릭터와 아트워크에 장점이 있는 게임들을 개발하고 있습니다.<br> 
+                                현재는 <a target="_blank" href="https://villainsbattle.com/">빌런즈:배틀로얄</a> 이라는 게임을 개발 중입니다. </p>
+                        </div>
+                        <div class="mywork">
+                            <div class="role">서버 개발<code>C#</code></div>
+                            <div class="role-detail">
+                                <p>
+                                    <a target="_blank" href="https://www.supersocket.net/">SuperSocket</a><br>
+                                    <a target="_blank" href="https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-intro.html">GameLift FlexMatch</a><br>
+                                    <a target="_blank" href="https://flywaydb.org/">Flyway</a><br>
+                                    <a target="_blank" href="https://github.com/neuecc/MessagePack-CSharp/">MessagePack for C#</a><br>
+                                    <a target="_blank" href="https://github.com/Oriflame/RedisMessaging.ReliableDelivery">Reliable Message Delivery</a><br>
+                                    <a target="_blank" href="https://github.com/Cysharp/ZString">ZString</a>
+                                </p>
+                            </div>
+                            <div class="role">서버팀장<code>팀 리드</code></div>
+                            <div class="role-detail">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate, nam atque facilis consequatur nostrum dignissimos ut corporis sapiente rem, dolores aperiam ducimus distinctio blanditiis laborum neque ratione quas ipsum saepe.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="company">
+                    <div class="company-head">
+                        <div class="company-dt">2021년 6월 ~ 2021년 9월</div>
+                        <div class="company-region">관악, 서울</div>
+                        <div class="company-name">이꼬르</div>
+                    </div>
+                    <div class="company-body">
+                        <div class="company-what">
+                            <p><a target="_blank" href="http://ekkorr.com/">이꼬르</a>는  2011년 9월 한국에서 설립된 게임 개발 회사입니다.<br> 
+                                오늘도 환생 등 총 9개의 게임을 개발 및 운영하고 있습니다. </p>
+                        </div>
+                        <div class="mywork">
+                            <div class="role">서버 개발<code>C#</code></div>
+                            <div class="role-detail">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate, nam atque facilis consequatur nostrum dignissimos ut corporis sapiente rem, dolores aperiam ducimus distinctio blanditiis laborum neque ratione quas ipsum saepe.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="company">
+                    <div class="company-head">
+                        <div class="company-dt">2020년 11월 ~ 2021년 6월</div>
+                        <div class="company-region">역삼, 서울</div>
+                        <div class="company-name">메가존클라우드</div>
+                    </div>
+                    <div class="company-body">
+                        <div class="company-what">
+                            <p><a target="_blank" href="https://www.megazone.com/">메가존클라우드</a>는 
+                                AWS 클라우드 MSP 전문기업으로 2012년부터
+                                국내 최초 AWS 공식 파트너사로 선정되어 국내 클라우드 시장을 선도하고 있습니다.
+                            </p>
+                        </div>
+                        <div class="mywork">
+                            <div class="role">Solutions Architect<code>AWS</code></div>
+                            <div class="role-detail">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate, nam atque facilis consequatur nostrum dignissimos ut corporis sapiente rem, dolores aperiam ducimus distinctio blanditiis laborum neque ratione quas ipsum saepe.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="company">
+                    <div class="company-head">
+                        <div class="company-dt">2018년 2월 ~ 2020년 10월</div>
+                        <div class="company-region">역삼, 서울</div>
+                        <div class="company-name">아카스튜디오</div>
+                    </div>
+                    <div class="company-body">
+                        <div class="company-what">
+                            <p>
+                                아카스튜디오는 네이버웹툰 나이트런 IP를 기반으로 한 모바일 실시간 1:1 전략 게임 <game-title>나이트런:레콘키스타</game-title>를 제작 및 서비스하였습니다.
+                            </p>
+                        </div>
+                        <div class="mywork">
+                            <div class="role">서버 개발<code>C#</code></div>
+                            <div class="role-detail">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate, nam atque facilis consequatur nostrum dignissimos ut corporis sapiente rem, dolores aperiam ducimus distinctio blanditiis laborum neque ratione quas ipsum saepe.</div>
+                            <div class="role">공동대표<code>경영, 개발총괄</code></div>
+                            <div class="role-detail">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate, nam atque facilis consequatur nostrum dignissimos ut corporis sapiente rem, dolores aperiam ducimus distinctio blanditiis laborum neque ratione quas ipsum saepe.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="company">
+                    <div class="company-head">
+                        <div class="company-dt">2014년 7월 ~ 2017년 8월</div>
+                        <div class="company-region">청담, 서울</div>
+                        <div class="company-name">와이디온라인</div>
+                    </div>
+                    <div class="company-body">
+                        <div class="company-what">
+                            <p>
+                                와이디온라인은 갓 오브 하이스쿨, 오디션, 프리스톤테일, 미르의 전설2,3 등의 게임을 직접 개발, 퍼블리싱하였습니다. <br>
+                                현재는 아이톡시로 사명이 변경되었습니다.
+                            </p>
+                        </div>
+                        <div class="mywork">
+                            <div class="role">서버 개발<code>C#</code></div>
+                            <div class="role-detail">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate, nam atque facilis consequatur nostrum dignissimos ut corporis sapiente rem, dolores aperiam ducimus distinctio blanditiis laborum neque ratione quas ipsum saepe.</div>
+                            <div class="role">개발팀장<code>개발팀 리드</code></div>
+                            <div class="role-detail">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate, nam atque facilis consequatur nostrum dignissimos ut corporis sapiente rem, dolores aperiam ducimus distinctio blanditiis laborum neque ratione quas ipsum saepe.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="company">
+                    <div class="company-head">
+                        <div class="company-dt">2013년 11월 ~ 2014년 6월</div>
+                        <div class="company-region">판교, 성남</div>
+                        <div class="company-name">다야에듀테인먼트</div>
+                    </div>
+                    <div class="company-body">
+                        <div class="company-what">
+                            <p>
+                                다야에듀테인먼트는 웹툰 IP 기반 최초, 유일 성공작인 갓 오브 하이스쿨을 개발한 회사이다. <br>
+                                이후 와이디온라인에서 이어 개발, 서비스를 이어간다.
+                            </p>
+                        </div>
+                        <div class="mywork">
+                            <div class="role">서버 개발<code>C#</code></div>
+                            <div class="role-detail">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate, nam atque facilis consequatur nostrum dignissimos ut corporis sapiente rem, dolores aperiam ducimus distinctio blanditiis laborum neque ratione quas ipsum saepe.</div>
+                            <div class="role">개발팀장<code>개발팀 리드</code></div>
+                            <div class="role-detail">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate, nam atque facilis consequatur nostrum dignissimos ut corporis sapiente rem, dolores aperiam ducimus distinctio blanditiis laborum neque ratione quas ipsum saepe.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="company">
+                    <div class="company-head">
+                        <div class="company-dt">2011년 3월 ~ 2013년 8월</div>
+                        <div class="company-region">종로, 서울</div>
+                        <div class="company-name">연합인포맥스</div>
+                    </div>
+                    <div class="company-body">
+                        <div class="company-what">
+                            <p>
+                                <a target="_blank" href="https://yonhap.einfomax.co.kr/newinfomax/yonhapinfomax/">연합인포맥스</a>는 국내 최고의 금융정보 전문 업체로 빠른 금융뉴스, 정확한 금융 데이터를 제공합니다.
+                            </p>
+                        </div>
+                        <div class="mywork">
+                            <div class="role">서버 개발<code>C#</code></div>
+                            <div class="role-detail">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate, nam atque facilis consequatur nostrum dignissimos ut corporis sapiente rem, dolores aperiam ducimus distinctio blanditiis laborum neque ratione quas ipsum saepe.</div>
+                            <div class="role">개발팀장<code>개발팀 리드</code></div>
+                            <div class="role-detail">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate, nam atque facilis consequatur nostrum dignissimos ut corporis sapiente rem, dolores aperiam ducimus distinctio blanditiis laborum neque ratione quas ipsum saepe.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="company">
+                    <div class="company-head">
+                        <div class="company-dt">2009년 11월 ~ 2011년 3월</div>
+                        <div class="company-region">유성, 대전</div>
+                        <div class="company-name">커미조아</div>
+                    </div>
+                    <div class="company-body">
+                        <div class="company-what">
+                            <p>
+                                <a target="_blank" href="http://www.comizoa.co.kr/">커미조아</a>는 계측, 제어, 모션분야의 순수 국내기술을 기반으로 첨단 반도체장비, 로봇 및 산업자동화 분야에 적용되는 다양한 제품군을 개발하여 생산하는 연구개발 벤처기업입니다.
+                            </p>
+                        </div>
+                        <div class="mywork">
+                            <div class="role">서버 개발<code>C#</code></div>
+                            <div class="role-detail">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate, nam atque facilis consequatur nostrum dignissimos ut corporis sapiente rem, dolores aperiam ducimus distinctio blanditiis laborum neque ratione quas ipsum saepe.</div>
+                            <div class="role">개발팀장<code>개발팀 리드</code></div>
+                            <div class="role-detail">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate, nam atque facilis consequatur nostrum dignissimos ut corporis sapiente rem, dolores aperiam ducimus distinctio blanditiis laborum neque ratione quas ipsum saepe.</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="aboutme">
-                <div class="aboutme-head">
-                    자기소개
-                </div>
-                <div class="aboutme-body">
-
-                </div>
+            <div class="about-me">
+                <div class="title">자기소개</div>
             </div>
         </div>
-    </div>        
+    </div>
 </body>
 </html>
