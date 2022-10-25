@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="kimdongyoung3.css">
-    <script src='kimdongyoung.js'></script>
+    <link rel="stylesheet" type="text/css" href="resume.css">
     <link rel='icon' href='favicon.ico'>
 </head>
 
@@ -75,7 +74,33 @@
                                         <br><br>
                                         성실하게 대학교 잘 다녀서 8학기 중 6학기 성적 장학금을 받았습니다. 
                                         <br>
-                                        2013년도에 좋아하는 분야를 찾아 게임 개발을 시작했고 살신성인하여 프로젝트의 성공도 경험하였습니다. 
+                                        2013년도에 좋아하는 분야를 찾아 게임 개발을 시작했고 살신성인하여 프로젝트의 성공(갓오브하이스쿨)도 경험하였습니다. 
+                                        <br>
+                                        현재 버드레터에서 서버 팀장으로 클라우드 인프라부터 서버 개발, 팀 리드까지 책임을 맡고 있습니다.
+                                    </p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="customSection">
+                        <div class="title2">경력요약</div>
+                        <div class="list">
+                            <div class="item">
+                                <div class="description">
+                                    <p>
+                                        안녕하세요.<br>
+                                        13년째 성실하고 개발 능력도 준수하고 책임감도 있게 개발하고 있는 서버 개발자 김동영입니다. 
+                                        <br><br>
+                                        성실하게 대학교 잘 다녀서 8학기 중 6학기 성적 장학금을 받았습니다. 
+                                        <br>
+                                        2013년도에 좋아하는 분야를 찾아 게임 개발을 시작했고 살신성인하여 프로젝트의 성공(갓오브하이스쿨)도 경험하였습니다. 
                                         <br>
                                         현재 버드레터에서 서버 팀장으로 클라우드 인프라부터 서버 개발, 팀 리드까지 책임을 맡고 있습니다.
                                     </p>
@@ -108,6 +133,7 @@
                                     <ui>
                                         <li>ASP.NET Core 컨트롤러와 C#언어를 사용하여 Out Game Playing의 대부분을 포함한 로그인, 배틀 결과, 친구, 팀, 클랜, 퀘스트 관련 API등을 수행하는 서버를 개발하였습니다.</li>
                                         <li>API 개발 시, API에 필요한 로직 코드를 <a target="_blank" href="https://nunit.org/">NUnit</a>을 사용하여 예외를 검증하는 테스트 코드를 만들며 구현하였습니다.</li>
+                                        <li>동시성 제어가 필요한 로직에는 MySQL FOR UPDATE를 사용하여 일관성 처리를 하였습니다.</li>
                                     </ui>
                                     
                                 </p>
@@ -128,7 +154,7 @@
                             <div class="role-detail">
                                 <p>
                                     <ui>
-                                        <li>데이터 저장소는 MySQL, Redis, OpenSearch 를 사용 중입니다.</li>
+                                        <li>데이터 저장소는 MySQL, Redis, OpenSearch(로그)를 사용 중입니다.</li>
                                         <li>데이터베이스 버저닝 툴인
                                             <a target="_blank" href="https://flywaydb.org/">Flyway</a>
                                             를 사용하였습니다.</li>
@@ -164,8 +190,23 @@
                                     <ui>
                                         <li>개발 서버 구성, 매치메이킹, AWS IAM 계정 관리, CI/CD, 스케줄러, 로그, 도메인, 인증서등을 위해 아래와 같은 서비스를 사용하였습니다.</li>
                                         <li>EC2, VPC, S3, CloudFront, ACM, Route53, IAM, GameLift, CodePipeline, EventBridge, Lambda, OpenSearch, CloudWatch, SNS 등</li>
-                                        <li><a target="_blank" href="pages/villains-architect.html">인프라 아키텍처 보기</a></li>
                                     </ui>
+
+                                    <section style="border: 1px lightgray solid; border-radius: 5px; margin: 1px; padding: 5px;">
+                                        <h1 style="font-size: medium; color: black; margin: 0px; padding: 1px; border-bottom: 1px solid lightblue;">
+                                            인프라 아키텍처 설계 설명(<a target="_blank" href="pages/villains-architect.html">보기</a>)
+                                        </h1>
+                                        <p style="font-size: small;">
+                                            <ui>
+                                                <li>모든 서버는 가용성을 위해 HA 구성을 전제로 설계하였습니다.</li>
+                                                <li>Global 구성으로 데이터 서버들은 메인 리전에 위치하고 나머지 서버는 각 리전에 위치합니다.</li>
+                                                <li>데이터 서버가 없는 서브 리전들은 인터넷 망이 아닌 AWS 전용망을 통한 DB, Redis 접근을 위해 Transit Gateway를 구성합니다.</li>
+                                                <li>Message 서버는 AWS NLB로 로드 밸런싱을 하되 TCP 서버로 Client와의 연결이 stateful 해야하므로 NLB Sticky Session을 활용합니다.</li>
+                                                <li>Redis는 사용 용도 별로 End Point를 분산하고 각 End Point는 AWS ElastiCache Redis Cluster를 사용하여 Key접근을 추가로 분산합니다.</li>
+                                                <li>DB는 AWS Aurora MySQL Cluster 구조로 읽기만 이루어지는 작업에서는 최대한 Reader Node로 접근하여 분산합니다. 또한 고성능의 Aurora RDS를 최대한 Scale Up 하여 운용하고 필요한 상황이 온다면 PlayerID를 통해 샤딩키를 추출하는 방식으로 레인지 DB샤딩을 이용합니다. </li>
+                                            </ui>
+                                        </p>
+                                    </section>
                                 </p>
                             </div>
                             <div class="role">서버팀장<code>팀 리드</code></div>
