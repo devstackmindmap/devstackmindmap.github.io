@@ -236,7 +236,7 @@
                                                 <li>데이터 서버가 없는 서브 리전들은 인터넷 망이 아닌 AWS 전용망을 통한 DB, Redis 접근을 위해 Transit Gateway를 구성합니다.</li>
                                                 <li>Message 서버는 AWS NLB로 로드 밸런싱을 하되 TCP 서버로 Client와의 연결이 stateful 해야하므로 NLB Sticky Session을 활용합니다.</li>
                                                 <li>Redis는 사용 용도 별로 End Point를 분산하고 각 End Point는 AWS ElastiCache Redis Cluster를 사용하여 Key접근을 추가로 분산합니다.</li>
-                                                <li>DB는 AWS Aurora MySQL Cluster 구조로 읽기만 이루어지는 작업에서는 최대한 Reader Node로 접근하여 분산합니다. 또한 고성능의 Aurora RDS를 최대한 Scale Up 하여 운용하고 필요한 상황이 온다면 PlayerID를 통해 샤딩키를 추출하는 방식으로 레인지 DB샤딩을 이용합니다. </li>
+                                                <li>DB는 AWS Aurora MySQL Cluster 구조로 읽기만 이루어지는 작업에서는 최대한 Reader Node로 접근하여 분산합니다. 또한 고성능의 Aurora RDS를 최대한 Scale up 하여 운용하고 필요한 상황이 온다면 PlayerID를 통해 샤딩키를 추출하는 방식으로 레인지 DB샤딩을 이용합니다. </li>
                                                 <li>프로젝트에서 필요한 모니터링 소스, 로그 소스는 모두 Kinesis Firehose를 통해 S3에 저장하여 모니터링 가용성을 챙기고 데이터 저장 비용도 아낄 수 있게 설계하였습니다.</li>
                                             </ui>
                                         </p>
