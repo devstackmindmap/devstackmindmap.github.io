@@ -346,3 +346,25 @@ table {
     text-align: center;
 
   }
+
+  img{
+    width: 70%;
+  }
+
+  .skills{
+    display: flex;
+    flex-direction: row;
+    align-content: stretch;
+  }
+
+  
+  .unit-name{
+    font-size: 2rem;
+    font-size-adjust: initial;
+  }
+
+  .skill>img, .skill-big>img{
+    width: 100%;
+  }
+
+  
